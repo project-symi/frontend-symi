@@ -1,1 +1,4 @@
-export default () => (<div>Cookies</div>);
+const Index = () => ( <div> Welcome to Symi! </div>);
+
+export default Index;
+
