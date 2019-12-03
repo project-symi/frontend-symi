@@ -1,12 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 const Ceo = () => (
   <div>
-    <Link href="/">
-      <button> Home </button>
-    </Link>
-    Welcome to Symi! Want to know what's happening in your company?
+    <Navbar></Navbar>
+    <h1>Welcome to Symi!</h1>
+    <h3>Want to know what's happening in your company?</h3>
   </div>
 );
 

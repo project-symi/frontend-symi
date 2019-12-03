@@ -1,11 +1,10 @@
-import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 const Employee = () => (
   <div>
-    <Link href="/">
-      <button>Home</button>
-    </Link>
-    Welcome to Symi! Want to share something with your CEO?
+    <Navbar></Navbar>
+    <h1>Welcome to Symi!</h1>
+    <h3>Want to share something with your CEO?</h3>
   </div>
 );
 
