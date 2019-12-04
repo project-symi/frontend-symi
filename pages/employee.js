@@ -1,11 +1,21 @@
 import Navbar from '../components/Navbar';
-import Feedback from '../components/Feedback';
+import Feedback from '../components/employeePage/Feedback';
 
-const Employee = () => (
-  <div>
-    <Navbar></Navbar>
-    <Feedback></Feedback>
-  </div>
-);
+export default class Employee extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+  submitFeedback = feedbackObj => {
+    console.log(feedbackObj);
+  };
 
-export default Employee;
+  render() {
+    return (
+      <div>
+        <Navbar></Navbar>
+        <Feedback submitFeedback={this.submitFeedback}></Feedback>
+      </div>
+    );
+  }
+}
