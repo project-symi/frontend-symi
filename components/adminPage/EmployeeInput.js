@@ -48,4 +48,8 @@ export default class EmployeeInput extends React.Component {
   }
 }
 
+EmployeeInput.propTypes = {
+  addNewEmployee: PropTypes.node.isRequired
+};
+
 //need to invoke callback func from the parent component to pass info about added user
