@@ -1,12 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import Navbar from '../components/Navbar';
+import Layout from '../components/Layout';
 
 const Ceo = () => (
-  <div>
-    <Navbar></Navbar>
+  <Layout>
     <h1>Welcome to Symi!</h1>
     <h3>Want to know what's happening in your company?</h3>
-  </div>
+  </Layout>
 );
 
 export default Ceo;
