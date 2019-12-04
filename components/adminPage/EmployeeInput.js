@@ -1,19 +1,23 @@
 //util functions
-import { emailValidation } from "../../utils/utils.js";
-import SweetAlert from "sweetalert-react";
-// import "sweetalert/dist/sweetalert.css";
+import { formValidation } from '../../utils/utils';
 
-export default class EmployeeInput extends React.Component {
+//components
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
+
+class EmployeeInput extends React.Component {
   constructor() {
     super();
     this.state = {
-      employeeId: "",
-      email: "",
-      department: "",
-      name: "",
-      dateOfBirth: "",
-      type: "",
-      isAlertShown: false
+      employeeId: '',
+      email: '',
+      department: '',
+      name: '',
+      dateOfBirth: '',
+      type: '',
+      isAlertShown: false,
+      alertTitle: null,
+      alertText: null
     };
   }
 
@@ -25,8 +29,9 @@ export default class EmployeeInput extends React.Component {
     e.preventDefault();
     //callback from parent which executes POST api call to the backend
     // eslint-disable-next-line react/prop-types
-    if (!emailValidation(this.state.email)) {
-      this.setState({ isAlertShown: true });
+    const validation = formValidation({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.department, type: this.state.type });
+    if (!validation.result) {
+      this.setState({ alertTitle: 'Form Validation Error', alertText: validation.errorMessages , isAlertShown: true });
       return;
     }
     this.props.addNewEmployee({
@@ -74,30 +79,28 @@ export default class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <label>Date Of Birth</label>
-          <input
-            id="dateOfBirth"
-            name="dateOfBirth"
-            value={this.state.dateOfBirth}
-            onChange={this.handleInputChange}
-          />
-          <label>Employee Type</label>
-          <input
-            id="type"
-            name="type"
-            value={this.state.type}
-            onChange={this.handleInputChange}
-          />
+          <input id='dateOfBirth' name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange}  />
+          <label>Access Type</label>
+          <select name='type' onChange={this.handleInputChange}>
+            <option value='ceo'>CEO</option>
+            <option value='employee'>Employee</option>
+            <option value='admin'>Admin</option>
+          </select>
+          {/* <input id='type' name='type' value={this.state.type} onChange={this.handleInputChange}  /> */}
           <button onClick={this.handleFormSubmit}>ADD USER</button>
         </form>
         <SweetAlert
           show={this.state.isAlertShown}
-          title="Email Validation"
-          text="Please input a valid email!"
+          title={this.state.alertTitle ? this.state.alertTitle : 'someText'}
+          text={'Please enter a valid ' + this.state.alertText}
           onConfirm={() => this.setState({ isAlertShown: false })}
         />
+
         <h3>Bulk Upload</h3>
         <h4>csv file upload</h4>
       </div>
     );
   }
 }
+
+export default EmployeeInput;
