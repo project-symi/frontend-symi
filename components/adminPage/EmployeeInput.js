@@ -1,3 +1,4 @@
+import React from 'react';
 //util functions
 import { formValidation } from '../../utils/utils';
 
@@ -5,7 +6,7 @@ import { formValidation } from '../../utils/utils';
 import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 
-export default class EmployeeInput extends React.Component {
+class EmployeeInput extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -75,3 +76,5 @@ export default class EmployeeInput extends React.Component {
     );
   }
 }
+
+export default EmployeeInput;

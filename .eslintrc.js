@@ -47,8 +47,9 @@ module.exports = {
             "single"
         ],
         "semi": [
-            "error"
+            "error",
             "always"
         ]
     }
+  }
 };
