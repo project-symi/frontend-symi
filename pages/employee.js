@@ -1,5 +1,6 @@
-import Navbar from '../components/Navbar';
-import Feedback from '../components/employeePage/Feedback';
+import Layout from "../components/Layout";
+import Feedback from "../components/employeePage/Feedback";
+import History from "../components/employeePage/History";
 
 export default class Employee extends React.Component {
   constructor() {
@@ -12,10 +13,11 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <div>
-        <Navbar></Navbar>
-        <Feedback submitFeedback={this.submitFeedback}></Feedback>
-      </div>
+      <Layout>
+        <h2>EMPLOYEE PAGE</h2>
+        <Feedback submitFeedback={this.submitFeedback} />
+        <History />
+      </Layout>
     );
   }
 }
