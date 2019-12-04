@@ -79,7 +79,8 @@ class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <label>Date Of Birth</label>
-          <input id='dateOfBirth' name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange}  />
+          <input type="date" placeholder="YYYY-MM-DD" data-date-split-input="true" name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange} />
+          {/* <input id='dateOfBirth' name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange}  /> */}
           <label>Access Type</label>
           <select name='type' onChange={this.handleInputChange}>
             <option value='ceo'>CEO</option>
