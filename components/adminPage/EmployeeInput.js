@@ -1,4 +1,3 @@
-import React from 'react';
 //util functions
 import { formValidation } from '../../utils/utils';
 
