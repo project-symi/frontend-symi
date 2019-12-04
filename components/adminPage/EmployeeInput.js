@@ -1,4 +1,4 @@
-export default class UserInput {
+export default class EmployeeInput extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -18,14 +18,14 @@ export default class UserInput {
   handleFormSubmit = (e) => {
     e.preventDefault();
     //callback from parent which executes POST api call to the backend
-    this.props.addNewUsers({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.dateOfBirth, type: this.state.type });
+    this.props.addNewEmployee({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.dateOfBirth, type: this.state.type });
   }
 
   render() {
     return (
       <div>
-        <h1>Add approved users</h1>
-        <h3>Add users invidually</h3>
+        <h1>Add approved employees</h1>
+        <h3>Add employee invidually</h3>
         <form>
           <label>Employee ID</label>
           <input name='employeeId' value={this.state.employeeId} onChange={this.handleInputChange}  />

@@ -2,7 +2,7 @@
 import Layout from '../components/Layout';
 
 //components
-import UserInput from '../components/adminPage';
+import EmployeeInput from '../components/adminPage';
 
 
 export default class Admin extends React.Component {
@@ -13,11 +13,16 @@ export default class Admin extends React.Component {
     };
   }
 
+  addNewUser = (newUser) => {
+
+  }
+
   render() {
     return (
       <Layout>
         <h1>Welcome to Symi!</h1>
-        <h3>Start to </h3>
+        <h3>Start using the dashboard from adding employees</h3>
+        <EmployeeInput addNewUser={this.addNewEmployee} />
       </Layout>
     );
   }
