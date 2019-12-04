@@ -2,19 +2,19 @@
 import Layout from '../components/Layout';
 
 //components
-import EmployeeInput from '../components/adminPage';
+import EmployeeInput from '../components/adminPage/EmployeeInput';
 
 
 export default class Admin extends React.Component {
   constructor() {
     super();
     this.state = {
-      addedUsers: null
+      addedEmployee: null
     };
   }
 
-  addNewUser = (newUser) => {
-
+  addNewEmployee = (addedEmployee) => {
+    this.setState({ addedEmployee });
   }
 
   render() {
@@ -22,7 +22,7 @@ export default class Admin extends React.Component {
       <Layout>
         <h1>Welcome to Symi!</h1>
         <h3>Start using the dashboard from adding employees</h3>
-        <EmployeeInput addNewUser={this.addNewEmployee} />
+        <EmployeeInput addNewEmployee={this.addNewEmployee} />
       </Layout>
     );
   }
