@@ -19,8 +19,8 @@ export default class Feedback extends React.Component {
   };
 
   handleInputChange = event => {
-    console.log('event.target.name = ', event.target.name);
-    if (event.target.name === 'About') {
+    console.log("event.target.name = ", event.target.name);
+    if (event.target.name === "About") {
       this.setState({
         about: {
           type: event.target.value,
@@ -28,8 +28,8 @@ export default class Feedback extends React.Component {
         }
       });
     } else if (
-      event.target.name === 'Employee' ||
-      event.target.name === 'Category'
+      event.target.name === "Employee" ||
+      event.target.name === "Category"
     ) {
       this.setState({
         about: {
@@ -44,6 +44,7 @@ export default class Feedback extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    // if all fields aren't filled out, send error message
     this.props.submitFeedback(this.state);
   };
 
@@ -75,14 +76,14 @@ export default class Feedback extends React.Component {
           </select>
 
           {/* 2nd ABOUT > EMPLOYEE SEARCH */}
-          {this.state.about.type === 'Employee' ? (
+          {this.state.about.type === "Employee" ? (
             <input type="text" onChange={this.searchEmployee}></input>
           ) : (
             <div></div>
           )}
 
           {/* 2nd ABOUT > CATEGORY */}
-          {this.state.about.type === 'Category' ? (
+          {this.state.about.type === "Category" ? (
             <select name="Category" onChange={this.handleInputChange}>
               <option>Work/Life Balance</option>
               <option>Benefits</option>
