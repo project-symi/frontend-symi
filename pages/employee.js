@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar';
+import Layout from '../components/Layout';
 import Feedback from '../components/employeePage/Feedback';
 
 export default class Employee extends React.Component {
@@ -12,10 +12,9 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <div>
-        <Navbar></Navbar>
+      <Layout>
         <Feedback submitFeedback={this.submitFeedback}></Feedback>
-      </div>
+      </Layout>
     );
   }
 }
