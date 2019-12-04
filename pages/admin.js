@@ -1,11 +1,30 @@
-import Navbar from '../components/Navbar';
+/* eslint-disable react/no-unescaped-entities */
+import Layout from '../components/Layout';
 
-const Employee = () => (
-  <div>
-    <Navbar></Navbar>
-    <h1>Welcome to Symi!</h1>
-    <h3>Want to share something with your CEO?</h3>
-  </div>
-);
+//components
+import EmployeeInput from '../components/adminPage/EmployeeInput';
 
-export default Employee;
+
+export default class Admin extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      addedEmployee: null
+    };
+  }
+
+  addNewEmployee = (addedEmployee) => {
+    this.setState({ addedEmployee });
+  }
+
+  render() {
+    return (
+      <Layout>
+        <h1>Welcome to Symi!</h1>
+        <h3>Start using the dashboard from adding employees</h3>
+        <EmployeeInput addNewEmployee={this.addNewEmployee} />
+      </Layout>
+    );
+  }
+}
+
