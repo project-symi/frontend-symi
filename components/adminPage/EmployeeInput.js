@@ -21,11 +21,11 @@ class EmployeeInput extends React.Component {
     };
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  handleFormSubmit = (e) => {
+  handleFormSubmit = e => {
     e.preventDefault();
     //callback from parent which executes POST api call to the backend
     // eslint-disable-next-line react/prop-types
@@ -34,8 +34,15 @@ class EmployeeInput extends React.Component {
       this.setState({ alertTitle: 'Form Validation Error', alertText: validation.errorMessages , isAlertShown: true });
       return;
     }
-    this.props.addNewEmployee({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.dateOfBirth, type: this.state.type });
-  }
+    this.props.addNewEmployee({
+      employeeId: this.state.employeeId,
+      email: this.state.email,
+      department: this.state.department,
+      name: this.state.name,
+      dateOfBirth: this.state.dateOfBirth,
+      type: this.state.type
+    });
+  };
 
   render() {
     return (
@@ -44,13 +51,33 @@ class EmployeeInput extends React.Component {
         <h3>Add employee invidually</h3>
         <form>
           <label>Employee ID</label>
-          <input id='employeeId' name='employeeId' value={this.state.employeeId} onChange={this.handleInputChange}  />
+          <input
+            id="employeeId"
+            name="employeeId"
+            value={this.state.employeeId}
+            onChange={this.handleInputChange}
+          />
           <label>Email</label>
-          <input id='email' name='email' value={this.state.email} onChange={this.handleInputChange}  />
+          <input
+            id="email"
+            name="email"
+            value={this.state.email}
+            onChange={this.handleInputChange}
+          />
           <label>Department</label>
-          <input id='department' name='department' value={this.state.department} onChange={this.handleInputChange}  />
+          <input
+            id="department"
+            name="department"
+            value={this.state.department}
+            onChange={this.handleInputChange}
+          />
           <label>Name</label>
-          <input id='name' name='name' value={this.state.name} onChange={this.handleInputChange}  />
+          <input
+            id="name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          />
           <label>Date Of Birth</label>
           <input id='dateOfBirth' name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange}  />
           <label>Access Type</label>

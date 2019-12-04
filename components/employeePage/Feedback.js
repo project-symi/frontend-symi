@@ -5,7 +5,8 @@ export default class Feedback extends React.Component {
     this.state = {
       feeling: null,
       about: { type: null, input: null },
-      note: null
+      note: null,
+      dateAdded: null
     };
   }
 
@@ -44,7 +45,12 @@ export default class Feedback extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // if all fields aren't filled out, send error message
+
+    // add timestampe
+    const newDate = new Date();
+    this.setState({ dateAdded: newDate });
+
+    // send feedback object
     this.props.submitFeedback(this.state);
   };
 
@@ -52,6 +58,7 @@ export default class Feedback extends React.Component {
     return (
       <form>
         <div>
+          <h4>FEEDBACK COMPONENT</h4>
           <label>I FEEL </label>
           <select name="feeling" onChange={this.handleInputChange}>
             <option name="feeling" value="good">

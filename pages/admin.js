@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
 
 //components
-import EmployeeInput from '../components/adminPage/EmployeeInput';
-
+import EmployeeInput from "../components/adminPage/EmployeeInput";
 
 export default class Admin extends React.Component {
   constructor() {
@@ -13,9 +12,9 @@ export default class Admin extends React.Component {
     };
   }
 
-  addNewEmployee = (addedEmployee) => {
+  addNewEmployee = addedEmployee => {
     this.setState({ addedEmployee });
-  }
+  };
 
   render() {
     return (
@@ -27,4 +26,3 @@ export default class Admin extends React.Component {
     );
   }
 }
-

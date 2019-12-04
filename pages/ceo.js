@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
+import Dashboard from "../components/ceoPage/Dashboard";
 
 const Ceo = () => (
   <Layout>
-    <h1>Welcome to Symi!</h1>
-    <h3>Want to know what's happening in your company?</h3>
+    <h2>CEO PAGE</h2>
+    <Dashboard />
   </Layout>
 );
 

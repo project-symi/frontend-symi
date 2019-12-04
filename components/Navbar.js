@@ -1,14 +1,19 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-const Navbar = () => (
-  <div>
-    <Link href="/">
-      <button> Home </button>
-    </Link>
-    <Link href="/about">
-      <button> About </button>
-    </Link>
-  </div>
-);
+export default class Navbar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false
+    };
+  }
 
-export default Navbar;
+  render() {
+    return (
+      <div>
+        <h4>NAVBAR</h4>[LOGO] SYMI
+        {this.state.loggedIn ? <button>Logout</button> : <button>Login</button>}
+      </div>
+    );
+  }
+}
