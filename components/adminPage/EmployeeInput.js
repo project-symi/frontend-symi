@@ -2,7 +2,7 @@
 import { formValidation } from '../../utils/utils';
 
 //components
-import { TextField } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 
 class EmployeeInput extends React.Component {
   constructor() {
@@ -124,7 +124,10 @@ class EmployeeInput extends React.Component {
             <option value='employee'>Employee</option>
             <option value='admin'>Admin</option>
           </TextField>
-          <button onClick={this.handleFormSubmit}>ADD USER</button>
+          <Button onClick={this.handleFormSubmit} variant="contained" color="primary">
+            Add Employee
+          </Button>
+          {/* <button onClick={this.handleFormSubmit}>ADD USER</button> */}
         </form>
         <h3>Bulk Upload</h3>
         <h4>csv file upload</h4>
