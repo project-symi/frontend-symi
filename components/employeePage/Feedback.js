@@ -79,26 +79,17 @@ export default class Feedback extends React.Component {
           <select name="About" onChange={this.handleInputChange}>
             <option>--- select ---</option>
             <option value="Employee">Employee</option>
-            <option value="Category">Category</option>
+            <option >Work/Life Balance</option>
+            <option>Benefits</option>
+            <option>Holidays</option>
+            <option>Job Satisfaction</option>
+            <option>Company Policy</option>
+            <option>Other</option>
           </select>
 
           {/* 2nd ABOUT > EMPLOYEE SEARCH */}
           {this.state.about.type === 'Employee' ? (
             <input type="text" onChange={this.searchEmployee}></input>
-          ) : (
-            <div></div>
-          )}
-
-          {/* 2nd ABOUT > CATEGORY */}
-          {this.state.about.type === 'Category' ? (
-            <select name="Category" onChange={this.handleInputChange}>
-              <option>Work/Life Balance</option>
-              <option>Benefits</option>
-              <option>Holidays</option>
-              <option>Job Satisfaction</option>
-              <option>Company Policy</option>
-              <option>Other</option>
-            </select>
           ) : (
             <div></div>
           )}

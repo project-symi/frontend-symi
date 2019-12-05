@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 
 //components
 import EmployeeInput from '../components/adminPage/EmployeeInput';
+import Sidebar from '../components/Sidebar';
 
 export default class Admin extends React.Component {
   constructor() {
@@ -18,7 +19,8 @@ export default class Admin extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout >
+        <Sidebar isEmployeeInputShown={true}   />
         <h1>Welcome to Symi!</h1>
         <h3>Start using the dashboard from adding employees</h3>
         <EmployeeInput addNewEmployee={this.addNewEmployee} />
@@ -26,3 +28,5 @@ export default class Admin extends React.Component {
     );
   }
 }
+
+

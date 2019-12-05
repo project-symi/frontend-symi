@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-export default class History extends React.Component {
+export default class FeedbackHistory extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +33,7 @@ export default class History extends React.Component {
         {this.state.feedback.map((item, i) => {
           console.log('test');
           return (
-            <h5>
+            <h5 key={i}>
               I feel {this.state.feedback[i].feeling} about{' '}
               {this.state.feedback[i].about.input} because{' '}
               {this.state.feedback[i].note}. (Added
