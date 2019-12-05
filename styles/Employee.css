@@ -1,0 +1,32 @@
+.title {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.feedback-container {
+  border: 0px solid;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+}
+
+.feedback-history-container {
+  display: grid;
+  grid-template-columns: 500px 20px;
+  grid-template-rows: 1fr;
+  grid-template-areas: "string date";
+  border: 0px solid;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+}
+
+.feedback-string {
+  grid-area: string;
+}
+
+.date-added {
+  grid-area: date;
+}

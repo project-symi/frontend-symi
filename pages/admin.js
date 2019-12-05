@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Layout from '../components/Layout';
+import Sidebar from '../components/Sidebar';
 
 //components
 import EmployeeInput from '../components/adminPage/EmployeeInput';
@@ -19,8 +20,7 @@ export default class Admin extends React.Component {
   render() {
     return (
       <Layout>
-        <h1>Welcome to Symi!</h1>
-        <h3>Start using the dashboard from adding employees</h3>
+        <Sidebar />
         <EmployeeInput addNewEmployee={this.addNewEmployee} />
       </Layout>
     );

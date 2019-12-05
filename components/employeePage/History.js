@@ -7,7 +7,7 @@ export default class History extends React.Component {
         {
           feeling: 'good',
           about: { type: 'Employee', input: 'Igor' },
-          note: 'hes super helpful and a hardworker',
+          note: 'he\'s super helpful and a hardworker',
           dateAdded: null
         },
         {
@@ -29,15 +29,20 @@ export default class History extends React.Component {
   render() {
     return (
       <div>
-        <h4>HISTORY COMPONENT</h4>
+        <p className="title">Feedback History</p>
         {this.state.feedback.map((item, i) => {
           return (
-            <h5>
-              I feel {this.state.feedback[i].feeling} about{' '}
-              {this.state.feedback[i].about.input} because{' '}
-              {this.state.feedback[i].note}. (Added
-              {this.state.feedback[i].dateAdded})
-            </h5>
+            <div className="feedback-container">
+              <div className="feedback-string">
+                I feel {this.state.feedback[i].feeling.toUpperCase()} about{' '}
+                {this.state.feedback[i].about.input.toUpperCase()} because{' '}
+                {this.state.feedback[i].note.toUpperCase()}.
+              </div>
+              <div className="date-added">
+                (Added
+                {this.state.feedback[i].dateAdded})
+              </div>
+            </div>
           );
         })}
       </div>

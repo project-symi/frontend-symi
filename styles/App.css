@@ -1,58 +1,66 @@
 html {
-     height: 100%;
-     background: rgb(114, 55, 211);
-     background: linear-gradient(326deg, rgba(114, 55, 211, 1) 0%, rgba(60, 217, 188, 1) 100%);
-     -webkit-background-size: cover;
-     -moz-background-size: cover;
-     -o-background-size: cover;
-     background-size: cover;
-     background-repeat: no-repeat;
+  height: 100%;
+  background: rgb(114, 55, 211);
+  background: linear-gradient(326deg,
+      rgba(114, 55, 211, 1) 0%,
+      rgba(60, 217, 188, 1) 100%);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .layout {
-     display: grid;
-     grid-template-columns: 1fr 5fr;
-     grid-template-rows: 1fr 9fr;
-     grid-column-gap: 0px;
-     grid-row-gap: 0px;
-     grid-template-areas:
-          "sidebar navbar"
-          "sidebar page";
-     border: 0px solid;
-     border-radius: 15px;
-     margin: 3%;
-     max-height: 600px;
-     background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr 9fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas:
+    "sidebar navbar"
+    "sidebar page";
+  border: 0px solid;
+  border-radius: 15px;
+  margin: 3% auto;
+  max-height: 650px;
+  max-width: 900px;
+  background-color: white;
+
 }
 
 #navbar {
-     grid-area: navbar;
-     display: grid;
-     grid-template-columns: 1fr 8fr 1fr;
-     grid-template-areas: "_ logo login";
-     padding: 10px;
-     text-align: center;
-     border-bottom: 1px solid;
+  grid-area: navbar;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  grid-template-areas: "_ logo login";
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid;
 }
 
 #logo {
-     grid-area: logo;
+  grid-area: logo;
 }
 
 #login {
-     grid-area: login;
+  grid-area: login;
 }
 
 #sidebar {
-     grid-area: sidebar;
-     display: flex;
-     flex-direction: column;
-     padding: 10px;
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
 #page {
-     grid-area: page;
-     padding: 10px;
-     background-color: #F5F6F8;
-     border-radius: 0px 0px 15px 0px;
+  grid-area: page;
+  padding: 10px 20px 20px 20px;
+  background-color: #f5f6f8;
+  border-radius: 0px 0px 15px 0px;
+  overflow: auto;
 }

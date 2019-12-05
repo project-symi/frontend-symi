@@ -1,10 +1,21 @@
-import Link from 'next/link';
+import Link from "next/link";
+import "../styles/Index.css";
 
 const Index = () => (
-  <div>
-    <h1>Welcome to Symi! </h1>
-    <label>USERNAME</label> <input></input>
-    <label>PASSWORD</label> <input type="password"></input>
+  <div id="login-wrap">
+    <div id="login-container">
+      <h1>Welcome to Symi! </h1>
+      <div>
+        {" "}
+        <label>USERNAME</label> <input></input>
+      </div>
+      <div>
+        <label>PASSWORD</label> <input type="password"></input>
+        <h4>
+          Don't have an account? <Link href="/register">Register here</Link>.
+        </h4>
+      </div>
+    </div>
     <h3>Who are you?</h3>
     <Link href="/ceo">
       <button>CEO</button>

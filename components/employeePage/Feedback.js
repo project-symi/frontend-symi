@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import '../../styles/Employee.css';
+
 export default class Feedback extends React.Component {
   constructor() {
     super();
@@ -56,42 +58,30 @@ export default class Feedback extends React.Component {
 
   render() {
     return (
-      <form>
-        <div>
-          <h4>FEEDBACK COMPONENT</h4>
-          <label>I FEEL </label>
-          <select name="feeling" onChange={this.handleInputChange}>
-            <option name="feeling" value="good">
-              😊
-            </option>
-            <option name="feeling" value="okay">
-              😐
-            </option>
-            <option name="feeling" value="bad">
-              😞
-            </option>
-          </select>
-        </div>
+      <div>
+        <p className="title">Feedback</p>
+        <form className="feedback-container">
+          <div>
+            <label>I FEEL </label>
+            <select name="feeling" onChange={this.handleInputChange}>
+              <option name="feeling" value="good">
+                😊
+              </option>
+              <option name="feeling" value="okay">
+                😐
+              </option>
+              <option name="feeling" value="bad">
+                😞
+              </option>
+            </select>
+          </div>
 
-        <div>
-          <label>ABOUT </label>
-          {/* 1st ABOUT SELECTION */}
-          <select name="About" onChange={this.handleInputChange}>
-            <option>--- select ---</option>
-            <option value="Employee">Employee</option>
-            <option value="Category">Category</option>
-          </select>
-
-          {/* 2nd ABOUT > EMPLOYEE SEARCH */}
-          {this.state.about.type === 'Employee' ? (
-            <input type="text" onChange={this.searchEmployee}></input>
-          ) : (
-            <div></div>
-          )}
-
-          {/* 2nd ABOUT > CATEGORY */}
-          {this.state.about.type === 'Category' ? (
-            <select name="Category" onChange={this.handleInputChange}>
+          <div>
+            <label>ABOUT </label>
+            {/* 1st ABOUT SELECTION */}
+            <select name="About" onChange={this.handleInputChange}>
+              <option>--- select ---</option>
+              <option value="Employee">Employee</option>
               <option>Work/Life Balance</option>
               <option>Benefits</option>
               <option>Holidays</option>
@@ -99,26 +89,41 @@ export default class Feedback extends React.Component {
               <option>Company Policy</option>
               <option>Other</option>
             </select>
-          ) : (
-            <div></div>
-          )}
-          {/* CATEGORY SELECT */}
-        </div>
 
-        <div>
-          <label>BECAUSE </label>
-          <input
-            type="text"
-            name="note"
-            value={this.state.note}
-            onChange={this.handleInputChange}
-          ></input>
-        </div>
+            {/* 2nd ABOUT > EMPLOYEE SEARCH */}
+            {this.state.about.type === 'Employee' ? (
+              <input type="text" onChange={this.searchEmployee}></input>
+            ) : (
+              <div></div>
+            )}
 
-        <button type="submit" onClick={this.handleSubmit}>
-          SUBMIT
-        </button>
-      </form>
+            {/* 2nd ABOUT > CATEGORY */}
+            {this.state.about.type === 'Category' ? (
+              <select
+                name="Category"
+                onChange={this.handleInputChange}
+              ></select>
+            ) : (
+              <div></div>
+            )}
+            {/* CATEGORY SELECT */}
+          </div>
+
+          <div>
+            <label>BECAUSE </label>
+            <input
+              type="text"
+              name="note"
+              value={this.state.note}
+              onChange={this.handleInputChange}
+            ></input>
+          </div>
+
+          <button type="submit" onClick={this.handleSubmit}>
+            SUBMIT
+          </button>
+        </form>
+      </div>
     );
   }
 }

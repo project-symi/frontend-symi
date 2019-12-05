@@ -1,4 +1,5 @@
 import Layout from '../components/Layout';
+import Sidebar from '../components/Sidebar';
 import Feedback from '../components/employeePage/Feedback';
 import History from '../components/employeePage/History';
 
@@ -14,9 +15,11 @@ export default class Employee extends React.Component {
   render() {
     return (
       <Layout>
-        <h2>EMPLOYEE PAGE</h2>
-        <Feedback submitFeedback={this.submitFeedback} />
-        <History />
+        <Sidebar />
+        <div id="page">
+          <Feedback submitFeedback={this.submitFeedback} />
+          <History />
+        </div>
       </Layout>
     );
   }
