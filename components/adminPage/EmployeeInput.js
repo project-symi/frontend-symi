@@ -80,22 +80,20 @@ class EmployeeInput extends React.Component {
           />
           <label>Date Of Birth</label>
           <input type="date" placeholder="YYYY-MM-DD" data-date-split-input="true" name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange} />
-          {/* <input id='dateOfBirth' name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange}  /> */}
           <label>Access Type</label>
           <select name='type' onChange={this.handleInputChange}>
             <option value='ceo'>CEO</option>
             <option value='employee'>Employee</option>
             <option value='admin'>Admin</option>
           </select>
-          {/* <input id='type' name='type' value={this.state.type} onChange={this.handleInputChange}  /> */}
           <button onClick={this.handleFormSubmit}>ADD USER</button>
         </form>
-        <SweetAlert
+        {/* <SweetAlert
           show={this.state.isAlertShown}
           title={this.state.alertTitle ? this.state.alertTitle : 'someText'}
           text={'Please enter a valid ' + this.state.alertText}
           onConfirm={() => this.setState({ isAlertShown: false })}
-        />
+        /> */}
 
         <h3>Bulk Upload</h3>
         <h4>csv file upload</h4>
