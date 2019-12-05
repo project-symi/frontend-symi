@@ -2,9 +2,6 @@
 import { formValidation } from '../../utils/utils';
 
 //components
-import SweetAlert from 'sweetalert-react';
-import 'sweetalert/dist/sweetalert.css';
-
 import { TextField } from '@material-ui/core';
 
 class EmployeeInput extends React.Component {
@@ -33,15 +30,16 @@ class EmployeeInput extends React.Component {
     if (validation.result) {
       this.setState({ formValidation: validation.errors });
       return;
+    } else {
+      this.props.addNewEmployee({
+        employeeId: this.state.employeeId,
+        email: this.state.email,
+        department: this.state.department,
+        name: this.state.name,
+        dateOfBirth: this.state.dateOfBirth,
+        type: this.state.type
+      });
     }
-    this.props.addNewEmployee({
-      employeeId: this.state.employeeId,
-      email: this.state.email,
-      department: this.state.department,
-      name: this.state.name,
-      dateOfBirth: this.state.dateOfBirth,
-      type: this.state.type
-    });
   };
 
   render() {
@@ -61,7 +59,7 @@ class EmployeeInput extends React.Component {
             value={this.state.employeeId}
             onChange={this.handleInputChange}
           />
-            <TextField
+          <TextField
             error={this.state.formValidation.email.isShown}
             name="email"
             id="outlined"
@@ -72,7 +70,7 @@ class EmployeeInput extends React.Component {
             value={this.state.email}
             onChange={this.handleInputChange}
           />
-                      <TextField
+          <TextField
             error={this.state.formValidation.department.isShown}
             name="department"
             id="outlined"
@@ -83,7 +81,7 @@ class EmployeeInput extends React.Component {
             value={this.state.department}
             onChange={this.handleInputChange}
           />
-                      <TextField
+          <TextField
             error={this.state.formValidation.name.isShown}
             name="name"
             id="outlined"
@@ -94,32 +92,40 @@ class EmployeeInput extends React.Component {
             value={this.state.name}
             onChange={this.handleInputChange}
           />
-                      <TextField
+          <TextField
+            name='dateOfBirth'
             error={this.state.formValidation.dateOfBirth.isShown}
-            name="dateOfBirth"
-            id="outlined"
-            label="Date Of Birth"
             helperText={this.state.formValidation.dateOfBirth.message}
+            label="Date Of Birth"
+            onChange={this.handleInputChange}
+            id="date"
+            type="date"
+            value={this.state.dateOfBirth}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            name='type'
+            error={this.state.formValidation.type.isShown}
+            id="outlined-select-currency"
+            select
+            label="Access Type"
+            value={this.state.type}
+            onChange={this.handleInputChange}
+            helperText={this.state.formValidation.type.message}
             margin="normal"
             variant="outlined"
-            value={this.state.dateOfBirth}
-            onChange={this.handleInputChange}
-          />
-          <label>Access Type</label>
-          <select name='type' onChange={this.handleInputChange}>
+            SelectProps={{
+              native: true
+            }}
+          >
             <option value='ceo'>CEO</option>
             <option value='employee'>Employee</option>
             <option value='admin'>Admin</option>
-          </select>
+          </TextField>
           <button onClick={this.handleFormSubmit}>ADD USER</button>
         </form>
-        {/* <SweetAlert
-          show={this.state.isAlertShown}
-          title={this.state.alertTitle ? this.state.alertTitle : 'someText'}
-          text={'Please enter a valid ' + this.state.alertText}
-          onConfirm={() => this.setState({ isAlertShown: false })}
-        /> */}
-
         <h3>Bulk Upload</h3>
         <h4>csv file upload</h4>
       </div>
