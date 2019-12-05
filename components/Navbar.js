@@ -10,9 +10,13 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4>NAVBAR</h4>[LOGO] SYMI
-        {this.state.loggedIn ? <button>Logout</button> : <button>Login</button>}
+      <div id="navbar">
+        <p id="logo">[LOGO] SYMI</p>
+        {this.state.loggedIn ? (
+          <button id="login">Logout</button>
+        ) : (
+          <button id="login">Login</button>
+        )}
       </div>
     );
   }

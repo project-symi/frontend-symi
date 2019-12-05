@@ -10,8 +10,7 @@ export default class Sidebar extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4>SIDEBAR</h4>
+      <div id="sidebar">
         {/* CEO VIEW */}
         <Link href="/ceo">
           <button> Dashboard </button>

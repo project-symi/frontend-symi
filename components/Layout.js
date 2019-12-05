@@ -1,12 +1,11 @@
-import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import PropTypes from 'prop-types';
+import '../styles/App.css';
 
 const Layout = props => (
-  <div>
+  <div className="layout">
     <Navbar />
-    <Sidebar />
-    {props.children}
+    <div id="page">{props.children}</div>
   </div>
 );
 
