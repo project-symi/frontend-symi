@@ -21,9 +21,9 @@ html {
 
 #login-container {
   display: grid;
-  /* grid-template-columns: 500px 20px;
-  grid-template-rows: 1fr;
-  grid-template-areas: "string date"; */
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  min-width: 250px;
   max-width: 300px;
   border: 0px solid;
   border-radius: 15px;
@@ -31,4 +31,8 @@ html {
   padding: 20px;
   margin: 50px auto;
   text-align: center;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, .11),
+    0 10px 10px rgba(90, 97, 105, .12),
+    0 10px 10px rgba(90, 97, 105, .06),
+    0 10px 70px rgba(90, 97, 105, .1);
 }

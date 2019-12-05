@@ -29,7 +29,10 @@ html {
   max-height: 650px;
   max-width: 900px;
   background-color: white;
-
+  box-shadow: 0 2px 0 rgba(90, 97, 105, .11),
+    0 10px 10px rgba(90, 97, 105, .12),
+    0 10px 10px rgba(90, 97, 105, .06),
+    0 10px 70px rgba(90, 97, 105, .1);
 }
 
 #navbar {
