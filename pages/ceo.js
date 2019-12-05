@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import Layout from "../components/Layout";
-import Dashboard from "../components/ceoPage/Dashboard";
+import Layout from '../components/Layout';
+import Dashboard from '../components/ceoPage/Dashboard';
 
 const Ceo = () => (
   <Layout>

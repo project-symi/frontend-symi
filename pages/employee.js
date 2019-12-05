@@ -1,6 +1,6 @@
-import Layout from "../components/Layout";
-import Feedback from "../components/employeePage/Feedback";
-import History from "../components/employeePage/History";
+import Layout from '../components/Layout';
+import Feedback from '../components/employeePage/Feedback';
+import History from '../components/employeePage/History';
 
 export default class Employee extends React.Component {
   constructor() {
