@@ -5,21 +5,21 @@ export default class History extends React.Component {
     this.state = {
       feedback: [
         {
-          feeling: "good",
-          about: { type: "Employee", input: "Igor" },
-          note: "hes super helpful and a hardworker",
+          feeling: 'good',
+          about: { type: 'Employee', input: 'Igor' },
+          note: 'hes super helpful and a hardworker',
           dateAdded: null
         },
         {
-          feeling: "okay",
-          about: { type: "Category", input: "Benefits" },
-          note: "there's no gym memebership",
+          feeling: 'okay',
+          about: { type: 'Category', input: 'Benefits' },
+          note: 'there\'s no gym memebership',
           dateAdded: null
         },
         {
-          feeling: "bad",
-          about: { type: "Category", input: "Holidays" },
-          note: "I don't have Hanukkah off...",
+          feeling: 'bad',
+          about: { type: 'Category', input: 'Holidays' },
+          note: 'I don\'t have Hanukkah off...',
           dateAdded: null
         }
       ]
@@ -31,11 +31,10 @@ export default class History extends React.Component {
       <div>
         <h4>HISTORY COMPONENT</h4>
         {this.state.feedback.map((item, i) => {
-          console.log("test");
           return (
             <h5>
-              I feel {this.state.feedback[i].feeling} about{" "}
-              {this.state.feedback[i].about.input} because{" "}
+              I feel {this.state.feedback[i].feeling} about{' '}
+              {this.state.feedback[i].about.input} because{' '}
               {this.state.feedback[i].note}. (Added
               {this.state.feedback[i].dateAdded})
             </h5>
