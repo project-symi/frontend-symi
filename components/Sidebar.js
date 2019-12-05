@@ -1,4 +1,9 @@
-import Link from 'next/link';
+import Link from "next/link";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import ChatIcon from "@material-ui/icons/Chat";
+import GroupIcon from "@material-ui/icons/Group";
+import InfoIcon from "@material-ui/icons/Info";
+import Typography from "@material-ui/core/Typography";
 
 export default class Sidebar extends React.Component {
   constructor() {
@@ -13,25 +18,30 @@ export default class Sidebar extends React.Component {
       <div id="sidebar">
         {/* CEO VIEW */}
         <Link href="/ceo">
-          <button> Dashboard </button>
+          <div className="sidebar-button">
+            <DashboardIcon color="primary" />
+            <Typography>Dashboard</Typography>
+          </div>
         </Link>
 
         {/* EMPLOYEE VIEW */}
         <Link href="/employee">
-          <button> Feedback </button>
+          <div className="sidebar-button">
+            <ChatIcon color="primary" /> <Typography>Feedback</Typography>
+          </div>
         </Link>
-        <Link href="/employee">
-          <button> History </button>
-        </Link>
-
         {/* ADMIN VIEW */}
         <Link href="/admin">
-          <button> Employees </button>
+          <div className="sidebar-button">
+            <GroupIcon color="primary" /> <Typography>Employees</Typography>
+          </div>
         </Link>
 
         {/* ALL */}
         <Link href="/about">
-          <button> About </button>
+          <div className="sidebar-button">
+            <InfoIcon color="primary" /> <Typography>About</Typography>
+          </div>
         </Link>
       </div>
     );

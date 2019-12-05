@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
 html {
   height: 100%;
   background: rgb(114, 55, 211);
@@ -12,6 +14,8 @@ html {
   justify-items: center;
   justify-content: center;
   overflow: hidden;
+  font-family: 'Roboto Condensed',
+    sans-serif;
 }
 
 .layout {
@@ -28,11 +32,11 @@ html {
   margin: 3% auto;
   max-height: 650px;
   max-width: 900px;
+  min-width: 600px;
   background-color: white;
-  box-shadow: 0 2px 0 rgba(90, 97, 105, .11),
-    0 10px 10px rgba(90, 97, 105, .12),
-    0 10px 10px rgba(90, 97, 105, .06),
-    0 10px 70px rgba(90, 97, 105, .1);
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
+    0 10px 10px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06),
+    0 10px 70px rgba(90, 97, 105, 0.1);
 }
 
 #navbar {
@@ -54,10 +58,36 @@ html {
 }
 
 #sidebar {
+  padding-top: 50px;
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
+  width: 150px;
+  font-size: 18px;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.sidebar-button {
   padding: 10px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  cursor: pointer;
+}
+
+.sidebar-button:hover {
+  background: #f5f6f8;
 }
 
 #page {
