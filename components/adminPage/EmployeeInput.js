@@ -5,6 +5,8 @@ import { formValidation } from '../../utils/utils';
 import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 
+import { TextField } from '@material-ui/core';
+
 class EmployeeInput extends React.Component {
   constructor() {
     super();
@@ -15,9 +17,7 @@ class EmployeeInput extends React.Component {
       name: '',
       dateOfBirth: '',
       type: '',
-      isAlertShown: false,
-      alertTitle: null,
-      alertText: null
+      formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }}
     };
   }
 
@@ -30,8 +30,8 @@ class EmployeeInput extends React.Component {
     //callback from parent which executes POST api call to the backend
     // eslint-disable-next-line react/prop-types
     const validation = formValidation({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.department, type: this.state.type });
-    if (!validation.result) {
-      this.setState({ alertTitle: 'Form Validation Error', alertText: validation.errorMessages , isAlertShown: true });
+    if (validation.result) {
+      this.setState({ formValidation: validation.errors });
       return;
     }
     this.props.addNewEmployee({
@@ -49,37 +49,62 @@ class EmployeeInput extends React.Component {
       <div>
         <h1>Add approved employees</h1>
         <h3>Add employee invidually</h3>
-        <form>
-          <label>Employee ID</label>
-          <input
-            id="employeeId"
+        <form autoComplete='off'>
+          <TextField
+            error={this.state.formValidation.employeeId.isShown}
             name="employeeId"
+            id="outlined"
+            label="Employee ID"
+            helperText={this.state.formValidation.employeeId.message}
+            margin="normal"
+            variant="outlined"
             value={this.state.employeeId}
             onChange={this.handleInputChange}
           />
-          <label>Email</label>
-          <input
-            id="email"
+            <TextField
+            error={this.state.formValidation.email.isShown}
             name="email"
+            id="outlined"
+            label="Email"
+            helperText={this.state.formValidation.email.message}
+            margin="normal"
+            variant="outlined"
             value={this.state.email}
             onChange={this.handleInputChange}
           />
-          <label>Department</label>
-          <input
-            id="department"
+                      <TextField
+            error={this.state.formValidation.department.isShown}
             name="department"
+            id="outlined"
+            label="Department"
+            helperText={this.state.formValidation.department.message}
+            margin="normal"
+            variant="outlined"
             value={this.state.department}
             onChange={this.handleInputChange}
           />
-          <label>Name</label>
-          <input
-            id="name"
+                      <TextField
+            error={this.state.formValidation.name.isShown}
             name="name"
+            id="outlined"
+            label="Employee Name"
+            helperText={this.state.formValidation.name.message}
+            margin="normal"
+            variant="outlined"
             value={this.state.name}
             onChange={this.handleInputChange}
           />
-          <label>Date Of Birth</label>
-          <input type="date" placeholder="YYYY-MM-DD" data-date-split-input="true" name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleInputChange} />
+                      <TextField
+            error={this.state.formValidation.dateOfBirth.isShown}
+            name="dateOfBirth"
+            id="outlined"
+            label="Date Of Birth"
+            helperText={this.state.formValidation.dateOfBirth.message}
+            margin="normal"
+            variant="outlined"
+            value={this.state.dateOfBirth}
+            onChange={this.handleInputChange}
+          />
           <label>Access Type</label>
           <select name='type' onChange={this.handleInputChange}>
             <option value='ceo'>CEO</option>
