@@ -33,7 +33,6 @@ export default class Employee extends React.Component {
   }
 
   handleFuzzyNameSearch = (string) => {
-    console.log(string);
     this.setState({ fuzzyNames: employees });
     //make an API call to get fuzzy names
   }

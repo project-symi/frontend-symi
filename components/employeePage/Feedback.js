@@ -37,7 +37,7 @@ export default class Feedback extends React.Component {
       input: '',
       note: '',
       status: 'unseen',
-      feedbackValidation: { result: false, errors: {feeling: {isShown: false, message: ''}, note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: ''}} }
+      feedbackValidation: { result: false, errors: { note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: ''}} }
     };
   }
 
@@ -57,7 +57,7 @@ export default class Feedback extends React.Component {
     event.preventDefault();
 
     // send feedback object
-    const validation = feedbackValidation({ feeling: this.state.feeling, about: this.state.about, note: this.state.note, input: this.state.input });
+    const validation = feedbackValidation({ about: this.state.about, note: this.state.note, input: this.state.input });
     if (validation.result) {
       this.setState({ feedbackValidation: validation });
     } else {
@@ -68,6 +68,7 @@ export default class Feedback extends React.Component {
         note: this.state.note,
         subcategory: this.state.input
       };
+      console.log(feedback);
       this.props.submitFeedback(feedback);
     }
   };
@@ -84,16 +85,10 @@ export default class Feedback extends React.Component {
     this.setState({ feeling });
   };
 
-  // searchEmployee = (event, value) => {
-  //   console.log(event);
-
-  //   this.setState({
-  //     about: {
-  //       type: this.state.about.type,
-  //       input: value.employeeID
-  //     }
-  //   });
-  // };
+  searchEmployee = (event, value) => {
+    //change input value the employee id
+    this.setState({ input: value.employeeID });
+  };
 
   render() {
     return (
