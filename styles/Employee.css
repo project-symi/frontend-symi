@@ -1,9 +1,17 @@
 .title {
   margin-top: 20px;
   font-weight: bold;
+  font-size: 18pt;
+  color: #3f50b5;
+  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .feedback-container {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: auto;
+  grid-row-gap: 35px;
   border: 0px solid;
   width: 300px;
   border-radius: 15px;
@@ -11,9 +19,14 @@
   padding: 20px;
   text-align: center;
   margin: auto;
+  font-size: 18pt;
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+.feedback-text {
+  margin: 10px;
 }
 
 #about-line {
@@ -21,12 +34,16 @@
   flex-direction: row;
 }
 
-
-
-
-.feedback-history-container {
+.feedback-history-sub {
   display: grid;
-  grid-template-columns: 500px 20px;
+  grid-template-columns: 6fr 4fr;
+  grid-template-rows: 1fr;
+  margin: 10px;
+}
+
+.feedback-history {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
   grid-template-rows: 1fr;
   grid-template-areas: "string date";
   border: 0px solid;

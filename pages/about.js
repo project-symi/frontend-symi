@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import Sidebar from "../components/Sidebar";
-import Layout from "../components/Layout";
+import Sidebar from '../components/Sidebar';
+import Layout from '../components/Layout';
 
 export default class Ceo extends React.Component {
   constructor() {

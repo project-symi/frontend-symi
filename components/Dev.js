@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import Login from '../components/Login';
+import '../styles/App.css';
 
-const Index = () => (
-  <div>
-    <Login />
-    <h3>Who are you?</h3>
+const Dev = () => (
+  <div id="dev">
     <Link href="/ceo">
       <button>CEO</button>
     </Link>
@@ -17,4 +15,4 @@ const Index = () => (
   </div>
 );
 
-export default Index;
+export default Dev;
