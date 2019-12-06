@@ -13,7 +13,7 @@ const formValidation = ({ employeeId, email, department, name, dateOfBirth, type
   let errors = { result: false, errors: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' },
     department: { isShown: false, message: '' }, name: { isShown: false, message: '' },
     dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }, gender: { isShown: false, message: ''}} };
-  if (!employeeId || employeeId.length < 1) {
+  if (!employeeId) {
     errors.errors.employeeId.isShown = true;
     errors.errors.employeeId.message = 'A valid employee ID is required';
     //tell that we have an error
@@ -40,13 +40,14 @@ const formValidation = ({ employeeId, email, department, name, dateOfBirth, type
     errors.result = true;
   }
   if (!type) {
+    console.log({type});
     errors.errors.type.isShown = true;
     errors.errors.type.message = 'A valid access type is required';
     errors.result = true;
   }
   if (!gender) {
-    errors.errors.type.isShown = true;
-    errors.errors.type.message = 'Gender is required';
+    errors.errors.gender.isShown = true;
+    errors.errors.gender.message = 'Gender is required';
     errors.result = true;
   }
   return errors;

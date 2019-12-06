@@ -20,7 +20,7 @@ class EmployeeInput extends React.Component {
       department: '',
       name: '',
       dateOfBirth: '',
-      type: 'Select Type',
+      type: '',
       gender: '',
       formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }, gender: { isShown: false, message: ''}},
     };
@@ -34,7 +34,7 @@ class EmployeeInput extends React.Component {
     e.preventDefault();
     //callback from parent which executes POST api call to the backend
     // eslint-disable-next-line react/prop-types
-    const validation = formValidation({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.department, type: this.state.type, gender: this.state.gender });
+    const validation = formValidation({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.dateOfBirth, type: this.state.type, gender: this.state.gender });
     if (validation.result) {
       this.setState({ formValidation: validation.errors });
       return;
@@ -48,7 +48,18 @@ class EmployeeInput extends React.Component {
         type: this.state.type,
         gender: this.state.gender
       });
-      this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '', gender: '' });
+      swal({
+        title: 'Employee Registration Confirm',
+        text: 'Are you sure you want to add another user?',
+        icon: 'warning',
+        button: true
+      }).then((val) => swal({
+        title: 'Done',
+        text: 'Employee successfully added!',
+        icon: 'success',
+        button: true
+      })).then((val) => this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '', gender: '' })
+      );
     }
   };
 
