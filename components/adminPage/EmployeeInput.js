@@ -1,8 +1,15 @@
-//util functions
+/* eslint-disable react/prop-types */
+//utils
 import { formValidation } from '../../utils/utils';
+import Papa from 'papaparse';
 
 //components
 import { TextField, Button } from '@material-ui/core';
+
+//sweet alert
+import swal from 'sweetalert';
+import '../../assets/sweetalert.min.js';
+
 
 class EmployeeInput extends React.Component {
   constructor() {
@@ -14,7 +21,8 @@ class EmployeeInput extends React.Component {
       name: '',
       dateOfBirth: '',
       type: '',
-      formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }}
+      gender: '',
+      formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }},
     };
   }
 
@@ -41,6 +49,28 @@ class EmployeeInput extends React.Component {
       });
     }
   };
+
+  handleCsvInput = e => {
+    //in case file type is not CSV
+    if (e.target.files[0].type !== 'text/csv') {
+      swal({
+        title: 'Upload Error',
+        text: 'Please upload a CSV file',
+        icon: 'error',
+        button: true
+      });
+    } else {
+      console.log(e.target.files[0]);
+      Papa.parse(e.target.files[0], {
+        complete: (results) => {
+          console.log(results);
+          this.props.addNewEmployee(results.data);
+        }
+      });
+    }
+    //clear input value in any case
+    e.target.value = '';
+  }
 
   render() {
     return (
@@ -130,7 +160,8 @@ class EmployeeInput extends React.Component {
           {/* <button onClick={this.handleFormSubmit}>ADD USER</button> */}
         </form>
         <h3>Bulk Upload</h3>
-        <h4>csv file upload</h4>
+        <h4>Please upload a csv file</h4>
+        <input type='file' onChange={this.handleCsvInput}></input>
       </div>
     );
   }

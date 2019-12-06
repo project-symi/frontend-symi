@@ -19,7 +19,12 @@ export default class Admin extends React.Component {
   }
 
   addNewEmployee = addedEmployee => {
-    this.setState({ addedEmployee });
+    if (Array.isArray(addedEmployee)) {
+      console.log('use endpoint for bulk upload');
+    } else {
+      console.log('individual employee upload');
+      this.setState({ addedEmployee });
+    }
   };
 
   handleComponentView = (view) => {
