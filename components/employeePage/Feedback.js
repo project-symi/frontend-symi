@@ -8,7 +8,7 @@ import {
   FormControl
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { makeStyles } from '@material-ui/core/styles';
+import { formValidation } from '../../utils/utils';
 
 const feelings = [
   {
@@ -40,8 +40,6 @@ export default class Feedback extends React.Component {
   }
 
   searchEmployee = (event, value) => {
-    console.log(event);
-
     this.setState({
       about: {
         type: this.state.about.type,
@@ -50,8 +48,7 @@ export default class Feedback extends React.Component {
     });
   };
 
-  handleInputChange = event => {
-    console.log('event.target.name = ', event.target.name);
+  handleInputChange = (event, value) => {
     if (event.target.name === 'About') {
       this.setState({
         about: {
@@ -101,7 +98,7 @@ export default class Feedback extends React.Component {
           {/* FEELING SLIDER */}
           <div className="about-line">
             <span className="feedback-text">I FEEL</span>
-
+            {/* <TextField error={}></TextField> */}
             <Slider
               style={{ width: 250 }}
               defaultValue={100}
@@ -118,6 +115,7 @@ export default class Feedback extends React.Component {
 
             <FormControl>
               <Select
+                helperText="Please fill out this field."
                 name="About"
                 native
                 onChange={this.handleInputChange}
@@ -156,7 +154,7 @@ export default class Feedback extends React.Component {
             <TextField
               id="outlined"
               margin="normal"
-              value={this.state.note}
+              name="note"
               onChange={this.handleInputChange}
               style={{ width: 250 }}
             />
