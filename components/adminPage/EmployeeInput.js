@@ -47,6 +47,7 @@ class EmployeeInput extends React.Component {
         dateOfBirth: this.state.dateOfBirth,
         type: this.state.type
       });
+      this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '' });
     }
   };
 
