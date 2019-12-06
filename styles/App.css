@@ -14,8 +14,8 @@ html {
   justify-items: center;
   justify-content: center;
   overflow: hidden;
-  font-family: 'Roboto Condensed',
-    sans-serif;
+  font-family: 'Roboto Condensed';
+  font: #666666;
 }
 
 .layout {
@@ -45,12 +45,14 @@ html {
   grid-template-columns: .1fr 8fr 1fr;
   grid-template-areas: "_ logo login";
   padding: 10px;
+  margin: 0px;
   text-align: center;
   border-bottom: 1px solid;
 }
 
 #logo {
   grid-area: logo;
+  margin: 0px;
 }
 
 #login {

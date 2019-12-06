@@ -5,11 +5,24 @@
 
 .feedback-container {
   border: 0px solid;
+  width: 300px;
   border-radius: 15px;
   background-color: white;
   padding: 20px;
-  margin: 10px;
+  text-align: center;
+  margin: auto;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
+
+#about-line {
+  display: flex;
+  flex-direction: row;
+}
+
+
+
 
 .feedback-history-container {
   display: grid;
@@ -21,6 +34,9 @@
   background-color: white;
   padding: 20px;
   margin: 10px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
 .feedback-string {

@@ -1,5 +1,19 @@
 /* eslint-disable react/prop-types */
 import '../../styles/Employee.css';
+import { Slider, Select, MenuItem, TextField, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const feelings = [
+  {
+    value: '100',
+    label: ' 😊'
+  },
+  {
+    value: 50,
+    label: '😐'
+  },
+  { value: 0, label: '😞' }
+];
 
 export default class Feedback extends React.Component {
   constructor() {
@@ -56,29 +70,51 @@ export default class Feedback extends React.Component {
     this.props.submitFeedback(this.state);
   };
 
+  getFeeling = (event, value) => {
+    let feeling = '';
+    if (value === 0) {
+      feeling = 'meh';
+    } else if (value === 50) {
+      feeling = 'okay';
+    } else if (value === 100) {
+      feeling = 'good';
+    }
+    this.setState({ feeling });
+  };
+
   render() {
     return (
       <div>
         <p className="title">Feedback</p>
         <form className="feedback-container">
-          <div>
-            <label>I FEEL </label>
-            <select name="feeling" onChange={this.handleInputChange}>
-              <option name="feeling" value="good">
-                😊
-              </option>
-              <option name="feeling" value="okay">
-                😐
-              </option>
-              <option name="feeling" value="bad">
-                😞
-              </option>
-            </select>
+          <div className="about-line">
+            I FEEL
+            <Slider
+              defaultValue={100}
+              aria-labelledby="discrete-slider-restrict"
+              step={50}
+              marks={feelings}
+              onChange={this.getFeeling}
+            />
           </div>
 
           <div>
             <label>ABOUT </label>
             {/* 1st ABOUT SELECTION */}
+            <Select
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value=""
+              onChange={this.handleChange}
+              autoWidth
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
             <select name="About" onChange={this.handleInputChange}>
               <option>--- select ---</option>
               <option value="Employee">Employee</option>
@@ -89,14 +125,12 @@ export default class Feedback extends React.Component {
               <option>Company Policy</option>
               <option>Other</option>
             </select>
-
             {/* 2nd ABOUT > EMPLOYEE SEARCH */}
             {this.state.about.type === 'Employee' ? (
               <input type="text" onChange={this.searchEmployee}></input>
             ) : (
               <div></div>
             )}
-
             {/* 2nd ABOUT > CATEGORY */}
             {this.state.about.type === 'Category' ? (
               <select
@@ -118,10 +152,13 @@ export default class Feedback extends React.Component {
               onChange={this.handleInputChange}
             ></input>
           </div>
-
-          <button type="submit" onClick={this.handleSubmit}>
-            SUBMIT
-          </button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </Button>
         </form>
       </div>
     );

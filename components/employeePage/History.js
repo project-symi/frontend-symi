@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 export default class History extends React.Component {
   constructor() {
     super();
@@ -30,9 +31,10 @@ export default class History extends React.Component {
     return (
       <div>
         <p className="title">Feedback History</p>
+
         {this.state.feedback.map((item, i) => {
           return (
-            <div className="feedback-container">
+            <div className="feedback-history-container">
               <div className="feedback-string">
                 I feel {this.state.feedback[i].feeling.toUpperCase()} about{' '}
                 {this.state.feedback[i].about.input.toUpperCase()} because{' '}
