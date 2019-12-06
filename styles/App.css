@@ -42,7 +42,7 @@ html {
 #navbar {
   grid-area: navbar;
   display: grid;
-  grid-template-columns: 1fr 8fr 1fr;
+  grid-template-columns: .1fr 8fr 1fr;
   grid-template-areas: "_ logo login";
   padding: 10px;
   text-align: center;

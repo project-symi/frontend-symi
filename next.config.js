@@ -1,3 +1,4 @@
-//this allows us to import external CSS files
 const withCSS = require('@zeit/next-css');
-module.exports = withCSS();
+const withImages = require('next-images');
+
+module.exports = withCSS(withImages());

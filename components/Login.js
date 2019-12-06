@@ -28,7 +28,10 @@ export default class Login extends React.Component {
     return (
       <div id="login-wrap">
         <div id="login-container">
-          <h1>Welcome to Symi! </h1>
+          <img
+            id="login-logo"
+            src="https://i.ibb.co/Pm81mBV/symilogo.png"
+          ></img>
           <TextField
             name="email"
             id="outlined"
