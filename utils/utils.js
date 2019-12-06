@@ -53,7 +53,7 @@ const formValidation = ({ employeeId, email, department, name, dateOfBirth, type
   return errors;
 };
 
-const feedbackValidation = ({ feeling, note, about }) => {
+const feedbackValidation = ({ feeling, note, about, input }) => {
   let errors = {result: false, errors: {feeling: {isShown: false, message: ''}, note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: '' }}};
   // if (!feeling) {
   //   errors.errors.feeling.isShown = true;
@@ -68,7 +68,7 @@ const feedbackValidation = ({ feeling, note, about }) => {
     errors.result = true;
   }
   if (about) {
-    if (about === 'Employee' || about === 'News' && !input) {
+    if (about === 'Employee' && !input || about === 'News' && !input) {
       errors.errors.input.isShown = true;
       errors.errors.input.message = 'This field is required';
       //tell that we have an error

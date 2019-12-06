@@ -93,7 +93,7 @@ export default class Feedback extends React.Component {
           <div className="about-line">
             <span className="feedback-text">ABOUT</span>
 
-            <FormControl error={this.state.feedbackValidation.errors.about.isShown} helperText={this.state.feedbackValidation.errors.about.message} >
+            <FormControl error={this.state.feedbackValidation.errors.about.isShown} >
               <Select
                 name="about"
                 native
