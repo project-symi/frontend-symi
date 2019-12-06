@@ -34,9 +34,9 @@ export default class Feedback extends React.Component {
     super();
     this.state = {
       feeling: 'good',
-      about: null,
-      input: null,
-      note: null,
+      about: '',
+      input: '',
+      note: '',
       status: 'unseen',
       feedbackValidation: { result: false, errors: {feeling: {isShown: false, message: ''}, note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: ''}} }
     };
@@ -54,7 +54,14 @@ export default class Feedback extends React.Component {
     if (validation.result) {
       this.setState({ feedbackValidation: validation }, () => console.log(this.state.feedbackValidation.errors.about));
     } else {
-      this.props.submitFeedback(this.state);
+      const feedback = {
+        feeling: this.state.feeling,
+        status: this.state.status,
+        category: this.state.about,
+        note: this.state.note,
+        subcategory: this.state.input
+      };
+      this.props.submitFeedback(feedback);
     }
   };
 

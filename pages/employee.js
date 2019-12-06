@@ -16,6 +16,7 @@ export default class Employee extends React.Component {
   }
   submitFeedback = feedbackObj => {
     console.log(feedbackObj);
+    //make an API call to add the feebback to db
   };
 
   handleComponentView = (view) => {
