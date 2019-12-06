@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 //components
 import EmployeeInput from '../components/adminPage/EmployeeInput';
+import Updates from '../components/adminPage/Updates';
 import Sidebar from '../components/Sidebar';
 import Layout from '../components/Layout';
-import Updates from '../components/adminPage/Updates';
+import Assignments from '../components/Assignments';
+import Polls from '../components/Polls';
+
 
 export default class Admin extends React.Component {
   constructor() {
@@ -29,6 +32,10 @@ export default class Admin extends React.Component {
       return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
     case 'updates':
       return <Updates />;
+    case 'assignments':
+      return <Assignments />;
+    case 'polls':
+      return <Polls />;
     default:
       null;
     }

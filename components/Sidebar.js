@@ -16,14 +16,29 @@ export default class Sidebar extends React.Component {
     return (
       <div id="sidebar">
         {
-          this.props.isFeedbackShown ? <div className="sidebar-button">
-            <ChatIcon color="primary" /> <Typography onClick={() => this.handleOnClick('feedback')}>Feedback</Typography>
+          this.props.dashboard ? <div className="sidebar-button">
+            <DashboardIcon color="primary" /><Typography onClick={() => this.handleOnClick('dashboard')}>Dashboard</Typography>
+          </div>  : null
+        }
+        {
+          this.props.news ? <div className="sidebar-button">
+            <InfoIcon color="primary" /><Typography onClick={() => this.handleOnClick('news')}>News</Typography>
           </div>  : null
         }
         {
           this.props.employeeInput ? <div className="sidebar-button">
             <GroupIcon color="primary" /> <Typography onClick={() => this.handleOnClick('employeeInput')}>Employees</Typography>
           </div> : null
+        }
+        {
+          this.props.feedback ? <div className="sidebar-button">
+            <ChatIcon color="primary" /> <Typography onClick={() => this.handleOnClick('feedback')}>Feedback</Typography>
+          </div>  : null
+        }
+        {
+          this.props.feedbackHistory ? <div className="sidebar-button">
+            <InfoIcon color="primary" /><Typography onClick={() => this.handleOnClick('feedbackHistory')}>Feedback History</Typography>
+          </div>  : null
         }
         {
           this.props.updates ? <div className="sidebar-button">
@@ -36,23 +51,8 @@ export default class Sidebar extends React.Component {
           </div>  : null
         }
         {
-          this.props.news ? <div className="sidebar-button">
-            <InfoIcon color="primary" /><Typography onClick={() => this.handleOnClick('news')}>News</Typography>
-          </div>  : null
-        }
-        {
           this.props.invites ? <div className="sidebar-button">
             <InfoIcon color="primary" /><Typography onClick={() => this.handleOnClick('invites')}>Invites</Typography>
-          </div>  : null
-        }
-        {
-          this.props.dashboard ? <div className="sidebar-button">
-            <DashboardIcon color="primary" /><Typography onClick={() => this.handleOnClick('dashboard')}>Dashboard</Typography>
-          </div>  : null
-        }
-        {
-          this.props.feedbackHistory ? <div className="sidebar-button">
-            <InfoIcon color="primary" /><Typography onClick={() => this.handleOnClick('feedbackHistory')}>Feedback History</Typography>
           </div>  : null
         }
         {
