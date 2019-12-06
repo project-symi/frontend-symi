@@ -3,13 +3,15 @@
 import EmployeeInput from '../components/adminPage/EmployeeInput';
 import Sidebar from '../components/Sidebar';
 import Layout from '../components/Layout';
+import Updates from '../components/adminPage/Updates';
 
 export default class Admin extends React.Component {
   constructor() {
     super();
     this.state = {
       addedEmployee: null,
-      isEmployeeInputShown: false
+      isDefaultView: true,
+      currentlyShown: ''
     };
   }
 
@@ -18,18 +20,29 @@ export default class Admin extends React.Component {
   };
 
   handleComponentView = (view) => {
-    this.setState({ [view]: true });
+    this.setState({ currentlyShown: view, isDefaultView: false });
+  }
+
+  renderSwitchView = (param) => {
+    switch (param) {
+    case 'employeeInput':
+      return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
+    case 'updates':
+      return <Updates />;
+    default:
+      null;
+    }
   }
 
   render() {
     return (
       <Layout >
-        <Sidebar employeeInput={true} handleComponentView={this.handleComponentView}  />
-        <h1>Welcome to Symi!</h1>
-        <h3>Start using the dashboard from adding employees</h3>
+        <Sidebar employeeInput={true} updates={true} assignments={true} polls={true} handleComponentView={this.handleComponentView} />
         {
-          this.state.isEmployeeInputShown ? <EmployeeInput addNewEmployee={this.addNewEmployee} /> : null
+          this.state.isDefaultView ? <div><h1>Welcome to Symi!</h1>
+            <h3>Start using the dashboard from adding employees</h3></div> : null
         }
+        {this.renderSwitchView(this.state.currentlyShown)}
       </Layout>
     );
   }

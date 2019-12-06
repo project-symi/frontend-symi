@@ -1,5 +1,5 @@
-import Link from "next/link";
-import Login from "../components/Login";
+import Link from 'next/link';
+import Login from '../components/Login';
 
 const Index = () => (
   <div>
