@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 //utils
-import { formValidation } from '../../utils/utils';
+import { formValidation, extractCsvData } from '../../utils/utils';
 import Papa from 'papaparse';
 
 //components
@@ -40,26 +40,39 @@ class EmployeeInput extends React.Component {
       this.setState({ formValidation: validation.errors });
       return;
     } else {
-      this.props.addNewEmployee({
-        employeeId: this.state.employeeId,
-        email: this.state.email,
-        department: this.state.department,
-        name: this.state.name,
-        dateOfBirth: this.state.dateOfBirth,
-        type: this.state.type,
-        gender: this.state.gender
-      });
       swal({
         title: 'Employee Registration Confirm',
         text: 'Are you sure you want to add another user?',
         icon: 'warning',
-        button: true
-      }).then((val) => swal({
-        title: 'Done',
-        text: 'Employee successfully added!',
-        icon: 'success',
-        button: true
-      })).then((val) => this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '', gender: '' })
+        buttons: {
+          confirm: {
+            text: 'CONFIRM',
+            value: 'confirm'
+          },
+          cancel: 'CANCEL'
+        }
+      }).then((value) => {
+        switch (value) {
+        case 'confirm':
+          return swal({title: 'Done',
+            text: 'Employee successfully added!',
+            icon: 'success',
+            button: true}).then((val) => {
+            console.log('adding an employee');
+            this.props.addNewEmployee({
+              employeeId: this.state.employeeId,
+              email: this.state.email,
+              department: this.state.department,
+              name: this.state.name,
+              dateOfBirth: this.state.dateOfBirth,
+              type: this.state.type,
+              gender: this.state.gender
+            });
+          });
+        default:
+          break;
+        }
+      }).then((val) => this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '', gender: '' })
       );
     }
   };
@@ -77,8 +90,8 @@ class EmployeeInput extends React.Component {
     } else {
       Papa.parse(e.target.files[0], {
         complete: (results) => {
-          console.log(results);
-          this.setState({ csvData: results.data });
+          const csvData = extractCsvData(results.data);
+          this.setState({ csvData });
         }
       });
     }
@@ -86,7 +99,7 @@ class EmployeeInput extends React.Component {
 
   handleCsvUpload = () => {
     this.props.addNewEmployee(this.state.csvData);
-    //clear input value in any case
+    //clear input value
     e.target.value = '';
   }
 

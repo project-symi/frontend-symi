@@ -84,9 +84,28 @@ const feedbackValidation = ({ feeling, note, about, input }) => {
   return errors;
 };
 
+const extractCsvData = (arr) => {
+  //TODO add additional check for columns
+  const columns = arr[0].reduce((acc, val, i) => {
+    acc[val] = i;
+    return acc;
+  }, {});
+
+  const employees = arr.reduce((acc, val, i) => {
+    if (i > 0 && val.length > 1) {
+      const obj = { employeeId: val[columns.employeeId], name: val[columns.name], department: val[columns.department],
+        email: val[columns.email], gender: val[columns.gender], dateOfBirth: val[columns.dateOfBirth], type: val[columns.type] };
+      acc.push(obj);
+    }
+    return acc;
+  }, []);
+  return employees;
+};
+
 
 
 module.exports = {
   formValidation,
-  feedbackValidation
+  feedbackValidation,
+  extractCsvData
 };
