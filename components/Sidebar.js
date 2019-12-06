@@ -1,23 +1,48 @@
 //components
-import Assignments from './Assignments';
-import News from './News';
-import Invites from './Invites';
-import Dashboard from './ceoPage/Dashboard';
-import EmployeeInput from './adminPage/EmployeeInput';
-import Updates from './adminPage/Updates';
-import FeedbackHistory from './employeePage/Feedback';
-import Feedback from './employeePage/Feedback';
-import Rewards from './employeePage/Rewards';
-import Polls from './Polls';
-import UsageStatistics from './employeePage/UsageStatistics';
+// import Assignments from './Assignments';
+// import News from './News';
+// import Invites from './Invites';
+// import Dashboard from './ceoPage/Dashboard';
+// import EmployeeInput from './adminPage/EmployeeInput';
+// import Updates from './adminPage/Updates';
+// import FeedbackHistory from './employeePage/Feedback';
+// import Feedback from './employeePage/Feedback';
+// import Rewards from './employeePage/Rewards';
+// import Polls from './Polls';
+// import UsageStatistics from './employeePage/UsageStatistics';
 
 /* eslint-disable react/prop-types */
 export default class Sidebar extends React.Component {
+
+  handleOnClick = (e) => {
+    this.props.handleComponentView(e.target.name);
+    console.log(e.target.name);
+  }
 
   render() {
     return (
       <div>
         <h4>SIDEBAR</h4>
+        {/* CEO VIEW */}
+        {/* News
+        Assignments
+        Invites
+        Statistics */}
+
+
+        {/* EMPLOYEE VIEW */}
+        {/* Feedback form
+        Feedback history
+        News
+        Notifications
+        Polls
+        UsageStatistics (number of people using the app) */}
+
+        {/* ADMIN VIEW */}
+        {/* Employee Input
+        Assignments
+        Updates
+        Polls */}
         {
           this.props.isAssignmentsShown ? <Assignments />  : null
         }
@@ -46,32 +71,11 @@ export default class Sidebar extends React.Component {
           this.props.isPollsShown ? <Polls />  : null
         }
         {
-          this.props.isEmployeeInputShown ? <button>EmployeeInput</button> : null
+          this.props.employeeInput ? <button name='isEmployeeInputShown' onClick={this.handleOnClick}>EmployeeInput</button> : null
         }
         {
           this.props.isUsageStatisticsShown ? <UsageStatistics />  : null
         }
-        {/* CEO VIEW */}
-        {/* News
-        Assignments
-        Invites
-        Statistics */}
-
-
-        {/* EMPLOYEE VIEW */}
-        {/* Feedback form
-        Feedback history
-        News
-        Notifications
-        Polls
-        UsageStatistics (number of people using the app) */}
-
-        {/* ADMIN VIEW */}
-        {/* Employee Input
-        Assignments
-        Updates
-        Polls */}
-
       </div>
     );
   }

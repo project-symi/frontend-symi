@@ -9,7 +9,8 @@ export default class Admin extends React.Component {
   constructor() {
     super();
     this.state = {
-      addedEmployee: null
+      addedEmployee: null,
+      isEmployeeInputShown: false
     };
   }
 
@@ -17,13 +18,19 @@ export default class Admin extends React.Component {
     this.setState({ addedEmployee });
   };
 
+  handleComponentView = (view) => {
+    this.setState({ [view]: true });
+  }
+
   render() {
     return (
       <Layout >
-        <Sidebar isEmployeeInputShown={true}   />
+        <Sidebar employeeInput={true} handleComponentView={this.handleComponentView}  />
         <h1>Welcome to Symi!</h1>
         <h3>Start using the dashboard from adding employees</h3>
-        <EmployeeInput addNewEmployee={this.addNewEmployee} />
+        {
+          this.state.isEmployeeInputShown ? <EmployeeInput addNewEmployee={this.addNewEmployee} /> : null
+        }
       </Layout>
     );
   }
