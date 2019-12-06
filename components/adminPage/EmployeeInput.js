@@ -23,6 +23,7 @@ class EmployeeInput extends React.Component {
       type: '',
       gender: '',
       formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }, gender: { isShown: false, message: ''}},
+      csvData: null
     };
   }
 
@@ -72,15 +73,19 @@ class EmployeeInput extends React.Component {
         icon: 'error',
         button: true
       });
+      e.target.value = '';
     } else {
-      console.log(e.target.files[0]);
       Papa.parse(e.target.files[0], {
         complete: (results) => {
           console.log(results);
-          this.props.addNewEmployee(results.data);
+          this.setState({ csvData: results.data });
         }
       });
     }
+  }
+
+  handleCsvUpload = () => {
+    this.props.addNewEmployee(this.state.csvData);
     //clear input value in any case
     e.target.value = '';
   }
@@ -92,11 +97,11 @@ class EmployeeInput extends React.Component {
         <h3>Add an employee invidually</h3>
         <form autoComplete='off'>
           <TextField
-            error={this.state.formValidation.employeeId.isShown}
+            // error={this.state.formValidation.employeeId.isShown}
             name="employeeId"
             id="outlined"
             label="Employee ID"
-            helperText={this.state.formValidation.employeeId.message}
+            //helperText={this.state.formValidation.employeeId.message}
             margin="normal"
             variant="outlined"
             value={this.state.employeeId}
@@ -190,11 +195,11 @@ class EmployeeInput extends React.Component {
           <Button onClick={this.handleFormSubmit} variant="contained" color="primary">
             Add Employee
           </Button>
-          {/* <button onClick={this.handleFormSubmit}>ADD USER</button> */}
         </form>
         <h3>Bulk Upload</h3>
         <h4>Please upload a csv file</h4>
         <input type='file' onChange={this.handleCsvInput}></input>
+        <Button onClick={this.handleCsvUpload} variant="contained" color="primary">Submit</Button>
       </div>
     );
   }
