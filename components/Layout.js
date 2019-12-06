@@ -1,8 +1,9 @@
 import Navbar from './Navbar';
 import PropTypes from 'prop-types';
+import '../styles/App.css';
 
 const Layout = props => (
-  <div>
+  <div className="layout">
     <Navbar />
     {props.children}
   </div>

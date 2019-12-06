@@ -3,6 +3,7 @@ export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
+      topEmployees: [],
       feedback: [
         { feeling: null, about: { type: null, input: null }, note: null }
       ]
@@ -16,6 +17,10 @@ export default class Dashboard extends React.Component {
         <h5>TOP CATEGORIES</h5>
         <h5>GENERAL SENTIMENT</h5>
         <h5>TOP EMPLOYEES</h5>
+        {/* 
+        10 employees
+         - name
+        */}
       </div>
     );
   }

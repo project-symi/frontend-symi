@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import Layout from '../components/Layout';
-
 //components
 import EmployeeInput from '../components/adminPage/EmployeeInput';
 import Sidebar from '../components/Sidebar';
+import Layout from '../components/Layout';
 
 export default class Admin extends React.Component {
   constructor() {

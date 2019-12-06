@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.7.1",
+    "@material-ui/icons": "^4.5.1",
     "@zeit/next-css": "^1.0.1",
     "babel-eslint": "^10.0.3",
     "eslint-plugin-react": "^7.17.0",
@@ -21,7 +22,8 @@
     "next-images": "^1.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "sweetalert-react": "^0.4.11"
+    "sweetalert-react": "^0.4.11",
+    "typeface-roboto": "0.0.75"
   },
   "devDependencies": {
     "@types/react": "^16.9.14",

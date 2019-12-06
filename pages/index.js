@@ -1,10 +1,9 @@
-import Link from 'next/link';
+import Link from "next/link";
+import Login from "../components/Login";
 
 const Index = () => (
   <div>
-    <h1>Welcome to Symi! </h1>
-    <label>USERNAME</label> <input></input>
-    <label>PASSWORD</label> <input type="password"></input>
+    <Login />
     <h3>Who are you?</h3>
     <Link href="/ceo">
       <button>CEO</button>

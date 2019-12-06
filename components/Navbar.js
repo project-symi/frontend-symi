@@ -1,18 +1,23 @@
 import Link from 'next/link';
+// import logo from "../assets/symilogo.png";
+
+//components
+import { Button } from '@material-ui/core';
 
 export default class Navbar extends React.Component {
   constructor() {
     super();
-    this.state = {
-      loggedIn: false
-    };
   }
 
   render() {
     return (
-      <div>
-        <h4>NAVBAR</h4>[LOGO] SYMI
-        {this.state.loggedIn ? <button>Logout</button> : <button>Login</button>}
+      <div id="navbar">
+        <p id="logo">
+          <img width="200px" src="https://i.ibb.co/Pm81mBV/symilogo.png" />
+        </p>
+        <Button color="secondardy" id="login">
+          Logout
+        </Button>
       </div>
     );
   }

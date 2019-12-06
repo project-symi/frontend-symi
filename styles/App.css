@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
+html {
+  height: 100%;
+  background: rgb(114, 55, 211);
+  background: linear-gradient(326deg,
+      rgba(114, 55, 211, 1) 0%,
+      rgba(60, 217, 188, 1) 100%);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Roboto Condensed',
+    sans-serif;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr 9fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas:
+    "sidebar navbar"
+    "sidebar page";
+  border: 0px solid;
+  border-radius: 15px;
+  margin: 3% auto;
+  max-height: 650px;
+  max-width: 900px;
+  min-width: 600px;
+  background-color: white;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
+    0 10px 10px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06),
+    0 10px 70px rgba(90, 97, 105, 0.1);
+}
+
+#navbar {
+  grid-area: navbar;
+  display: grid;
+  grid-template-columns: .1fr 8fr 1fr;
+  grid-template-areas: "_ logo login";
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid;
+}
+
+#logo {
+  grid-area: logo;
+}
+
+#login {
+  grid-area: login;
+}
+
+#sidebar {
+  padding-top: 50px;
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  font-size: 18px;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.sidebar-button {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  cursor: pointer;
+}
+
+.sidebar-button:hover {
+  background: #f5f6f8;
+}
+
+#page {
+  grid-area: page;
+  padding: 10px 20px 20px 20px;
+  background-color: #f5f6f8;
+  border-radius: 0px 0px 15px 0px;
+  overflow: auto;
+}
