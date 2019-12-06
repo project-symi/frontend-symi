@@ -9,27 +9,11 @@ const nameValidation = name => {
 };
 
 //TODO add more validation
-// const formValidation = ({ employeeId, email, department, name, dateOfBirth, type }) => {
-//   let errors = { result: false, errorMessages: [] };
-//   if (!employeeId || employeeId.length < 1) errors.errorMessages.push('an employee ID');
-//   if (!emailValidation(email)) errors.errorMessages.push('a valid email address');
-//   if (!department || department.length < 1) errors.errorMessages.push('a department');
-//   if (!nameValidation(name) || name.length < 1) errors.errorMessages.push('an employee name');
-//   if (!dateOfBirth || dateOfBirth.length < 1) errors.errorMessages.push('employee\'s date of birth (will be used as a default password)');
-//   if (!type) errors.errorMessages.push('an access type');
-//   if (errors.errorMessages.length < 1) {
-//     return { result: true, message: 'everything is OK' };
-//   }
-//   errors.errorMessages = errors.errorMessages.join(', ');
-//   return errors;
-// };
-
-
-const formValidation = ({ employeeId, email, department, name, dateOfBirth, type }) => {
+const formValidation = ({ employeeId, email, department, name, dateOfBirth, type, gender }) => {
   let errors = { result: false, errors: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' },
     department: { isShown: false, message: '' }, name: { isShown: false, message: '' },
-    dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }} };
-  if (!employeeId || employeeId.length < 1) {
+    dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }, gender: { isShown: false, message: ''}} };
+  if (!employeeId) {
     errors.errors.employeeId.isShown = true;
     errors.errors.employeeId.message = 'A valid employee ID is required';
     //tell that we have an error
@@ -56,8 +40,14 @@ const formValidation = ({ employeeId, email, department, name, dateOfBirth, type
     errors.result = true;
   }
   if (!type) {
+    console.log({type});
     errors.errors.type.isShown = true;
     errors.errors.type.message = 'A valid access type is required';
+    errors.result = true;
+  }
+  if (!gender) {
+    errors.errors.gender.isShown = true;
+    errors.errors.gender.message = 'Gender is required';
     errors.result = true;
   }
   return errors;
