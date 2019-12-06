@@ -33,7 +33,7 @@ export default class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      feeling: null,
+      feeling: 'good',
       about: null,
       input: null,
       note: null,
@@ -78,7 +78,6 @@ export default class Feedback extends React.Component {
           {/* FEELING SLIDER */}
           <div className="about-line">
             <span className="feedback-text">I FEEL</span>
-            {/* <TextField error={}></TextField> */}
             <Slider
               style={{ width: 250 }}
               defaultValue={100}
