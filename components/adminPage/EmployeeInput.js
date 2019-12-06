@@ -92,11 +92,11 @@ class EmployeeInput extends React.Component {
         <h3>Add an employee invidually</h3>
         <form autoComplete='off'>
           <TextField
-            error={this.state.formValidation.employeeId.isShown}
+            // error={this.state.formValidation.employeeId.isShown}
             name="employeeId"
             id="outlined"
             label="Employee ID"
-            helperText={this.state.formValidation.employeeId.message}
+            //helperText={this.state.formValidation.employeeId.message}
             margin="normal"
             variant="outlined"
             value={this.state.employeeId}

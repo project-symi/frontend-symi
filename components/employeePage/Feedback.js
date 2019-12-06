@@ -5,10 +5,10 @@ import {
   Select,
   TextField,
   Button,
-  FormControl
+  FormControl,
+  FormHelperText
 } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
-import { formValidation } from '../../utils/utils';
+import { feedbackValidation } from '../../utils/utils';
 
 const feelings = [
   {
@@ -34,48 +34,28 @@ export default class Feedback extends React.Component {
     super();
     this.state = {
       feeling: null,
-      about: { type: null, input: null },
-      note: null
+      about: null,
+      input: null,
+      note: null,
+      status: 'unseen',
+      feedbackValidation: { result: false, errors: {feeling: {isShown: false, message: ''}, note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: ''}} }
     };
   }
 
-  searchEmployee = (event, value) => {
-    this.setState({
-      about: {
-        type: this.state.about.type,
-        input: value.employeeID
-      }
-    });
-  };
-
-  handleInputChange = (event, value) => {
-    if (event.target.name === 'About') {
-      this.setState({
-        about: {
-          type: event.target.value,
-          input: null
-        }
-      });
-    } else if (
-      event.target.name === 'Employee' ||
-      event.target.name === 'Category'
-    ) {
-      this.setState({
-        about: {
-          type: this.state.about.type,
-          input: event.target.value
-        }
-      });
-    } else {
-      this.setState({ [event.target.name]: event.target.value });
-    }
+  handleInputChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
     // send feedback object
-    this.props.submitFeedback(this.state);
+    const validation = feedbackValidation({ feeling: this.state.feeling, about: this.state.about, note: this.state.note, input: this.state.input });
+    if (validation.result) {
+      this.setState({ feedbackValidation: validation }, () => console.log(this.state.feedbackValidation.errors.about));
+    } else {
+      this.props.submitFeedback(this.state);
+    }
   };
 
   getFeeling = (event, value) => {
@@ -113,38 +93,36 @@ export default class Feedback extends React.Component {
           <div className="about-line">
             <span className="feedback-text">ABOUT</span>
 
-            <FormControl>
+            <FormControl error={this.state.feedbackValidation.errors.about.isShown} helperText={this.state.feedbackValidation.errors.about.message} >
               <Select
-                helperText="Please fill out this field."
-                name="About"
+                name="about"
                 native
                 onChange={this.handleInputChange}
                 style={{ width: 250 }}
               >
                 <option value="" />
                 <option value="Employee">Employee</option>
+                <option value="News">News</option>
                 <option value="Work/Life Balance">Work/Life Balance</option>
                 <option value="Benefits">Benefits</option>
                 <option value="Holidays">Holidays</option>
                 <option value="Job Satisfaction">Job Satisfaction</option>
                 <option value="Company Policy">Company Policy</option>
-                <option value="Company Policy">Other</option>
+                <option value="Other">Other</option>
               </Select>
+              {
+                this.state.feedbackValidation.errors.about.message ? <FormHelperText id="my-helper-text">{this.state.feedbackValidation.errors.about.message}</FormHelperText> : null
+              }
 
-              {/* EMPLOYEE SEARCH */}
-              {this.state.about.type === 'Employee' ? (
-                <Autocomplete
-                  options={employees}
-                  getOptionLabel={option => {
-                    return `${option.name} (${option.department})`;
-                  }}
-                  style={{ width: 250 }}
-                  onChange={this.searchEmployee}
-                  renderInput={params => <TextField {...params} fullWidth />}
-                />
-              ) : (
-                <div></div>
-              )}
+              {this.state.about === 'Employee' || this.state.about === 'News' ? (
+                <TextField error={this.state.feedbackValidation.errors.input.isShown}
+                  helperText={this.state.feedbackValidation.errors.input.message}
+                  id="outlined"
+                  margin="normal"
+                  name="input"
+                  placeholder={this.state.about === 'Employee' ? 'Please specify employee name' : 'Please enter news topic'}
+                  onChange={this.handleInputChange}></TextField>
+              ) : null}
             </FormControl>
           </div>
 
@@ -152,6 +130,8 @@ export default class Feedback extends React.Component {
           <div className="about-line">
             <span className="feedback-text">BECAUSE</span>
             <TextField
+              error={this.state.feedbackValidation.errors.note.isShown}
+              helperText={this.state.feedbackValidation.errors.note.message}
               id="outlined"
               margin="normal"
               name="note"

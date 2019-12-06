@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 //components
-import EmployeeInput from "../components/adminPage/EmployeeInput";
-import Updates from "../components/adminPage/Updates";
-import Sidebar from "../components/Sidebar";
-import Layout from "../components/Layout";
-import Assignments from "../components/Assignments";
-import Polls from "../components/Polls";
+import EmployeeInput from '../components/adminPage/EmployeeInput';
+import Updates from '../components/adminPage/Updates';
+import Sidebar from '../components/Sidebar';
+import Layout from '../components/Layout';
+import Assignments from '../components/Assignments';
+import Polls from '../components/Polls';
 
 export default class Admin extends React.Component {
   constructor() {
@@ -13,7 +13,7 @@ export default class Admin extends React.Component {
     this.state = {
       addedEmployee: null,
       isDefaultView: true,
-      currentlyShown: ""
+      currentlyShown: ''
     };
   }
 
@@ -32,16 +32,16 @@ export default class Admin extends React.Component {
 
   renderSwitchView = param => {
     switch (param) {
-      case "employeeInput":
-        return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
-      case "updates":
-        return <Updates />;
-      case "assignments":
-        return <Assignments />;
-      case "polls":
-        return <Polls />;
-      default:
-        null;
+    case 'employeeInput':
+      return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
+    case 'updates':
+      return <Updates />;
+    case 'assignments':
+      return <Assignments />;
+    case 'polls':
+      return <Polls />;
+    default:
+      null;
     }
   };
 
