@@ -15,7 +15,7 @@ export default class Navbar extends React.Component {
         <p id="logo">
           <img width="200px" src="https://i.ibb.co/Pm81mBV/symilogo.png" />
         </p>
-        <Button color="secondardy" id="login">
+        <Button color="secondary" id="login">
           Logout
         </Button>
       </div>
