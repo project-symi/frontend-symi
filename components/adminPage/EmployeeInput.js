@@ -20,9 +20,9 @@ class EmployeeInput extends React.Component {
       department: '',
       name: '',
       dateOfBirth: '',
-      type: '',
+      type: 'Select Type',
       gender: '',
-      formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }},
+      formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }, gender: { isShown: false, message: ''}},
     };
   }
 
@@ -34,7 +34,7 @@ class EmployeeInput extends React.Component {
     e.preventDefault();
     //callback from parent which executes POST api call to the backend
     // eslint-disable-next-line react/prop-types
-    const validation = formValidation({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.department, type: this.state.type });
+    const validation = formValidation({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.department, type: this.state.type, gender: this.state.gender });
     if (validation.result) {
       this.setState({ formValidation: validation.errors });
       return;
@@ -45,9 +45,10 @@ class EmployeeInput extends React.Component {
         department: this.state.department,
         name: this.state.name,
         dateOfBirth: this.state.dateOfBirth,
-        type: this.state.type
+        type: this.state.type,
+        gender: this.state.gender
       });
-      this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '' });
+      this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '', gender: '' });
     }
   };
 
@@ -77,7 +78,7 @@ class EmployeeInput extends React.Component {
     return (
       <div>
         <h1>Add approved employees</h1>
-        <h3>Add employee invidually</h3>
+        <h3>Add an employee invidually</h3>
         <form autoComplete='off'>
           <TextField
             error={this.state.formValidation.employeeId.isShown}
@@ -89,6 +90,49 @@ class EmployeeInput extends React.Component {
             variant="outlined"
             value={this.state.employeeId}
             onChange={this.handleInputChange}
+          />
+          <TextField
+            error={this.state.formValidation.name.isShown}
+            name="name"
+            id="outlined"
+            label="Employee Name"
+            helperText={this.state.formValidation.name.message}
+            margin="normal"
+            variant="outlined"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          />
+          <TextField
+            name='gender'
+            error={this.state.formValidation.gender.isShown}
+            id="outlined-select"
+            select
+            label="Gender"
+            value={this.state.gender}
+            onChange={this.handleInputChange}
+            helperText={this.state.formValidation.gender.message}
+            margin="normal"
+            variant="outlined"
+            SelectProps={{
+              native: true
+            }}
+          >
+            <option value=''></option>
+            <option value='ceo'>Female</option>
+            <option value='employee'>Male</option>
+          </TextField>
+          <TextField
+            name='dateOfBirth'
+            error={this.state.formValidation.dateOfBirth.isShown}
+            helperText={this.state.formValidation.dateOfBirth.message}
+            label="Date Of Birth"
+            onChange={this.handleInputChange}
+            id="date"
+            type="date"
+            value={this.state.dateOfBirth}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <TextField
             error={this.state.formValidation.email.isShown}
@@ -113,30 +157,6 @@ class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <TextField
-            error={this.state.formValidation.name.isShown}
-            name="name"
-            id="outlined"
-            label="Employee Name"
-            helperText={this.state.formValidation.name.message}
-            margin="normal"
-            variant="outlined"
-            value={this.state.name}
-            onChange={this.handleInputChange}
-          />
-          <TextField
-            name='dateOfBirth'
-            error={this.state.formValidation.dateOfBirth.isShown}
-            helperText={this.state.formValidation.dateOfBirth.message}
-            label="Date Of Birth"
-            onChange={this.handleInputChange}
-            id="date"
-            type="date"
-            value={this.state.dateOfBirth}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
             name='type'
             error={this.state.formValidation.type.isShown}
             id="outlined-select-currency"
@@ -151,6 +171,7 @@ class EmployeeInput extends React.Component {
               native: true
             }}
           >
+            <option value=''></option>
             <option value='ceo'>CEO</option>
             <option value='employee'>Employee</option>
             <option value='admin'>Admin</option>
