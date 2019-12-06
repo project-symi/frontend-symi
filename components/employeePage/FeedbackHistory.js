@@ -30,9 +30,13 @@ export default class FeedbackHistory extends React.Component {
     return (
       <div>
         <p className="title">Feedback History</p>
+
+        <div className="feedback-history-sub">
+          <span>Feedback ▾</span> <span>Date Added ▾</span>
+        </div>
         {this.state.feedback.map((item, i) => {
           return (
-            <div key={i} className="feedback-container">
+            <div key={i} className="feedback-history">
               <div className="feedback-string">
                 I feel {item.feeling.toUpperCase()} about{' '}
                 {item.about.input.toUpperCase()} because{' '}

@@ -14,8 +14,8 @@ html {
   justify-items: center;
   justify-content: center;
   overflow: hidden;
-  font-family: 'Roboto Condensed',
-    sans-serif;
+  font-family: 'Roboto Condensed';
+  font: #666666;
 }
 
 .layout {
@@ -45,12 +45,13 @@ html {
   grid-template-columns: .1fr 8fr 1fr;
   grid-template-areas: "_ logo login";
   padding: 10px;
+  margin: 0px;
   text-align: center;
-  border-bottom: 1px solid;
 }
 
 #logo {
   grid-area: logo;
+  margin: 0px;
 }
 
 #login {
@@ -82,7 +83,7 @@ html {
 .sidebar-button {
   padding: 10px;
   display: grid;
-  grid-template-columns: 40px 1fr;
+  grid-template-columns: 30px 1fr;
   cursor: pointer;
 }
 
@@ -96,4 +97,9 @@ html {
   background-color: #f5f6f8;
   border-radius: 0px 0px 15px 0px;
   overflow: auto;
+}
+
+.dev {
+  display: flex;
+  flex-direction: row;
 }
