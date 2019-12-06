@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 import '../../styles/Employee.css';
+
+//components
+import { Autocomplete } from '@material-ui/lab';
 import {
   Slider,
   Select,
@@ -8,8 +11,11 @@ import {
   FormControl,
   FormHelperText
 } from '@material-ui/core';
-import { feedbackValidation } from '../../utils/utils';
 
+//util functions
+import { feedbackValidation, debounce } from '../../utils/utils';
+
+//feelings data
 const feelings = [
   {
     value: '100',
@@ -20,13 +26,6 @@ const feelings = [
     label: '😐'
   },
   { value: 0, label: '😞' }
-];
-
-const employees = [
-  { name: 'Mini Meow', department: 'Marketing', employeeID: '1234' },
-  { name: 'Igor Dawg', department: 'HR', employeeID: '4321' },
-  { name: 'Yukio Lion', department: 'Engineering', employeeID: '2345' },
-  { name: 'Steffie Frog', department: 'Operations', employeeID: '6543' }
 ];
 
 export default class Feedback extends React.Component {
@@ -42,7 +41,15 @@ export default class Feedback extends React.Component {
     };
   }
 
+  update = debounce(() => {
+    this.props.handleFuzzyNameSearch(this.state.input);
+  }, 1500);
+
   handleInputChange = (event) => {
+    if (this.state.about === 'Employee') {
+      this.setState({ [event.target.name]: event.target.value });
+      this.update(event);
+    }
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -52,7 +59,7 @@ export default class Feedback extends React.Component {
     // send feedback object
     const validation = feedbackValidation({ feeling: this.state.feeling, about: this.state.about, note: this.state.note, input: this.state.input });
     if (validation.result) {
-      this.setState({ feedbackValidation: validation }, () => console.log(this.state.feedbackValidation.errors.about));
+      this.setState({ feedbackValidation: validation });
     } else {
       const feedback = {
         feeling: this.state.feeling,
@@ -65,7 +72,7 @@ export default class Feedback extends React.Component {
     }
   };
 
-  getFeeling = (event, value) => {
+  handleFeelingInput = (event, value) => {
     let feeling = '';
     if (value === 0) {
       feeling = 'meh';
@@ -76,6 +83,17 @@ export default class Feedback extends React.Component {
     }
     this.setState({ feeling });
   };
+
+  // searchEmployee = (event, value) => {
+  //   console.log(event);
+
+  //   this.setState({
+  //     about: {
+  //       type: this.state.about.type,
+  //       input: value.employeeID
+  //     }
+  //   });
+  // };
 
   render() {
     return (
@@ -91,7 +109,7 @@ export default class Feedback extends React.Component {
               aria-labelledby="discrete-slider-restrict"
               step={50}
               marks={feelings}
-              onChange={this.getFeeling}
+              onChange={this.handleFeelingInput}
             />
           </div>
 
@@ -120,7 +138,7 @@ export default class Feedback extends React.Component {
                 this.state.feedbackValidation.errors.about.message ? <FormHelperText id="my-helper-text">{this.state.feedbackValidation.errors.about.message}</FormHelperText> : null
               }
 
-              {this.state.about === 'Employee' || this.state.about === 'News' ? (
+              {this.state.about === 'Employee' && this.props.fuzzyNames === '' || this.state.about === 'News' && this.props.fuzzyNames === '' ? (
                 <TextField error={this.state.feedbackValidation.errors.input.isShown}
                   helperText={this.state.feedbackValidation.errors.input.message}
                   id="outlined"
@@ -129,6 +147,17 @@ export default class Feedback extends React.Component {
                   placeholder={this.state.about === 'Employee' ? 'Please specify employee name' : 'Please enter news topic'}
                   onChange={this.handleInputChange}></TextField>
               ) : null}
+              { this.props.fuzzyNames.length > 1 ? (
+                <Autocomplete
+                  options={this.props.fuzzyNames}
+                  getOptionLabel={option => {
+                    return `${option.name} (${option.department})`;
+                  }}
+                  style={{ width: 250 }}
+                  onChange={this.searchEmployee}
+                  renderInput={params => <TextField label="Select Employee" {...params} fullWidth />}
+                />
+              ) : null }
             </FormControl>
           </div>
 
