@@ -53,14 +53,8 @@ const formValidation = ({ employeeId, email, department, name, dateOfBirth, type
   return errors;
 };
 
-const feedbackValidation = ({ feeling, note, about, input }) => {
-  let errors = {result: false, errors: {feeling: {isShown: false, message: ''}, note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: '' }}};
-  // if (!feeling) {
-  //   errors.errors.feeling.isShown = true;
-  //   errors.errors.feeling.message = 'Please tell us how you feel about it';
-  //   //tell that we have an error
-  //   errors.result = true;
-  // }
+const feedbackValidation = ({ note, about, input }) => {
+  let errors = {result: false, errors: {note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: '' }}};
   if (!about) {
     errors.errors.about.isShown = true;
     errors.errors.about.message = 'This field is required';
@@ -102,10 +96,21 @@ const extractCsvData = (arr) => {
   return employees;
 };
 
-
+const debounce = (a,b,c) => {
+  var d,e;
+  return function(){
+    function h(){
+      d=null;
+      c||(e=a.apply(f,g));
+    }
+    var f=this,g=arguments;
+    return (clearTimeout(d),d=setTimeout(h,b),c&&!d&&(e=a.apply(f,g)),e)
+  };
+};
 
 module.exports = {
   formValidation,
   feedbackValidation,
-  extractCsvData
+  extractCsvData,
+  debounce
 };
