@@ -10,7 +10,6 @@ import { TextField, Button } from '@material-ui/core';
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
-
 class EmployeeInput extends React.Component {
   constructor() {
     super();
@@ -22,7 +21,15 @@ class EmployeeInput extends React.Component {
       dateOfBirth: '',
       type: '',
       gender: '',
-      formValidation: { employeeId: { isShown: false, message: '' }, email: { isShown: false, message: '' }, department: { isShown: false, message: '' }, name: { isShown: false, message: '' }, dateOfBirth: { isShown: false, message: '' }, type: { isShown: false, message: '' }, gender: { isShown: false, message: ''}},
+      formValidation: {
+        employeeId: { isShown: false, message: '' },
+        email: { isShown: false, message: '' },
+        department: { isShown: false, message: '' },
+        name: { isShown: false, message: '' },
+        dateOfBirth: { isShown: false, message: '' },
+        type: { isShown: false, message: '' },
+        gender: { isShown: false, message: '' }
+      },
       csvData: null
     };
   }
@@ -35,7 +42,15 @@ class EmployeeInput extends React.Component {
     e.preventDefault();
     //callback from parent which executes POST api call to the backend
     // eslint-disable-next-line react/prop-types
-    const validation = formValidation({ employeeId: this.state.employeeId, email: this.state.email, department: this.state.department, name: this.state.name, dateOfBirth: this.state.dateOfBirth, type: this.state.type, gender: this.state.gender });
+    const validation = formValidation({
+      employeeId: this.state.employeeId,
+      email: this.state.email,
+      department: this.state.department,
+      name: this.state.name,
+      dateOfBirth: this.state.dateOfBirth,
+      type: this.state.type,
+      gender: this.state.gender
+    });
     if (validation.result) {
       this.setState({ formValidation: validation.errors });
       return;
@@ -51,29 +66,42 @@ class EmployeeInput extends React.Component {
           },
           cancel: 'CANCEL'
         }
-      }).then((value) => {
-        switch (value) {
-        case 'confirm':
-          return swal({title: 'Done',
-            text: 'Employee successfully added!',
-            icon: 'success',
-            button: true}).then((val) => {
-            console.log('adding an employee');
-            this.props.addNewEmployee({
-              employeeId: this.state.employeeId,
-              email: this.state.email,
-              department: this.state.department,
-              name: this.state.name,
-              dateOfBirth: this.state.dateOfBirth,
-              type: this.state.type,
-              gender: this.state.gender
+      })
+        .then(value => {
+          switch (value) {
+          case 'confirm':
+            return swal({
+              title: 'Done',
+              text: 'Employee successfully added!',
+              icon: 'success',
+              button: true
+            }).then(val => {
+              console.log('adding an employee');
+              this.props.addNewEmployee({
+                employeeId: this.state.employeeId,
+                email: this.state.email,
+                department: this.state.department,
+                name: this.state.name,
+                dateOfBirth: this.state.dateOfBirth,
+                type: this.state.type,
+                gender: this.state.gender
+              });
             });
-          });
-        default:
-          break;
-        }
-      }).then((val) => this.setState({ employeeId: '', email: '', department: '', name: '', dateOfBirth: '', type: '', gender: '' })
-      );
+          default:
+            break;
+          }
+        })
+        .then(val =>
+          this.setState({
+            employeeId: '',
+            email: '',
+            department: '',
+            name: '',
+            dateOfBirth: '',
+            type: '',
+            gender: ''
+          })
+        );
     }
   };
 
@@ -89,26 +117,26 @@ class EmployeeInput extends React.Component {
       e.target.value = '';
     } else {
       Papa.parse(e.target.files[0], {
-        complete: (results) => {
+        complete: results => {
           const csvData = extractCsvData(results.data);
           this.setState({ csvData });
         }
       });
     }
-  }
+  };
 
   handleCsvUpload = () => {
     this.props.addNewEmployee(this.state.csvData);
     //clear input value
     e.target.value = '';
-  }
+  };
 
   render() {
     return (
       <div>
-        <h1>Add approved employees</h1>
-        <h3>Add an employee invidually</h3>
-        <form autoComplete='off'>
+        <span className="title">Add Approved Employees</span>
+        <h3>Add invidually</h3>
+        <form autoComplete="off">
           <TextField
             // error={this.state.formValidation.employeeId.isShown}
             name="employeeId"
@@ -132,7 +160,7 @@ class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <TextField
-            name='gender'
+            name="gender"
             error={this.state.formValidation.gender.isShown}
             id="outlined-select"
             select
@@ -146,12 +174,12 @@ class EmployeeInput extends React.Component {
               native: true
             }}
           >
-            <option value=''></option>
-            <option value='ceo'>Female</option>
-            <option value='employee'>Male</option>
+            <option value=""></option>
+            <option value="ceo">Female</option>
+            <option value="employee">Male</option>
           </TextField>
           <TextField
-            name='dateOfBirth'
+            name="dateOfBirth"
             error={this.state.formValidation.dateOfBirth.isShown}
             helperText={this.state.formValidation.dateOfBirth.message}
             label="Date Of Birth"
@@ -160,7 +188,7 @@ class EmployeeInput extends React.Component {
             type="date"
             value={this.state.dateOfBirth}
             InputLabelProps={{
-              shrink: true,
+              shrink: true
             }}
           />
           <TextField
@@ -186,7 +214,7 @@ class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <TextField
-            name='type'
+            name="type"
             error={this.state.formValidation.type.isShown}
             id="outlined-select-currency"
             select
@@ -200,19 +228,29 @@ class EmployeeInput extends React.Component {
               native: true
             }}
           >
-            <option value=''></option>
-            <option value='ceo'>CEO</option>
-            <option value='employee'>Employee</option>
-            <option value='admin'>Admin</option>
+            <option value=""></option>
+            <option value="ceo">CEO</option>
+            <option value="employee">Employee</option>
+            <option value="admin">Admin</option>
           </TextField>
-          <Button onClick={this.handleFormSubmit} variant="contained" color="primary">
+          <Button
+            onClick={this.handleFormSubmit}
+            variant="contained"
+            color="primary"
+          >
             Add Employee
           </Button>
         </form>
         <h3>Bulk Upload</h3>
         <h4>Please upload a csv file</h4>
-        <input type='file' onChange={this.handleCsvInput}></input>
-        <Button onClick={this.handleCsvUpload} variant="contained" color="primary">Submit</Button>
+        <input type="file" onChange={this.handleCsvInput}></input>
+        <Button
+          onClick={this.handleCsvUpload}
+          variant="contained"
+          color="primary"
+        >
+          Upload
+        </Button>
       </div>
     );
   }

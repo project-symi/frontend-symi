@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar';
 import Layout from '../components/Layout';
 import Assignments from '../components/Assignments';
 import Polls from '../components/Polls';
+import '../styles/Admin.css';
 
 export default class Admin extends React.Component {
   constructor() {

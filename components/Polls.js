@@ -1,3 +1,13 @@
-const Polls = () => (<div>I am polls component</div>);
+export default class Polls extends React.Component {
+  constructor() {
+    super();
+  }
 
-export default Polls;
+  render() {
+    return (
+      <div>
+        <p className="title">Polls</p>
+      </div>
+    );
+  }
+}

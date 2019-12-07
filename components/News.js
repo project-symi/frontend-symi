@@ -1,3 +1,13 @@
-const News = () => (<div>I am news component</div>);
+export default class News extends React.Component {
+  constructor() {
+    super();
+  }
 
-export default News;
+  render() {
+    return (
+      <div>
+        <p className="title">News</p>
+      </div>
+    );
+  }
+}
