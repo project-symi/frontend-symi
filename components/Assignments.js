@@ -14,6 +14,7 @@ export default class Assignments extends React.Component {
     return (
       <div>
         <p className="title">Assignments</p>
+        <div className="assignments-container"></div>
       </div>
     );
   }
