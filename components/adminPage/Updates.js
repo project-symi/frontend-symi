@@ -1,3 +1,3 @@
-const Updates = () => (<div>I am Updates component</div>);
+const Updates = () => <div>I am Updates component</div>;
 
 export default Updates;

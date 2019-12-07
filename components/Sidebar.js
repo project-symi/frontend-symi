@@ -2,11 +2,12 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ChatIcon from '@material-ui/icons/Chat';
 import GroupIcon from '@material-ui/icons/Group';
 import InfoIcon from '@material-ui/icons/Info';
-import Typography from '@material-ui/core/Typography';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import PollIcon from '@material-ui/icons/Poll';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
+
+import StarIcon from '@material-ui/icons/Star';
 
 // DEV HELP
 import Dev from '../components/Dev';
@@ -14,6 +15,13 @@ import Dev from '../components/Dev';
 /* eslint-disable react/prop-types */
 //TODO change to functional component
 export default class Sidebar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      points: 500
+    };
+  }
+
   handleOnClick = view => {
     this.props.handleComponentView(view);
   };
@@ -21,6 +29,7 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <div id="sidebar">
+        <div id="points"> {this.state.points} ⭐️</div>
         {this.props.dashboard ? (
           <div className="sidebar-button">
             <DashboardIcon color="primary" />

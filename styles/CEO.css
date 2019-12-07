@@ -53,3 +53,19 @@
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
+
+.top {
+  grid-area: small;
+  display: grid;
+  grid-template-columns: .25fr 1fr 1fr .5fr;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 12pt;
+}
+
+.top-num {
+  font-weight: bold;
+  font-size: 14pt;
+  color: #3f50b5;
+}
