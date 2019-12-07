@@ -41,6 +41,7 @@ export default class Feedback extends React.Component {
     };
   }
 
+  //make an API call to DB to get employees
   update = debounce(() => {
     this.props.handleFuzzyNameSearch(this.state.input);
   }, 1500);
@@ -68,7 +69,6 @@ export default class Feedback extends React.Component {
         note: this.state.note,
         subcategory: this.state.input
       };
-      console.log(feedback);
       this.props.submitFeedback(feedback);
     }
   };
