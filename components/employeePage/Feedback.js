@@ -1,15 +1,20 @@
 /* eslint-disable react/prop-types */
-import '../../styles/Employee.css';
+
+//components
+import { Autocomplete } from '@material-ui/lab';
 import {
   Slider,
   Select,
   TextField,
   Button,
-  FormControl
+  FormControl,
+  FormHelperText
 } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
-import { formValidation } from '../../utils/utils';
 
+//util functions
+import { feedbackValidation, debounce } from '../../utils/utils';
+
+//feelings data
 const feelings = [
   {
     value: '100',
@@ -22,63 +27,63 @@ const feelings = [
   { value: 0, label: '😞' }
 ];
 
-const employees = [
-  { name: 'Mini Meow', department: 'Marketing', employeeID: '1234' },
-  { name: 'Igor Dawg', department: 'HR', employeeID: '4321' },
-  { name: 'Yukio Lion', department: 'Engineering', employeeID: '2345' },
-  { name: 'Steffie Frog', department: 'Operations', employeeID: '6543' }
-];
-
 export default class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      feeling: null,
-      about: { type: null, input: null },
-      note: null
+      feeling: 'good',
+      about: '',
+      input: '',
+      note: '',
+      status: 'unseen',
+      feedbackValidation: {
+        result: false,
+        errors: {
+          note: { isShown: false, message: '' },
+          about: { isShown: false, message: '' },
+          input: { isShown: false, message: '' }
+        }
+      }
     };
   }
 
-  searchEmployee = (event, value) => {
-    this.setState({
-      about: {
-        type: this.state.about.type,
-        input: value.employeeID
-      }
-    });
-  };
+  update = debounce(() => {
+    this.props.handleFuzzyNameSearch(this.state.input);
+  }, 1500);
 
-  handleInputChange = (event, value) => {
-    if (event.target.name === 'About') {
-      this.setState({
-        about: {
-          type: event.target.value,
-          input: null
-        }
-      });
-    } else if (
-      event.target.name === 'Employee' ||
-      event.target.name === 'Category'
-    ) {
-      this.setState({
-        about: {
-          type: this.state.about.type,
-          input: event.target.value
-        }
-      });
-    } else {
+  handleInputChange = event => {
+    if (this.state.about === 'Employee') {
       this.setState({ [event.target.name]: event.target.value });
+      this.update(event);
     }
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
     // send feedback object
-    this.props.submitFeedback(this.state);
+    const validation = feedbackValidation({
+      about: this.state.about,
+      note: this.state.note,
+      input: this.state.input
+    });
+    if (validation.result) {
+      this.setState({ feedbackValidation: validation });
+    } else {
+      const feedback = {
+        feeling: this.state.feeling,
+        status: this.state.status,
+        category: this.state.about,
+        note: this.state.note,
+        subcategory: this.state.input
+      };
+      console.log(feedback);
+      this.props.submitFeedback(feedback);
+    }
   };
 
-  getFeeling = (event, value) => {
+  handleFeelingInput = (event, value) => {
     let feeling = '';
     if (value === 0) {
       feeling = 'meh';
@@ -90,6 +95,11 @@ export default class Feedback extends React.Component {
     this.setState({ feeling });
   };
 
+  searchEmployee = (event, value) => {
+    //change input value the employee id
+    this.setState({ input: value.employeeID });
+  };
+
   render() {
     return (
       <div>
@@ -98,14 +108,13 @@ export default class Feedback extends React.Component {
           {/* FEELING SLIDER */}
           <div className="about-line">
             <span className="feedback-text">I FEEL</span>
-            {/* <TextField error={}></TextField> */}
             <Slider
               style={{ width: 250 }}
               defaultValue={100}
               aria-labelledby="discrete-slider-restrict"
               step={50}
               marks={feelings}
-              onChange={this.getFeeling}
+              onChange={this.handleFeelingInput}
             />
           </div>
 
@@ -113,38 +122,63 @@ export default class Feedback extends React.Component {
           <div className="about-line">
             <span className="feedback-text">ABOUT</span>
 
-            <FormControl>
+            <FormControl
+              error={this.state.feedbackValidation.errors.about.isShown}
+            >
               <Select
-                helperText="Please fill out this field."
-                name="About"
+                name="about"
                 native
                 onChange={this.handleInputChange}
                 style={{ width: 250 }}
               >
                 <option value="" />
                 <option value="Employee">Employee</option>
+                <option value="News">News</option>
                 <option value="Work/Life Balance">Work/Life Balance</option>
                 <option value="Benefits">Benefits</option>
                 <option value="Holidays">Holidays</option>
                 <option value="Job Satisfaction">Job Satisfaction</option>
                 <option value="Company Policy">Company Policy</option>
-                <option value="Company Policy">Other</option>
+                <option value="Other">Other</option>
               </Select>
+              {this.state.feedbackValidation.errors.about.message ? (
+                <FormHelperText id="my-helper-text">
+                  {this.state.feedbackValidation.errors.about.message}
+                </FormHelperText>
+              ) : null}
 
-              {/* EMPLOYEE SEARCH */}
-              {this.state.about.type === 'Employee' ? (
+              {(this.state.about === 'Employee' &&
+                this.props.fuzzyNames === '') ||
+              (this.state.about === 'News' && this.props.fuzzyNames === '') ? (
+                  <TextField
+                    error={this.state.feedbackValidation.errors.input.isShown}
+                    helperText={
+                      this.state.feedbackValidation.errors.input.message
+                    }
+                    id="outlined"
+                    margin="normal"
+                    name="input"
+                    placeholder={
+                      this.state.about === 'Employee'
+                        ? 'Please specify employee name'
+                        : 'Please enter news topic'
+                    }
+                    onChange={this.handleInputChange}
+                  ></TextField>
+                ) : null}
+              {this.props.fuzzyNames.length > 1 ? (
                 <Autocomplete
-                  options={employees}
+                  options={this.props.fuzzyNames}
                   getOptionLabel={option => {
                     return `${option.name} (${option.department})`;
                   }}
                   style={{ width: 250 }}
                   onChange={this.searchEmployee}
-                  renderInput={params => <TextField {...params} fullWidth />}
+                  renderInput={params => (
+                    <TextField label="Select Employee" {...params} fullWidth />
+                  )}
                 />
-              ) : (
-                <div></div>
-              )}
+              ) : null}
             </FormControl>
           </div>
 
@@ -152,6 +186,8 @@ export default class Feedback extends React.Component {
           <div className="about-line">
             <span className="feedback-text">BECAUSE</span>
             <TextField
+              error={this.state.feedbackValidation.errors.note.isShown}
+              helperText={this.state.feedbackValidation.errors.note.message}
               id="outlined"
               margin="normal"
               name="note"
