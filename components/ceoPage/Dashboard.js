@@ -1,5 +1,4 @@
-import { PieChart, Pie, Legend, Tooltip } from 'recharts';
-import { AreaChart, Area } from 'recharts';
+import { Button } from '@material-ui/core';
 
 import SentimentOverall from './Charts/SentimentOverall';
 import SentimentbyCategory from './Charts/SentimentbyCategory';
@@ -10,7 +9,20 @@ export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      topEmployees: []
+      topEmployees: [
+        { name: 'Igor Dawg', points: 500 },
+        { name: 'Mini Meow', points: 400 },
+        { name: 'Yukio Lion', points: 100 },
+        { name: 'Steffie Frog', points: 150 },
+        { name: 'Potato Fan', points: 300 }
+      ],
+      topDepartments: [
+        { name: 'Engineering', points: 5500 },
+        { name: 'Operations', points: 7000 },
+        { name: 'Admin', points: 200 },
+        { name: 'Marketing', points: 2300 },
+        { name: 'Sales', points: 5000 }
+      ]
     };
   }
 
@@ -20,6 +32,56 @@ export default class Dashboard extends React.Component {
     return (
       <div>
         <p className="title">CEO Dashboard</p>
+        <div id="data-container">
+          <div>
+            <p className="data-title">TOP RATED EMPLOYEES</p>
+            <div className="data">
+              {[]
+                .concat(this.state.topEmployees)
+                .sort((a, b) => {
+                  return b.points - a.points;
+                })
+                .map((employee, i) => {
+                  return (
+                    <div key={i} className="top">
+                      <div className="top-num">{i + 1}</div>
+                      <div>{employee.name}</div>
+                      <div>{employee.points} ⭐️</div>
+                      <div>
+                        <Button size="small" color="primary">
+                          invite
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div>
+            <p className="data-title">TOP RATED DEPARTMENTS</p>
+            <div className="data">
+              {[]
+                .concat(this.state.topDepartments)
+                .sort((a, b) => {
+                  return b.points - a.points;
+                })
+                .map((department, i) => {
+                  return (
+                    <div key={i} className="top">
+                      <div className="top-num">{i + 1}</div>
+                      <div>{department.name}</div>
+                      <div>{department.points} ⭐️</div>
+                      <div>
+                        <Button size="small" color="primary">
+                          assign
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
         <div id="data-container">
           <div>
             <p className="data-title">OVERALL SENTIMENT</p>
