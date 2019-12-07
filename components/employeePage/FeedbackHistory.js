@@ -13,7 +13,7 @@ const FeedbackHistory = (props) => {
           <div key={i} className="feedback-history">
             <div className="feedback-string">
                 I feel {item.feeling.toUpperCase()} about{' '}
-              {item.about.input.toUpperCase()} because{' '}
+              {item.input ? item.input.toUpperCase() : item.about.toUpperCase()} because{' '}
               {item.note.toUpperCase()}.
             </div>
             <div className="date-added">
