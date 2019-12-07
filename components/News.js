@@ -7,13 +7,15 @@ export default class News extends React.Component {
           title: 'Bring Your Pup to Work!',
           description:
             'You can now bring your puppy to work on Wednesdays! That\'s something to celebrate.',
-          photo: 'https://media.giphy.com/media/mRB9PmJFOjAw8/giphy.gif'
+          photo: 'https://media.giphy.com/media/mRB9PmJFOjAw8/giphy.gif',
+          date: '12/10/2019'
         },
         {
           title: 'Kentucky Christmas Party!',
           description:
             'Join the Kentucky Christmas party 12/27! We look forward to having you.',
-          photo: 'https://media.giphy.com/media/in4t9IzuZKhqg/giphy.gif'
+          photo: 'https://media.giphy.com/media/in4t9IzuZKhqg/giphy.gif',
+          date: '12/15/2019'
         }
       ]
     };
@@ -29,8 +31,9 @@ export default class News extends React.Component {
               <div key={i} className="news-container">
                 <img className="news-img" src={item.photo}></img>
                 <div className="news-desc">
-                  <h3>{item.title}</h3>
-                  {item.description}
+                  <h2>{item.title}</h2>
+                  <h4>{item.description}</h4>
+                  Posted: {item.date}
                 </div>
               </div>
             );
