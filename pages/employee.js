@@ -77,7 +77,7 @@ export default class Employee extends React.Component {
     console.log(feedbackObj, ' feedback was sent to db');
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
-      //API call to db points table, add 10 points to employee (employeeId will the subcategory)
+      //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
       // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
       console.log(feedbackObj.subcategory, ' received 10 points');
     }
