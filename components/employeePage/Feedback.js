@@ -54,7 +54,9 @@ export default class Feedback extends React.Component {
 
   handleInputChange = event => {
     if (this.state.about === 'Employee') {
+      //temporary update input value to name string
       this.setState({ [event.target.name]: event.target.value });
+      // make and API call via props after 1.5 seconds
       this.update(event);
     }
     this.setState({ [event.target.name]: event.target.value });
@@ -96,7 +98,7 @@ export default class Feedback extends React.Component {
   };
 
   searchEmployee = (event, value) => {
-    //change input value the employee id
+    //change input value to the employee id
     this.setState({ input: value.employeeID });
   };
 
