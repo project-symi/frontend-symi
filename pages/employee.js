@@ -2,6 +2,7 @@ import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar';
 import Feedback from '../components/employeePage/Feedback';
 import History from '../components/employeePage/FeedbackHistory';
+import Rewards from '../components/employeePage/Rewards';
 import Polls from '../components/Polls';
 import News from '../components/News';
 import Invites from '../components/Invites';
@@ -33,8 +34,8 @@ export default class Employee extends React.Component {
   }
 
   handleFuzzyNameSearch = (string) => {
+    //make an API call to get fuzzy names and assign the return value to fuzzyNames property
     this.setState({ fuzzyNames: employees });
-    //make an API call to get fuzzy names
   }
 
 
@@ -50,6 +51,8 @@ export default class Employee extends React.Component {
       return <Polls />;
     case 'invites':
       return <Invites />;
+    case 'rewards':
+      return <Rewards />;
     default:
       null;
     }
@@ -58,7 +61,7 @@ export default class Employee extends React.Component {
   render() {
     return (
       <Layout>
-        <Sidebar news={true} feedback={true} feedbackHistory={true} polls={true} invites={true} handleComponentView={this.handleComponentView} />
+        <Sidebar news={true} feedback={true} feedbackHistory={true} polls={true} invites={true} rewards={true} handleComponentView={this.handleComponentView} />
         <div id="page">
           {
             this.state.isDefaultView ? <div><h1>Welcome to Symi!</h1>
