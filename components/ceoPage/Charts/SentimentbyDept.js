@@ -6,56 +6,56 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip
-} from "recharts";
+} from 'recharts';
 
 const dataset = [
   {
-    name: "Marketing",
-    "😊": 400,
-    "😐": 240,
-    "😞": 100,
+    name: 'Marketing',
+    '😊': 400,
+    '😐': 240,
+    '😞': 100,
     amt: 240
   },
   {
-    name: "HR",
-    "😊": 300,
-    "😐": 139,
-    "😞": 100,
+    name: 'HR',
+    '😊': 300,
+    '😐': 139,
+    '😞': 100,
     amt: 221
   },
   {
-    name: "Eng",
-    "😊": 200,
-    "😐": 980,
-    "😞": 100,
+    name: 'Eng',
+    '😊': 200,
+    '😐': 980,
+    '😞': 100,
     amt: 229
   },
   {
-    name: "Operations",
-    "😊": 278,
-    "😐": 390,
-    "😞": 100,
+    name: 'Operations',
+    '😊': 278,
+    '😐': 390,
+    '😞': 100,
     amt: 200
   },
   {
-    name: "Accounting",
-    "😊": 189,
-    "😐": 480,
-    "😞": 100,
+    name: 'Accounting',
+    '😊': 189,
+    '😐': 480,
+    '😞': 100,
     amt: 218
   },
   {
-    name: "Sales",
-    "😊": 239,
-    "😐": 380,
-    "😞": 100,
+    name: 'Sales',
+    '😊': 239,
+    '😐': 380,
+    '😞': 100,
     amt: 250
   },
   {
-    name: "Management",
-    "😊": 239,
-    "😐": 380,
-    "😞": 100,
+    name: 'Management',
+    '😊': 239,
+    '😐': 380,
+    '😞': 100,
     amt: 250
   }
 ];
@@ -64,7 +64,7 @@ export default class SentimentbyDept extends React.Component {
   constructor() {
     super();
     this.state = {
-      colors: ["#3ED7BD", "#58AFC2", "#8884d8"],
+      colors: ['#3ED7BD', '#58AFC2', '#8884d8'],
       data: dataset
     };
   }

@@ -1,9 +1,13 @@
-import { Button } from '@material-ui/core';
-
+//charts
 import SentimentOverall from './Charts/SentimentOverall';
 import SentimentbyCategory from './Charts/SentimentbyCategory';
 import SentimentbyNews from './Charts/SentimentbyNews';
 import SentimentbyDept from './Charts/SentimentbyDept';
+
+//components
+import { Button } from '@material-ui/core';
+import CreateInvitation from './CreateInvitation';
+
 
 export default class Dashboard extends React.Component {
   constructor() {
@@ -22,88 +26,98 @@ export default class Dashboard extends React.Component {
         { name: 'Admin', points: 200 },
         { name: 'Marketing', points: 2300 },
         { name: 'Sales', points: 5000 }
-      ]
+      ],
+      currentlyShown: 'defaultView'
     };
   }
 
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
+  handleInvite = () => {
+    console.log('created invitation');
+    this.setState({ currentlyShown: 'createInvitation' });
+  }
+
   render() {
     return (
       <div>
-        <p className="title">CEO Dashboard</p>
-        <div id="data-container">
-          <div>
-            <p className="data-title">TOP RATED EMPLOYEES</p>
-            <div className="data">
-              {[]
-                .concat(this.state.topEmployees)
-                .sort((a, b) => {
-                  return b.points - a.points;
-                })
-                .map((employee, i) => {
-                  return (
-                    <div key={i} className="top">
-                      <div className="top-num">{i + 1}</div>
-                      <div>{employee.name}</div>
-                      <div>{employee.points} ⭐️</div>
-                      <div>
-                        <Button size="small" color="primary">
-                          invite
-                        </Button>
-                      </div>
-                    </div>
-                  );
-                })}
+        {
+          this.state.currentlyShown === 'createInvitation' ? <CreateInvitation /> :         <div>
+            <p className="title">CEO Dashboard</p>
+            <div id="data-container">
+              <div>
+                <p className="data-title">TOP RATED EMPLOYEES</p>
+                <div className="data">
+                  {[]
+                    .concat(this.state.topEmployees)
+                    .sort((a, b) => {
+                      return b.points - a.points;
+                    })
+                    .map((employee, i) => {
+                      return (
+                        <div key={i} className="top">
+                          <div className="top-num">{i + 1}</div>
+                          <div>{employee.name}</div>
+                          <div>{employee.points} ⭐️</div>
+                          <div>
+                            <Button size="small" color="primary" onClick={this.handleInvite}>
+                            invite
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+              <div>
+                <p className="data-title">TOP RATED DEPARTMENTS</p>
+                <div className="data">
+                  {[]
+                    .concat(this.state.topDepartments)
+                    .sort((a, b) => {
+                      return b.points - a.points;
+                    })
+                    .map((department, i) => {
+                      return (
+                        <div key={i} className="top">
+                          <div className="top-num">{i + 1}</div>
+                          <div>{department.name}</div>
+                          <div>{department.points} ⭐️</div>
+                          <div>
+                            <Button size="small" color="primary">
+                            assign
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            </div>
+            <div id="data-container">
+              <div>
+                <p className="data-title">OVERALL SENTIMENT</p>
+                <SentimentOverall />
+              </div>
+              <div>
+                <p className="data-title">SENTIMENT BY CATEGORY</p>
+                <SentimentbyCategory />
+              </div>
+            </div>
+            <div id="data-container-big">
+              <div>
+                <p className="data-title">SENTIMENT BY DEPARTMENT</p>
+                <SentimentbyDept />
+              </div>
+              <div id="data-container-big">
+                <div>
+                  <p className="data-title">SENTIMENT BY NEWS</p>
+                  <SentimentbyNews />
+                </div>
+              </div>
             </div>
           </div>
-          <div>
-            <p className="data-title">TOP RATED DEPARTMENTS</p>
-            <div className="data">
-              {[]
-                .concat(this.state.topDepartments)
-                .sort((a, b) => {
-                  return b.points - a.points;
-                })
-                .map((department, i) => {
-                  return (
-                    <div key={i} className="top">
-                      <div className="top-num">{i + 1}</div>
-                      <div>{department.name}</div>
-                      <div>{department.points} ⭐️</div>
-                      <div>
-                        <Button size="small" color="primary">
-                          assign
-                        </Button>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-        </div>
-        <div id="data-container">
-          <div>
-            <p className="data-title">OVERALL SENTIMENT</p>
-            <SentimentOverall />
-          </div>
-          <div>
-            <p className="data-title">SENTIMENT BY CATEGORY</p>
-            <SentimentbyCategory />
-          </div>
-        </div>
-        <div id="data-container-big">
-          <div>
-            <p className="data-title">SENTIMENT BY DEPARTMENT</p>
-            <SentimentbyDept />
-          </div>
-          <div id="data-container-big">
-            <div>
-              <p className="data-title">SENTIMENT BY NEWS</p>
-              <SentimentbyNews />
-            </div>
-          </div>
-        </div>
+        }
       </div>
     );
   }

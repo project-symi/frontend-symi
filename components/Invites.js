@@ -1,23 +1,23 @@
 /* eslint-disable react/prop-types */
-import { Button } from "@material-ui/core";
+import { Button } from '@material-ui/core';
 
 export default class Invites extends React.Component {
   constructor() {
     super();
     this.state = {
-      userType: "",
+      userType: '',
       invites: [
         {
-          date: "12/3/2009",
-          title: "Lunch at Afuri",
-          invitee: "Yukio",
-          status: "accepted"
+          date: '12/3/2009',
+          title: 'Lunch at Afuri',
+          invitee: 'Yukio',
+          status: 'accepted'
         },
         {
-          date: "12/3/2009",
-          title: "Walking meeting to Lawson",
-          invitee: "Igor",
-          status: "pending"
+          date: '12/3/2009',
+          title: 'Walking meeting to Lawson',
+          invitee: 'Igor',
+          status: 'pending'
         }
       ]
     };
