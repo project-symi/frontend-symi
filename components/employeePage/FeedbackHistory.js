@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+//TODO make this a functional component
 export default class FeedbackHistory extends React.Component {
 
   render() {
@@ -7,9 +8,9 @@ export default class FeedbackHistory extends React.Component {
         <p className="title">Feedback History</p>
 
         <div className="feedback-history-sub">
-          <span>Feedback ▾</span> <span>Date Added ▾</span> <span>Status ▾</span> 
+          <span>Feedback ▾</span> <span>Date Added ▾</span> <span>Status ▾</span>
         </div>
-        {this.state.feedback.map((item, i) => {
+        {this.props.feedbacks.map((item, i) => {
           return (
             <div key={i} className="feedback-history">
               <div className="feedback-string">
@@ -21,9 +22,8 @@ export default class FeedbackHistory extends React.Component {
                 (Added
                 {item.dateAdded})
               </div>
-              <div className="date-added">
-                (Status
-                {item.status})
+              <div className="status">
+                {item.status}
               </div>
             </div>
           );

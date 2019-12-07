@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Layout from '../components/Layout';
 import Sidebar from '../components/Sidebar';
 import Feedback from '../components/employeePage/Feedback';
@@ -7,23 +6,14 @@ import Rewards from '../components/employeePage/Rewards';
 import Polls from '../components/Polls';
 import News from '../components/News';
 import Invites from '../components/Invites';
-=======
-import Layout from "../components/Layout";
-import Sidebar from "../components/Sidebar";
-import Feedback from "../components/employeePage/Feedback";
-import History from "../components/employeePage/FeedbackHistory";
-import Polls from "../components/Polls";
-import News from "../components/News";
-import Invites from "../components/Invites";
-import "../styles/Employee.css";
->>>>>>> af31c3816d966556c633e1622fbe49c6da156cbe
+import '../styles/Employee.css';
 
 //dummy data for fuzzy name input
 const employees = [
-  { name: "Mini Meow", department: "Marketing", employeeID: "1234" },
-  { name: "Igor Dawg", department: "HR", employeeID: "4321" },
-  { name: "Yukio Lion", department: "Engineering", employeeID: "2345" },
-  { name: "Steffie Frog", department: "Operations", employeeID: "6543" }
+  { name: 'Mini Meow', department: 'Marketing', employeeID: '1234' },
+  { name: 'Igor Dawg', department: 'HR', employeeID: '4321' },
+  { name: 'Yukio Lion', department: 'Engineering', employeeID: '2345' },
+  { name: 'Steffie Frog', department: 'Operations', employeeID: '6543' }
 ];
 
 //dummy data of feedbacks
@@ -33,22 +23,34 @@ const feedbacks = [
     about: { type: 'Employee', input: 'Igor' },
     note: 'he\'s super helpful and a hardworker',
     dateAdded: null,
-    status: 'unseen'
+    status: 'unseen',
+    id: '1111'
   },
   {
     feeling: 'okay',
     about: { type: 'Category', input: 'Benefits' },
     note: 'there\'s no gym memebership',
     dateAdded: null,
-    status: 'unseen'
+    status: 'unseen',
+    id: '2222'
   },
   {
     feeling: 'bad',
     about: { type: 'Category', input: 'Holidays' },
     note: 'I don\'t have Hanukkah off...',
     dateAdded: null,
-    status: 'seen'
+    status: 'seen',
+    id: '3333'
   }
+];
+
+const rewards = [
+  { points: 10, category: 'feedback', dateAdded: '01/12/2019', correspondentId: '1111' },
+  { points: 5, category: 'poll', dateAdded: '02/12/2019', correspondentId:'6' },
+  { points: 10, category: 'feedback', dateAdded: '04/12/2019', correspondentId:'2222' },
+  { points: 5, category: 'poll', dateAdded: '05/12/2019', correspondentId:'7' },
+  { points: 10, category: 'feedback', dateAdded: '01/12/2019', correspondentId: '3333' },
+  { points: 5, category: 'poll', dateAdded: '07/12/2019', correspondentId:'8' },
 ];
 
 export default class Employee extends React.Component {
@@ -56,27 +58,29 @@ export default class Employee extends React.Component {
     super();
     this.state = {
       isDefaultView: true,
-<<<<<<< HEAD
       currentlyShown: '',
       fuzzyNames: '',
       feedbacks: null,
       rewards: null
-=======
-      currentlyShown: "",
-      fuzzyNames: ""
->>>>>>> af31c3816d966556c633e1622fbe49c6da156cbe
     };
   }
 
   componentDidMount() {
     //make an API call to get all the feedbacks
-
+    //make another API call to get all points
+    this.setState({ feedbacks, rewards });
   }
 
 
   submitFeedback = feedbackObj => {
-    console.log(feedbackObj);
     //make an API call to add the feebback to db
+    console.log(feedbackObj, ' feedback was sent to db');
+    //check whether feedback category is employee, if yes make another API call to add points
+    if (feedbackObj.category === 'Employee') {
+      //API call to db, add 10 points to employee
+      console.log(feedbackObj.subcategory, ' received 10 points');
+    }
+
   };
 
   handleComponentView = view => {
@@ -91,24 +95,26 @@ export default class Employee extends React.Component {
 
   renderSwitchView = param => {
     switch (param) {
-      case "feedback":
-        return (
-          <Feedback
-            handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-            submitFeedback={this.submitFeedback}
-            fuzzyNames={this.state.fuzzyNames}
-          />
-        );
-      case "feedbackHistory":
-        return <History />;
-      case "news":
-        return <News />;
-      case "polls":
-        return <Polls />;
-      case "invites":
-        return <Invites />;
-      default:
-        null;
+    case 'feedback':
+      return (
+        <Feedback
+          handleFuzzyNameSearch={this.handleFuzzyNameSearch}
+          submitFeedback={this.submitFeedback}
+          fuzzyNames={this.state.fuzzyNames}
+        />
+      );
+    case 'feedbackHistory':
+      return <History feedbacks={this.state.feedbacks} />;
+    case 'news':
+      return <News />;
+    case 'polls':
+      return <Polls />;
+    case 'rewards':
+      return <Rewards rewards={this.state.rewards} />;
+    case 'invites':
+      return <Invites />;
+    default:
+      null;
     }
   };
 
@@ -121,6 +127,7 @@ export default class Employee extends React.Component {
           feedbackHistory={true}
           polls={true}
           invites={true}
+          rewards={true}
           handleComponentView={this.handleComponentView}
         />
         <div id="page">

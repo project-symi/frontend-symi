@@ -1,16 +1,16 @@
-import { PieChart, Pie, Legend, Tooltip, Cell } from "recharts";
+import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 
 const dataset = [
-  { name: "😊", value: 40 },
-  { name: "😐", value: 30 },
-  { name: "😞", value: 34 }
+  { name: '😊', value: 40 },
+  { name: '😐', value: 30 },
+  { name: '😞', value: 34 }
 ];
 
 export default class SentimentOverall extends React.Component {
   constructor() {
     super();
     this.state = {
-      colors: ["#3ED7BD", "#58AFC2", "#8884d8"],
+      colors: ['#3ED7BD', '#58AFC2', '#8884d8'],
       data: dataset
     };
   }
@@ -34,7 +34,7 @@ export default class SentimentOverall extends React.Component {
         x={x}
         y={y}
         fill="white"
-        textAnchor={x > cx ? "start" : "end"}
+        textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
       >
         {`${(percent * 100).toFixed(0)}%`}
