@@ -1,4 +1,4 @@
-import TextField from '@material-ui/core/TextField';
+import { TextField, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -6,6 +6,13 @@ const useStyles = makeStyles(theme => ({
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       width: 200,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: 'auto',
+      maxWidth: '100%',
+      margin: '15px',
+      borderRadius: '20px'
     },
   },
 }));
@@ -16,6 +23,7 @@ const CreateInvitation = () => {
   return (
     <div>
       <h1 className='title' >Create Invitation</h1>
+      <Paper className={classes.paper}>
       <form className={classes.root} noValidate autoComplete="off">
         <div>
           <TextField required id="standard-required" label="Required" defaultValue="Hello World" />
@@ -51,6 +59,7 @@ const CreateInvitation = () => {
           />
         </div>
       </form>
+      </Paper>
     </div>
   );
 };
