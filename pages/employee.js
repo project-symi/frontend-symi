@@ -20,7 +20,8 @@ const employees = [
 const feedbacks = [
   {
     feeling: 'good',
-    about: { type: 'Employee', input: 'Igor' },
+    about: 'Employee',
+    input: 'Igor',
     note: 'he\'s super helpful and a hardworker',
     dateAdded: null,
     status: 'unseen',
@@ -28,7 +29,7 @@ const feedbacks = [
   },
   {
     feeling: 'okay',
-    about: { type: 'Category', input: 'Benefits' },
+    about: 'Benefits',
     note: 'there\'s no gym memebership',
     dateAdded: null,
     status: 'unseen',
@@ -36,7 +37,7 @@ const feedbacks = [
   },
   {
     feeling: 'bad',
-    about: { type: 'Category', input: 'Holidays' },
+    about: 'Holidays',
     note: 'I don\'t have Hanukkah off...',
     dateAdded: null,
     status: 'seen',
@@ -71,7 +72,7 @@ export default class Employee extends React.Component {
     this.setState({ feedbacks, rewards });
   }
 
-
+  //callback for Feedback to submit the feedback
   submitFeedback = feedbackObj => {
     //make an API call to add the feebback to db
     console.log(feedbackObj, ' feedback was sent to db');
@@ -88,10 +89,25 @@ export default class Employee extends React.Component {
     this.setState({ currentlyShown: view, isDefaultView: false });
   };
 
+  //callback for Feedback submit to get employee names
   handleFuzzyNameSearch = (string) => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
-    this.setState({ fuzzyNames: employees }, () => console.log('get fuzzy names'));
+    this.setState({ fuzzyNames: employees });
   }
+
+  handleRewardDetails = (id, category) => {
+    if (category === 'feedback') {
+      //make an API call to get feedback details by ID
+      const feedbackDetails = feedbacks.find(feedback => feedback.id === id);
+      return feedbackDetails.note;
+    } else {
+      //make an API call to get poll details by ID
+      const pollDetails = 'this is dummy poll details';
+      return pollDetails;
+    }
+  }
+
+
 
 
   renderSwitchView = param => {
@@ -111,7 +127,7 @@ export default class Employee extends React.Component {
     case 'polls':
       return <Polls />;
     case 'rewards':
-      return <Rewards rewards={this.state.rewards} />;
+      return <Rewards rewards={this.state.rewards} handleRewardDetails={this.handleRewardDetails} />;
     case 'invites':
       return <Invites />;
     default:

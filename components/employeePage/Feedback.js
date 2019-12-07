@@ -50,7 +50,7 @@ export default class Feedback extends React.Component {
 
   //make an API call to DB to get employees
   update = debounce(async () => {
-    console.log("I am getting fuzzy names");
+    console.log('I am getting fuzzy names');
     await this.props.handleFuzzyNameSearch(this.state.input);
     this.setState({ isPopupOpen: true });
   }, 1500);
@@ -61,7 +61,7 @@ export default class Feedback extends React.Component {
   };
 
   handleEmployeeNameInput = event => {
-    console.log("hello");
+    console.log('hello');
     this.setState({ input: event.target.value });
     this.update();
   }
