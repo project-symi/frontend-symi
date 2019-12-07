@@ -81,6 +81,7 @@ export default class Employee extends React.Component {
       // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
       console.log(feedbackObj.subcategory, ' received 10 points');
     }
+    this.setState({ fuzzyNames: '' });
   };
 
   handleComponentView = view => {
@@ -89,7 +90,7 @@ export default class Employee extends React.Component {
 
   handleFuzzyNameSearch = (string) => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
-    this.setState({ fuzzyNames: employees });
+    this.setState({ fuzzyNames: employees }, () => console.log('get fuzzy names'));
   }
 
 
