@@ -24,89 +24,77 @@ export default class Sidebar extends React.Component {
         {this.props.dashboard ? (
           <div className="sidebar-button">
             <DashboardIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('dashboard')}>
+            <span onClick={() => this.handleOnClick('dashboard')}>
               Dashboard
-            </Typography>
+            </span>
           </div>
         ) : null}
         {this.props.news ? (
           <div className="sidebar-button">
             <AnnouncementIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('news')}>
-              News
-            </Typography>
+            <span onClick={() => this.handleOnClick('news')}>News</span>
           </div>
         ) : null}
         {this.props.employeeInput ? (
           <div className="sidebar-button">
             <GroupIcon color="primary" />{' '}
-            <Typography onClick={() => this.handleOnClick('employeeInput')}>
+            <span onClick={() => this.handleOnClick('employeeInput')}>
               Employees
-            </Typography>
+            </span>
           </div>
         ) : null}
         {this.props.feedback ? (
           <div className="sidebar-button">
             <ChatIcon color="primary" />{' '}
-            <Typography onClick={() => this.handleOnClick('feedback')}>
-              Feedback
-            </Typography>
+            <span onClick={() => this.handleOnClick('feedback')}>Feedback</span>
           </div>
         ) : null}
         {this.props.feedbackHistory ? (
           <div className="sidebar-button">
             <InfoIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('feedbackHistory')}>
+            <span onClick={() => this.handleOnClick('feedbackHistory')}>
               Feedback History
-            </Typography>
+            </span>
           </div>
         ) : null}
         {this.props.updates ? (
           <div className="sidebar-button">
             <AnnouncementIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('updates')}>
-              Updates
-            </Typography>
+            <span onClick={() => this.handleOnClick('updates')}>Updates</span>
           </div>
         ) : null}
         {this.props.assignments ? (
           <div className="sidebar-button">
             <AssignmentTurnedInIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('assignments')}>
+            <span onClick={() => this.handleOnClick('assignments')}>
               Assignments
-            </Typography>
+            </span>
           </div>
         ) : null}
         {this.props.invites ? (
           <div className="sidebar-button">
             <InsertInvitationIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('invites')}>
-              Invites
-            </Typography>
+            <span onClick={() => this.handleOnClick('invites')}>Invites</span>
           </div>
         ) : null}
         {this.props.rewards ? (
           <div className="sidebar-button">
             <InfoIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('rewards')}>
-              Rewards
-            </Typography>
+            <span onClick={() => this.handleOnClick('rewards')}>Rewards</span>
           </div>
         ) : null}
         {this.props.polls ? (
           <div className="sidebar-button">
             <PollIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('polls')}>
-              Polls
-            </Typography>
+            <span onClick={() => this.handleOnClick('polls')}>Polls</span>
           </div>
         ) : null}
         {this.props.usageStatistics ? (
           <div className="sidebar-button">
             <InfoIcon color="primary" />
-            <Typography onClick={() => this.handleOnClick('usageStatistics')}>
+            <span onClick={() => this.handleOnClick('usageStatistics')}>
               UsageStatistics
-            </Typography>
+            </span>
           </div>
         ) : null}
 

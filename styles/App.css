@@ -64,7 +64,7 @@ html {
   display: flex;
   flex-direction: column;
   width: 150px;
-  font-size: 18px;
+  font-size: 15pt;
   -webkit-touch-callout: none;
   /* iOS Safari */
   -webkit-user-select: none;

@@ -1,3 +1,13 @@
-const Invites = () => (<div>I am Invites component</div>);
+export default class Invites extends React.Component {
+  constructor() {
+    super();
+  }
 
-export default Invites;
+  render() {
+    return (
+      <div>
+        <p className="title">Invites</p>
+      </div>
+    );
+  }
+}

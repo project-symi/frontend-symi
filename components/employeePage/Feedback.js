@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import '../../styles/Employee.css';
 
 //components
 import { Autocomplete } from '@material-ui/lab';
@@ -37,7 +36,14 @@ export default class Feedback extends React.Component {
       input: '',
       note: '',
       status: 'unseen',
-      feedbackValidation: { result: false, errors: { note: {isShown: false, message: ''}, about: {isShown: false, message: ''}, input: {isShown: false, message: ''}} }
+      feedbackValidation: {
+        result: false,
+        errors: {
+          note: { isShown: false, message: '' },
+          about: { isShown: false, message: '' },
+          input: { isShown: false, message: '' }
+        }
+      }
     };
   }
 
@@ -46,7 +52,7 @@ export default class Feedback extends React.Component {
     this.props.handleFuzzyNameSearch(this.state.input);
   }, 1500);
 
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     if (this.state.about === 'Employee') {
       this.setState({ [event.target.name]: event.target.value });
       this.update(event);
@@ -58,7 +64,11 @@ export default class Feedback extends React.Component {
     event.preventDefault();
 
     // send feedback object
-    const validation = feedbackValidation({ about: this.state.about, note: this.state.note, input: this.state.input });
+    const validation = feedbackValidation({
+      about: this.state.about,
+      note: this.state.note,
+      input: this.state.input
+    });
     if (validation.result) {
       this.setState({ feedbackValidation: validation });
     } else {
@@ -112,7 +122,9 @@ export default class Feedback extends React.Component {
           <div className="about-line">
             <span className="feedback-text">ABOUT</span>
 
-            <FormControl error={this.state.feedbackValidation.errors.about.isShown} >
+            <FormControl
+              error={this.state.feedbackValidation.errors.about.isShown}
+            >
               <Select
                 name="about"
                 native
@@ -129,20 +141,32 @@ export default class Feedback extends React.Component {
                 <option value="Company Policy">Company Policy</option>
                 <option value="Other">Other</option>
               </Select>
-              {
-                this.state.feedbackValidation.errors.about.message ? <FormHelperText id="my-helper-text">{this.state.feedbackValidation.errors.about.message}</FormHelperText> : null
-              }
-
-              {this.state.about === 'Employee' && this.props.fuzzyNames === '' || this.state.about === 'News' && this.props.fuzzyNames === '' ? (
-                <TextField error={this.state.feedbackValidation.errors.input.isShown}
-                  helperText={this.state.feedbackValidation.errors.input.message}
-                  id="outlined"
-                  margin="normal"
-                  name="input"
-                  placeholder={this.state.about === 'Employee' ? 'Please specify employee name' : 'Please enter news topic'}
-                  onChange={this.handleInputChange}></TextField>
+              {this.state.feedbackValidation.errors.about.message ? (
+                <FormHelperText id="my-helper-text">
+                  {this.state.feedbackValidation.errors.about.message}
+                </FormHelperText>
               ) : null}
-              { this.props.fuzzyNames.length > 1 ? (
+
+              {(this.state.about === 'Employee' &&
+                this.props.fuzzyNames === '') ||
+              (this.state.about === 'News' && this.props.fuzzyNames === '') ? (
+                  <TextField
+                    error={this.state.feedbackValidation.errors.input.isShown}
+                    helperText={
+                      this.state.feedbackValidation.errors.input.message
+                    }
+                    id="outlined"
+                    margin="normal"
+                    name="input"
+                    placeholder={
+                      this.state.about === 'Employee'
+                        ? 'Please specify employee name'
+                        : 'Please enter news topic'
+                    }
+                    onChange={this.handleInputChange}
+                  ></TextField>
+                ) : null}
+              {this.props.fuzzyNames.length > 1 ? (
                 <Autocomplete
                   options={this.props.fuzzyNames}
                   getOptionLabel={option => {
@@ -150,9 +174,11 @@ export default class Feedback extends React.Component {
                   }}
                   style={{ width: 250 }}
                   onChange={this.searchEmployee}
-                  renderInput={params => <TextField label="Select Employee" {...params} fullWidth />}
+                  renderInput={params => (
+                    <TextField label="Select Employee" {...params} fullWidth />
+                  )}
                 />
-              ) : null }
+              ) : null}
             </FormControl>
           </div>
 
