@@ -15,15 +15,49 @@ const employees = [
   { name: 'Steffie Frog', department: 'Operations', employeeID: '6543' }
 ];
 
+//dummy data of feedbacks
+const feedbacks = [
+  {
+    feeling: 'good',
+    about: { type: 'Employee', input: 'Igor' },
+    note: 'he\'s super helpful and a hardworker',
+    dateAdded: null,
+    status: 'unseen'
+  },
+  {
+    feeling: 'okay',
+    about: { type: 'Category', input: 'Benefits' },
+    note: 'there\'s no gym memebership',
+    dateAdded: null,
+    status: 'unseen'
+  },
+  {
+    feeling: 'bad',
+    about: { type: 'Category', input: 'Holidays' },
+    note: 'I don\'t have Hanukkah off...',
+    dateAdded: null,
+    status: 'seen'
+  }
+];
+
 export default class Employee extends React.Component {
   constructor() {
     super();
     this.state = {
       isDefaultView: true,
       currentlyShown: '',
-      fuzzyNames: ''
+      fuzzyNames: '',
+      feedbacks: null,
+      rewards: null
     };
   }
+
+  componentDidMount() {
+    //make an API call to get all the feedbacks
+
+  }
+
+
   submitFeedback = feedbackObj => {
     console.log(feedbackObj);
     //make an API call to add the feebback to db
