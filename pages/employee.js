@@ -16,44 +16,6 @@ const employees = [
   { name: 'Steffie Frog', department: 'Operations', employeeID: '6543' }
 ];
 
-//dummy data of feedbacks
-const feedbacks = [
-  {
-    feeling: 'good',
-    about: 'Employee',
-    input: 'Igor',
-    note: 'he\'s super helpful and a hardworker',
-    dateAdded: null,
-    status: 'unseen',
-    id: '1111'
-  },
-  {
-    feeling: 'okay',
-    about: 'Benefits',
-    note: 'there\'s no gym memebership',
-    dateAdded: null,
-    status: 'unseen',
-    id: '2222'
-  },
-  {
-    feeling: 'bad',
-    about: 'Holidays',
-    note: 'I don\'t have Hanukkah off...',
-    dateAdded: null,
-    status: 'seen',
-    id: '3333'
-  }
-];
-
-const rewards = [
-  { points: 10, category: 'feedback', dateAdded: '01/12/2019', correspondentId: '1111' },
-  { points: 5, category: 'poll', dateAdded: '02/12/2019', correspondentId:'6' },
-  { points: 10, category: 'feedback', dateAdded: '04/12/2019', correspondentId:'2222' },
-  { points: 5, category: 'poll', dateAdded: '05/12/2019', correspondentId:'7' },
-  { points: 10, category: 'feedback', dateAdded: '01/12/2019', correspondentId: '3333' },
-  { points: 5, category: 'poll', dateAdded: '07/12/2019', correspondentId:'8' },
-];
-
 export default class Employee extends React.Component {
   constructor() {
     super();
