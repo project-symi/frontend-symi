@@ -43,22 +43,28 @@ export default class Feedback extends React.Component {
           about: { isShown: false, message: '' },
           input: { isShown: false, message: '' }
         }
-      }
+      },
+      isPopupOpen: false
     };
   }
 
   //make an API call to DB to get employees
-  update = debounce(() => {
-    this.props.handleFuzzyNameSearch(this.state.input);
+  update = debounce(async () => {
+    console.log('I am getting fuzzy names');
+    await this.props.handleFuzzyNameSearch(this.state.input);
+    this.setState({ isPopupOpen: true });
   }, 1500);
 
   handleInputChange = event => {
-    if (this.state.about === 'Employee') {
-      this.setState({ [event.target.name]: event.target.value });
-      this.update(event);
-    }
+    //for because & about input field
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  handleEmployeeNameInput = event => {
+    console.log('hello');
+    this.setState({ input: event.target.value });
+    this.update();
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -80,6 +86,7 @@ export default class Feedback extends React.Component {
         subcategory: this.state.input
       };
       this.props.submitFeedback(feedback);
+      this.setState({ about: '', note: '', input: '' });
     }
   };
 
@@ -96,8 +103,8 @@ export default class Feedback extends React.Component {
   };
 
   searchEmployee = (event, value) => {
-    //change input value the employee id
-    this.setState({ input: value.employeeID });
+    //change input value to the employee id
+    this.setState({ input: value.employeeID, isPopupOpen: false });
   };
 
   render() {
@@ -130,6 +137,7 @@ export default class Feedback extends React.Component {
                 native
                 onChange={this.handleInputChange}
                 style={{ width: 250 }}
+                value={this.state.about}
               >
                 <option value="" />
                 <option value="Employee">Employee</option>
@@ -163,7 +171,7 @@ export default class Feedback extends React.Component {
                         ? 'Please specify employee name'
                         : 'Please enter news topic'
                     }
-                    onChange={this.handleInputChange}
+                    onChange={this.handleEmployeeNameInput}
                   ></TextField>
                 ) : null}
               {this.props.fuzzyNames.length > 1 ? (
@@ -172,6 +180,7 @@ export default class Feedback extends React.Component {
                   getOptionLabel={option => {
                     return `${option.name} (${option.department})`;
                   }}
+                  open={this.state.isPopupOpen}
                   style={{ width: 250 }}
                   onChange={this.searchEmployee}
                   renderInput={params => (
@@ -192,6 +201,7 @@ export default class Feedback extends React.Component {
               margin="normal"
               name="note"
               onChange={this.handleInputChange}
+              value={this.state.note}
               style={{ width: 250 }}
             />
           </div>

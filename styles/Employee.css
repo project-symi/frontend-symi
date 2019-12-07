@@ -36,7 +36,7 @@
 
 .feedback-history-sub {
   display: grid;
-  grid-template-columns: 6fr 4fr;
+  grid-template-columns: 6fr 4fr 4fr;
   grid-template-rows: 1fr;
   margin: 10px;
 }
@@ -45,7 +45,7 @@
   display: grid;
   grid-template-columns: 6fr 4fr;
   grid-template-rows: 1fr;
-  grid-template-areas: "string date";
+  grid-template-areas: "string date status";
   border: 0px solid;
   border-radius: 15px;
   background-color: white;
@@ -62,4 +62,8 @@
 
 .date-added {
   grid-area: date;
+}
+
+.status {
+  grid-area: status;
 }

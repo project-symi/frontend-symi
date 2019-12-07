@@ -104,7 +104,7 @@ const debounce = (a,b,c) => {
       c||(e=a.apply(f,g));
     }
     var f=this,g=arguments;
-    return (clearTimeout(d),d=setTimeout(h,b),c&&!d&&(e=a.apply(f,g)),e)
+    return (clearTimeout(d),d=setTimeout(h,b),c&&!d&&(e=a.apply(f,g)),e);
   };
 };
 
