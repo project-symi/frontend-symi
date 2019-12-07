@@ -6,6 +6,7 @@ import Assignments from '../components/Assignments';
 import Polls from '../components/Polls';
 import News from '../components/News';
 import Invites from '../components/Invites';
+import '../styles/CEO.css';
 
 export default class Ceo extends React.Component {
   constructor() {
@@ -15,11 +16,11 @@ export default class Ceo extends React.Component {
     };
   }
 
-  handleComponentView = (view) => {
+  handleComponentView = view => {
     this.setState({ currentlyShown: view });
-  }
+  };
 
-  renderSwitchView = (param) => {
+  renderSwitchView = param => {
     switch (param) {
     case 'news':
       return <News />;
@@ -34,21 +35,21 @@ export default class Ceo extends React.Component {
     default:
       null;
     }
-  }
-
+  };
 
   render() {
     return (
       <Layout>
-        <Sidebar news={true} assignments={true} polls={true} dashboard={true} invites={true} handleComponentView={this.handleComponentView} />
-        <div id="page">
-          {this.renderSwitchView(this.state.currentlyShown)}
-        </div>
+        <Sidebar
+          news={true}
+          assignments={true}
+          polls={true}
+          dashboard={true}
+          invites={true}
+          handleComponentView={this.handleComponentView}
+        />
+        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
       </Layout>
     );
   }
-};
-
-
-
-
+}
