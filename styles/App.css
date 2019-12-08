@@ -259,6 +259,15 @@ html {
       "sidebar page";
   }
 
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+
+
   .title {
     font-size: medium;
   }

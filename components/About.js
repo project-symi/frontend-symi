@@ -22,10 +22,10 @@ export default class Ceo extends React.Component {
 
         <div id="about">
           This was a group project created as a student at
-          <a href="https://codechrysalis.io">Code Chrysalis</a>. SYMI (send your
-          message interface) is a way for employees to voice their opinion to
-          C-Suite. View this open-source project on Github
-          <a href="https://github.com/project-symi">here</a>.
+          <a href="https://codechrysalis.io"> Code Chrysalis</a>. SYMI (send
+          your message interface) is a way for employees to voice their opinion
+          to C-Suite. View this open-source project on Github
+          <a href="https://github.com/project-symi"> here</a>.
         </div>
 
         <span className="title">Development Team</span>
@@ -36,10 +36,10 @@ export default class Ceo extends React.Component {
             <span>Tech Lead/Fullstack</span>
             <span>
               <a href="https://github.com/miniengineer">
-                <GitHubIcon color="primary" fontSize="small" />
+                <GitHubIcon color="primary" />
               </a>
               <a href="https://www.linkedin.com/in/minira-samadova/">
-                <LinkedInIcon color="primary" fontSize="small" />
+                <LinkedInIcon color="primary" />
               </a>
             </span>
           </div>
@@ -49,10 +49,10 @@ export default class Ceo extends React.Component {
             <span>Fullstack</span>
             <span>
               <a href="https://github.com/FuyuByakko">
-                <GitHubIcon color="primary" fontSize="small" />
+                <GitHubIcon color="primary" />
               </a>
               <a href="https://www.linkedin.com/in/igor-michailov-68929b27/">
-                <LinkedInIcon color="primary" fontSize="small" />
+                <LinkedInIcon color="primary" />
               </a>
             </span>
           </div>
@@ -62,16 +62,16 @@ export default class Ceo extends React.Component {
             <span>Frontend/UX Design</span>
             <span>
               <a href="https://github.com/steffieharner">
-                <GitHubIcon color="primary" fontSize="small" />
+                <GitHubIcon color="primary" />
               </a>
               <a href="https://www.linkedin.com/in/steffieharner">
-                <LinkedInIcon color="primary" fontSize="small" />
+                <LinkedInIcon color="primary" />
               </a>
               <a href="https://twitter.com/steffieharner">
-                <TwitterIcon color="primary" fontSize="small" />
+                <TwitterIcon color="primary" />
               </a>
               <a href="https://instagram.com/steffieharner">
-                <InstagramIcon color="primary" fontSize="small" />
+                <InstagramIcon color="primary" />
               </a>
             </span>
           </div>
@@ -81,13 +81,13 @@ export default class Ceo extends React.Component {
             <span>Backend</span>
             <span>
               <a href="https://github.com/Yukio0315">
-                <GitHubIcon color="primary" fontSize="small" />
+                <GitHubIcon color="primary" />
               </a>
               <a href="https://www.linkedin.com/in/yukio-ueda">
-                <LinkedInIcon color="primary" fontSize="small" />
+                <LinkedInIcon color="primary" />
               </a>
               <a href="https://twitter.com/SnowSnowManMan">
-                <TwitterIcon color="primary" fontSize="small" />
+                <TwitterIcon color="primary" />
               </a>
             </span>
           </div>
