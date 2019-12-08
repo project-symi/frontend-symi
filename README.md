@@ -31,10 +31,6 @@ npm run start
 * Github: [@steffieharner](https://github.com/steffieharner)
 * LinkedIn: [@steffieharner](https://linkedin.com/in/steffieharner)
 
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/project-symi/frontend-symi/issues). You can also take a look at the [contributing guide](https://github.com/project-symi/frontend-symi/blob/master/CONTRIBUTING.md).
-
 ## Show your support
 
 Give a ⭐️ if this project helped you!
