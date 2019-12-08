@@ -12,13 +12,11 @@
 
 ### ✨ [Demo]([demo url])
 
-## Install
+## Commands
 
 ```sh
 npm install
 ```
-
-## Usage
 
 ```sh
 npm run start
@@ -38,6 +36,3 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 This project is [ISC](https://github.com/project-symi/frontend-symi/blob/master/LICENSE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
