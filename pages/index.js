@@ -4,7 +4,6 @@ import Login from '../components/Login';
 const Index = () => (
   <div>
     <Login />
-    <h3>Who are you?</h3>
     <Link href="/ceo">
       <button>CEO</button>
     </Link>

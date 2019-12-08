@@ -209,3 +209,26 @@ html {
   display: flex;
   flex-direction: row;
 }
+
+
+
+@media screen and (max-width: 480px) {
+  .menu-item {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+
+  #sidebar {
+    width: 100%;
+  }
+
+  .layout {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+  }
+}
