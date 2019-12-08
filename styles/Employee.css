@@ -1,7 +1,7 @@
 .title {
   margin-top: 20px;
   font-weight: bold;
-  font-size: 18pt;
+  font-size: large;
   color: #3f50b5;
   margin-top: 5px;
   margin-top: 8px;
@@ -13,7 +13,7 @@
   grid-auto-rows: auto;
   grid-row-gap: 35px;
   border: 0px solid;
-  width: 300px;
+  max-width: 300px;
   border-radius: 15px;
   background-color: white;
   padding: 20px;
@@ -32,8 +32,9 @@
 }
 
 #about-line {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
 .feedback-history-sub {
@@ -42,6 +43,7 @@
   grid-template-rows: 1fr;
   padding: 0px 20px;
   margin: 15px;
+  font-size: small;
 }
 
 .feedback-history {

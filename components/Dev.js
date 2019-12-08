@@ -15,9 +15,6 @@ const Dev = () => (
     <Link href="/">
       <button>Login</button>
     </Link>
-    <Link href="/about">
-      <button>About</button>
-    </Link>
   </div>
 );
 

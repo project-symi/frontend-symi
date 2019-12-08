@@ -64,7 +64,7 @@ export default class Feedback extends React.Component {
     console.log('hello');
     this.setState({ input: event.target.value });
     this.update();
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -114,9 +114,9 @@ export default class Feedback extends React.Component {
         <form className="feedback-container">
           {/* FEELING SLIDER */}
           <div className="about-line">
-            <span className="feedback-text">I FEEL</span>
+            <div className="feedback-text">I FEEL</div>
             <Slider
-              style={{ width: 250 }}
+              style={{ width: 220 }}
               defaultValue={100}
               aria-labelledby="discrete-slider-restrict"
               step={50}
@@ -127,7 +127,7 @@ export default class Feedback extends React.Component {
 
           {/* CATEGORY SELECT */}
           <div className="about-line">
-            <span className="feedback-text">ABOUT</span>
+            <div className="feedback-text">ABOUT</div>
 
             <FormControl
               error={this.state.feedbackValidation.errors.about.isShown}
@@ -136,7 +136,7 @@ export default class Feedback extends React.Component {
                 name="about"
                 native
                 onChange={this.handleInputChange}
-                style={{ width: 250 }}
+                style={{ width: 220 }}
                 value={this.state.about}
               >
                 <option value="" />
@@ -181,7 +181,7 @@ export default class Feedback extends React.Component {
                     return `${option.name} (${option.department})`;
                   }}
                   open={this.state.isPopupOpen}
-                  style={{ width: 250 }}
+                  style={{ width: 220 }}
                   onChange={this.searchEmployee}
                   renderInput={params => (
                     <TextField label="Select Employee" {...params} fullWidth />
@@ -202,7 +202,7 @@ export default class Feedback extends React.Component {
               name="note"
               onChange={this.handleInputChange}
               value={this.state.note}
-              style={{ width: 250 }}
+              style={{ width: 220 }}
             />
           </div>
           <Button

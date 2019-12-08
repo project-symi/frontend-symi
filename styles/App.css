@@ -25,14 +25,13 @@ html {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   grid-template-areas:
-    "sidebar navbar"
+    "navbar navbar"
     "sidebar page";
   border: 0px solid;
   border-radius: 15px;
   margin: 3% auto;
   max-height: 650px;
-  max-width: 900px;
-  min-width: 600px;
+  width: 900px;
   background-color: white;
   box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
     0 10px 10px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06),
@@ -42,8 +41,8 @@ html {
 #navbar {
   grid-area: navbar;
   display: grid;
-  grid-template-columns: 0.1fr 8fr 1fr;
-  grid-template-areas: "_ logo login";
+  grid-template-columns: 2fr 8fr 1fr;
+  grid-template-areas: "points logo login";
   padding: 10px;
   margin: 0px;
   text-align: center;
@@ -51,7 +50,9 @@ html {
 
 #logo {
   grid-area: logo;
+  place-self: center stretch;
   margin: 0px;
+
 }
 
 #login {
@@ -59,8 +60,10 @@ html {
 }
 
 #points {
+  width: 100px;
+  grid-area: points;
+  margin: 10px;
   background: #3f51b5;
-  margin: 15px;
   padding: 3px;
   border-radius: 5px;
   color: white;
@@ -140,10 +143,12 @@ html {
   grid-area: newsimg;
   width: 200px;
   padding-right: 30px;
+  align-self: center;
 }
 
 .news-desc {
   grid-area: newsdesc;
+  padding: 5px;
 }
 
 .assignments-container {
@@ -167,6 +172,7 @@ html {
   grid-template-rows: 1fr;
   padding: 0px 20px;
   margin: 10px 10px 0px 0px;
+  font-size: small;
 }
 
 .assignments {
@@ -189,6 +195,7 @@ html {
   grid-template-rows: 1fr;
   padding: 0px 20px;
   margin: 15px;
+  font-size: small;
 }
 
 .invite {
@@ -222,13 +229,51 @@ html {
     display: none;
   }
 
+  #page {
+    padding: 5px;
+  }
+
   #sidebar {
-    width: 100%;
+    width: 45px;
+  }
+
+  .sidebar-button {
+    grid-template-columns: 100%;
   }
 
   .layout {
     top: 0;
     bottom: 0;
+    right: 0;
+    left: 0;
     position: absolute;
+    margin: 10px;
+    max-width: 94vw;
+    min-width: 200px;
+    min-height: 100vw;
+    grid-template-columns: 45px 1fr;
+    grid-template-rows: 1fr 9fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas: "navbar navbar"
+      "sidebar page";
+  }
+
+  .title {
+    font-size: medium;
+  }
+
+  #points {
+    font-size: small;
+    margin: 10px;
+    min-width: 50px;
+    max-width: 50px;
+  }
+
+  .news-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 1fr;
+    grid-template-areas: "newsimg""newsdesc";
   }
 }
