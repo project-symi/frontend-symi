@@ -1,3 +1,5 @@
+import { Button } from '@material-ui/core';
+
 export default class News extends React.Component {
   constructor() {
     super();
@@ -31,9 +33,12 @@ export default class News extends React.Component {
               <div key={i} className="news-container">
                 <img className="news-img" src={item.photo}></img>
                 <div className="news-desc">
+                  {item.date}
                   <h2>{item.title}</h2>
                   <h4>{item.description}</h4>
-                  Posted: {item.date}
+                  <Button variant="contained" color="primary">
+                    SUBMIT FEEDBACK
+                  </Button>
                 </div>
               </div>
             );

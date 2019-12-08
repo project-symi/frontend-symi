@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap");
 
 html {
   height: 100%;
@@ -14,7 +14,7 @@ html {
   justify-items: center;
   justify-content: center;
   overflow: hidden;
-  font-family: 'Roboto Condensed';
+  font-family: "Roboto Condensed";
   font: #666666;
 }
 
@@ -42,7 +42,7 @@ html {
 #navbar {
   grid-area: navbar;
   display: grid;
-  grid-template-columns: .1fr 8fr 1fr;
+  grid-template-columns: 0.1fr 8fr 1fr;
   grid-template-areas: "_ logo login";
   padding: 10px;
   margin: 0px;
@@ -59,13 +59,16 @@ html {
 }
 
 #points {
-  background: #3F51B5;
+  background: #3f51b5;
   margin: 15px;
   padding: 3px;
   border-radius: 5px;
   color: white;
   text-align: center;
   font-size: 18pt;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
+    0 10px 10px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06),
+    0 10px 70px rgba(90, 97, 105, 0.1);
 }
 
 #sidebar {
@@ -107,7 +110,6 @@ html {
   border-radius: 0px 0px 15px 0px;
   overflow: auto;
 }
-
 
 /* SHARED PAGES */
 
@@ -186,7 +188,7 @@ html {
   grid-template-columns: 100px 6fr 100px 100px;
   grid-template-rows: 1fr;
   padding: 0px 20px;
-  margin: 10px 10px 0px 0px;
+  margin: 15px;
 }
 
 .invite {
@@ -202,8 +204,6 @@ html {
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
-
-
 
 .dev {
   display: flex;

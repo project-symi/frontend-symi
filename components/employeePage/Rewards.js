@@ -10,7 +10,7 @@ import '../../assets/sweetalert.min.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
     padding: theme.spacing(2),
@@ -21,18 +21,18 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     width: 128,
-    height: 128,
+    height: 128
   },
   points: {
-    color: '#58afc2'
+    fontFamily: 'Roboto Condensed'
   },
   title: {
-    color: '#58afc2'
+    color: '#58afc2',
+    fontFamily: 'Roboto Condensed'
   }
 }));
 
-
-const Rewards = (props) => {
+const Rewards = props => {
   const classes = useStyles();
 
   const handleShowDetails = (id, category) => {
@@ -50,36 +50,58 @@ const Rewards = (props) => {
 
   return (
     <div>
-      <h1 className='title'>Rewards</h1>
+      <h1 className="title">Rewards</h1>
       {props.rewards.map((reward, i) => {
-        return (<div key={i} className={classes.root}>
-          <Paper className={classes.paper}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm container>
-                <Grid item xs container direction="column" spacing={2}>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="h6" className={classes.title}>
-                      {reward.category === 'feedback' ? 'Praised by an employee' : 'Company poll participation'}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                    Date received: {reward.dateAdded}
-                    </Typography>
+        return (
+          <div key={i} className={classes.root}>
+            <Paper className={classes.paper}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm container>
+                  <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs>
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        className={classes.title}
+                      >
+                        {reward.category === 'feedback'
+                          ? 'Praised by an employee'
+                          : 'Poll participation'}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        Date received: {reward.dateAdded}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        onClick={() =>
+                          handleShowDetails(
+                            reward.correspondentId,
+                            reward.category
+                          )
+                        }
+                        variant="body2"
+                        style={{ cursor: 'pointer' }}
+                      >
+                        Show details
+                      </Typography>
+                    </Grid>
                   </Grid>
                   <Grid item>
-                    <Typography onClick={() => handleShowDetails(reward.correspondentId, reward.category)} variant="body2" style={{ cursor: 'pointer' }}>
-                    Show details
+                    <Typography
+                      variant="h5"
+                      gutterBottom
+                      className={classes.points}
+                    >
+                      {reward.points} ⭐
                     </Typography>
                   </Grid>
                 </Grid>
-                <Grid item>
-                  <Typography variant="h5" gutterBottom className={classes.points}>{reward.points}⭐</Typography>
-                </Grid>
               </Grid>
-            </Grid>
-          </Paper>
-        </div>);
-      })
-      }
+            </Paper>
+          </div>
+        );
+      })}
     </div>
   );
 };

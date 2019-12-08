@@ -6,8 +6,7 @@ import AnnouncementIcon from '@material-ui/icons/Announcement';
 import PollIcon from '@material-ui/icons/Poll';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
-
-import StarIcon from '@material-ui/icons/Star';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 // DEV HELP
 import Dev from '../components/Dev';
@@ -108,6 +107,13 @@ export default class Sidebar extends React.Component {
         ) : null}
 
         <Dev></Dev>
+
+        <div>
+          <div className="sidebar-button">
+            <HelpOutlineIcon color="primary" />
+            <span onClick={() => this.handleOnClick('about')}>About</span>
+          </div>
+        </div>
       </div>
     );
   }

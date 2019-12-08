@@ -1,0 +1,38 @@
+#team {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-items: center;
+  margin: 15px 0px;
+}
+
+#about {
+  padding: 10px;
+  border-radius: 15px;
+  background: white;
+  margin: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  margin: 15px 0px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+.profile {
+  display: grid;
+  background: white;
+  justify-items: center;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 5px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+.headshot {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 20px;
+  align-self: center;
+  margin: auto;
+}
