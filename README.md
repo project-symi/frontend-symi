@@ -1,12 +1,7 @@
-<h1 align="center"> <img width="200px" src="assets/symilogo.png" /></h1>
-<p>
+<h1 align="center"> <img width="300px" src="assets/symilogo.png" /></h1>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://twitter.com/steffieharner" target="_blank">
-    <img alt="Twitter: steffieharner" src="https://img.shields.io/twitter/follow/steffieharner.svg?style=social" />
-  </a>
-</p>
 
-> Creating transparency between CEO and bottom line.
+Creating transparency between CEO and bottom line.
 
 ### 🏠 [Homepage](https://github.com/project-symi/frontend-symi#readme)
 
@@ -22,16 +17,28 @@ npm install
 npm run start
 ```
 
-## Author
+## Contributors
 
-* Website: steffieharner.com
-* Twitter: [@steffieharner](https://twitter.com/steffieharner)
-* Github: [@steffieharner](https://github.com/steffieharner)
-* LinkedIn: [@steffieharner](https://linkedin.com/in/steffieharner)
+<table>
+ <tr>
+    <td align="center"><a href="https://github.com/miniengineer"><img src="/assets/headshots/mini.png"" width="200px;"/><br /><sub><b>Mini</b></sub></a><br />Tech Lead</td>
+    <td align="center"><a href="https://github.com/FuyuByakko"><img src="/assets/headshots/igor.png" width="200px;"/><br /><sub><b>Igor</b></sub></a><br />Fullstack</td>
+    <td align="center"><a href="https://github.com/steffieharner"><img src="/assets/headshots/steffie.png" width="200px;"/><br /><sub><b>Steffie Harner</b></sub></a><br />Design/Frontend <p>
+  <a href="https://twitter.com/steffieharner" target="_blank">
+    <img alt="Twitter: steffieharner" src="https://img.shields.io/twitter/follow/steffieharner.svg?style=social" />
+  </a>
+</p></td> 
+    <td align="center"><a href="https://github.com/Yukio0315"><img src="/assets/headshots/yukio.png" width="200px;" alt=""/><br /><sub><b>Yukio Ueda</b></sub></a><br /> Backend <p>
+  <a href="https://twitter.com/SnowSnowManMan" target="_blank">
+    <img alt="Twitter: SnowSnowManMan" src="https://img.shields.io/twitter/follow/SnowSnowManMan.svg?style=social" />
+  </a>
+</p>
+  </tr>
+</table>
 
 ## Show your support
 
-Give a ⭐️ if this project helped you!
+Give a ⭐️ if you like our stuff!
 
 ## 📝 License
 
