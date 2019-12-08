@@ -1,4 +1,4 @@
-<h1 align="center"> <img width="200px" src="assets/symilogo.png" /> SYMI (SHARE YOUR MESSAGE INTERFACE)</h1>
+<h1 align="center"> <img width="200px" src="assets/symilogo.png" /></h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://twitter.com/steffieharner" target="_blank">
