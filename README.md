@@ -10,7 +10,7 @@
 
 ### 🏠 [Homepage](https://github.com/project-symi/frontend-symi#readme)
 
-### ✨ [Demo]([demo url])
+### ✨ [Demo](<add demo url>)
 
 ## Commands
 
