@@ -4,7 +4,7 @@
   grid-template-rows: 60px 60px;
   grid-column-gap: 10px;
   grid-row-gap: 5px;
-  grid-template-areas: ". . . button" ". . . . ";
+  grid-template-areas: ". . . button"". . . . ";
   align-items: center;
   border: 0px solid;
   border-radius: 15px;
@@ -40,7 +40,6 @@
 .add-news-container {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 1fr;
   grid-column-gap: 10px;
   grid-row-gap: 5px;
   align-items: center;
@@ -92,12 +91,21 @@
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
+.submit-feedback-button {
+  display: none;
+  visibility: hidden;
+}
+
+.delete {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 480px) {
   .employees-container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 50px;
-    grid-template-areas: "." "." "." "." "." "." "." "button";
+    grid-template-areas: ".""."".""."".""."".""button";
   }
 
   .employee-upload-container {
@@ -108,5 +116,9 @@
 
   input {
     width: 200px;
+  }
+
+  .add-news-container {
+    grid-template-columns: 1fr;
   }
 }

@@ -71,6 +71,10 @@
   color: #3f50b5;
 }
 
+.delete {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
   .data {
     width: 260px;

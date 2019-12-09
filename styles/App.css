@@ -3,11 +3,9 @@
 html {
   height: 100%;
   background: rgb(114, 55, 211);
-  background: linear-gradient(
-    326deg,
-    rgba(114, 55, 211, 1) 0%,
-    rgba(60, 217, 188, 1) 100%
-  );
+  background: linear-gradient(326deg,
+      rgba(114, 55, 211, 1) 0%,
+      rgba(60, 217, 188, 1) 100%);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -128,7 +126,7 @@ html {
 
 .news-container {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 3fr 20px;
   grid-template-areas: "newsimg newsdesc";
   border: 0px solid;
   border-radius: 15px;
@@ -310,6 +308,6 @@ html {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 200px 1fr;
-    grid-template-areas: "newsimg" "newsdesc";
+    grid-template-areas: "newsimg""newsdesc";
   }
 }
