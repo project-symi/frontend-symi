@@ -1,6 +1,12 @@
 /* eslint-disable react/prop-types */
+
+//components
 import { TextField, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+
+//sweet alert
+import swal from 'sweetalert';
+import '../../assets/sweetalert.min.js';
 
 const styles = theme => ({
   paper: {
@@ -36,27 +42,66 @@ class CreateInvitation extends React.Component {
     this.state = {
       comments: '',
       invitationDate: '',
+      commentsError: false,
+      invitationDateError: false
     };
   }
 
+  handleInputChange = (e) => {
+    //change state and don't forget to get rid of error message
+    if (e.target.name === 'comments') return this.setState({ comments: e.target.value, commentsError: false });
+    if (e.target.name === 'invitationDate') return this.setState({ invitationDate: e.target.value, invitationDateError: false });
+  }
+
+  //cancel button clicked, switch view back to the dashboard
   handleCancelInvitation = () => {
     this.props.handleCancelInvitation();
   };
 
+  //send button clicked, generate invitation and pass it to the dashboard
   handleSendInvitation = () => {
-    let invitation = {
-      employeeId: this.props.invitee.employeeId,
-      comments: this.state.comments,
-      status: 'pending or confirmed or rescheduled',
-      reply: 'reply from the employee who was invited',
-      seen: 'seen or unseen by the CEO'
-    };
-    this.props.handleCancelInvitation(invitation);
+    //check whether comments and date was inputted
+    if (!this.state.comments) this.setState({ commentsError: true });
+    if (!this.state.invitationDate) return this.setState({ invitationDateError: true });
+    //ask for the confirmation before generating and sending an invitation
+    swal({
+      title: 'Invitation Confirmation',
+      text: 'Are you sure you want to send the invitation to ' + this.props.invitee.name + '?',
+      icon: 'warning',
+      buttons: {
+        confirm: {
+          text: 'CONFIRM',
+          value: 'confirm'
+        },
+        cancel: 'CANCEL'
+      }
+    }).then(value => {
+      switch (value) {
+      case 'confirm':
+        return swal({
+          title: 'Done',
+          text: 'Invitation sent successfully!',
+          icon: 'success',
+          button: true
+        }).then(value => {
+          console.log('generating an invitation');
+          this.props.handleSendInvitation({
+            employeeId: this.props.invitee.employeeId,
+            comments: this.state.comments,
+            invitationDate: this.state.invitationDate,
+            status: 'pending or confirmed or rescheduled',
+            reply: 'reply from the employee who was invited',
+            seen: 'seen or unseen by the CEO'
+          });
+        }).then(value => this.setState({ comments: '', invitationDate: '' }));
+      default:
+        break;
+      }
+    });
   };
 
   render() {
     const { classes } = this.props;
-    console.log(this.props.invitee);
 
     return (
       <div>
@@ -67,22 +112,26 @@ class CreateInvitation extends React.Component {
               <TextField
                 id="standard-read-only-input"
                 label="Invite"
-                defaultValue={'Praise' + this.props.invitee.name}
+                defaultValue={this.props.invitee.name}
                 InputProps={{
                   readOnly: true,
                 }}
                 className={classes.textField}
               />
-              <TextField required id="standard-required" label="Comments" className={classes.textField} />
+              <TextField required id="standard-required" label="Comments" value={this.state.comments} className={classes.textField} name='comments' onChange={this.handleInputChange} error={this.state.commentsError ? true : false} helperText={this.state.commentsError ? 'This field is required' : null} />
               <TextField
-                name="dateOfBirth"
                 id="date"
                 type="date"
                 className={classes.dataField}
+                value={this.state.invitationDate}
+                name='invitationDate'
+                onChange={this.handleInputChange}
+                error={this.state.invitationDateError ? true : false}
+                helperText={this.state.invitationDateError ? 'This field is required' : null}
               />
             </div>
           </form>
-          <Button variant="contained" color="secondary" className={classes.sendButton}>Send</Button>
+          <Button variant="contained" color="secondary" className={classes.sendButton} onClick={this.handleSendInvitation}>Send</Button>
           <Button variant="contained" color="secondary" onClick={this.handleCancelInvitation} >Cancel</Button>
         </Paper>
       </div>

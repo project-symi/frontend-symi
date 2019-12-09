@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 //charts
 import SentimentOverall from './Charts/SentimentOverall';
 import SentimentbyCategory from './Charts/SentimentbyCategory';
@@ -8,18 +9,10 @@ import SentimentbyDept from './Charts/SentimentbyDept';
 import { Button } from '@material-ui/core';
 import CreateInvitation from './CreateInvitation';
 
-
 export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      topEmployees: [
-        { name: 'Igor Dawg', points: 500, employeeId: 3 },
-        { name: 'Mini Meow', points: 400, employeeId: 1 },
-        { name: 'Yukio Lion', points: 100, employeeId: 2 },
-        { name: 'Steffie Frog', points: 150, employeeId: 4 },
-        { name: 'Potato Fan', points: 300, employeeId: 5 }
-      ],
       topDepartments: [
         { name: 'Engineering', points: 5500 },
         { name: 'Operations', points: 7000 },
@@ -27,7 +20,7 @@ export default class Dashboard extends React.Component {
         { name: 'Marketing', points: 2300 },
         { name: 'Sales', points: 5000 }
       ],
-      createInvitationView: 'defaultView',
+      currentlyShown: 'defaultView',
       invitee: null
     };
   }
@@ -35,7 +28,7 @@ export default class Dashboard extends React.Component {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
   //switch view to Create Invitation and pass the invitee name
-  handleInvite = (invitee) => {
+  handleSwitchViewToInvite = (invitee) => {
     this.setState({ currentlyShown: 'createInvitation', invitee });
   }
 
@@ -44,22 +37,23 @@ export default class Dashboard extends React.Component {
     this.setState({ currentlyShown: 'defaultView' });
   }
 
-  handleSendInvitation = (value) => {
-    console.log(value);
+  //callback from CreateInvitation component
+  //ask Parent component to make an API call to DB to create an invitation
+  handleSendInvitation = (invitationObj) => {
+    this.props.handleSendInvitation(invitationObj);
   }
 
   render() {
     return (
       <div>
         {
-          this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} /> :         <div>
+          this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} handleSendInvitation={this.handleSendInvitation} /> :         <div>
             <p className="title">CEO Dashboard</p>
             <div id="data-container">
               <div>
                 <p className="data-title">TOP RATED EMPLOYEES</p>
                 <div className="data">
-                  {[]
-                    .concat(this.state.topEmployees)
+                  {this.props.topEmployees ? this.props.topEmployees
                     .sort((a, b) => {
                       return b.points - a.points;
                     })
@@ -70,20 +64,19 @@ export default class Dashboard extends React.Component {
                           <div>{employee.name}</div>
                           <div>{employee.points} ⭐️</div>
                           <div>
-                            <Button size="small" color="primary" onClick={() => this.handleInvite(employee)}>
+                            <Button size="small" color="primary" onClick={() => this.handleSwitchViewToInvite(employee)}>
                             invite
                             </Button>
                           </div>
                         </div>
                       );
-                    })}
+                    }) : null}
                 </div>
               </div>
               <div>
                 <p className="data-title">TOP RATED DEPARTMENTS</p>
                 <div className="data">
-                  {[]
-                    .concat(this.state.topDepartments)
+                  {this.state.topDepartments
                     .sort((a, b) => {
                       return b.points - a.points;
                     })
