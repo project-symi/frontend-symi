@@ -20,7 +20,7 @@ const topEmployees = [
 
 // feedback sentiment by category dummy data
 const feedbacksByFeeling = [
-  { name: '😊', value: 40, feeling: 'happy' },
+  { name: '😊', value: 40, feeling: 'good' },
   { name: '😐', value: 30, feeling: 'meh' },
   { name: '😞', value: 34, feeling: 'sad' }
 ];
