@@ -14,11 +14,11 @@ export default class Dashboard extends React.Component {
     super();
     this.state = {
       topEmployees: [
-        { name: 'Igor Dawg', points: 500 },
-        { name: 'Mini Meow', points: 400 },
-        { name: 'Yukio Lion', points: 100 },
-        { name: 'Steffie Frog', points: 150 },
-        { name: 'Potato Fan', points: 300 }
+        { name: 'Igor Dawg', points: 500, employeeId: 3 },
+        { name: 'Mini Meow', points: 400, employeeId: 1 },
+        { name: 'Yukio Lion', points: 100, employeeId: 2 },
+        { name: 'Steffie Frog', points: 150, employeeId: 4 },
+        { name: 'Potato Fan', points: 300, employeeId: 5 }
       ],
       topDepartments: [
         { name: 'Engineering', points: 5500 },
@@ -27,7 +27,7 @@ export default class Dashboard extends React.Component {
         { name: 'Marketing', points: 2300 },
         { name: 'Sales', points: 5000 }
       ],
-      currentlyShown: 'defaultView',
+      createInvitationView: 'defaultView',
       invitee: null
     };
   }
@@ -36,13 +36,16 @@ export default class Dashboard extends React.Component {
 
   //switch view to Create Invitation and pass the invitee name
   handleInvite = (invitee) => {
-    console.log('created invitation');
     this.setState({ currentlyShown: 'createInvitation', invitee });
   }
 
   //in case CEO click cancel invitation button switch to default view
   handleCancelInvitation = () => {
     this.setState({ currentlyShown: 'defaultView' });
+  }
+
+  handleSendInvitation = (value) => {
+    console.log(value);
   }
 
   render() {
@@ -67,7 +70,7 @@ export default class Dashboard extends React.Component {
                           <div>{employee.name}</div>
                           <div>{employee.points} ⭐️</div>
                           <div>
-                            <Button size="small" color="primary" onClick={() => this.handleInvite(employee.name)}>
+                            <Button size="small" color="primary" onClick={() => this.handleInvite(employee)}>
                             invite
                             </Button>
                           </div>
