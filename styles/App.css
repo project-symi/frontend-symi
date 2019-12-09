@@ -3,9 +3,11 @@
 html {
   height: 100%;
   background: rgb(114, 55, 211);
-  background: linear-gradient(326deg,
-      rgba(114, 55, 211, 1) 0%,
-      rgba(60, 217, 188, 1) 100%);
+  background: linear-gradient(
+    326deg,
+    rgba(114, 55, 211, 1) 0%,
+    rgba(60, 217, 188, 1) 100%
+  );
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -31,7 +33,7 @@ html {
   border-radius: 15px;
   margin: 3% auto;
   max-height: 650px;
-  width: 900px;
+  width: 1020px;
   background-color: white;
   box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
     0 10px 10px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06),
@@ -52,7 +54,6 @@ html {
   grid-area: logo;
   place-self: center stretch;
   margin: 0px;
-
 }
 
 #login {
@@ -217,8 +218,6 @@ html {
   flex-direction: row;
 }
 
-
-
 @media screen and (max-width: 480px) {
   .menu-item {
     visibility: hidden;
@@ -255,7 +254,8 @@ html {
     grid-template-rows: 1fr 9fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    grid-template-areas: "navbar navbar"
+    grid-template-areas:
+      "navbar navbar"
       "sidebar page";
   }
 
@@ -266,7 +266,6 @@ html {
   a:visited {
     text-decoration: none;
   }
-
 
   .title {
     font-size: medium;
@@ -283,6 +282,6 @@ html {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 200px 1fr;
-    grid-template-areas: "newsimg""newsdesc";
+    grid-template-areas: "newsimg" "newsdesc";
   }
 }
