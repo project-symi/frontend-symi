@@ -63,6 +63,7 @@ export default class SentimentOverall extends React.Component {
             >
               {this.state.data.map((entry, index) => (
                 <Cell
+                  key={index}
                   fill={this.state.colors[index % this.state.colors.length]}
                 />
               ))}
