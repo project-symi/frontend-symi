@@ -1,0 +1,37 @@
+.rewards-container {
+     display: grid;
+     grid-template-columns: 6fr 4fr;
+     grid-template-rows: 1fr;
+     grid-template-areas: "string date";
+     border: 0px solid;
+     border-radius: 15px;
+     background-color: white;
+     padding: 20px;
+     margin: 10px;
+     -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+     -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+     box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+.rewards-sub {
+     display: grid;
+     grid-template-columns: 6fr 100px 100px;
+     grid-template-rows: 1fr;
+     padding: 0px 20px;
+     margin: 15px;
+     font-size: small;
+}
+
+.rewards {
+     display: grid;
+     grid-template-columns: 6fr 100px 100px;
+     grid-template-rows: 1fr;
+     border: 0px solid;
+     border-radius: 15px;
+     background-color: white;
+     padding: 20px;
+     margin: 15px;
+     -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+     -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+     box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}

@@ -13,26 +13,27 @@
 
 #data-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
 }
 
 #data-container-big {
   display: grid;
   grid-template-columns: 1fr;
+  height: 250px;
 }
 
 .data {
   grid-area: small;
+  height: 200px;
   max-height: 900px;
-  width: 300px;
+  width: 225px;
   border: 0px solid;
   border-radius: 15px;
   background-color: white;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   margin: auto;
-  font-size: 10pt;
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
@@ -41,13 +42,13 @@
 .data-big {
   grid-area: big;
   max-height: 900px;
-  width: 660px;
+  width: 750px;
   border: 0px solid;
   border-radius: 15px;
   background-color: white;
   padding: 20px;
   text-align: center;
-  margin: auto;
+  margin: 10px;
   font-size: 10pt;
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
@@ -57,15 +58,32 @@
 .top {
   grid-area: small;
   display: grid;
-  grid-template-columns: .25fr 1fr 1fr .5fr;
+  grid-template-columns: 0.25fr 1fr 1fr 0.5fr;
   height: 30px;
   line-height: 30px;
   text-align: center;
-  font-size: 12pt;
+  font-size: 10pt;
 }
 
 .top-num {
   font-weight: bold;
   font-size: 14pt;
   color: #3f50b5;
+}
+
+@media screen and (max-width: 480px) {
+  .data {
+    width: 260px;
+  }
+
+  #data-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 10px;
+  }
+
+  #data-container-big {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }

@@ -25,7 +25,7 @@ export default class Dashboard extends React.Component {
     };
   }
 
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
+  static jsfiddleUrl = "https://jsfiddle.net/alidingling/w6wsrc52/";
 
   //switch view to Create Invitation and pass the invitee name
   handleSwitchViewToInvite = (invitee) => {
@@ -46,13 +46,13 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        {
-          this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} handleSendInvitation={this.handleSendInvitation} /> :         <div>
+        {this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} handleSendInvitation={this.handleSendInvitation} /> : 
+          <div>
             <p className="title">CEO Dashboard</p>
             <div id="data-container">
-              <div>
-                <p className="data-title">TOP RATED EMPLOYEES</p>
-                <div className="data">
+            <div>
+            <p className="data-title">TOP RATED EMPLOYEES</p>
+            <div className="data">
                   {this.props.topEmployees ? this.props.topEmployees
                     .sort((a, b) => {
                       return b.points - a.points;
@@ -71,10 +71,10 @@ export default class Dashboard extends React.Component {
                         </div>
                       );
                     }) : null}
-                </div>
+              </div>
               </div>
               <div>
-                <p className="data-title">TOP RATED DEPARTMENTS</p>
+              <p className="data-title">TOP RATED DEPARTMENTS</p>
                 <div className="data">
                   {this.state.topDepartments
                     .sort((a, b) => {
@@ -96,27 +96,43 @@ export default class Dashboard extends React.Component {
                     })}
                 </div>
               </div>
-            </div>
-            <div id="data-container">
               <div>
-                <p className="data-title">OVERALL SENTIMENT</p>
-                <SentimentOverall />
+              <p className="data-title">OVERALL SENTIMENT</p>
+            <SentimentOverall />
               </div>
               <div>
-                <p className="data-title">SENTIMENT BY CATEGORY</p>
-                <SentimentbyCategory />
-              </div>
+              <p className="data-title">TOP RATED TEAMS</p>
+            <div className="data">
+              {[]
+                .concat(this.state.topDepartments)
+                .sort((a, b) => {
+                  return b.points - a.points;
+                })
+                .map((department, i) => {
+                  return (
+                    <div key={i} className="top">
+                      <div className="top-num">{i + 1}</div>
+                      <div>{department.name}</div>
+                      <div>{department.points} ⭐️</div>
+                      <div>
+                        <Button size="small" color="primary">
+                          assign
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
-            <div id="data-container-big">
+              </div>
               <div>
-                <p className="data-title">SENTIMENT BY DEPARTMENT</p>
-                <SentimentbyDept />
+              <div id="data-container-big">
+              <p className="data-title">SENTIMENT BY DEPARTMENT</p>
+            <SentimentbyDept />
               </div>
               <div id="data-container-big">
-                <div>
-                  <p className="data-title">SENTIMENT BY NEWS</p>
-                  <SentimentbyNews />
-                </div>
+              <p className="data-title">SENTIMENT BY NEWS</p>
+              <SentimentbyNews />
+              </div>
               </div>
             </div>
           </div>

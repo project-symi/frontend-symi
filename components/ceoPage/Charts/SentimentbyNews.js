@@ -5,20 +5,20 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip
-} from 'recharts';
+} from "recharts";
 
 const dataset = [
-  { name: 'Premium Fridays', '😞': 400, '😐': 240, '😊': 240 },
-  { name: 'Bring Your Pup', '😞': 300, '😐': 139, '😊': 221 },
-  { name: 'Gym', '😞': 200, '😐': 980, '😊': 229 },
-  { name: 'KFC Christmas', '😞': 278, '😐': 390, '😊': 200 }
+  { name: "Premium Fridays", "😞": 400, "😐": 240, "😊": 240 },
+  { name: "Bring Your Pup", "😞": 300, "😐": 139, "😊": 221 },
+  { name: "Gym", "😞": 200, "😐": 980, "😊": 229 },
+  { name: "KFC Christmas", "😞": 278, "😐": 390, "😊": 200 }
 ];
 
 export default class SentimentbyNews extends React.Component {
   constructor() {
     super();
     this.state = {
-      colors: ['#3ED7BD', '#58AFC2', '#8884d8'],
+      colors: ["#3ED7BD", "#58AFC2", "#8884d8"],
       data: dataset
     };
   }
@@ -27,7 +27,7 @@ export default class SentimentbyNews extends React.Component {
     return (
       <div className="data-big">
         <AreaChart
-          width={650}
+          width={750}
           height={300}
           data={this.state.data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}

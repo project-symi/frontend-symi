@@ -1,57 +1,73 @@
-import Layout from '../components/Layout';
-import Sidebar from '../components/Sidebar';
-import Feedback from '../components/employeePage/Feedback';
-import History from '../components/employeePage/FeedbackHistory';
-import Rewards from '../components/employeePage/Rewards';
-import Polls from '../components/Polls';
-import News from '../components/News';
-import Invites from '../components/Invites';
-import '../styles/Employee.css';
+import Layout from "../components/Layout";
+import Sidebar from "../components/Sidebar";
+import Feedback from "../components/employeePage/Feedback";
+import Rewards from "../components/employeePage/Rewards";
+import Polls from "../components/Polls";
+import News from "../components/News";
+import Invites from "../components/Invites";
+import About from "../components/About";
+
+import "../styles/Employee.css";
 
 //dummy data for fuzzy name input
 const employees = [
-  { name: 'Mini Meow', department: 'Marketing', employeeID: '1234' },
-  { name: 'Igor Dawg', department: 'HR', employeeID: '4321' },
-  { name: 'Yukio Lion', department: 'Engineering', employeeID: '2345' },
-  { name: 'Steffie Frog', department: 'Operations', employeeID: '6543' }
+  { name: "Mini Meow", department: "Marketing", employeeID: "1234" },
+  { name: "Igor Dawg", department: "HR", employeeID: "4321" },
+  { name: "Yukio Lion", department: "Engineering", employeeID: "2345" },
+  { name: "Steffie Frog", department: "Operations", employeeID: "6543" }
 ];
 
-//dummy data of feedbacks
+// FEEDBACK HISTORY
 const feedbacks = [
   {
-    feeling: 'good',
-    about: 'Employee',
-    input: 'Igor',
-    note: 'he\'s super helpful and a hardworker',
-    dateAdded: null,
-    status: 'unseen',
-    id: '1111'
+    feeling: "good",
+    about: "Employee",
+    input: "Igor",
+    note: "he's super helpful and a hardworker",
+    dateAdded: "12/15/2009",
+    points: 10,
+    status: "unseen",
+    id: "1111"
   },
   {
-    feeling: 'okay',
-    about: 'Benefits',
-    note: 'there\'s no gym memebership',
-    dateAdded: null,
-    status: 'unseen',
-    id: '2222'
+    feeling: "okay",
+    about: "Benefits",
+    note: "there's no gym memebership",
+    dateAdded: "12/15/2009",
+    points: 10,
+    status: "unseen",
+    id: "2222"
   },
   {
-    feeling: 'bad',
-    about: 'Holidays',
-    note: 'I don\'t have Hanukkah off...',
-    dateAdded: null,
-    status: 'seen',
-    id: '3333'
+    feeling: "bad",
+    about: "Holidays",
+    note: "I don't have Hanukkah off...",
+    dateAdded: "12/15/2009",
+    points: 10,
+    status: "seen",
+    id: "3333"
   }
 ];
 
 const rewards = [
-  { points: 10, category: 'feedback', dateAdded: '01/12/2019', correspondentId: '1111' },
-  { points: 5, category: 'poll', dateAdded: '02/12/2019', correspondentId:'6' },
-  { points: 10, category: 'feedback', dateAdded: '04/12/2019', correspondentId:'2222' },
-  { points: 5, category: 'poll', dateAdded: '05/12/2019', correspondentId:'7' },
-  { points: 10, category: 'feedback', dateAdded: '01/12/2019', correspondentId: '3333' },
-  { points: 5, category: 'poll', dateAdded: '07/12/2019', correspondentId:'8' },
+  {
+    points: 50,
+    category: "positive feedback",
+    dateAdded: "01/12/2019",
+    correspondentId: "1111"
+  },
+  {
+    points: 5,
+    category: "poll",
+    dateAdded: "02/12/2019",
+    correspondentId: "6"
+  },
+  {
+    points: 10,
+    category: "submitted feedback",
+    dateAdded: "04/12/2019",
+    correspondentId: "2222"
+  }
 ];
 
 export default class Employee extends React.Component {
@@ -59,8 +75,8 @@ export default class Employee extends React.Component {
     super();
     this.state = {
       isDefaultView: true,
-      currentlyShown: '',
-      fuzzyNames: '',
+      currentlyShown: "news",
+      fuzzyNames: "",
       feedbacks: null,
       rewards: null
     };
@@ -75,14 +91,14 @@ export default class Employee extends React.Component {
   //callback for Feedback to submit the feedback
   submitFeedback = feedbackObj => {
     //make an API call to add the feebback to db
-    console.log(feedbackObj, ' feedback was sent to db');
+    console.log(feedbackObj, " feedback was sent to db");
     //check whether feedback category is employee, if yes make another API call to add points
-    if (feedbackObj.category === 'Employee') {
+    if (feedbackObj.category === "Employee") {
       //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
       // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
-      console.log(feedbackObj.subcategory, ' received 10 points');
+      console.log(feedbackObj.subcategory, " received 10 points");
     }
-    this.setState({ fuzzyNames: '' });
+    this.setState({ fuzzyNames: "" });
   };
 
   handleComponentView = view => {
@@ -90,48 +106,56 @@ export default class Employee extends React.Component {
   };
 
   //callback for Feedback submit to get employee names
-  handleFuzzyNameSearch = (string) => {
+  handleFuzzyNameSearch = string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
     this.setState({ fuzzyNames: employees });
-  }
+  };
 
   handleRewardDetails = (id, category) => {
-    if (category === 'feedback') {
-      //make an API call to get feedback details by ID
-      const feedbackDetails = feedbacks.find(feedback => feedback.id === id);
-      return feedbackDetails.note;
-    } else {
-      //make an API call to get poll details by ID
-      const pollDetails = 'this is dummy poll details';
-      return pollDetails;
+    switch (category) {
+      case "positive feedback":
+        const feedbackDetails = feedbacks.find(feedback => feedback.id === id);
+        return feedbackDetails.note;
+        break;
+      case "poll":
+        return "dummy poll";
+        break;
+      case "submitted feedback":
+        return "dummy submitted feedback";
+        break;
+      default:
+        return null;
     }
-  }
-
-
-
+  };
 
   renderSwitchView = param => {
     switch (param) {
-    case 'feedback':
-      return (
-        <Feedback
-          handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-          submitFeedback={this.submitFeedback}
-          fuzzyNames={this.state.fuzzyNames}
-        />
-      );
-    case 'feedbackHistory':
-      return <History feedbacks={this.state.feedbacks} />;
-    case 'news':
-      return <News />;
-    case 'polls':
-      return <Polls />;
-    case 'rewards':
-      return <Rewards rewards={this.state.rewards} handleRewardDetails={this.handleRewardDetails} />;
-    case 'invites':
-      return <Invites />;
-    default:
-      null;
+      case "feedback":
+        return (
+          <Feedback
+            feedbacks={this.state.feedbacks}
+            handleFuzzyNameSearch={this.handleFuzzyNameSearch}
+            submitFeedback={this.submitFeedback}
+            fuzzyNames={this.state.fuzzyNames}
+          />
+        );
+      case "news":
+        return <News />;
+      case "polls":
+        return <Polls />;
+      case "rewards":
+        return (
+          <Rewards
+            rewards={this.state.rewards}
+            handleRewardDetails={this.handleRewardDetails}
+          />
+        );
+      case "invites":
+        return <Invites />;
+      case "about":
+        return <About />;
+      default:
+        null;
     }
   };
 
@@ -141,24 +165,12 @@ export default class Employee extends React.Component {
         <Sidebar
           news={true}
           feedback={true}
-          feedbackHistory={true}
           polls={true}
           invites={true}
           rewards={true}
           handleComponentView={this.handleComponentView}
         />
-        <div id="page">
-          {this.state.isDefaultView ? (
-            <div>
-              <h1>Welcome to Symi!</h1>
-              <h3>
-                Start using the dashboard from checking what is happening in the
-                company
-              </h3>
-            </div>
-          ) : null}
-          {this.renderSwitchView(this.state.currentlyShown)}
-        </div>
+        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
       </Layout>
     );
   }

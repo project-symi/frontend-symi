@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 //components
-import { Autocomplete } from '@material-ui/lab';
+import { Autocomplete } from "@material-ui/lab";
 import {
   Slider,
   Select,
@@ -9,39 +9,42 @@ import {
   Button,
   FormControl,
   FormHelperText
-} from '@material-ui/core';
+} from "@material-ui/core";
+
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 
 //util functions
-import { feedbackValidation, debounce } from '../../utils/utils';
+import { feedbackValidation, debounce } from "../../utils/utils";
 
 //feelings data
 const feelings = [
   {
-    value: '100',
-    label: ' 😊'
+    value: "100",
+    label: " 😊"
   },
   {
     value: 50,
-    label: '😐'
+    label: "😐"
   },
-  { value: 0, label: '😞' }
+  { value: 0, label: "😞" }
 ];
 
 export default class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      feeling: 'good',
-      about: '',
-      input: '',
-      note: '',
-      status: 'unseen',
+      feeling: "good",
+      about: "",
+      input: "",
+      note: "",
+      status: "unseen",
       feedbackValidation: {
         result: false,
         errors: {
-          note: { isShown: false, message: '' },
-          about: { isShown: false, message: '' },
-          input: { isShown: false, message: '' }
+          note: { isShown: false, message: "" },
+          about: { isShown: false, message: "" },
+          input: { isShown: false, message: "" }
         }
       },
       isPopupOpen: false
@@ -50,7 +53,7 @@ export default class Feedback extends React.Component {
 
   //make an API call to DB to get employees
   update = debounce(async () => {
-    console.log('I am getting fuzzy names');
+    console.log("I am getting fuzzy names");
     await this.props.handleFuzzyNameSearch(this.state.input);
     this.setState({ isPopupOpen: true });
   }, 1500);
@@ -61,10 +64,10 @@ export default class Feedback extends React.Component {
   };
 
   handleEmployeeNameInput = event => {
-    console.log('hello');
+    console.log("hello");
     this.setState({ input: event.target.value });
     this.update();
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -86,18 +89,18 @@ export default class Feedback extends React.Component {
         subcategory: this.state.input
       };
       this.props.submitFeedback(feedback);
-      this.setState({ about: '', note: '', input: '' });
+      this.setState({ about: "", note: "", input: "" });
     }
   };
 
   handleFeelingInput = (event, value) => {
-    let feeling = '';
+    let feeling = "";
     if (value === 0) {
-      feeling = 'meh';
+      feeling = "meh";
     } else if (value === 50) {
-      feeling = 'okay';
+      feeling = "okay";
     } else if (value === 100) {
-      feeling = 'good';
+      feeling = "good";
     }
     this.setState({ feeling });
   };
@@ -114,9 +117,9 @@ export default class Feedback extends React.Component {
         <form className="feedback-container">
           {/* FEELING SLIDER */}
           <div className="about-line">
-            <span className="feedback-text">I FEEL</span>
+            <div className="feedback-text">I FEEL</div>
             <Slider
-              style={{ width: 250 }}
+              style={{ width: 220 }}
               defaultValue={100}
               aria-labelledby="discrete-slider-restrict"
               step={50}
@@ -127,7 +130,7 @@ export default class Feedback extends React.Component {
 
           {/* CATEGORY SELECT */}
           <div className="about-line">
-            <span className="feedback-text">ABOUT</span>
+            <div className="feedback-text">ABOUT</div>
 
             <FormControl
               error={this.state.feedbackValidation.errors.about.isShown}
@@ -136,7 +139,7 @@ export default class Feedback extends React.Component {
                 name="about"
                 native
                 onChange={this.handleInputChange}
-                style={{ width: 250 }}
+                style={{ width: 220 }}
                 value={this.state.about}
               >
                 <option value="" />
@@ -155,25 +158,25 @@ export default class Feedback extends React.Component {
                 </FormHelperText>
               ) : null}
 
-              {(this.state.about === 'Employee' &&
-                this.props.fuzzyNames === '') ||
-              (this.state.about === 'News' && this.props.fuzzyNames === '') ? (
-                  <TextField
-                    error={this.state.feedbackValidation.errors.input.isShown}
-                    helperText={
-                      this.state.feedbackValidation.errors.input.message
-                    }
-                    id="outlined"
-                    margin="normal"
-                    name="input"
-                    placeholder={
-                      this.state.about === 'Employee'
-                        ? 'Please specify employee name'
-                        : 'Please enter news topic'
-                    }
-                    onChange={this.handleEmployeeNameInput}
-                  ></TextField>
-                ) : null}
+              {(this.state.about === "Employee" &&
+                this.props.fuzzyNames === "") ||
+              (this.state.about === "News" && this.props.fuzzyNames === "") ? (
+                <TextField
+                  error={this.state.feedbackValidation.errors.input.isShown}
+                  helperText={
+                    this.state.feedbackValidation.errors.input.message
+                  }
+                  id="outlined"
+                  margin="normal"
+                  name="input"
+                  placeholder={
+                    this.state.about === "Employee"
+                      ? "Please specify employee name"
+                      : "Please enter news topic"
+                  }
+                  onChange={this.handleEmployeeNameInput}
+                ></TextField>
+              ) : null}
               {this.props.fuzzyNames.length > 1 ? (
                 <Autocomplete
                   options={this.props.fuzzyNames}
@@ -181,7 +184,7 @@ export default class Feedback extends React.Component {
                     return `${option.name} (${option.department})`;
                   }}
                   open={this.state.isPopupOpen}
-                  style={{ width: 250 }}
+                  style={{ width: 220 }}
                   onChange={this.searchEmployee}
                   renderInput={params => (
                     <TextField label="Select Employee" {...params} fullWidth />
@@ -202,7 +205,7 @@ export default class Feedback extends React.Component {
               name="note"
               onChange={this.handleInputChange}
               value={this.state.note}
-              style={{ width: 250 }}
+              style={{ width: 220 }}
             />
           </div>
           <Button
@@ -213,6 +216,35 @@ export default class Feedback extends React.Component {
             Submit
           </Button>
         </form>
+
+        <p className="title">Feedback History</p>
+
+        <div className="feedback-history-sub">
+          <span>Details ▾</span>
+          <span className="status">Status ▾</span>
+        </div>
+        {this.props.feedbacks.map((item, i) => {
+          return (
+            <div key={i} className="feedback-history">
+              <span className="feedback">
+                <span> {item.dateAdded}</span>I feel {" " + item.feeling + " "}
+                about
+                {" " + (item.input ? item.input : item.about) + " "}
+                because {item.note}.
+              </span>{" "}
+              <div className="status">
+                <div>
+                  {item.status === "unseen" ? (
+                    <HighlightOffIcon style={{ color: "red" }} />
+                  ) : (
+                    <CheckCircleOutlineIcon style={{ color: "green" }} />
+                  )}
+                </div>
+                <div> {item.status}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   }
