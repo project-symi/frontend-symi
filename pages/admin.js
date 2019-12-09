@@ -58,7 +58,7 @@ export default class Admin extends React.Component {
           polls={true}
           handleComponentView={this.handleComponentView}
         />
-        {this.renderSwitchView(this.state.currentlyShown)}
+        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
       </Layout>
     );
   }

@@ -1,34 +1,34 @@
 /* eslint-disable react/prop-types */
 //utils
-import { formValidation, extractCsvData } from '../../utils/utils';
-import Papa from 'papaparse';
+import { formValidation, extractCsvData } from "../../utils/utils";
+import Papa from "papaparse";
 
 //components
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from "@material-ui/core";
 
 //sweet alert
-import swal from 'sweetalert';
-import '../../assets/sweetalert.min.js';
+import swal from "sweetalert";
+import "../../assets/sweetalert.min.js";
 
 class EmployeeInput extends React.Component {
   constructor() {
     super();
     this.state = {
-      employeeId: '',
-      email: '',
-      department: '',
-      name: '',
-      dateOfBirth: '',
-      type: '',
-      gender: '',
+      employeeId: "",
+      email: "",
+      department: "",
+      name: "",
+      dateOfBirth: "",
+      type: "",
+      gender: "",
       formValidation: {
-        employeeId: { isShown: false, message: '' },
-        email: { isShown: false, message: '' },
-        department: { isShown: false, message: '' },
-        name: { isShown: false, message: '' },
-        dateOfBirth: { isShown: false, message: '' },
-        type: { isShown: false, message: '' },
-        gender: { isShown: false, message: '' }
+        employeeId: { isShown: false, message: "" },
+        email: { isShown: false, message: "" },
+        department: { isShown: false, message: "" },
+        name: { isShown: false, message: "" },
+        dateOfBirth: { isShown: false, message: "" },
+        type: { isShown: false, message: "" },
+        gender: { isShown: false, message: "" }
       },
       csvData: null
     };
@@ -56,50 +56,50 @@ class EmployeeInput extends React.Component {
       return;
     } else {
       swal({
-        title: 'Employee Registration Confirm',
-        text: 'Are you sure you want to add another user?',
-        icon: 'warning',
+        title: "Employee Registration Confirm",
+        text: "Are you sure you want to add another user?",
+        icon: "warning",
         buttons: {
           confirm: {
-            text: 'CONFIRM',
-            value: 'confirm'
+            text: "CONFIRM",
+            value: "confirm"
           },
-          cancel: 'CANCEL'
+          cancel: "CANCEL"
         }
       })
         .then(value => {
           switch (value) {
-          case 'confirm':
-            return swal({
-              title: 'Done',
-              text: 'Employee successfully added!',
-              icon: 'success',
-              button: true
-            }).then(val => {
-              console.log('adding an employee');
-              this.props.addNewEmployee({
-                employeeId: this.state.employeeId,
-                email: this.state.email,
-                department: this.state.department,
-                name: this.state.name,
-                dateOfBirth: this.state.dateOfBirth,
-                type: this.state.type,
-                gender: this.state.gender
+            case "confirm":
+              return swal({
+                title: "Done",
+                text: "Employee successfully added!",
+                icon: "success",
+                button: true
+              }).then(val => {
+                console.log("adding an employee");
+                this.props.addNewEmployee({
+                  employeeId: this.state.employeeId,
+                  email: this.state.email,
+                  department: this.state.department,
+                  name: this.state.name,
+                  dateOfBirth: this.state.dateOfBirth,
+                  type: this.state.type,
+                  gender: this.state.gender
+                });
               });
-            });
-          default:
-            break;
+            default:
+              break;
           }
         })
         .then(val =>
           this.setState({
-            employeeId: '',
-            email: '',
-            department: '',
-            name: '',
-            dateOfBirth: '',
-            type: '',
-            gender: ''
+            employeeId: "",
+            email: "",
+            department: "",
+            name: "",
+            dateOfBirth: "",
+            type: "",
+            gender: ""
           })
         );
     }
@@ -107,14 +107,14 @@ class EmployeeInput extends React.Component {
 
   handleCsvInput = e => {
     //in case file type is not CSV
-    if (e.target.files[0].type !== 'text/csv') {
+    if (e.target.files[0].type !== "text/csv") {
       swal({
-        title: 'Upload Error',
-        text: 'Please upload a CSV file',
-        icon: 'error',
+        title: "Upload Error",
+        text: "Please upload a CSV file",
+        icon: "error",
         button: true
       });
-      e.target.value = '';
+      e.target.value = "";
     } else {
       Papa.parse(e.target.files[0], {
         complete: results => {
@@ -128,16 +128,17 @@ class EmployeeInput extends React.Component {
   handleCsvUpload = () => {
     this.props.addNewEmployee(this.state.csvData);
     //clear input value
-    e.target.value = '';
+    e.target.value = "";
   };
 
   render() {
     return (
       <div>
-        <span className="title">Add Approved Employees</span>
+        <span className="title">Add Approved Users</span>
         <h3>Add invidually</h3>
-        <form autoComplete="off">
+        <form autoComplete="off" className="employees-container">
           <TextField
+            size="small"
             // error={this.state.formValidation.employeeId.isShown}
             name="employeeId"
             id="outlined"
@@ -149,6 +150,7 @@ class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <TextField
+            size="small"
             error={this.state.formValidation.name.isShown}
             name="name"
             id="outlined"
@@ -170,6 +172,7 @@ class EmployeeInput extends React.Component {
             helperText={this.state.formValidation.gender.message}
             margin="normal"
             variant="outlined"
+            size="small"
             SelectProps={{
               native: true
             }}
@@ -179,6 +182,7 @@ class EmployeeInput extends React.Component {
             <option value="employee">Male</option>
           </TextField>
           <TextField
+            size="small"
             name="dateOfBirth"
             error={this.state.formValidation.dateOfBirth.isShown}
             helperText={this.state.formValidation.dateOfBirth.message}
@@ -192,6 +196,7 @@ class EmployeeInput extends React.Component {
             }}
           />
           <TextField
+            size="small"
             error={this.state.formValidation.email.isShown}
             name="email"
             id="outlined"
@@ -203,6 +208,7 @@ class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <TextField
+            size="small"
             error={this.state.formValidation.department.isShown}
             name="department"
             id="outlined"
@@ -214,6 +220,7 @@ class EmployeeInput extends React.Component {
             onChange={this.handleInputChange}
           />
           <TextField
+            size="small"
             name="type"
             error={this.state.formValidation.type.isShown}
             id="outlined-select-currency"
@@ -234,23 +241,26 @@ class EmployeeInput extends React.Component {
             <option value="admin">Admin</option>
           </TextField>
           <Button
+            className="button"
             onClick={this.handleFormSubmit}
             variant="contained"
             color="primary"
+            size="small"
           >
-            Add Employee
+            Add
           </Button>
         </form>
         <h3>Bulk Upload</h3>
-        <h4>Please upload a csv file</h4>
-        <input type="file" onChange={this.handleCsvInput}></input>
-        <Button
-          onClick={this.handleCsvUpload}
-          variant="contained"
-          color="primary"
-        >
-          Upload
-        </Button>
+        <div className="upload-container">
+          <input type="file" onChange={this.handleCsvInput}></input>
+          <Button
+            onClick={this.handleCsvUpload}
+            variant="contained"
+            color="primary"
+          >
+            Upload
+          </Button>
+        </div>
       </div>
     );
   }

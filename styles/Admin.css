@@ -1,37 +1,94 @@
+.employees-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 60px 60px;
+  grid-column-gap: 10px;
+  grid-row-gap: 5px;
+  grid-template-areas: ". . . button" ". . . . ";
+  align-items: center;
+  border: 0px solid;
+  border-radius: 15px;
+  background-color: white;
+  padding: 5px 15px 15px;
+  margin: 10px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+.upload-container {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-column-gap: 10px;
+  align-items: center;
+  border: 0px solid;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+.button {
+  grid-area: button;
+  height: 50px;
+}
+
 .rewards-container {
-     display: grid;
-     grid-template-columns: 6fr 4fr;
-     grid-template-rows: 1fr;
-     grid-template-areas: "string date";
-     border: 0px solid;
-     border-radius: 15px;
-     background-color: white;
-     padding: 20px;
-     margin: 10px;
-     -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
-     -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
-     box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "string date";
+  border: 0px solid;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
 .rewards-sub {
-     display: grid;
-     grid-template-columns: 6fr 100px 100px;
-     grid-template-rows: 1fr;
-     padding: 0px 20px;
-     margin: 15px;
-     font-size: small;
+  display: grid;
+  grid-template-columns: 6fr 100px 100px;
+  grid-template-rows: 1fr;
+  padding: 0px 20px;
+  margin: 15px;
+  font-size: small;
 }
 
 .rewards {
-     display: grid;
-     grid-template-columns: 6fr 100px 100px;
-     grid-template-rows: 1fr;
-     border: 0px solid;
-     border-radius: 15px;
-     background-color: white;
-     padding: 20px;
-     margin: 15px;
-     -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
-     -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
-     box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  display: grid;
+  grid-template-columns: 6fr 100px 100px;
+  grid-template-rows: 1fr;
+  border: 0px solid;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  margin: 15px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+@media screen and (max-width: 480px) {
+  .employees-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 50px;
+    grid-template-areas: "." "." "." "." "." "." "." "button";
+  }
+
+  .upload-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 50px;
+  }
+
+  input {
+    width: 200px;
+  }
 }

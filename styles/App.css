@@ -169,8 +169,10 @@ html {
 
 .assignments-sub {
   display: grid;
-  grid-template-columns: 6fr 100px 100px;
+  grid-template-columns: 6fr 1fr 50px;
   grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-template-areas: ". assignedto .";
   padding: 0px 20px;
   margin: 10px 10px 0px 0px;
   font-size: small;
@@ -178,8 +180,9 @@ html {
 
 .assignments {
   display: grid;
-  grid-template-columns: 6fr 100px 100px;
+  grid-template-columns: 6fr 1fr 50px;
   grid-template-rows: 1fr;
+  grid-column-gap: 10px;
   border: 0px solid;
   border-radius: 15px;
   background-color: white;
@@ -188,6 +191,10 @@ html {
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+.assigned-to {
+  grid-area: assignedto;
 }
 
 .invites-sub {
@@ -225,6 +232,11 @@ html {
   flex-direction: row;
 }
 
+.status {
+  text-align: center;
+  font-size: small;
+}
+
 @media screen and (max-width: 480px) {
   .menu-item {
     visibility: hidden;
@@ -245,6 +257,15 @@ html {
 
   .sidebar-button {
     grid-template-columns: 100%;
+  }
+
+  .assignments-sub {
+    display: grid;
+    grid-template-columns: 6fr 50px;
+  }
+
+  .assigned-to {
+    display: none;
   }
 
   .layout {

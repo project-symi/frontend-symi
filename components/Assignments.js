@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 
 export default class Assignments extends React.Component {
   constructor() {
@@ -28,7 +30,8 @@ export default class Assignments extends React.Component {
         <p className="title">Assignments</p>
 
         <div className="assignments-sub">
-          <span>Task ▾</span> <span>Assigned ▾</span> <span>Status ▾</span>
+          <span>Details ▾</span> <span className="assigned-to">Assigned ▾</span>{" "}
+          <span className="status">Status ▾</span>
         </div>
         {this.state.assignments.map((item, i) => {
           return (
@@ -36,7 +39,14 @@ export default class Assignments extends React.Component {
               <div>{item.task}</div>
 
               <div> {item.assigned}</div>
-              <div> {item.status}</div>
+              <div className="status">
+                {item.status === "incomplete" ? (
+                  <HighlightOffIcon style={{ color: "red" }} />
+                ) : (
+                  <CheckCircleOutlineIcon style={{ color: "green" }} />
+                )}
+                {item.status}
+              </div>
             </div>
           );
         })}
