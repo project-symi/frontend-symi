@@ -93,11 +93,11 @@
 
 .submit-feedback-button {
   display: none;
-  visibility: hidden;
 }
 
 .delete {
   cursor: pointer;
+  display: inline-block;
 }
 
 @media screen and (max-width: 480px) {

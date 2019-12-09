@@ -75,6 +75,10 @@
   display: none;
 }
 
+.submit-feedback-button {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
   .data {
     width: 260px;

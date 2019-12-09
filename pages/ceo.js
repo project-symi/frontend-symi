@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
+
 import Sidebar from '../components/Sidebar';
-import Layout from '../components/Layout';
+import Navbar from '../components/Navbar';
 import Dashboard from '../components/ceoPage/Dashboard';
 import Assignments from '../components/Assignments';
 import Polls from '../components/Polls';
@@ -37,17 +38,22 @@ export default class Ceo extends React.Component {
     this.setState({ currentlyShown: view });
   };
 
-  handleSendInvitation = (invitationObj) => {
+  handleSendInvitation = invitationObj => {
     //make an API call to create an invitation
     console.log(invitationObj, ' invitation was sent');
-  }
+  };
 
   renderSwitchView = param => {
     switch (param) {
     case 'news':
       return <News />;
     case 'dashboard':
-      return <Dashboard handleSendInvitation={this.handleSendInvitation} topEmployees={this.state.topEmployees} />;
+      return (
+        <Dashboard
+          handleSendInvitation={this.handleSendInvitation}
+          topEmployees={this.state.topEmployees}
+        />
+      );
     case 'assignments':
       return <Assignments />;
     case 'polls':
@@ -63,7 +69,8 @@ export default class Ceo extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <div className="layout">
+        <Navbar />
         <Sidebar
           news={true}
           assignments={true}
@@ -73,7 +80,7 @@ export default class Ceo extends React.Component {
           handleComponentView={this.handleComponentView}
         />
         <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </Layout>
+      </div>
     );
   }
 }

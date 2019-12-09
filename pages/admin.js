@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 //components
-import EmployeeInput from '../components/adminPage/EmployeeInput';
-import Updates from '../components/adminPage/Updates';
-import Sidebar from '../components/Sidebar';
-import Layout from '../components/Layout';
-import Assignments from '../components/Assignments';
-import Polls from '../components/Polls';
-import About from '../components/About';
-import '../styles/Admin.css';
+import EmployeeInput from "../components/adminPage/EmployeeInput";
+import Updates from "../components/adminPage/Updates";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import Assignments from "../components/Assignments";
+import Polls from "../components/Polls";
+import About from "../components/About";
+import "../styles/Admin.css";
 
 export default class Admin extends React.Component {
   constructor() {
@@ -15,15 +15,15 @@ export default class Admin extends React.Component {
     this.state = {
       addedEmployee: null,
       isDefaultView: true,
-      currentlyShown: 'assignments'
+      currentlyShown: "assignments"
     };
   }
 
   addNewEmployee = addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      console.log('use endpoint for bulk upload');
+      console.log("use endpoint for bulk upload");
     } else {
-      console.log('individual employee upload');
+      console.log("individual employee upload");
       this.setState({ addedEmployee });
     }
   };
@@ -34,23 +34,24 @@ export default class Admin extends React.Component {
 
   renderSwitchView = param => {
     switch (param) {
-    case 'employeeInput':
-      return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
-    case 'updates':
-      return <Updates />;
-    case 'assignments':
-      return <Assignments />;
-    case 'polls':
-      return <Polls />;
-    case 'about':
-      return <About />;
-      null;
+      case "employeeInput":
+        return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
+      case "updates":
+        return <Updates />;
+      case "assignments":
+        return <Assignments />;
+      case "polls":
+        return <Polls />;
+      case "about":
+        return <About />;
+        null;
     }
   };
 
   render() {
     return (
-      <Layout>
+      <div className="layout">
+        <Navbar />
         <Sidebar
           employeeInput={true}
           updates={true}
@@ -59,7 +60,7 @@ export default class Admin extends React.Component {
           handleComponentView={this.handleComponentView}
         />
         <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </Layout>
+      </div>
     );
   }
 }

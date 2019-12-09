@@ -41,11 +41,18 @@ html {
 #navbar {
   grid-area: navbar;
   display: grid;
-  grid-template-columns: 2fr 8fr 1fr;
-  grid-template-areas: "points logo login";
+  grid-template-columns: 2fr 8fr 1fr 0.5fr;
+  grid-template-areas: "points logo user login";
   padding: 10px;
   margin: 0px;
   text-align: center;
+  align-items: center;
+}
+
+#user {
+  grid-area: user;
+  color: #3F50B5;
+  font-weight: bold;
 }
 
 #logo {
@@ -56,6 +63,9 @@ html {
 
 #login {
   grid-area: login;
+  height: 50px;
+  align-self: center;
+  justify-self: auto;
 }
 
 #points {
