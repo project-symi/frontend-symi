@@ -202,7 +202,6 @@ class EmployeeInput extends React.Component {
             id="outlined"
             label="Email"
             helperText={this.state.formValidation.email.message}
-            margin="normal"
             variant="outlined"
             value={this.state.email}
             onChange={this.handleInputChange}
@@ -214,7 +213,6 @@ class EmployeeInput extends React.Component {
             id="outlined"
             label="Department"
             helperText={this.state.formValidation.department.message}
-            margin="normal"
             variant="outlined"
             value={this.state.department}
             onChange={this.handleInputChange}
@@ -229,7 +227,6 @@ class EmployeeInput extends React.Component {
             value={this.state.type}
             onChange={this.handleInputChange}
             helperText={this.state.formValidation.type.message}
-            margin="normal"
             variant="outlined"
             SelectProps={{
               native: true
@@ -251,7 +248,7 @@ class EmployeeInput extends React.Component {
           </Button>
         </form>
         <h3>Bulk Upload</h3>
-        <div className="upload-container">
+        <div className="employee-upload-container">
           <input type="file" onChange={this.handleCsvInput}></input>
           <Button
             onClick={this.handleCsvUpload}
