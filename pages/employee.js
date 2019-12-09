@@ -75,7 +75,7 @@ export default class Employee extends React.Component {
     super();
     this.state = {
       isDefaultView: true,
-      currentlyShown: "",
+      currentlyShown: "news",
       fuzzyNames: "",
       feedbacks: null,
       rewards: null
@@ -170,18 +170,7 @@ export default class Employee extends React.Component {
           rewards={true}
           handleComponentView={this.handleComponentView}
         />
-        <div id="page">
-          {this.state.isDefaultView ? (
-            <div>
-              <h1>Welcome to Symi!</h1>
-              <h3>
-                Start using the dashboard from checking what is happening in the
-                company
-              </h3>
-            </div>
-          ) : null}
-          {this.renderSwitchView(this.state.currentlyShown)}
-        </div>
+        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
       </Layout>
     );
   }
