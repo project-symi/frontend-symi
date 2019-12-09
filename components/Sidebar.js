@@ -1,7 +1,7 @@
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ChatIcon from "@material-ui/icons/Chat";
 import GroupIcon from "@material-ui/icons/Group";
-import InfoIcon from "@material-ui/icons/Info";
+import StarsIcon from "@material-ui/icons/Stars";
 import AnnouncementIcon from "@material-ui/icons/Announcement";
 import PollIcon from "@material-ui/icons/Poll";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
@@ -61,15 +61,6 @@ export default class Sidebar extends React.Component {
             <span className="menu-item">Feedback</span>
           </div>
         ) : null}
-        {this.props.feedbackHistory ? (
-          <div
-            className="sidebar-button"
-            onClick={() => this.handleOnClick("feedbackHistory")}
-          >
-            <InfoIcon color="primary" />
-            <span className="menu-item">Feedback History</span>
-          </div>
-        ) : null}
         {this.props.updates ? (
           <div
             className="sidebar-button"
@@ -102,7 +93,7 @@ export default class Sidebar extends React.Component {
             className="sidebar-button"
             onClick={() => this.handleOnClick("rewards")}
           >
-            <InfoIcon color="primary" />
+            <StarsIcon color="primary" />
             <span className="menu-item">Rewards</span>
           </div>
         ) : null}

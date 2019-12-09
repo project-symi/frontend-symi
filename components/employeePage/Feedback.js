@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 //components
-import { Autocomplete } from '@material-ui/lab';
+import { Autocomplete } from "@material-ui/lab";
 import {
   Slider,
   Select,
@@ -9,39 +9,39 @@ import {
   Button,
   FormControl,
   FormHelperText
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 //util functions
-import { feedbackValidation, debounce } from '../../utils/utils';
+import { feedbackValidation, debounce } from "../../utils/utils";
 
 //feelings data
 const feelings = [
   {
-    value: '100',
-    label: ' 😊'
+    value: "100",
+    label: " 😊"
   },
   {
     value: 50,
-    label: '😐'
+    label: "😐"
   },
-  { value: 0, label: '😞' }
+  { value: 0, label: "😞" }
 ];
 
 export default class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      feeling: 'good',
-      about: '',
-      input: '',
-      note: '',
-      status: 'unseen',
+      feeling: "good",
+      about: "",
+      input: "",
+      note: "",
+      status: "unseen",
       feedbackValidation: {
         result: false,
         errors: {
-          note: { isShown: false, message: '' },
-          about: { isShown: false, message: '' },
-          input: { isShown: false, message: '' }
+          note: { isShown: false, message: "" },
+          about: { isShown: false, message: "" },
+          input: { isShown: false, message: "" }
         }
       },
       isPopupOpen: false
@@ -50,7 +50,7 @@ export default class Feedback extends React.Component {
 
   //make an API call to DB to get employees
   update = debounce(async () => {
-    console.log('I am getting fuzzy names');
+    console.log("I am getting fuzzy names");
     await this.props.handleFuzzyNameSearch(this.state.input);
     this.setState({ isPopupOpen: true });
   }, 1500);
@@ -61,7 +61,7 @@ export default class Feedback extends React.Component {
   };
 
   handleEmployeeNameInput = event => {
-    console.log('hello');
+    console.log("hello");
     this.setState({ input: event.target.value });
     this.update();
   };
@@ -86,18 +86,18 @@ export default class Feedback extends React.Component {
         subcategory: this.state.input
       };
       this.props.submitFeedback(feedback);
-      this.setState({ about: '', note: '', input: '' });
+      this.setState({ about: "", note: "", input: "" });
     }
   };
 
   handleFeelingInput = (event, value) => {
-    let feeling = '';
+    let feeling = "";
     if (value === 0) {
-      feeling = 'meh';
+      feeling = "meh";
     } else if (value === 50) {
-      feeling = 'okay';
+      feeling = "okay";
     } else if (value === 100) {
-      feeling = 'good';
+      feeling = "good";
     }
     this.setState({ feeling });
   };
@@ -155,25 +155,25 @@ export default class Feedback extends React.Component {
                 </FormHelperText>
               ) : null}
 
-              {(this.state.about === 'Employee' &&
-                this.props.fuzzyNames === '') ||
-              (this.state.about === 'News' && this.props.fuzzyNames === '') ? (
-                  <TextField
-                    error={this.state.feedbackValidation.errors.input.isShown}
-                    helperText={
-                      this.state.feedbackValidation.errors.input.message
-                    }
-                    id="outlined"
-                    margin="normal"
-                    name="input"
-                    placeholder={
-                      this.state.about === 'Employee'
-                        ? 'Please specify employee name'
-                        : 'Please enter news topic'
-                    }
-                    onChange={this.handleEmployeeNameInput}
-                  ></TextField>
-                ) : null}
+              {(this.state.about === "Employee" &&
+                this.props.fuzzyNames === "") ||
+              (this.state.about === "News" && this.props.fuzzyNames === "") ? (
+                <TextField
+                  error={this.state.feedbackValidation.errors.input.isShown}
+                  helperText={
+                    this.state.feedbackValidation.errors.input.message
+                  }
+                  id="outlined"
+                  margin="normal"
+                  name="input"
+                  placeholder={
+                    this.state.about === "Employee"
+                      ? "Please specify employee name"
+                      : "Please enter news topic"
+                  }
+                  onChange={this.handleEmployeeNameInput}
+                ></TextField>
+              ) : null}
               {this.props.fuzzyNames.length > 1 ? (
                 <Autocomplete
                   options={this.props.fuzzyNames}
@@ -213,6 +213,29 @@ export default class Feedback extends React.Component {
             Submit
           </Button>
         </form>
+
+        <p className="title">Feedback History</p>
+
+        <div className="feedback-history-sub">
+          <span>Feedback ▾</span> <span>Date ▾</span> <span>Points ▾</span>
+          <span>Status ▾</span>
+        </div>
+        {this.props.feedbacks.map((item, i) => {
+          return (
+            <div key={i} className="feedback-history">
+              <span className="feedback-string">
+                I feel {item.feeling.toUpperCase()} about
+                {item.input
+                  ? item.input.toUpperCase()
+                  : item.about.toUpperCase()}
+                because {item.note.toUpperCase()}.
+              </span>
+              <span>{item.dateAdded}</span>
+              <span>{item.points} ⭐️</span>
+              <span>{item.status}</span>
+            </div>
+          );
+        })}
       </div>
     );
   }
