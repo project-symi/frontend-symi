@@ -1,32 +1,36 @@
-import { Button } from '@material-ui/core';
+import { Button } from "@material-ui/core";
 
-import SentimentOverall from './Charts/SentimentOverall';
-import SentimentbyCategory from './Charts/SentimentbyCategory';
-import SentimentbyNews from './Charts/SentimentbyNews';
-import SentimentbyDept from './Charts/SentimentbyDept';
+import SentimentOverall from "./Charts/SentimentOverall";
+import SentimentbyCategory from "./Charts/SentimentbyCategory";
+import SentimentbyNews from "./Charts/SentimentbyNews";
+import SentimentbyDept from "./Charts/SentimentbyDept";
 
 export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
       topEmployees: [
-        { name: 'Igor Dawg', points: 500 },
-        { name: 'Mini Meow', points: 400 },
-        { name: 'Yukio Lion', points: 100 },
-        { name: 'Steffie Frog', points: 150 },
-        { name: 'Potato Fan', points: 300 }
+        { name: "Igor Dawg", points: 500 },
+        { name: "Mini Meow", points: 400 },
+        { name: "Yukio Lion", points: 100 },
+        { name: "Steffie Frog", points: 150 },
+        { name: "Potato Fan", points: 300 },
+        { name: "Baru Ishi", points: 350 },
+        { name: "Ziyu Chen", points: 550 }
       ],
       topDepartments: [
-        { name: 'Engineering', points: 5500 },
-        { name: 'Operations', points: 7000 },
-        { name: 'Admin', points: 200 },
-        { name: 'Marketing', points: 2300 },
-        { name: 'Sales', points: 5000 }
+        { name: "Engineering", points: 5500 },
+        { name: "Operations", points: 7000 },
+        { name: "Admin", points: 200 },
+        { name: "Marketing", points: 2300 },
+        { name: "Sales", points: 5000 },
+        { name: "QA", points: 5000 },
+        { name: "Part-Time", points: 5000 }
       ]
     };
   }
 
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
+  static jsfiddleUrl = "https://jsfiddle.net/alidingling/w6wsrc52/";
 
   render() {
     return (
@@ -58,7 +62,11 @@ export default class Dashboard extends React.Component {
             </div>
           </div>
           <div>
-            <p className="data-title">TOP RATED DEPARTMENTS</p>
+            <p className="data-title">OVERALL SENTIMENT</p>
+            <SentimentOverall />
+          </div>
+          <div>
+            <p className="data-title">TOP RATED TEAMS</p>
             <div className="data">
               {[]
                 .concat(this.state.topDepartments)
@@ -80,16 +88,6 @@ export default class Dashboard extends React.Component {
                   );
                 })}
             </div>
-          </div>
-        </div>
-        <div id="data-container">
-          <div>
-            <p className="data-title">OVERALL SENTIMENT</p>
-            <SentimentOverall />
-          </div>
-          <div>
-            <p className="data-title">SENTIMENT BY CATEGORY</p>
-            <SentimentbyCategory />
           </div>
         </div>
         <div id="data-container-big">
