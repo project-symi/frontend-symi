@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar';
 import Layout from '../components/Layout';
 import Assignments from '../components/Assignments';
 import Polls from '../components/Polls';
+import About from '../components/About';
 import '../styles/Admin.css';
 
 export default class Admin extends React.Component {
@@ -41,7 +42,8 @@ export default class Admin extends React.Component {
       return <Assignments />;
     case 'polls':
       return <Polls />;
-    default:
+    case 'about':
+      return <About />;
       null;
     }
   };

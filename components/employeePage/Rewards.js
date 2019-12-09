@@ -2,7 +2,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Typography, Button } from '@material-ui/core';
 
 //sweet alert
 import swal from 'sweetalert';
@@ -59,6 +59,9 @@ const Rewards = props => {
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
+                      <Typography variant="body2">
+                        {reward.dateAdded}
+                      </Typography>
                       <Typography
                         gutterBottom
                         variant="h6"
@@ -68,23 +71,20 @@ const Rewards = props => {
                           ? 'Praised by an employee'
                           : 'Poll participation'}
                       </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        Date received: {reward.dateAdded}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography
+                      <Button
+                        size="small"
                         onClick={() =>
                           handleShowDetails(
                             reward.correspondentId,
                             reward.category
                           )
                         }
-                        variant="body2"
+                        color="primary"
+                        variant="contained"
                         style={{ cursor: 'pointer' }}
                       >
                         Show details
-                      </Typography>
+                      </Button>
                     </Grid>
                   </Grid>
                   <Grid item>

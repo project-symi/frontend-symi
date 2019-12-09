@@ -19,6 +19,7 @@
      grid-template-rows: 1fr;
      padding: 0px 20px;
      margin: 15px;
+     font-size: small;
 }
 
 .rewards {

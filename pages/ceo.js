@@ -6,6 +6,7 @@ import Assignments from '../components/Assignments';
 import Polls from '../components/Polls';
 import News from '../components/News';
 import Invites from '../components/Invites';
+import About from '../components/About';
 import '../styles/CEO.css';
 
 export default class Ceo extends React.Component {
@@ -32,6 +33,8 @@ export default class Ceo extends React.Component {
       return <Polls />;
     case 'invites':
       return <Invites />;
+    case 'about':
+      return <About />;
     default:
       null;
     }
