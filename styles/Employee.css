@@ -18,9 +18,7 @@
   background-color: white;
   padding: 20px;
   text-align: center;
-
-  margin: auto;
-  margin-top: 15px;
+  margin: 15px auto;
   font-size: 18pt;
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
@@ -39,7 +37,7 @@
 
 .feedback-history-sub {
   display: grid;
-  grid-template-columns: 5fr 2fr 2fr 2fr;
+  grid-template-columns: 8fr 2fr;
   grid-template-rows: 1fr;
   padding: 0px 20px;
   margin: 15px;
@@ -48,9 +46,9 @@
 
 .feedback-history {
   display: grid;
-  grid-template-columns: 5fr 2fr 2fr 2fr;
+  grid-template-columns: 8fr 2fr;
   grid-template-rows: 1fr;
-  grid-template-areas: "string date status";
+  grid-template-areas: "string status";
   border: 0px solid;
   border-radius: 15px;
   background-color: white;
@@ -61,14 +59,46 @@
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
-.feedback-string {
+.feedback {
+  display: grid;
+  grid-template-rows: 0.5fr 1fr;
+  grid-row-gap: 10px;
   grid-area: string;
 }
 
-.date-added {
-  grid-area: date;
+.status {
+  text-align: center;
+  grid-area: status;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
 }
 
-.status {
-  grid-area: status;
+@media screen and (max-width: 480px) {
+  .data {
+    width: 260px;
+  }
+
+  #data-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 10px;
+  }
+
+  #data-container-big {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-history-sub {
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-template-rows: 1fr;
+    padding: 0px 20px;
+    margin: 15px;
+    font-size: small;
+  }
+
+  .date-added {
+    display: none;
+  }
 }

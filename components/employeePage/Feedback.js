@@ -11,6 +11,9 @@ import {
   FormHelperText
 } from "@material-ui/core";
 
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+
 //util functions
 import { feedbackValidation, debounce } from "../../utils/utils";
 
@@ -217,22 +220,28 @@ export default class Feedback extends React.Component {
         <p className="title">Feedback History</p>
 
         <div className="feedback-history-sub">
-          <span>Feedback ▾</span> <span>Date ▾</span> <span>Points ▾</span>
+          <span>Feedback ▾</span>
           <span>Status ▾</span>
         </div>
         {this.props.feedbacks.map((item, i) => {
           return (
             <div key={i} className="feedback-history">
-              <span className="feedback-string">
-                I feel {item.feeling.toUpperCase()} about
-                {item.input
-                  ? item.input.toUpperCase()
-                  : item.about.toUpperCase()}
-                because {item.note.toUpperCase()}.
-              </span>
-              <span>{item.dateAdded}</span>
-              <span>{item.points} ⭐️</span>
-              <span>{item.status}</span>
+              <span className="feedback">
+                <span> {item.dateAdded}</span>I feel {" " + item.feeling + " "}
+                about
+                {" " + (item.input ? item.input : item.about) + " "}
+                because {item.note}.
+              </span>{" "}
+              <div className="status">
+                <div>
+                  {item.status === "unseen" ? (
+                    <HighlightOffIcon style={{ color: "red" }} />
+                  ) : (
+                    <CheckCircleOutlineIcon style={{ color: "green" }} />
+                  )}
+                </div>
+                <div> {item.status}</div>
+              </div>
             </div>
           );
         })}

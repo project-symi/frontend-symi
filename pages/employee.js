@@ -17,14 +17,14 @@ const employees = [
   { name: "Steffie Frog", department: "Operations", employeeID: "6543" }
 ];
 
-//dummy data of feedback submitted
+// FEEDBACK HISTORY
 const feedbacks = [
   {
     feeling: "good",
     about: "Employee",
     input: "Igor",
     note: "he's super helpful and a hardworker",
-    dateAdded: null,
+    dateAdded: "12/15/2009",
     points: 10,
     status: "unseen",
     id: "1111"
@@ -33,7 +33,7 @@ const feedbacks = [
     feeling: "okay",
     about: "Benefits",
     note: "there's no gym memebership",
-    dateAdded: null,
+    dateAdded: "12/15/2009",
     points: 10,
     status: "unseen",
     id: "2222"
@@ -42,7 +42,7 @@ const feedbacks = [
     feeling: "bad",
     about: "Holidays",
     note: "I don't have Hanukkah off...",
-    dateAdded: null,
+    dateAdded: "12/15/2009",
     points: 10,
     status: "seen",
     id: "3333"
