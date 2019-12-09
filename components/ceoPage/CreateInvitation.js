@@ -1,64 +1,69 @@
-import { TextField, Paper } from '@material-ui/core';
+/* eslint-disable react/prop-types */
+import { TextField, Paper, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: 200,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      margin: 'auto',
-      maxWidth: '100%',
-      margin: '15px',
-      borderRadius: '20px'
-    },
+  paper: {
+    padding: theme.spacing(2),
+    maxWidth: '100%',
+    marginTop: '20px',
+    borderRadius: '20px'
   },
+  textField: {
+    margin: '10px'
+  },
+  dataField: {
+    marginTop: '26px'
+  },
+  sendButton: {
+    backgroundColor: '#3f50b5',
+    margin: '10px',
+    '&:hover': {
+      backgroundColor: '#3748b0'
+    }
+  },
+  button: {
+    margin: '10px',
+  },
+  fields: {
+    margin: 'auto'
+  }
 }));
 
-const CreateInvitation = () => {
+
+const CreateInvitation = (props) => {
   const classes = useStyles();
+
+  const handleCancelInvitation = () => {
+    props.handleCancelInvitation();
+  };
 
   return (
     <div>
       <h1 className='title' >Create Invitation</h1>
       <Paper className={classes.paper}>
-      <form className={classes.root} noValidate autoComplete="off">
-        <div>
-          <TextField required id="standard-required" label="Required" defaultValue="Hello World" />
-          <TextField disabled id="standard-disabled" label="Disabled" defaultValue="Hello World" />
-          <TextField
-            id="standard-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-          />
-          <TextField
-            id="standard-read-only-input"
-            label="Read Only"
-            defaultValue="Hello World"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <TextField
-            id="standard-number"
-            label="Number"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField id="standard-search" label="Search field" type="search" />
-          <TextField
-            id="standard-helperText"
-            label="Helper text"
-            defaultValue="Default Value"
-            helperText="Some important text"
-          />
-        </div>
-      </form>
+        <form noValidate autoComplete="off">
+          <div className={classes.fields}>
+            <TextField
+              id="standard-read-only-input"
+              label="Invite"
+              defaultValue={'Praise' + props.invitee}
+              InputProps={{
+                readOnly: true,
+              }}
+              className={classes.textField}
+            />
+            <TextField required id="standard-required" label="Comments" className={classes.textField} />
+            <TextField
+              name="dateOfBirth"
+              id="date"
+              type="date"
+              className={classes.dataField}
+            />
+          </div>
+        </form>
+        <Button variant="contained" color="secondary" className={classes.sendButton}>Send</Button>
+        <Button variant="contained" color="secondary" onClick={handleCancelInvitation} >Cancel</Button>
       </Paper>
     </div>
   );

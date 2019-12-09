@@ -27,22 +27,28 @@ export default class Dashboard extends React.Component {
         { name: 'Marketing', points: 2300 },
         { name: 'Sales', points: 5000 }
       ],
-      currentlyShown: 'defaultView'
+      currentlyShown: 'defaultView',
+      invitee: null
     };
   }
 
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
-  handleInvite = () => {
+  //switch view to Create Invitation and pass the invitee name
+  handleInvite = (invitee) => {
     console.log('created invitation');
-    this.setState({ currentlyShown: 'createInvitation' });
+    this.setState({ currentlyShown: 'createInvitation', invitee });
+  }
+
+  handleCancelInvitation = () => {
+    this.setState({ currentlyShown: 'defaultView' });
   }
 
   render() {
     return (
       <div>
         {
-          this.state.currentlyShown === 'createInvitation' ? <CreateInvitation /> :         <div>
+          this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} /> :         <div>
             <p className="title">CEO Dashboard</p>
             <div id="data-container">
               <div>
@@ -60,7 +66,7 @@ export default class Dashboard extends React.Component {
                           <div>{employee.name}</div>
                           <div>{employee.points} ⭐️</div>
                           <div>
-                            <Button size="small" color="primary" onClick={this.handleInvite}>
+                            <Button size="small" color="primary" onClick={() => this.handleInvite(employee.name)}>
                             invite
                             </Button>
                           </div>
