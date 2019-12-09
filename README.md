@@ -42,4 +42,4 @@ Give a ⭐️ if you like our stuff!
 
 ## 📝 License
 
-This project is [ISC](https://github.com/project-symi/frontend-symi/blob/master/LICENSE) licensed.
+This project is [ISC](https://github.com/project-symi/frontend-symi/license.md) licensed.
