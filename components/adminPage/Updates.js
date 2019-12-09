@@ -5,7 +5,11 @@ import News from "../News";
 const Updates = () => (
   <div>
     <p className="title">Add News</p>
-    <div className="add-news-container">
+    <form
+      autoComplete="off"
+      className="employees-container"
+      className="add-news-container"
+    >
       {" "}
       <TextField size="small" name="title" label="Title" variant="outlined" />
       <TextField
@@ -17,7 +21,7 @@ const Updates = () => (
       <Button color="primary" variant="contained">
         UPLOAD
       </Button>
-    </div>
+    </form>
     <News />
   </div>
 );
