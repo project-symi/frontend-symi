@@ -86,8 +86,10 @@ export default class Feedback extends React.Component {
         status: this.state.status,
         category: this.state.about,
         note: this.state.note,
-        subcategory: this.state.input
+        recipientId: this.state.about === 'Employee' ? this.state.input : '',
+        newsId: this.state.about === 'News' ? this.state.input : ''
       };
+      console.log(feedback);
       this.props.submitFeedback(feedback);
       this.setState({ about: '', note: '', input: '' });
     }
@@ -107,7 +109,8 @@ export default class Feedback extends React.Component {
 
   searchEmployee = (event, value) => {
     //change input value to the employee id
-    this.setState({ input: value.employeeID, isPopupOpen: false });
+    //TODO for version 2.0 write logic to add newsId depending on the category
+    this.setState({ input: value.employeeId, isPopupOpen: false });
   };
 
   render() {
