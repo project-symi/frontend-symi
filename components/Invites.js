@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Button } from '@material-ui/core';
 
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 export default class Invites extends React.Component {
   constructor() {
@@ -45,10 +45,10 @@ export default class Invites extends React.Component {
 
               <div> {item.title}</div>
               <div className="status">
-                {item.status === "accepted" ? (
-                  <CheckCircleOutlineIcon style={{ color: "green" }} />
+                {item.status === 'accepted' ? (
+                  <CheckCircleOutlineIcon style={{ color: 'green' }} />
                 ) : (
-                  <HelpOutlineIcon style={{ color: "purple" }} />
+                  <HelpOutlineIcon style={{ color: 'purple' }} />
                 )}
 
                 <div>{item.status}</div>
