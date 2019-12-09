@@ -28,7 +28,7 @@ export default class Ceo extends React.Component {
   }
 
   componentDidMount() {
-    //make an API call to db to pass top employees data to dashboard
+    //make an API call to db to get top employees data for dashboard
     this.setState({ topEmployees });
   }
 
