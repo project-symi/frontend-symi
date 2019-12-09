@@ -10,15 +10,15 @@ export default class Assignments extends React.Component {
       assignments: [
         {
           task:
-            "It seems like bringing TimTams for the Engineering team really brightened their day. Let's order more!",
-          assigned: "Mini",
-          status: "complete"
+            'It seems like bringing TimTams for the Engineering team really brightened their day. Let\'s order more!',
+          assigned: 'Mini',
+          status: 'complete'
         },
         {
           task:
-            "Can you start a discussion to make a bring your dog to work day?",
-          assigned: "Steffie",
-          status: "incomplete"
+            'Can you start a discussion to make a bring your dog to work day?',
+          assigned: 'Steffie',
+          status: 'incomplete'
         }
       ]
     };
