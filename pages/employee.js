@@ -78,7 +78,8 @@ export default class Employee extends React.Component {
       currentlyShown: 'news',
       fuzzyNames: '',
       feedbacks: null,
-      rewards: null
+      rewards: null,
+      currentEmployeeId: '1'
     };
   }
 
@@ -90,7 +91,9 @@ export default class Employee extends React.Component {
 
   //callback for Feedback to submit the feedback
   submitFeedback = feedbackObj => {
-    //make an API call to add the feebback to db
+    //add current employeeId to the feedback object (for the feedback history)
+    feedbackObj.employeeId = this.state.employeeId;
+    //make an API call to add the feedback to db
     console.log(feedbackObj, ' feedback was sent to db');
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
@@ -116,13 +119,10 @@ export default class Employee extends React.Component {
     case 'positive feedback':
       const feedbackDetails = feedbacks.find(feedback => feedback.id === id);
       return feedbackDetails.note;
-      break;
     case 'poll':
       return 'dummy poll';
-      break;
     case 'submitted feedback':
       return 'dummy submitted feedback';
-      break;
     default:
       return null;
     }
