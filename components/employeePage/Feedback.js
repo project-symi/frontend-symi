@@ -98,9 +98,9 @@ export default class Feedback extends React.Component {
   handleFeelingInput = (event, value) => {
     let feeling = '';
     if (value === 0) {
-      feeling = 'meh';
+      feeling = 'sad';
     } else if (value === 50) {
-      feeling = 'okay';
+      feeling = 'meh';
     } else if (value === 100) {
       feeling = 'good';
     }

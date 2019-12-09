@@ -30,7 +30,7 @@ const feedbacks = [
     id: '1111'
   },
   {
-    feeling: 'okay',
+    feeling: 'meh',
     about: 'Benefits',
     note: 'there\'s no gym memebership',
     dateAdded: '12/15/2009',
@@ -39,7 +39,7 @@ const feedbacks = [
     id: '2222'
   },
   {
-    feeling: 'bad',
+    feeling: 'sad',
     about: 'Holidays',
     note: 'I don\'t have Hanukkah off...',
     dateAdded: '12/15/2009',
