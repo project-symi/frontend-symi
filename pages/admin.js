@@ -7,6 +7,7 @@ import Layout from "../components/Layout";
 import Assignments from "../components/Assignments";
 import Polls from "../components/Polls";
 import About from "../components/About";
+
 import "../styles/Admin.css";
 
 export default class Admin extends React.Component {
@@ -58,7 +59,7 @@ export default class Admin extends React.Component {
           polls={true}
           handleComponentView={this.handleComponentView}
         />
-        {this.renderSwitchView(this.state.currentlyShown)}
+        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
       </Layout>
     );
   }
