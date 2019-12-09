@@ -40,6 +40,7 @@ export default class Dashboard extends React.Component {
     this.setState({ currentlyShown: 'createInvitation', invitee });
   }
 
+  //in case CEO click cancel invitation button switch to default view
   handleCancelInvitation = () => {
     this.setState({ currentlyShown: 'defaultView' });
   }
