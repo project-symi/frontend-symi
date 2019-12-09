@@ -1,17 +1,19 @@
 /* eslint-disable react/prop-types */
+
+//material-ui
+import { Button } from '@material-ui/core';
+
 //charts
 import SentimentOverall from './Charts/SentimentOverall';
-//import SentimentbyCategory from './Charts/SentimentbyCategory';
+import SentimentbyCategory from './Charts/SentimentbyCategory';
 import SentimentbyNews from './Charts/SentimentbyNews';
 import SentimentbyDept from './Charts/SentimentbyDept';
 
 //components
-import { Button } from '@material-ui/core';
 import CreateInvitation from './CreateInvitation';
 
 //images
 import Loader from '../../assets/loader_img.gif';
-
 
 
 export default class Dashboard extends React.Component {
@@ -23,7 +25,9 @@ export default class Dashboard extends React.Component {
         { name: 'Operations', points: 7000 },
         { name: 'Admin', points: 200 },
         { name: 'Marketing', points: 2300 },
-        { name: 'Sales', points: 5000 }
+        { name: 'Sales', points: 5000 },
+        { name: 'QA', points: 5000 },
+        { name: 'Part-Time', points: 5000 }
       ],
       currentlyShown: 'defaultView',
       invitee: null
@@ -41,17 +45,17 @@ export default class Dashboard extends React.Component {
   handleCancelInvitation = () => {
     this.setState({ currentlyShown: 'defaultView' });
   }
-
   //callback from CreateInvitation component
   //ask Parent component to make an API call to DB to create an invitation
   handleSendInvitation = (invitationObj) => {
     this.props.handleSendInvitation(invitationObj);
   }
 
+
   render() {
     return (
       <div>
-        {this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} handleSendInvitation={this.handleSendInvitation} /> : 
+        { this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} handleSendInvitation={this.handleSendInvitation} /> :
           <div>
             <p className="title">CEO Dashboard</p>
             <div id="data-container">
@@ -70,35 +74,12 @@ export default class Dashboard extends React.Component {
                           <div>{employee.points} ⭐️</div>
                           <div>
                             <Button size="small" color="primary" onClick={() => this.handleSwitchViewToInvite(employee)}>
-                            invite
+                           invite
                             </Button>
                           </div>
                         </div>
                       );
-                    }) : <img style={{ height: '200px', width: '200px' }} src={Loader}></img> }
-                </div>
-              </div>
-              <div>
-                <p className="data-title">TOP RATED DEPARTMENTS</p>
-                <div className="data">
-                  {this.state.topDepartments
-                    .sort((a, b) => {
-                      return b.points - a.points;
-                    })
-                    .map((department, i) => {
-                      return (
-                        <div key={i} className="top">
-                          <div className="top-num">{i + 1}</div>
-                          <div>{department.name}</div>
-                          <div>{department.points} ⭐️</div>
-                          <div>
-                            <Button size="small" color="primary">
-                            assign
-                            </Button>
-                          </div>
-                        </div>
-                      );
-                    })}
+                    }) : <img src={Loader} style={{ height: '100px', width: '100px' }} ></img> }
                 </div>
               </div>
               <div>
@@ -121,7 +102,7 @@ export default class Dashboard extends React.Component {
                           <div>{department.points} ⭐️</div>
                           <div>
                             <Button size="small" color="primary">
-                          assign
+                           assign
                             </Button>
                           </div>
                         </div>
@@ -129,12 +110,14 @@ export default class Dashboard extends React.Component {
                     })}
                 </div>
               </div>
+            </div>
+            <div id="data-container-big">
               <div>
-                <div id="data-container-big">
-                  <p className="data-title">SENTIMENT BY DEPARTMENT</p>
-                  <SentimentbyDept />
-                </div>
-                <div id="data-container-big">
+                <p className="data-title">SENTIMENT BY DEPARTMENT</p>
+                <SentimentbyDept />
+              </div>
+              <div id="data-container-big">
+                <div>
                   <p className="data-title">SENTIMENT BY NEWS</p>
                   <SentimentbyNews />
                 </div>
