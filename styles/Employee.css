@@ -37,16 +37,21 @@
 
 .feedback-history-sub {
   display: grid;
-  grid-template-columns: 8fr 2fr;
+  grid-template-columns: 8fr 1fr;
   grid-template-rows: 1fr;
   padding: 0px 20px;
   margin: 15px;
   font-size: small;
 }
 
+.status {
+  text-align: center;
+  font-size: 10pt;
+}
+
 .feedback-history {
   display: grid;
-  grid-template-columns: 8fr 2fr;
+  grid-template-columns: 8fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: "string status";
   border: 0px solid;
@@ -64,13 +69,7 @@
   grid-template-rows: 0.5fr 1fr;
   grid-row-gap: 10px;
   grid-area: string;
-}
-
-.status {
-  text-align: center;
-  grid-area: status;
-  grid-template-rows: 1fr 1fr;
-  justify-items: center;
+  margin-right: 5px;
 }
 
 @media screen and (max-width: 480px) {

@@ -220,8 +220,8 @@ export default class Feedback extends React.Component {
         <p className="title">Feedback History</p>
 
         <div className="feedback-history-sub">
-          <span>Feedback ▾</span>
-          <span>Status ▾</span>
+          <span>Details ▾</span>
+          <span className="status">Status ▾</span>
         </div>
         {this.props.feedbacks.map((item, i) => {
           return (

@@ -64,7 +64,7 @@ const Rewards = props => {
 
   return (
     <div>
-      <h1 className="title">Rewards</h1>
+      <span className="title">Rewards</span>
       {props.rewards.map((reward, i) => {
         return (
           <div key={i} className={classes.root}>
@@ -73,9 +73,8 @@ const Rewards = props => {
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Typography variant="body2">
-                        {reward.dateAdded}
-                      </Typography>
+                      {reward.dateAdded}
+
                       <Typography
                         gutterBottom
                         variant="h6"
@@ -119,7 +118,7 @@ const Rewards = props => {
                       gutterBottom
                       className={classes.points}
                     >
-                      {reward.points} ⭐
+                      +{reward.points} ⭐
                     </Typography>
                   </Grid>
                 </Grid>
