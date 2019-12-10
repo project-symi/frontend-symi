@@ -7,7 +7,7 @@ const Dev = () => (
       <button>CEO</button>
     </Link>
     <Link href="/employee">
-      <button>Employee</button>
+      <button>Emp</button>
     </Link>
     <Link href="/admin">
       <button>Admin</button>

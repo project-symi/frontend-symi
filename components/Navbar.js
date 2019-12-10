@@ -1,37 +1,27 @@
-import Link from 'next/link';
-// import logo from "../assets/symilogo.png";
-//components
-import { Button } from '@material-ui/core';
+import Link from "next/link";
+import logo from "../assets/symi-small.png";
 
-import PersonIcon from '@material-ui/icons/Person';
-
-import logo from '../assets/symi-small.png';
+// MUI components
+import { Button } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
 
 export default class Navbar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      points: 500
-    };
-  }
-
   render() {
     return (
       <div id="navbar">
-        <div id="points"> {this.state.points} ⭐️</div>
+        {this.props.points ? (
+          <div id="points"> {this.props.points + " ⭐️"} </div>
+        ) : null}
         <div id="logo">
           <img width="150px" src={logo} />
         </div>
+        {/* <Button fontSize="small" color="primary" id="login">
+          Logout
+        </Button> */}
         <div id="user">
           <PersonIcon color="primary"></PersonIcon>
-          <div>
-            {/* {this.state.userPermission[0]} */}
-            {console.log('userPermission', this.props)}
-          </div>
+          <div>{this.props.userType}</div>
         </div>
-        <Button fontSize="small" color="primary" id="login">
-          Logout
-        </Button>
       </div>
     );
   }

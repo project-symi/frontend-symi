@@ -117,7 +117,7 @@ export default class Sidebar extends React.Component {
           </div>
         ) : null}
 
-        <Dev></Dev>
+        {/* <Dev></Dev> */}
 
         <div>
           <div
