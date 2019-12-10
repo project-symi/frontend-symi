@@ -15,6 +15,10 @@ import '../styles/CEO.css';
 //utils
 import axios from 'axios';
 
+//sweet alert
+import swal from 'sweetalert';
+import '../../assets/sweetalert.min.js';
+
 //top employees dummy data (for now)
 const topEmployees = [{
   name: 'Igor Dawg',
@@ -144,6 +148,14 @@ export default class Ceo extends React.Component {
         }
       }
     );
+    // swal({
+    //   title: 'Positive Feedback Highlights',
+    //   text: response.data.result.join(','),
+    //   icon: 'success',
+    //   button: true
+    // }).then((val) => {
+    //   return axios.patch('https://symi-be.herokuapp.com/feedbacks/status');
+    // });
     console.log(response.data.result);
   };
 
