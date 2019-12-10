@@ -3,9 +3,11 @@
 html {
   height: 100%;
   background: rgb(114, 55, 211);
-  background: linear-gradient(326deg,
-      rgba(114, 55, 211, 1) 0%,
-      rgba(60, 217, 188, 1) 100%);
+  background: linear-gradient(
+    326deg,
+    rgba(114, 55, 211, 1) 0%,
+    rgba(60, 217, 188, 1) 100%
+  );
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -42,7 +44,7 @@ html {
   grid-area: navbar;
   display: grid;
   grid-template-columns: 2fr 8fr 1fr 0.5fr;
-  grid-template-areas: "points logo user login";
+  grid-template-areas: "points logo login user";
   padding: 10px;
   margin: 0px;
   text-align: center;
@@ -51,8 +53,10 @@ html {
 
 #user {
   grid-area: user;
-  color: #3F50B5;
+  color: #3f50b5;
   font-weight: bold;
+  font-size: 12pt;
+  margin: 5px;
 }
 
 #logo {
@@ -318,6 +322,6 @@ html {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 200px 1fr;
-    grid-template-areas: "newsimg""newsdesc";
+    grid-template-areas: "newsimg" "newsdesc";
   }
 }
