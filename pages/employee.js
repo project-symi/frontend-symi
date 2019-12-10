@@ -82,7 +82,8 @@ export default class Employee extends React.Component {
       feedbacks: null,
       rewards: null,
       currentEmployeeId: "1",
-      user: "EMPLOYEE"
+      user: "EMPLOYEE",
+      points: 450
     };
   }
 
@@ -165,7 +166,7 @@ export default class Employee extends React.Component {
   render() {
     return (
       <div className="layout">
-        <Navbar userPermission={this.state.user} />
+        <Navbar points={this.state.points} userPermission={this.state.user} />
         <Sidebar
           news={true}
           feedback={true}
