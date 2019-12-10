@@ -225,7 +225,7 @@ export default class Feedback extends React.Component {
           <span>Details ▾</span>
           <span className="status">Status ▾</span>
         </div>
-        {this.props.feedbacks.map((item) => {
+        {this.props.feedbacks ? this.props.feedbacks.map((item) => {
           return (
             <div key={item.id} className="feedback-history">
               <span className="feedback">
@@ -242,7 +242,7 @@ export default class Feedback extends React.Component {
               </div>
             </div>
           );
-        })}
+        }) : null}
       </div>
     );
   }
