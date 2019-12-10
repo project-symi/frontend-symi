@@ -10,13 +10,15 @@ import {
   FormControl,
   FormHelperText
 } from '@material-ui/core';
-
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 //util functions
 import { feedbackValidation, debounce } from '../../utils/utils';
 import moment from 'moment';
+
+//images
+import Loader from '../../assets/loader_img.gif';
 
 //feelings data
 const feelings = [
@@ -88,7 +90,6 @@ export default class Feedback extends React.Component {
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
         newsId: this.state.about === 'News' ? this.state.input : ''
       };
-      console.log(feedback);
       this.props.submitFeedback(feedback);
       this.setState({ about: '', note: '', input: '' });
     }
@@ -242,7 +243,7 @@ export default class Feedback extends React.Component {
               </div>
             </div>
           );
-        }) : null}
+        }) : <img src={Loader}></img>}
       </div>
     );
   }

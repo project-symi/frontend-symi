@@ -22,40 +22,6 @@ const employees = [
   { name: 'Steffie Frog', department: 'Operations', employeeId: '6543' }
 ];
 
-// FEEDBACK HISTORY
-const feedbacks = [
-  {
-    feeling: 'good',
-    category: 'Employee',
-    name: 'Yuki',
-    note: 'he\'s super helpful and a hardworker',
-    dateAdded: '12/15/2009',
-    points: 10,
-    status: 'unseen',
-    id: '1111'
-  },
-  {
-    feeling: 'meh',
-    category: 'Benefits',
-    note: 'there\'s no gym memebership',
-    dateAdded: '12/15/2009',
-    points: 10,
-    status: 'unseen',
-    id: '2222',
-    name: ''
-  },
-  {
-    feeling: 'sad',
-    category: 'Holidays',
-    note: 'I don\'t have Hanukkah off...',
-    dateAdded: '12/15/2009',
-    points: 10,
-    status: 'seen',
-    id: '3333',
-    name: ''
-  }
-];
-
 const rewards = [
   {
     points: 50,
@@ -102,10 +68,11 @@ export default class Employee extends React.Component {
   }
 
   //callback for Feedback to submit the feedback
-  submitFeedback = feedbackObj => {
+  submitFeedback = async (feedbackObj) => {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.employeeId;
     //make an API call to add the feedback to db
+    axios.post('https://symi-be.herokuapp.com/feedbacks/')
     console.log(feedbackObj, ' feedback was sent to db');
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
