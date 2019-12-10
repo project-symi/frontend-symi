@@ -52,7 +52,7 @@ export default class Employee extends React.Component {
       fuzzyNames: '',
       feedbacks: null,
       rewards: null,
-      currentEmployeeId: 'X009999'
+      employeeId: 'X009999'
     };
   }
 
