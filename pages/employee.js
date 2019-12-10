@@ -14,26 +14,7 @@ import axios from "axios";
 //styles
 import "../styles/Employee.css";
 
-const rewards = [
-  {
-    points: 50,
-    category: "positive feedback",
-    dateAdded: "01/12/2019",
-    correspondentId: "1111"
-  },
-  {
-    points: 5,
-    category: "poll",
-    dateAdded: "02/12/2019",
-    correspondentId: "6"
-  },
-  {
-    points: 10,
-    category: "submitted feedback",
-    dateAdded: "04/12/2019",
-    correspondentId: "2222"
-  }
-];
+import { rewards } from "../assets/dummyData";
 
 export default class Employee extends React.Component {
   constructor() {
@@ -43,9 +24,29 @@ export default class Employee extends React.Component {
       currentlyShown: "news",
       fuzzyNames: "",
       feedbacks: null,
-      rewards: null,
+      rewards: [
+        {
+          points: 50,
+          category: "positive feedback",
+          dateAdded: "01/12/2019",
+          correspondentId: "1111"
+        },
+        {
+          points: 5,
+          category: "poll",
+          dateAdded: "02/12/2019",
+          correspondentId: "6"
+        },
+        {
+          points: 10,
+          category: "submitted feedback",
+          dateAdded: "04/12/2019",
+          correspondentId: "2222"
+        }
+      ],
       employeeId: "X009999",
-      userType: "Employee"
+      userType: "Employee",
+      points: 450
     };
   }
 
@@ -81,7 +82,10 @@ export default class Employee extends React.Component {
   };
 
   handleComponentView = view => {
-    this.setState({ currentlyShown: view, isDefaultView: false });
+    this.setState({
+      currentlyShown: view,
+      isDefaultView: false
+    });
   };
 
   //callback for Feedback submit to get employee names
