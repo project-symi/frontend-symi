@@ -16,6 +16,7 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 //util functions
 import { feedbackValidation, debounce } from '../../utils/utils';
+import moment from 'moment';
 
 //feelings data
 const feelings = [
@@ -228,7 +229,7 @@ export default class Feedback extends React.Component {
           return (
             <div key={item.id} className="feedback-history">
               <span className="feedback">
-                <span> {item.dateAdded}</span>I feel {' ' + item.feeling.toLowerCase() + ' '}
+                <span> {moment(item.dateAdded).format('ddd, hA')}</span>I feel {' ' + item.feeling.toLowerCase() + ' '}
                 about
                 {' ' + (item.category === 'Employee' ? item.name : item.category) + ' '}
                 because {item.note}.
