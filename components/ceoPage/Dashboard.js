@@ -84,7 +84,7 @@ export default class Dashboard extends React.Component {
               </div>
               <div>
                 <p className="data-title">OVERALL SENTIMENT</p>
-                <SentimentOverall />
+                <SentimentOverall data={this.props.overallSentiment} />
               </div>
               <div>
                 <p className="data-title">TOP RATED TEAMS</p>

@@ -21,8 +21,8 @@ const employees = [
 const feedbacks = [
   {
     feeling: 'good',
-    about: 'Employee',
-    input: 'Igor',
+    category: 'Employee',
+    name: 'Yuki',
     note: 'he\'s super helpful and a hardworker',
     dateAdded: '12/15/2009',
     points: 10,
@@ -30,22 +30,24 @@ const feedbacks = [
     id: '1111'
   },
   {
-    feeling: 'okay',
-    about: 'Benefits',
+    feeling: 'meh',
+    category: 'Benefits',
     note: 'there\'s no gym memebership',
     dateAdded: '12/15/2009',
     points: 10,
     status: 'unseen',
-    id: '2222'
+    id: '2222',
+    name: ''
   },
   {
-    feeling: 'bad',
-    about: 'Holidays',
+    feeling: 'sad',
+    category: 'Holidays',
     note: 'I don\'t have Hanukkah off...',
     dateAdded: '12/15/2009',
     points: 10,
     status: 'seen',
-    id: '3333'
+    id: '3333',
+    name: ''
   }
 ];
 
@@ -78,7 +80,8 @@ export default class Employee extends React.Component {
       currentlyShown: 'news',
       fuzzyNames: '',
       feedbacks: null,
-      rewards: null
+      rewards: null,
+      currentEmployeeId: '1'
     };
   }
 
@@ -90,7 +93,9 @@ export default class Employee extends React.Component {
 
   //callback for Feedback to submit the feedback
   submitFeedback = feedbackObj => {
-    //make an API call to add the feebback to db
+    //add current employeeId to the feedback object (for the feedback history)
+    feedbackObj.employeeId = this.state.employeeId;
+    //make an API call to add the feedback to db
     console.log(feedbackObj, ' feedback was sent to db');
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
@@ -116,13 +121,10 @@ export default class Employee extends React.Component {
     case 'positive feedback':
       const feedbackDetails = feedbacks.find(feedback => feedback.id === id);
       return feedbackDetails.note;
-      break;
     case 'poll':
       return 'dummy poll';
-      break;
     case 'submitted feedback':
       return 'dummy submitted feedback';
-      break;
     default:
       return null;
     }
