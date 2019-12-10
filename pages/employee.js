@@ -79,7 +79,7 @@ export default class Employee extends React.Component {
       // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
       console.log(feedbackObj.subcategory, ' received 10 points');
     }
-    this.setState({ fuzzyNames: '' });
+    this.deleteFuzzyNames();
   };
 
   handleComponentView = view => {
@@ -93,6 +93,10 @@ export default class Employee extends React.Component {
     console.log(response.data);
     this.setState({ fuzzyNames: response.data });
   };
+
+  deleteFuzzyNames = () => {
+    this.setState({ fuzzyNames: '' });
+  }
 
   handleRewardDetails = (id, category) => {
     switch (category) {
@@ -117,6 +121,7 @@ export default class Employee extends React.Component {
           handleFuzzyNameSearch={this.handleFuzzyNameSearch}
           submitFeedback={this.submitFeedback}
           fuzzyNames={this.state.fuzzyNames}
+          deleteFuzzyNames={this.deleteFuzzyNames}
         />
       );
     case 'news':

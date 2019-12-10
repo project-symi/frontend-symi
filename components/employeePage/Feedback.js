@@ -50,7 +50,7 @@ export default class Feedback extends React.Component {
           input: { isShown: false, message: '' }
         }
       },
-      isPopupOpen: false
+      isPopupOpen: false,
     };
   }
 
@@ -110,7 +110,14 @@ export default class Feedback extends React.Component {
   searchEmployee = (event, value) => {
     //change input value to the employee id
     //TODO for version 2.0 write logic to add newsId depending on the category
-    this.setState({ input: value.employeeId, isPopupOpen: false });
+    if (this.state.isPopupOpen) {
+      this.setState({ input: value.employeeId, isPopupOpen: false });
+    } else {
+      console.log('hello', this.state.input);
+      //clear the input and re-render employee name input field
+      this.setState({ input: '' });
+      this.props.deleteFuzzyNames();
+    }
   };
 
   render() {
@@ -180,7 +187,7 @@ export default class Feedback extends React.Component {
                     onChange={this.handleEmployeeNameInput}
                   ></TextField>
                 ) : null}
-              {this.props.fuzzyNames.length > 0 ? (
+              {this.props.fuzzyNames ? (
                 <Autocomplete
                   options={this.props.fuzzyNames}
                   getOptionLabel={option => {
