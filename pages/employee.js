@@ -1,3 +1,4 @@
+//components
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Feedback from '../components/employeePage/Feedback';
@@ -7,6 +8,10 @@ import News from '../components/News';
 import Invites from '../components/Invites';
 import About from '../components/About';
 
+//utils
+import axios from 'axios';
+
+//styles
 import '../styles/Employee.css';
 
 //dummy data for fuzzy name input
@@ -81,14 +86,19 @@ export default class Employee extends React.Component {
       fuzzyNames: '',
       feedbacks: null,
       rewards: null,
-      currentEmployeeId: '1'
+      currentEmployeeId: 'X009999'
     };
   }
 
   componentDidMount() {
-    //make an API call to get all the feedbacks
+    //make an API call to get all the feedbacks made by this user
     //make another API call to get all points
-    this.setState({ feedbacks, rewards });
+    this.handleGetFeedbacks().then(() => this.setState({ rewards }, () => console.log(this.state.feedbacks)));
+  }
+
+  handleGetFeedbacks = async () => {
+    const response = await axios.get(`https://symi-be.herokuapp.com/feedbacks/${this.state.currentEmployeeId}`);
+    this.setState({ feedbacks: response.data });
   }
 
   //callback for Feedback to submit the feedback

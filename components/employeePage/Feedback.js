@@ -224,24 +224,20 @@ export default class Feedback extends React.Component {
           <span>Details ▾</span>
           <span className="status">Status ▾</span>
         </div>
-        {this.props.feedbacks.map((item, i) => {
+        {this.props.feedbacks.map((item) => {
           return (
-            <div key={i} className="feedback-history">
+            <div key={item.id} className="feedback-history">
               <span className="feedback">
-                <span> {item.dateAdded}</span>I feel {' ' + item.feeling + ' '}
+                <span> {item.dateAdded}</span>I feel {' ' + item.feeling.toLowerCase() + ' '}
                 about
-                {' ' + (item.about === 'Employee' ? item.name : item.category) + ' '}
+                {' ' + (item.category === 'Employee' ? item.name : item.category) + ' '}
                 because {item.note}.
               </span>{' '}
               <div className="status">
                 <div>
-                  {item.status === 'unseen' ? (
-                    <HighlightOffIcon style={{ color: 'red' }} />
-                  ) : (
-                    <CheckCircleOutlineIcon style={{ color: 'green' }} />
-                  )}
+                  {!item.status ? <HighlightOffIcon style={{ color: 'red' }} /> : <CheckCircleOutlineIcon style={{ color: 'green' }} />}
                 </div>
-                <div> {item.status}</div>
+                <div> {item.status ? 'Seen' : 'Unseen'}</div>
               </div>
             </div>
           );
