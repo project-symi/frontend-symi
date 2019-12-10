@@ -49,8 +49,9 @@ export default class SentimentOverall extends React.Component {
   };
 
   handleCellClick = (value) => {
-    //ask parent component to make API call and extract keywords and switch view to keywords
-    console.log(value);
+    //ask parent component to make an API call to get keywords and switch view to keywords
+    console.log(value.feeling);
+    this.props.handleGetKeywords(value.feeling);
   }
 
   render() {

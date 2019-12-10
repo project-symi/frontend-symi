@@ -33,3 +33,17 @@ const feedbacks = [
 ];
 
 
+// feedback sentiment by category dummy data
+const feedbacksByFeeling = [
+  { name: '😊', value: 40, feeling: 'good' },
+  { name: '😐', value: 30, feeling: 'meh' },
+  { name: '😞', value: 34, feeling: 'sad' }
+];
+
+//dummy data for fuzzy name input
+const employees = [
+  { name: 'Mini Meow', department: 'Marketing', employeeId: '1234' },
+  { name: 'Igor Dawg', department: 'HR', employeeId: '4321' },
+  { name: 'Yukio Lion', department: 'Engineering', employeeId: '2345' },
+  { name: 'Steffie Frog', department: 'Operations', employeeId: '6543' }
+];

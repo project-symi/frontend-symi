@@ -24,13 +24,6 @@ const topEmployees = [
   { name: 'Potato Fan', points: 300, employeeId: 5 }
 ];
 
-// feedback sentiment by category dummy data
-const feedbacksByFeeling = [
-  { name: '😊', value: 40, feeling: 'good' },
-  { name: '😐', value: 30, feeling: 'meh' },
-  { name: '😞', value: 34, feeling: 'sad' }
-];
-
 export default class Ceo extends React.Component {
   constructor() {
     super();
@@ -39,7 +32,7 @@ export default class Ceo extends React.Component {
       topEmployees: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
-      sadFeedBacks: null,
+      sadFeedbacks: null,
       feedbacksByFeelingRatio: null
     };
   }
@@ -81,7 +74,31 @@ export default class Ceo extends React.Component {
     //sad fb
     const responseSad = await axios.get('https://symi-be.herokuapp.com/feedbacks?feeling=sad');
     //create feedbacks ratio by feelings
-    this.setState({ feedbacksByFeelingRatio, goodFeedbacks: responseGood.data, mehFeedbacks: responseMeh.data, sadFeedBacks: responseSad.data });
+    this.setState({ feedbacksByFeelingRatio, goodFeedbacks: responseGood.data, mehFeedbacks: responseMeh.data, sadFeedbacks: responseSad.data });
+  }
+
+  handleGetKeywords = async (feeling) => {
+    let notes;
+    console.log(this.state.goodFeedbacks);
+    switch (feeling) {
+    case 'good':
+      notes = this.state.goodFeedbacks.map(feedback => feedback.note);
+      break;
+    case 'meh':
+      notes = this.state.mehFeedbacks.map(feedback => feedback.note);
+      break;
+    default:
+      notes = this.state.sadFeedbacks.map(feedback => feedback.note);
+      break;
+    }
+    console.log(notes);
+    const requestBody = {
+      'input_data': notes,
+      'input_type': 'text',
+      'N': 10
+      };
+    const response = await axios.post('https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords', requestBody, { headers: {'Content-Type': 'application/json', 'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com', 'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'} });
+    console.log(response.data.result);
   }
 
   //decide which component to render
@@ -99,7 +116,7 @@ export default class Ceo extends React.Component {
     case 'news':
       return <News />;
     case 'dashboard':
-      return <Dashboard handleSendInvitation={this.handleSendInvitation} topEmployees={this.state.topEmployees} overallSentiment={this.state.feedbacksByFeelingRatio} />;
+      return <Dashboard handleSendInvitation={this.handleSendInvitation} topEmployees={this.state.topEmployees} overallSentiment={this.state.feedbacksByFeelingRatio} feedbacksbyFeelings={[this.state.responseGood, this.state.responseMeh, this.state.responseSad]} handleGetKeywords={this.handleGetKeywords} />;
     case 'assignments':
       return <Assignments />;
     case 'polls':

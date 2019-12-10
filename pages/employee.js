@@ -14,14 +14,6 @@ import axios from 'axios';
 //styles
 import '../styles/Employee.css';
 
-//dummy data for fuzzy name input
-const employees = [
-  { name: 'Mini Meow', department: 'Marketing', employeeId: '1234' },
-  { name: 'Igor Dawg', department: 'HR', employeeId: '4321' },
-  { name: 'Yukio Lion', department: 'Engineering', employeeId: '2345' },
-  { name: 'Steffie Frog', department: 'Operations', employeeId: '6543' }
-];
-
 const rewards = [
   {
     points: 50,
