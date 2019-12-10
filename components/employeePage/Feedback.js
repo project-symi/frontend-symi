@@ -180,7 +180,7 @@ export default class Feedback extends React.Component {
                     onChange={this.handleEmployeeNameInput}
                   ></TextField>
                 ) : null}
-              {this.props.fuzzyNames.length > 1 ? (
+              {this.props.fuzzyNames.length > 0 ? (
                 <Autocomplete
                   options={this.props.fuzzyNames}
                   getOptionLabel={option => {

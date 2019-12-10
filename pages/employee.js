@@ -72,7 +72,6 @@ export default class Employee extends React.Component {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.employeeId;
     //make an API call to add the feedback to db
-    axios.post('https://symi-be.herokuapp.com/feedbacks/')
     console.log(feedbackObj, ' feedback was sent to db');
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
@@ -88,9 +87,11 @@ export default class Employee extends React.Component {
   };
 
   //callback for Feedback submit to get employee names
-  handleFuzzyNameSearch = string => {
+  handleFuzzyNameSearch = async (string) => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
-    this.setState({ fuzzyNames: employees });
+    const response = await axios.get(`https://symi-be.herokuapp.com/users?name=${string}`);
+    console.log(response.data);
+    this.setState({ fuzzyNames: response.data });
   };
 
   handleRewardDetails = (id, category) => {
