@@ -19,7 +19,7 @@ const dataset = {
     { name: 'Employees', value: 20 },
     { name: 'Other', value: 20 }
   ],
-  okay: [
+  meh: [
     { name: 'Work/Life Balance', value: 10 },
     { name: 'News', value: 30 },
     { name: 'Benefits', value: 30 },
@@ -29,7 +29,7 @@ const dataset = {
     { name: 'Employees', value: 20 },
     { name: 'Other', value: 20 }
   ],
-  meh: [
+  sad: [
     { name: 'Work/Life Balance', value: 20 },
     { name: 'News', value: 30 },
     { name: 'Benefits', value: 30 },
@@ -40,6 +40,7 @@ const dataset = {
     { name: 'Other', value: 20 }
   ]
 };
+
 
 export default class SentimentbyCategory extends React.Component {
   constructor() {
@@ -63,7 +64,7 @@ export default class SentimentbyCategory extends React.Component {
             fill="#3ED7BD"
           />
           <Pie
-            data={this.state.data.okay}
+            data={this.state.data.meh}
             dataKey="value"
             cx={140}
             cy={110}
@@ -72,7 +73,7 @@ export default class SentimentbyCategory extends React.Component {
             fill="#58AFC2"
           />
           <Pie
-            data={this.state.data.meh}
+            data={this.state.data.sad}
             dataKey="value"
             cx={140}
             cy={110}

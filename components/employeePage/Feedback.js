@@ -55,7 +55,6 @@ export default class Feedback extends React.Component {
 
   //make an API call to DB to get employees
   update = debounce(async () => {
-    console.log("I am getting fuzzy names");
     await this.props.handleFuzzyNameSearch(this.state.input);
     this.setState({ isPopupOpen: true });
   }, 1500);
@@ -66,7 +65,6 @@ export default class Feedback extends React.Component {
   };
 
   handleEmployeeNameInput = event => {
-    console.log("hello");
     this.setState({ input: event.target.value });
     this.update();
   };
@@ -100,9 +98,9 @@ export default class Feedback extends React.Component {
   handleFeelingInput = (event, value) => {
     let feeling = "";
     if (value === 0) {
-      feeling = "meh";
+      feeling = "sad";
     } else if (value === 50) {
-      feeling = "okay";
+      feeling = "meh";
     } else if (value === 100) {
       feeling = "good";
     }
@@ -257,7 +255,9 @@ export default class Feedback extends React.Component {
               <span className="feedback">
                 <span> {item.dateAdded}</span>I feel {" " + item.feeling + " "}
                 about
-                {" " + (item.input ? item.input : item.about) + " "}
+                {" " +
+                  (item.about === "Employee" ? item.name : item.category) +
+                  " "}
                 because {item.note}.
               </span>{" "}
               <div className="status">

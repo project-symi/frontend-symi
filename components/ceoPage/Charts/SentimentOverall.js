@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   ResponsiveContainer,
   PieChart,
@@ -7,18 +8,11 @@ import {
   Cell
 } from 'recharts';
 
-const dataset = [
-  { name: '😊', value: 40 },
-  { name: '😐', value: 30 },
-  { name: '😞', value: 34 }
-];
-
 export default class SentimentOverall extends React.Component {
   constructor() {
     super();
     this.state = {
-      colors: ['#3ED7BD', '#58AFC2', '#8884d8'],
-      data: dataset
+      colors: ['#3ED7BD', '#58AFC2', '#8884d8']
     };
   }
 
@@ -49,6 +43,11 @@ export default class SentimentOverall extends React.Component {
     );
   };
 
+  handleCellClick = (value) => {
+    //ask parent component to make API call and extract keywords and switch view to keywords
+    console.log(value);
+  }
+
   render() {
     return (
       <div className="data">
@@ -56,15 +55,16 @@ export default class SentimentOverall extends React.Component {
           <PieChart>
             <Pie
               dataKey="value"
-              data={this.state.data}
+              data={this.props.data}
               fill="#8884d8"
               labelLine={false}
               label={this.renderPercentageLabel}
             >
-              {this.state.data.map((entry, index) => (
+              {this.props.data.map((entry, index) => (
                 <Cell
                   key={index}
                   fill={this.state.colors[index % this.state.colors.length]}
+                  onClick={() => this.handleCellClick(entry)}
                 />
               ))}
             </Pie>
