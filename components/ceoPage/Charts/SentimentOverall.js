@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+
+//charts
 import {
   ResponsiveContainer,
   PieChart,
@@ -7,6 +9,9 @@ import {
   Tooltip,
   Cell
 } from 'recharts';
+
+//images
+import Loader from '../../../assets/loader_img.gif';
 
 export default class SentimentOverall extends React.Component {
   constructor() {
@@ -52,25 +57,28 @@ export default class SentimentOverall extends React.Component {
     return (
       <div className="data">
         <ResponsiveContainer>
-          <PieChart>
-            <Pie
-              dataKey="value"
-              data={this.props.data}
-              fill="#8884d8"
-              labelLine={false}
-              label={this.renderPercentageLabel}
-            >
-              {this.props.data.map((entry, index) => (
-                <Cell
-                  key={index}
-                  fill={this.state.colors[index % this.state.colors.length]}
-                  onClick={() => this.handleCellClick(entry)}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
+          {this.props.overallSentiment ?
+            <PieChart>
+              <Pie
+                dataKey="value"
+                data={this.props.overallSentiment}
+                fill="#8884d8"
+                labelLine={false}
+                label={this.renderPercentageLabel}
+              >
+                {this.props.overallSentiment.map((entry, index) => (
+                  <Cell
+                    key={index}
+                    fill={this.state.colors[index % this.state.colors.length]}
+                    onClick={() => this.handleCellClick(entry)}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+            : <img src={Loader}></img>
+          }
         </ResponsiveContainer>
       </div>
     );
