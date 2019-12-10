@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import '../styles/App.css';
+import Link from "next/link";
+import "../styles/App.css";
 
 const Dev = () => (
   <div id="dev">
@@ -7,14 +7,14 @@ const Dev = () => (
       <button>CEO</button>
     </Link>
     <Link href="/employee">
-      <button>Employee</button>
+      <button>Emp</button>
     </Link>
     <Link href="/admin">
       <button>Admin</button>
     </Link>
-    <Link href="/">
+    {/* <Link href="/">
       <button>Login</button>
-    </Link>
+    </Link> */}
   </div>
 );
 

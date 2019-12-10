@@ -1,19 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 //components
-import Sidebar from '../components/Sidebar';
-import Navbar from '../components/Navbar';
-import Dashboard from '../components/ceoPage/Dashboard';
-import Assignments from '../components/Assignments';
-import Polls from '../components/Polls';
-import News from '../components/News';
-import Invites from '../components/Invites';
-import About from '../components/About';
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import Dashboard from "../components/ceoPage/Dashboard";
+import Assignments from "../components/Assignments";
+import Polls from "../components/Polls";
+import News from "../components/News";
+import Invites from "../components/Invites";
+import About from "../components/About";
 
 //styles
-import '../styles/CEO.css';
+import "../styles/CEO.css";
 
 //utils
-import axios from 'axios';
+import axios from "axios";
 
 //top employees dummy data (for now)
 const topEmployees = [{
@@ -47,12 +47,13 @@ export default class Ceo extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentlyShown: 'dashboard',
+      currentlyShown: "dashboard",
       topEmployees: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
       sadFeedbacks: null,
-      feedbacksByFeelingRatio: null
+      feedbacksByFeelingRatio: null,
+      userType: "CEO"
     };
   }
 
@@ -67,44 +68,42 @@ export default class Ceo extends React.Component {
 
   getFeedbacks = async () => {
     //all fbs
-    const response = await axios.get('https://symi-be.herokuapp.com/feedbacks');
+    const response = await axios.get("https://symi-be.herokuapp.com/feedbacks");
     //change data to format applicable by overall centiment chart
-    const feedbacksByFeelingRatio = response.data.reduce((acc, feedback) => {
-      switch (feedback.feeling) {
-        case 'good':
-          acc[0].value++;
-          break;
-        case 'meh':
-          acc[1].value++;
-          break;
-        default:
-          acc[2].value++;
-          break;
-      };
-      return acc;
-    }, [{
-        name: '😊',
-        value: 0,
-        feeling: 'good'
+    const feedbacksByFeelingRatio = response.data.reduce(
+      (acc, feedback) => {
+        switch (feedback.feeling) {
+          case "good":
+            acc[0].value++;
+            break;
+          case "meh":
+            acc[1].value++;
+            break;
+          default:
+            acc[2].value++;
+            break;
+        }
+        return acc;
       },
-      {
-        name: '😐',
-        value: 0,
-        feeling: 'meh'
-      },
-      {
-        name: '😞',
-        value: 0,
-        feeling: 'sad'
-      }
-    ]);
+      [
+        { name: "😊", value: 0, feeling: "good" },
+        { name: "😐", value: 0, feeling: "meh" },
+        { name: "😞", value: 0, feeling: "sad" }
+      ]
+    );
     console.log(feedbacksByFeelingRatio);
     //good fb
-    const responseGood = await axios.get('https://symi-be.herokuapp.com/feedbacks?feeling=good');
+    const responseGood = await axios.get(
+      "https://symi-be.herokuapp.com/feedbacks?feeling=good"
+    );
     //meh fb
-    const responseMeh = await axios.get('https://symi-be.herokuapp.com/feedbacks?feeling=meh');
+    const responseMeh = await axios.get(
+      "https://symi-be.herokuapp.com/feedbacks?feeling=meh"
+    );
     //sad fb
-    const responseSad = await axios.get('https://symi-be.herokuapp.com/feedbacks?feeling=sad');
+    const responseSad = await axios.get(
+      "https://symi-be.herokuapp.com/feedbacks?feeling=sad"
+    );
     //create feedbacks ratio by feelings
     this.setState({
       feedbacksByFeelingRatio,
@@ -112,9 +111,9 @@ export default class Ceo extends React.Component {
       mehFeedbacks: responseMeh.data,
       sadFeedbacks: responseSad.data
     });
-  }
+  };
 
-  handleGetKeywords = async (feeling) => {
+  handleGetKeywords = async feeling => {
     let notes;
     console.log(this.state.goodFeedbacks);
     switch (feeling) {
@@ -130,19 +129,23 @@ export default class Ceo extends React.Component {
     }
     console.log(notes);
     const requestBody = {
-      'input_data': notes,
-      'input_type': 'text',
-      'N': 10
+      input_data: notes,
+      input_type: "text",
+      N: 10
     };
-    const response = await axios.post('https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords', requestBody, {
-      headers: {
-        'Content-Type': 'application/json',
-        'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
-        'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'
+    const response = await axios.post(
+      "https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords",
+      requestBody,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-rapidapi-host": "unfound-keywords-extraction-v1.p.rapidapi.com",
+          "x-rapidapi-key": "0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634"
+        }
       }
-    });
+    );
     console.log(response.data.result);
-  }
+  };
 
   //decide which component to render
   handleComponentView = view => {
@@ -153,7 +156,7 @@ export default class Ceo extends React.Component {
 
   handleSendInvitation = invitationObj => {
     //make an API call to create an invitation
-    console.log(invitationObj, ' invitation was sent');
+    console.log(invitationObj, " invitation was sent");
   };
 
   renderSwitchView = param => {
@@ -192,34 +195,19 @@ export default class Ceo extends React.Component {
   };
 
   render() {
-    return ( <
-      div className = "layout" >
-      <
-      Navbar / >
-      <
-      Sidebar news = {
-        true
-      }
-      assignments = {
-        true
-      }
-      polls = {
-        true
-      }
-      dashboard = {
-        true
-      }
-      invites = {
-        true
-      }
-      handleComponentView = {
-        this.handleComponentView
-      }
-      /> <
-      div id = "page" > {
-        this.renderSwitchView(this.state.currentlyShown)
-      } < /div> <
-      /div>
+    return (
+      <div className="layout">
+        <Navbar userType={this.state.userType} />
+        <Sidebar
+          news={true}
+          assignments={true}
+          polls={true}
+          dashboard={true}
+          invites={true}
+          handleComponentView={this.handleComponentView}
+        />
+        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
+      </div>
     );
   }
 }
