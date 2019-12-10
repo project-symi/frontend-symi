@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Feedback from '../components/employeePage/Feedback';
 import Rewards from '../components/employeePage/Rewards';
@@ -163,7 +163,8 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <div className="layout">
+        <Navbar />
         <Sidebar
           news={true}
           feedback={true}
@@ -173,7 +174,7 @@ export default class Employee extends React.Component {
           handleComponentView={this.handleComponentView}
         />
         <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </Layout>
+      </div>
     );
   }
 }

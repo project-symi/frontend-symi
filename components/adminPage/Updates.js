@@ -1,6 +1,6 @@
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button } from '@material-ui/core';
 
-import News from "../News";
+import News from '../News';
 
 const Updates = () => (
   <div>
@@ -10,7 +10,6 @@ const Updates = () => (
       className="employees-container"
       className="add-news-container"
     >
-      {" "}
       <TextField size="small" name="title" label="Title" variant="outlined" />
       <TextField
         size="small"

@@ -67,6 +67,17 @@
   margin-right: 5px;
 }
 
+/* HIDE DEPENDING ON USER */
+
+.delete {
+  display: none;
+}
+
+.submit-feedback-button {
+  display: inline !important;
+}
+
+
 @media screen and (max-width: 480px) {
   .data {
     width: 260px;

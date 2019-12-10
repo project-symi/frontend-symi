@@ -1,5 +1,7 @@
 import { Button } from '@material-ui/core';
 
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
 export default class News extends React.Component {
   constructor() {
     super();
@@ -32,13 +34,20 @@ export default class News extends React.Component {
             return (
               <div key={i} className="news-container">
                 <img className="news-img" src={item.photo}></img>
+                <div className="delete">
+                  <DeleteForeverIcon
+                    style={{ color: 'red' }}
+                  ></DeleteForeverIcon>
+                </div>
                 <div className="news-desc">
                   {item.date}
                   <h2>{item.title}</h2>
                   <h4>{item.description}</h4>
-                  <Button variant="contained" color="primary">
-                    SUBMIT FEEDBACK
-                  </Button>
+                  <div className="submit-feedback-button">
+                    <Button variant="contained" color="primary">
+                      SUBMIT FEEDBACK
+                    </Button>
+                  </div>
                 </div>
               </div>
             );
