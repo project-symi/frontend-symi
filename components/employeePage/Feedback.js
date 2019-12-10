@@ -10,12 +10,15 @@ import {
   FormControl,
   FormHelperText
 } from '@material-ui/core';
-
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 //util functions
 import { feedbackValidation, debounce } from '../../utils/utils';
+import moment from 'moment';
+
+//images
+import Loader from '../../assets/loader_img.gif';
 
 //feelings data
 const feelings = [
@@ -38,7 +41,7 @@ export default class Feedback extends React.Component {
       about: '',
       input: '',
       note: '',
-      status: 'unseen',
+      status: false,
       feedbackValidation: {
         result: false,
         errors: {
@@ -47,7 +50,7 @@ export default class Feedback extends React.Component {
           input: { isShown: false, message: '' }
         }
       },
-      isPopupOpen: false
+      isPopupOpen: false,
     };
   }
 
@@ -85,9 +88,8 @@ export default class Feedback extends React.Component {
         category: this.state.about,
         note: this.state.note,
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
-        newsId: this.state.about === 'News' ? this.state.input : ''
+        newsId: this.state.about === 'News' ? this.state.input : 0
       };
-      console.log(feedback);
       this.props.submitFeedback(feedback);
       this.setState({ about: '', note: '', input: '' });
     }
@@ -108,7 +110,14 @@ export default class Feedback extends React.Component {
   searchEmployee = (event, value) => {
     //change input value to the employee id
     //TODO for version 2.0 write logic to add newsId depending on the category
-    this.setState({ input: value.employeeId, isPopupOpen: false });
+    if (this.state.isPopupOpen) {
+      this.setState({ input: value.employeeId, isPopupOpen: false });
+    } else {
+      console.log('hello', this.state.input);
+      //clear the input and re-render employee name input field
+      this.setState({ input: '' });
+      this.props.deleteFuzzyNames();
+    }
   };
 
   render() {
@@ -178,7 +187,7 @@ export default class Feedback extends React.Component {
                     onChange={this.handleEmployeeNameInput}
                   ></TextField>
                 ) : null}
-              {this.props.fuzzyNames.length > 1 ? (
+              {this.props.fuzzyNames ? (
                 <Autocomplete
                   options={this.props.fuzzyNames}
                   getOptionLabel={option => {
@@ -224,28 +233,24 @@ export default class Feedback extends React.Component {
           <span>Details ▾</span>
           <span className="status">Status ▾</span>
         </div>
-        {this.props.feedbacks.map((item, i) => {
+        {this.props.feedbacks ? this.props.feedbacks.map((item) => {
           return (
-            <div key={i} className="feedback-history">
+            <div key={item.id} className="feedback-history">
               <span className="feedback">
-                <span> {item.dateAdded}</span>I feel {' ' + item.feeling + ' '}
+                <span> {moment(item.dateAdded).format('ddd, hA')}</span>I feel {' ' + item.feeling.toLowerCase() + ' '}
                 about
-                {' ' + (item.about === 'Employee' ? item.name : item.category) + ' '}
+                {' ' + (item.category === 'Employee' ? item.name : item.category) + ' '}
                 because {item.note}.
               </span>{' '}
               <div className="status">
                 <div>
-                  {item.status === 'unseen' ? (
-                    <HighlightOffIcon style={{ color: 'red' }} />
-                  ) : (
-                    <CheckCircleOutlineIcon style={{ color: 'green' }} />
-                  )}
+                  {!item.status ? <HighlightOffIcon style={{ color: 'red' }} /> : <CheckCircleOutlineIcon style={{ color: 'green' }} />}
                 </div>
-                <div> {item.status}</div>
+                <div> {item.status ? 'Seen' : 'Unseen'}</div>
               </div>
             </div>
           );
-        })}
+        }) : <img src={Loader}></img>}
       </div>
     );
   }

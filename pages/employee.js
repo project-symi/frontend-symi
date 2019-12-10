@@ -1,3 +1,4 @@
+//components
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Feedback from '../components/employeePage/Feedback';
@@ -7,49 +8,11 @@ import News from '../components/News';
 import Invites from '../components/Invites';
 import About from '../components/About';
 
+//utils
+import axios from 'axios';
+
+//styles
 import '../styles/Employee.css';
-
-//dummy data for fuzzy name input
-const employees = [
-  { name: 'Mini Meow', department: 'Marketing', employeeId: '1234' },
-  { name: 'Igor Dawg', department: 'HR', employeeId: '4321' },
-  { name: 'Yukio Lion', department: 'Engineering', employeeId: '2345' },
-  { name: 'Steffie Frog', department: 'Operations', employeeId: '6543' }
-];
-
-// FEEDBACK HISTORY
-const feedbacks = [
-  {
-    feeling: 'good',
-    category: 'Employee',
-    name: 'Yuki',
-    note: 'he\'s super helpful and a hardworker',
-    dateAdded: '12/15/2009',
-    points: 10,
-    status: 'unseen',
-    id: '1111'
-  },
-  {
-    feeling: 'meh',
-    category: 'Benefits',
-    note: 'there\'s no gym memebership',
-    dateAdded: '12/15/2009',
-    points: 10,
-    status: 'unseen',
-    id: '2222',
-    name: ''
-  },
-  {
-    feeling: 'sad',
-    category: 'Holidays',
-    note: 'I don\'t have Hanukkah off...',
-    dateAdded: '12/15/2009',
-    points: 10,
-    status: 'seen',
-    id: '3333',
-    name: ''
-  }
-];
 
 const rewards = [
   {
@@ -81,29 +44,35 @@ export default class Employee extends React.Component {
       fuzzyNames: '',
       feedbacks: null,
       rewards: null,
-      currentEmployeeId: '1'
+      employeeId: 'X009999'
     };
   }
 
   componentDidMount() {
-    //make an API call to get all the feedbacks
+    //make an API call to get all the feedbacks made by this user
+    this.handleGetFeedbacks().then(() => this.setState({ rewards }, () => console.log(this.state.feedbacks)));
     //make another API call to get all points
-    this.setState({ feedbacks, rewards });
+  }
+
+  //API call to get all feedbacks for the user
+  handleGetFeedbacks = async () => {
+    const response = await axios.get(`https://symi-be.herokuapp.com/feedbacks/${this.state.employeeId}`);
+    this.setState({ feedbacks: response.data });
   }
 
   //callback for Feedback to submit the feedback
-  submitFeedback = feedbackObj => {
+  submitFeedback = async (feedbackObj) => {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.employeeId;
-    //make an API call to add the feedback to db
-    console.log(feedbackObj, ' feedback was sent to db');
+    //make an API call to add the feedback to the db
+    await axios.post('https://symi-be.herokuapp.com/feedbacks', feedbackObj);
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
       //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
       // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
       console.log(feedbackObj.subcategory, ' received 10 points');
     }
-    this.setState({ fuzzyNames: '' });
+    this.deleteFuzzyNames();
   };
 
   handleComponentView = view => {
@@ -111,10 +80,16 @@ export default class Employee extends React.Component {
   };
 
   //callback for Feedback submit to get employee names
-  handleFuzzyNameSearch = string => {
+  handleFuzzyNameSearch = async (string) => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
-    this.setState({ fuzzyNames: employees });
+    const response = await axios.get(`https://symi-be.herokuapp.com/users?name=${string}`);
+    console.log(response.data);
+    this.setState({ fuzzyNames: response.data });
   };
+
+  deleteFuzzyNames = () => {
+    this.setState({ fuzzyNames: '' });
+  }
 
   handleRewardDetails = (id, category) => {
     switch (category) {
@@ -139,6 +114,7 @@ export default class Employee extends React.Component {
           handleFuzzyNameSearch={this.handleFuzzyNameSearch}
           submitFeedback={this.submitFeedback}
           fuzzyNames={this.state.fuzzyNames}
+          deleteFuzzyNames={this.deleteFuzzyNames}
         />
       );
     case 'news':
