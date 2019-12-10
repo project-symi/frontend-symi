@@ -22,13 +22,11 @@ const feedbacks = [
   {
     feeling: 'good',
     category: 'Employee',
-    recipientId: '123',
+    name: 'Yuki',
     note: 'he\'s super helpful and a hardworker',
     dateAdded: '12/15/2009',
     points: 10,
-    newsId: '',
     status: 'unseen',
-    employeeId: '2222',
     id: '1111'
   },
   {
@@ -39,9 +37,7 @@ const feedbacks = [
     points: 10,
     status: 'unseen',
     id: '2222',
-    recipientId: '',
-    employeeId: '2222',
-    newsId: ''
+    name: ''
   },
   {
     feeling: 'sad',
@@ -51,9 +47,7 @@ const feedbacks = [
     points: 10,
     status: 'seen',
     id: '3333',
-    recipientId: '',
-    employeeId: '2222',
-    newsId: ''
+    name: ''
   }
 ];
 

@@ -230,7 +230,7 @@ export default class Feedback extends React.Component {
               <span className="feedback">
                 <span> {item.dateAdded}</span>I feel {' ' + item.feeling + ' '}
                 about
-                {' ' + (item.input ? item.input : item.about) + ' '}
+                {' ' + (item.about === 'Employee' ? item.name : item.category) + ' '}
                 because {item.note}.
               </span>{' '}
               <div className="status">
