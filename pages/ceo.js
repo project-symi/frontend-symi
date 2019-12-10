@@ -16,14 +16,31 @@ import "../styles/CEO.css";
 import axios from "axios";
 
 //top employees dummy data (for now)
-const topEmployees = [
-  { name: "Igor Dawg", points: 1000, employeeId: 3 },
-  { name: "Mini Meow", points: 400, employeeId: 1 },
-  { name: "Yukio Lion", points: 100, employeeId: 2 },
-  { name: "Steffie Frog", points: 150, employeeId: 4 },
-  { name: "Potato Fan", points: 300, employeeId: 5 },
-  { name: "Nao Babe", points: 300, employeeId: 5 },
-  { name: "Cat Snake", points: 100, employeeId: 5 }
+const topEmployees = [{
+    name: 'Igor Dawg',
+    points: 500,
+    employeeId: 3
+  },
+  {
+    name: 'Mini Meow',
+    points: 400,
+    employeeId: 1
+  },
+  {
+    name: 'Yukio Lion',
+    points: 100,
+    employeeId: 2
+  },
+  {
+    name: 'Steffie Frog',
+    points: 150,
+    employeeId: 4
+  },
+  {
+    name: 'Potato Fan',
+    points: 300,
+    employeeId: 5
+  }
 ];
 
 export default class Ceo extends React.Component {
@@ -44,7 +61,9 @@ export default class Ceo extends React.Component {
     //make an API call to db to get top employees data for dashboard
     //make an API call to get all feedbacks
     this.getFeedbacks();
-    this.setState({ topEmployees });
+    this.setState({
+      topEmployees
+    });
   }
 
   getFeedbacks = async () => {
@@ -98,10 +117,10 @@ export default class Ceo extends React.Component {
     let notes;
     console.log(this.state.goodFeedbacks);
     switch (feeling) {
-      case "good":
+      case 'good':
         notes = this.state.goodFeedbacks.map(feedback => feedback.note);
         break;
-      case "meh":
+      case 'meh':
         notes = this.state.mehFeedbacks.map(feedback => feedback.note);
         break;
       default:
@@ -130,7 +149,9 @@ export default class Ceo extends React.Component {
 
   //decide which component to render
   handleComponentView = view => {
-    this.setState({ currentlyShown: view });
+    this.setState({
+      currentlyShown: view
+    });
   };
 
   handleSendInvitation = invitationObj => {
@@ -140,30 +161,34 @@ export default class Ceo extends React.Component {
 
   renderSwitchView = param => {
     switch (param) {
-      case "news":
-        return <News />;
-      case "dashboard":
-        return (
-          <Dashboard
-            handleSendInvitation={this.handleSendInvitation}
-            topEmployees={this.state.topEmployees}
-            overallSentiment={this.state.feedbacksByFeelingRatio}
-            feedbacksbyFeelings={[
-              this.state.responseGood,
-              this.state.responseMeh,
-              this.state.responseSad
-            ]}
-            handleGetKeywords={this.handleGetKeywords}
-          />
-        );
-      case "assignments":
-        return <Assignments />;
-      case "polls":
-        return <Polls />;
-      case "invites":
-        return <Invites />;
-      case "about":
-        return <About />;
+      case 'news':
+        return <News / > ;
+      case 'dashboard':
+        return <Dashboard
+        handleSendInvitation = {
+          this.handleSendInvitation
+        }
+        topEmployees = {
+          this.state.topEmployees
+        }
+        overallSentiment = {
+          this.state.feedbacksByFeelingRatio
+        }
+        feedbacksbyFeelings = {
+          [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
+        }
+        handleGetKeywords = {
+          this.handleGetKeywords
+        }
+        />;
+      case 'assignments':
+        return <Assignments / > ;
+      case 'polls':
+        return <Polls / > ;
+      case 'invites':
+        return <Invites / > ;
+      case 'about':
+        return <About / > ;
       default:
         null;
     }
