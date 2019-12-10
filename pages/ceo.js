@@ -1,59 +1,59 @@
 /* eslint-disable react/no-unescaped-entities */
 //components
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import Dashboard from "../components/ceoPage/Dashboard";
-import Assignments from "../components/Assignments";
-import Polls from "../components/Polls";
-import News from "../components/News";
-import Invites from "../components/Invites";
-import About from "../components/About";
+import Sidebar from '../components/Sidebar';
+import Navbar from '../components/Navbar';
+import Dashboard from '../components/ceoPage/Dashboard';
+import Assignments from '../components/Assignments';
+import Polls from '../components/Polls';
+import News from '../components/News';
+import Invites from '../components/Invites';
+import About from '../components/About';
 
 //styles
-import "../styles/CEO.css";
+import '../styles/CEO.css';
 
 //utils
-import axios from "axios";
+import axios from 'axios';
 
 //top employees dummy data (for now)
 const topEmployees = [{
-    name: 'Igor Dawg',
-    points: 500,
-    employeeId: 3
-  },
-  {
-    name: 'Mini Meow',
-    points: 400,
-    employeeId: 1
-  },
-  {
-    name: 'Yukio Lion',
-    points: 100,
-    employeeId: 2
-  },
-  {
-    name: 'Steffie Frog',
-    points: 150,
-    employeeId: 4
-  },
-  {
-    name: 'Potato Fan',
-    points: 300,
-    employeeId: 5
-  }
+  name: 'Igor Dawg',
+  points: 500,
+  employeeId: 3
+},
+{
+  name: 'Mini Meow',
+  points: 400,
+  employeeId: 1
+},
+{
+  name: 'Yukio Lion',
+  points: 100,
+  employeeId: 2
+},
+{
+  name: 'Steffie Frog',
+  points: 150,
+  employeeId: 4
+},
+{
+  name: 'Potato Fan',
+  points: 300,
+  employeeId: 5
+}
 ];
 
 export default class Ceo extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentlyShown: "dashboard",
+      currentlyShown: 'dashboard',
       topEmployees: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
       sadFeedbacks: null,
       feedbacksByFeelingRatio: null,
-      userType: "CEO"
+      userType: 'CEO'
     };
   }
 
@@ -68,41 +68,41 @@ export default class Ceo extends React.Component {
 
   getFeedbacks = async () => {
     //all fbs
-    const response = await axios.get("https://symi-be.herokuapp.com/feedbacks");
+    const response = await axios.get('https://symi-be.herokuapp.com/feedbacks');
     //change data to format applicable by overall centiment chart
     const feedbacksByFeelingRatio = response.data.reduce(
       (acc, feedback) => {
         switch (feedback.feeling) {
-          case "good":
-            acc[0].value++;
-            break;
-          case "meh":
-            acc[1].value++;
-            break;
-          default:
-            acc[2].value++;
-            break;
+        case 'good':
+          acc[0].value++;
+          break;
+        case 'meh':
+          acc[1].value++;
+          break;
+        default:
+          acc[2].value++;
+          break;
         }
         return acc;
       },
       [
-        { name: "😊", value: 0, feeling: "good" },
-        { name: "😐", value: 0, feeling: "meh" },
-        { name: "😞", value: 0, feeling: "sad" }
+        { name: '😊', value: 0, feeling: 'good' },
+        { name: '😐', value: 0, feeling: 'meh' },
+        { name: '😞', value: 0, feeling: 'sad' }
       ]
     );
     console.log(feedbacksByFeelingRatio);
     //good fb
     const responseGood = await axios.get(
-      "https://symi-be.herokuapp.com/feedbacks?feeling=good"
+      'https://symi-be.herokuapp.com/feedbacks?feeling=good'
     );
     //meh fb
     const responseMeh = await axios.get(
-      "https://symi-be.herokuapp.com/feedbacks?feeling=meh"
+      'https://symi-be.herokuapp.com/feedbacks?feeling=meh'
     );
     //sad fb
     const responseSad = await axios.get(
-      "https://symi-be.herokuapp.com/feedbacks?feeling=sad"
+      'https://symi-be.herokuapp.com/feedbacks?feeling=sad'
     );
     //create feedbacks ratio by feelings
     this.setState({
@@ -117,30 +117,30 @@ export default class Ceo extends React.Component {
     let notes;
     console.log(this.state.goodFeedbacks);
     switch (feeling) {
-      case 'good':
-        notes = this.state.goodFeedbacks.map(feedback => feedback.note);
-        break;
-      case 'meh':
-        notes = this.state.mehFeedbacks.map(feedback => feedback.note);
-        break;
-      default:
-        notes = this.state.sadFeedbacks.map(feedback => feedback.note);
-        break;
+    case 'good':
+      notes = this.state.goodFeedbacks.map(feedback => feedback.note);
+      break;
+    case 'meh':
+      notes = this.state.mehFeedbacks.map(feedback => feedback.note);
+      break;
+    default:
+      notes = this.state.sadFeedbacks.map(feedback => feedback.note);
+      break;
     }
     console.log(notes);
     const requestBody = {
       input_data: notes,
-      input_type: "text",
+      input_type: 'text',
       N: 10
     };
     const response = await axios.post(
-      "https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords",
+      'https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords',
       requestBody,
       {
         headers: {
-          "Content-Type": "application/json",
-          "x-rapidapi-host": "unfound-keywords-extraction-v1.p.rapidapi.com",
-          "x-rapidapi-key": "0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634"
+          'Content-Type': 'application/json',
+          'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
+          'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'
         }
       }
     );
@@ -156,15 +156,15 @@ export default class Ceo extends React.Component {
 
   handleSendInvitation = invitationObj => {
     //make an API call to create an invitation
-    console.log(invitationObj, " invitation was sent");
+    console.log(invitationObj, ' invitation was sent');
   };
 
   renderSwitchView = param => {
     switch (param) {
-      case 'news':
-        return <News / > ;
-      case 'dashboard':
-        return <Dashboard
+    case 'news':
+      return <News / > ;
+    case 'dashboard':
+      return <Dashboard
         handleSendInvitation = {
           this.handleSendInvitation
         }
@@ -180,17 +180,17 @@ export default class Ceo extends React.Component {
         handleGetKeywords = {
           this.handleGetKeywords
         }
-        />;
-      case 'assignments':
-        return <Assignments / > ;
-      case 'polls':
-        return <Polls / > ;
-      case 'invites':
-        return <Invites / > ;
-      case 'about':
-        return <About / > ;
-      default:
-        null;
+      />;
+    case 'assignments':
+      return <Assignments / > ;
+    case 'polls':
+      return <Polls / > ;
+    case 'invites':
+      return <Invites / > ;
+    case 'about':
+      return <About / > ;
+    default:
+      null;
     }
   };
 
