@@ -10,15 +10,15 @@ export default class Assignments extends React.Component {
       assignments: [
         {
           task:
-            "It seems like bringing TimTams for the Engineering team really brightened their day. Let's order more!",
-          assigned: "Mini",
-          status: "complete"
+            'It seems like bringing TimTams for the Engineering team really brightened their day. Let\'s order more!',
+          assigned: 'Mini',
+          status: 'complete'
         },
         {
           task:
-            "Can you start a discussion to make a bring your dog to work day?",
-          assigned: "Steffie",
-          status: "incomplete"
+            'Can you start a discussion to make a bring your dog to work day?',
+          assigned: 'Steffie',
+          status: 'incomplete'
         }
       ]
     };
@@ -30,7 +30,7 @@ export default class Assignments extends React.Component {
         <p className="title">Assignments</p>
 
         <div className="assignments-sub">
-          <span>Details ▾</span> <span className="assigned-to">Assigned ▾</span>
+          <span>Details ▾</span> <span className="assigned-to">Assigned ▾</span>{" "}
           <span className="status">Status ▾</span>
         </div>
         {this.state.assignments.map((item, i) => {

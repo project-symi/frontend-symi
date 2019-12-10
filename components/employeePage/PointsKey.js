@@ -73,7 +73,6 @@ export default function PointsKey() {
           </TableBody>
         </Table>
       </Paper>
-      <div className={classes.prize}>⭐500 = $50 Amazon Gift Card</div>
     </div>
   );
 }
