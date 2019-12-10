@@ -41,7 +41,7 @@ export default class Feedback extends React.Component {
       about: '',
       input: '',
       note: '',
-      status: 'unseen',
+      status: false,
       feedbackValidation: {
         result: false,
         errors: {
@@ -88,7 +88,7 @@ export default class Feedback extends React.Component {
         category: this.state.about,
         note: this.state.note,
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
-        newsId: this.state.about === 'News' ? this.state.input : ''
+        newsId: this.state.about === 'News' ? this.state.input : 0
       };
       this.props.submitFeedback(feedback);
       this.setState({ about: '', note: '', input: '' });

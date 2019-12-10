@@ -58,10 +58,11 @@ export default class Employee extends React.Component {
 
   componentDidMount() {
     //make an API call to get all the feedbacks made by this user
-    //make another API call to get all points
     this.handleGetFeedbacks().then(() => this.setState({ rewards }, () => console.log(this.state.feedbacks)));
+    //make another API call to get all points
   }
 
+  //API call to get all feedbacks for the user
   handleGetFeedbacks = async () => {
     const response = await axios.get(`https://symi-be.herokuapp.com/feedbacks/${this.state.currentEmployeeId}`);
     this.setState({ feedbacks: response.data });
