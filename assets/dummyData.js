@@ -46,24 +46,3 @@ const employees = [
   { name: "Yukio Lion", department: "Engineering", employeeId: "2345" },
   { name: "Steffie Frog", department: "Operations", employeeId: "6543" }
 ];
-
-const rewards = [
-  {
-    points: 50,
-    category: "positive feedback",
-    dateAdded: "01/12/2019",
-    correspondentId: "1111"
-  },
-  {
-    points: 5,
-    category: "poll",
-    dateAdded: "02/12/2019",
-    correspondentId: "6"
-  },
-  {
-    points: 10,
-    category: "submitted feedback",
-    dateAdded: "04/12/2019",
-    correspondentId: "2222"
-  }
-];

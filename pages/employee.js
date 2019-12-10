@@ -21,7 +21,7 @@ export default class Employee extends React.Component {
     super();
     this.state = {
       isDefaultView: true,
-      currentlyShown: "news",
+      currentlyShown: "feedback",
       fuzzyNames: "",
       feedbacks: null,
       rewards: [
