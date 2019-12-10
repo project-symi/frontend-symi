@@ -72,8 +72,8 @@ export default class Employee extends React.Component {
   submitFeedback = async (feedbackObj) => {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.employeeId;
-    //make an API call to add the feedback to db
-    console.log(feedbackObj, ' feedback was sent to db');
+    //make an API call to add the feedback to the db
+    await axios.post('https://symi-be.herokuapp.com/feedbacks', feedbackObj);
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
       //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
