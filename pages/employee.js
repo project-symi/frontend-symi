@@ -64,7 +64,7 @@ export default class Employee extends React.Component {
 
   //API call to get all feedbacks for the user
   handleGetFeedbacks = async () => {
-    const response = await axios.get(`https://symi-be.herokuapp.com/feedbacks/${this.state.currentEmployeeId}`);
+    const response = await axios.get(`https://symi-be.herokuapp.com/feedbacks/${this.state.employeeId}`);
     this.setState({ feedbacks: response.data });
   }
 
@@ -73,6 +73,7 @@ export default class Employee extends React.Component {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.employeeId;
     //make an API call to add the feedback to db
+    await axios.post('https://symi-be.herokuapp.com/feedbacks/', feedbackObj);
     console.log(feedbackObj, ' feedback was sent to db');
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
