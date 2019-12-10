@@ -123,9 +123,8 @@ export default class Feedback extends React.Component {
     return (
       <div>
         {/* //////////// SUBMIT FEEDBACK SECTION */}
-
         <p className="title">Submit Feedback</p>
-        <form className="feedback-container">
+        <form className="feedback">
           {/* FEELING SLIDER */}
           <div className="about-line">
             <div className="feedback-text">I FEEL</div>
@@ -228,7 +227,10 @@ export default class Feedback extends React.Component {
           </Button>
         </form>
 
-        <div className="feedback-container">
+        {/* 
+        ///// POINTS KEY */}
+
+        <div className="feedback">
           <PointsKey />
         </div>
 
