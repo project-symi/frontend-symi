@@ -16,7 +16,7 @@ export default class Admin extends React.Component {
       addedEmployee: null,
       isDefaultView: true,
       currentlyShown: "assignments",
-      user: "ADMIN"
+      userType: "Admin"
     };
   }
 
@@ -52,7 +52,7 @@ export default class Admin extends React.Component {
   render() {
     return (
       <div className="layout">
-        <Navbar userPermission={this.state.user} />
+        <Navbar userPermission={this.state.userType} />
         <Sidebar
           employeeInput={true}
           updates={true}

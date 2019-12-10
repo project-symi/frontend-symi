@@ -20,7 +20,7 @@ export default class Navbar extends React.Component {
         </Button> */}
         <div id="user">
           <PersonIcon color="primary"></PersonIcon>
-          <div>{this.props.userPermission}</div>
+          <div>{this.props.userType}</div>
         </div>
       </div>
     );
