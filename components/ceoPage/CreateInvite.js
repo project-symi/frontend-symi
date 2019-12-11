@@ -29,7 +29,7 @@ const styles = theme => ({
     }
   },
   button: {
-    margin: '10px',
+    margin: '10px'
   },
   fields: {
     margin: 'auto'
@@ -47,11 +47,16 @@ class CreateInvitation extends React.Component {
     };
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     //change state and don't forget to get rid of error message
-    if (e.target.name === 'comments') return this.setState({ comments: e.target.value, commentsError: false });
-    if (e.target.name === 'invitationDate') return this.setState({ invitationDate: e.target.value, invitationDateError: false });
-  }
+    if (e.target.name === 'comments')
+      return this.setState({ comments: e.target.value, commentsError: false });
+    if (e.target.name === 'invitationDate')
+      return this.setState({
+        invitationDate: e.target.value,
+        invitationDateError: false
+      });
+  };
 
   //cancel button clicked, switch view back to the dashboard
   handleCancelInvitation = () => {
@@ -62,11 +67,15 @@ class CreateInvitation extends React.Component {
   handleSendInvitation = () => {
     //check whether comments and date was inputted
     if (!this.state.comments) this.setState({ commentsError: true });
-    if (!this.state.invitationDate) return this.setState({ invitationDateError: true });
+    if (!this.state.invitationDate)
+      return this.setState({ invitationDateError: true });
     //ask for the confirmation before generating and sending an invitation
     swal({
-      title: 'Invitation Confirmation',
-      text: 'Are you sure you want to send the invitation to ' + this.props.invitee.name + '?',
+      title: 'Confirm Invite',
+      text:
+        'Are you sure you want to send an invite to ' +
+        this.props.invitee.name +
+        '?',
       icon: 'warning',
       buttons: {
         confirm: {
@@ -79,21 +88,22 @@ class CreateInvitation extends React.Component {
       switch (value) {
       case 'confirm':
         return swal({
-          title: 'Done',
-          text: 'Invitation sent successfully!',
+          title: 'Invite sent!',
           icon: 'success',
           button: true
-        }).then(value => {
-          console.log('generating an invitation');
-          this.props.handleSendInvitation({
-            employeeId: this.props.invitee.employeeId,
-            comments: this.state.comments,
-            invitationDate: this.state.invitationDate,
-            status: 'pending or confirmed or rescheduled',
-            reply: 'reply from the employee who was invited',
-            seen: 'seen or unseen by the CEO'
-          });
-        }).then(value => this.setState({ comments: '', invitationDate: '' }));
+        })
+          .then(value => {
+            console.log('generating an invitation');
+            this.props.handleSendInvitation({
+              employeeId: this.props.invitee.employeeId,
+              comments: this.state.comments,
+              invitationDate: this.state.invitationDate,
+              status: 'pending or confirmed or rescheduled',
+              reply: 'reply from the employee who was invited',
+              seen: 'seen or unseen by the CEO'
+            });
+          })
+          .then(value => this.setState({ comments: '', invitationDate: '' }));
       default:
         break;
       }
@@ -105,7 +115,7 @@ class CreateInvitation extends React.Component {
 
     return (
       <div>
-        <h1 className='title'>Create Invitation</h1>
+        <h1 className="title">Send Invite</h1>
         <Paper className={classes.paper}>
           <form noValidate autoComplete="off">
             <div className={classes.fields}>
@@ -114,25 +124,54 @@ class CreateInvitation extends React.Component {
                 label="Invite"
                 defaultValue={this.props.invitee.name}
                 InputProps={{
-                  readOnly: true,
+                  readOnly: true
                 }}
                 className={classes.textField}
               />
-              <TextField required id="standard-required" label="Comments" value={this.state.comments} className={classes.textField} name='comments' onChange={this.handleInputChange} error={this.state.commentsError ? true : false} helperText={this.state.commentsError ? 'This field is required' : null} />
+              <TextField
+                required
+                id="standard-required"
+                label="Note"
+                value={this.state.comments}
+                className={classes.textField}
+                name="comments"
+                onChange={this.handleInputChange}
+                error={this.state.commentsError ? true : false}
+                helperText={
+                  this.state.commentsError ? 'This field is required' : null
+                }
+              />
               <TextField
                 id="date"
                 type="date"
                 className={classes.dataField}
                 value={this.state.invitationDate}
-                name='invitationDate'
+                name="invitationDate"
                 onChange={this.handleInputChange}
                 error={this.state.invitationDateError ? true : false}
-                helperText={this.state.invitationDateError ? 'This field is required' : null}
+                helperText={
+                  this.state.invitationDateError
+                    ? 'This field is required'
+                    : null
+                }
               />
             </div>
           </form>
-          <Button variant="contained" color="secondary" className={classes.sendButton} onClick={this.handleSendInvitation}>Send</Button>
-          <Button variant="contained" color="secondary" onClick={this.handleCancelInvitation} >Cancel</Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.sendButton}
+            onClick={this.handleSendInvitation}
+          >
+            Send
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={this.handleCancelInvitation}
+          >
+            Cancel
+          </Button>
         </Paper>
       </div>
     );

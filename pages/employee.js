@@ -65,7 +65,7 @@ export default class Employee extends React.Component {
       `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.employeeId}`,
       { headers: { token: this.props.token } }
     );
-    const feedbacks = response.data.sort((a,b) => {
+    const feedbacks = response.data.sort((a, b) => {
       a = new Date(a.dateAdded);
       b = new Date(b.dateAdded);
       return a > b ? -1 : a < b ? 1 : 0;
@@ -88,7 +88,7 @@ export default class Employee extends React.Component {
       //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
       // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
       console.log(feedbackObj.subcategory, ' received 10 points');
-    };
+    }
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
     this.setState({ feedbacks: addedFeedback });
@@ -118,7 +118,7 @@ export default class Employee extends React.Component {
 
   handleRewardDetails = (id, category) => {
     switch (category) {
-    case 'positive feedback':
+    case 'received positive feedback':
       const feedbackDetails = feedbacks.find(feedback => feedback.id === id);
       return feedbackDetails.note;
     case 'poll':
