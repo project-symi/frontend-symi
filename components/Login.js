@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import '../styles/Index.css';
 
+import About from './About';
+
 //util functions
 import { formValidation } from '../utils/utils';
 
