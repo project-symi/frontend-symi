@@ -1,20 +1,20 @@
-import Link from 'next/link';
-import '../styles/Index.css';
+import Link from "next/link";
+import "../styles/Index.css";
 
-import About from './About';
+import About from "./About";
 
 //util functions
-import { formValidation } from '../utils/utils';
+import { formValidation } from "../utils/utils";
 
 //components
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from "@material-ui/core";
 
 export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     };
   }
 
@@ -38,7 +38,7 @@ export default class Login extends React.Component {
             name="email"
             id="outlined"
             variant="filled"
-            label="email"
+            label="Email"
             margin="normal"
             value={this.state.email}
             onChange={this.handleInputChange}
