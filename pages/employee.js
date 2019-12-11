@@ -15,6 +15,9 @@ import axios from 'axios';
 //styles
 import '../styles/Employee.css';
 
+//contextAPI
+import { UserProvider } from '../contextApi/UserContext';
+
 import { rewards } from '../assets/dummyData';
 
 export default class Employee extends React.Component {
@@ -47,7 +50,8 @@ export default class Employee extends React.Component {
       ],
       employeeId: 'X009999',
       userType: 'Employee',
-      points: 450
+      points: 450,
+      user: { name: 'Tania', loggedIn: true }
     };
   }
 
@@ -158,18 +162,20 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <div className="layout">
-        <Navbar points={this.state.points} userType={this.state.userType} />
-        <Sidebar
-          news={true}
-          feedback={true}
-          polls={true}
-          invites={true}
-          rewards={true}
-          handleComponentView={this.handleComponentView}
-        />
-        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </div>
+      <UserProvider value={{ points: this.state.points }}>
+        <div className="layout">
+          <Navbar userType={this.state.userType} />
+          <Sidebar
+            news={true}
+            feedback={true}
+            polls={true}
+            invites={true}
+            rewards={true}
+            handleComponentView={this.handleComponentView}
+          />
+          <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
+        </div>
+      </UserProvider>
     );
   }
 }
