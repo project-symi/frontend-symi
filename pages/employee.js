@@ -162,9 +162,9 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <UserProvider value={{ points: this.state.points }}>
+      <UserProvider value={{ points: this.state.points, userType: this.state.userType }}>
         <div className="layout">
-          <Navbar userType={this.state.userType} />
+          <Navbar />
           <Sidebar
             news={true}
             feedback={true}
