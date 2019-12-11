@@ -17,8 +17,8 @@ import '../styles/CEO.css';
 import axios from 'axios';
 
 //sweet alert
-import swal from 'sweetalert';
-import '../../assets/sweetalert.min.js';
+// import swal from 'sweetalert';
+// import '../../assets/sweetalert.min.js';
 
 //top employees dummy data (for now)
 const topEmployees = [{
