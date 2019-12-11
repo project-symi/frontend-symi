@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 //components
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
@@ -61,7 +62,7 @@ export default class Employee extends React.Component {
   //API call to get all feedbacks for the user
   handleGetFeedbacks = async () => {
     const response = await axios.get(
-      `https://symi-be.herokuapp.com/feedbacks/${this.state.employeeId}`
+      `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.employeeId}`, { headers: { token: this.props.token } }
     );
     this.setState({ feedbacks: response.data });
   };
@@ -71,7 +72,7 @@ export default class Employee extends React.Component {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.employeeId;
     //make an API call to add the feedback to the db
-    await axios.post('https://symi-be.herokuapp.com/feedbacks', feedbackObj);
+    await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.props.token } });
     //check whether feedback category is employee, if yes make another API call to add points
     if (feedbackObj.category === 'Employee') {
       //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
@@ -92,7 +93,7 @@ export default class Employee extends React.Component {
   handleFuzzyNameSearch = async string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
     const response = await axios.get(
-      `https://symi-be.herokuapp.com/users?name=${string}`
+      `https://symi-be.herokuapp.com/auth/users?name=${string}`, { headers: { token: this.props.token } }
     );
     console.log(response.data);
     this.setState({ fuzzyNames: response.data });

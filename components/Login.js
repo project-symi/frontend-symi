@@ -43,12 +43,14 @@ export default class Login extends React.Component {
           />
           <TextField
             name="password"
-            id="outlined"
             label="password"
             margin="normal"
             variant="filled"
             value={this.state.password}
             onChange={this.handleInputChange}
+            type="password"
+            id="standard-password-input"
+            autoComplete="current-password"
           />
           <Button
             onClick={this.handleLogin}

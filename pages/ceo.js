@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 //components
 import Sidebar from '../components/Sidebar';
@@ -72,7 +73,8 @@ export default class Ceo extends React.Component {
 
   getFeedbacks = async () => {
     //all fbs
-    const response = await axios.get('https://symi-be.herokuapp.com/feedbacks');
+    console.log(this.props.token);
+    const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.props.token } });
     //change data to format applicable by overall centiment chart
     const feedbacksByFeelingRatio = response.data.reduce(
       (acc, feedback) => {
@@ -98,15 +100,15 @@ export default class Ceo extends React.Component {
     console.log(feedbacksByFeelingRatio);
     //good fb
     const responseGood = await axios.get(
-      'https://symi-be.herokuapp.com/feedbacks?feeling=good'
+      'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.props.token }}
     );
     //meh fb
     const responseMeh = await axios.get(
-      'https://symi-be.herokuapp.com/feedbacks?feeling=meh'
+      'https://symi-be.herokuapp.com/auth/feedbacks?feeling=meh', { headers: { token: this.props.token }}
     );
     //sad fb
     const responseSad = await axios.get(
-      'https://symi-be.herokuapp.com/feedbacks?feeling=sad'
+      'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad', { headers: { token: this.props.token }}
     );
     //create feedbacks ratio by feelings
     this.setState({
