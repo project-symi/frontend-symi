@@ -1,21 +1,21 @@
-import '../styles/Index.css';
+import "../styles/Index.css";
 
 //utils
-import axios from 'axios';
+import axios from "axios";
 
 //components
-import { TextField, Button } from '@material-ui/core';
-import Ceo from './ceo';
-import Employee from './employee';
+import { TextField, Button } from "@material-ui/core";
+import Ceo from "./ceo";
+import Employee from "./employee";
 
 export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      userId: '',
-      password: '',
-      token: '',
-      permission: ''
+      userId: "",
+      password: "",
+      token: "",
+      permission: ""
     };
   }
 
@@ -25,7 +25,7 @@ export default class Login extends React.Component {
 
   handleLogin = async e => {
     e.preventDefault();
-    const response = await axios.post('https://symi-be.herokuapp.com/login', {
+    const response = await axios.post("https://symi-be.herokuapp.com/login", {
       userId: this.state.userId,
       password: this.state.password
     });
@@ -37,9 +37,9 @@ export default class Login extends React.Component {
   };
 
   render() {
-    if (this.state.permission === 'CEO') {
+    if (this.state.permission === "CEO") {
       return <Ceo token={this.state.token} />;
-    } else if (this.state.permission === 'employee') {
+    } else if (this.state.permission === "employee") {
       return <Employee token={this.state.token} />;
     } else {
       return (

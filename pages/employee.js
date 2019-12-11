@@ -65,7 +65,12 @@ export default class Employee extends React.Component {
       `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.employeeId}`,
       { headers: { token: this.props.token } }
     );
-    this.setState({ feedbacks: response.data });
+    const feedbacks = response.data.sort((a,b) => {
+      a = new Date(a.dateAdded);
+      b = new Date(b.dateAdded);
+      return a > b ? -1 : a < b ? 1 : 0;
+    });
+    this.setState({ feedbacks });
   };
 
   //callback for Feedback to submit the feedback
@@ -83,7 +88,10 @@ export default class Employee extends React.Component {
       //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
       // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
       console.log(feedbackObj.subcategory, ' received 10 points');
-    }
+    };
+    let addedFeedback = [...this.state.feedbacks];
+    addedFeedback.unshift(feedbackObj);
+    this.setState({ feedbacks: addedFeedback });
     this.deleteFuzzyNames();
   };
 
@@ -101,7 +109,6 @@ export default class Employee extends React.Component {
       `https://symi-be.herokuapp.com/auth/users?name=${string}`,
       { headers: { token: this.props.token } }
     );
-    console.log(response.data);
     this.setState({ fuzzyNames: response.data });
   };
 

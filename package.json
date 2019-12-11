@@ -7,6 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "prod": "next build && next start",
     "lint": "eslint --ext js .",
     "lintfix": "eslint --ext js . --fix"
   },
