@@ -153,10 +153,49 @@ export default class Feedback extends React.Component {
                   <FormControl
                     error={this.state.feedbackValidation.errors.about.isShown}
                   >
-                    <Select
-                      name="about"
-                      native
-                      onChange={this.handleInputChange}
+                    <option value="" />
+                    <option value="Employee">Employee</option>
+                    <option value="News">News</option>
+                    <option value="Work/Life Balance">Work/Life Balance</option>
+                    <option value="Benefits">Benefits</option>
+                    <option value="Holidays">Holidays</option>
+                    <option value="Job Satisfaction">Job Satisfaction</option>
+                    <option value="Company Policy">Company Policy</option>
+                    <option value="Other">Other</option>
+                  </Select>
+                  {this.state.feedbackValidation.errors.about.message ? (
+                    <FormHelperText id="my-helper-text">
+                      {this.state.feedbackValidation.errors.about.message}
+                    </FormHelperText>
+                  ) : null}
+
+                  {(this.state.about === 'Employee' &&
+                    this.props.fuzzyNames === '') ||
+                  (this.state.about === 'News' &&
+                    this.props.fuzzyNames === '') ? (
+                      <TextField
+                        error={this.state.feedbackValidation.errors.input.isShown}
+                        helperText={
+                          this.state.feedbackValidation.errors.input.message
+                        }
+                        id="outlined"
+                        margin="normal"
+                        name="input"
+                        placeholder={
+                          this.state.about === 'Employee'
+                            ? 'Please specify employee name'
+                            : 'Please enter news topic'
+                        }
+                        onChange={this.handleEmployeeNameInput}
+                      ></TextField>
+                    ) : null}
+                  {this.props.fuzzyNames ? (
+                    <FormControl
+                      options={this.props.fuzzyNames}
+                      getOptionLabel={option => {
+                        return `${option.name} (${option.department})`;
+                      }}
+                      open={this.state.isPopupOpen}
                       style={{ width: 220 }}
                       value={this.state.about}
                     >
@@ -171,7 +210,10 @@ export default class Feedback extends React.Component {
                       <option value="Job Satisfaction">Job Satisfaction</option>
                       <option value="Company Policy">Company Policy</option>
                       <option value="Other">Other</option>
-                    </Select>
+                    </Autocomplete>
+
+
+
                     {this.state.feedbackValidation.errors.about.message ? (
                       <FormHelperText id="my-helper-text">
                         {this.state.feedbackValidation.errors.about.message}
@@ -219,6 +261,7 @@ export default class Feedback extends React.Component {
                       />
                     ) : null}
                   </FormControl>
+
                 </div>
 
                 {/* NOTE */}
