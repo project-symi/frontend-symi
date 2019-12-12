@@ -1,3 +1,7 @@
+/* eslint-disable react/prop-types */
+
+
+//MUI icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ChatIcon from '@material-ui/icons/Chat';
 import GroupIcon from '@material-ui/icons/Group';
@@ -14,7 +18,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import EmployeeContext from '../contextApi/EmployeeContext';
 import { useContext } from 'react';
 
-/* eslint-disable react/prop-types */
 
 const Sidebar = (props) => {
 
