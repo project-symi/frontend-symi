@@ -1,6 +1,6 @@
-import { Button } from "@material-ui/core";
+import { Button } from '@material-ui/core';
 
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 export default class News extends React.Component {
   constructor() {
@@ -8,18 +8,18 @@ export default class News extends React.Component {
     this.state = {
       news: [
         {
-          title: "Bring Your Pup to Work!",
+          title: 'Bring Your Pup to Work!',
           description:
-            "You can now bring your puppy to work on Wednesdays! That's something to celebrate.",
-          photo: "https://media.giphy.com/media/mRB9PmJFOjAw8/giphy.gif",
-          date: "12/10/2019"
+            'You can now bring your puppy to work on Wednesdays! That\'s something to celebrate.',
+          photo: 'https://media.giphy.com/media/mRB9PmJFOjAw8/giphy.gif',
+          date: '12/10/2019'
         },
         {
-          title: "Kentucky Christmas Party!",
+          title: 'Kentucky Christmas Party!',
           description:
-            "Join the Kentucky Christmas party 12/27! We look forward to having you.",
-          photo: "https://media.giphy.com/media/in4t9IzuZKhqg/giphy.gif",
-          date: "12/15/2019"
+            'Join the Kentucky Christmas party 12/27! We look forward to having you.',
+          photo: 'https://media.giphy.com/media/in4t9IzuZKhqg/giphy.gif',
+          date: '12/15/2019'
         }
       ]
     };
