@@ -15,8 +15,6 @@ import axios from 'axios';
 //styles
 import '../styles/Employee.css';
 
-import { rewards } from '../assets/dummyData';
-
 export default class Employee extends React.Component {
   constructor() {
     super();
@@ -53,9 +51,7 @@ export default class Employee extends React.Component {
 
   componentDidMount() {
     //make an API call to get all the feedbacks made by this user
-    this.handleGetFeedbacks().then(() =>
-      this.setState({ rewards }, () => console.log(this.state.feedbacks))
-    );
+    this.handleGetFeedbacks();
     //make another API call to get all points
   }
 
