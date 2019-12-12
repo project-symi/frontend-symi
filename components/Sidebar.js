@@ -9,116 +9,118 @@ import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import InfoIcon from '@material-ui/icons/Info';
 
-// DEV HELP
-import Dev from '../components/Dev';
+
+//context API
+import EmployeeContext from '../contextApi/EmployeeContext';
+import { useContext } from 'react';
 
 /* eslint-disable react/prop-types */
 
-const Sidebar = () => {
+const Sidebar = (props) => {
 
-  handleOnClick = view => {
-    this.props.handleComponentView(view);
+  const value = useContext(EmployeeContext);
+
+  const handleOnClick = view => {
+    value.handleComponentView(view);
   };
 
   return (
     <div id="sidebar">
-      {this.props.dashboard ? (
+      {props.dashboard ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('dashboard')}
+          onClick={() => handleOnClick('dashboard')}
         >
           <DashboardIcon color="primary" />
           <span className="menu-item">Dashboard</span>
         </div>
       ) : null}
-      {this.props.news ? (
+      {value.news ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('news')}
+          onClick={() => handleOnClick('news')}
         >
           <AnnouncementIcon color="primary" />
           <span className="menu-item">News</span>
         </div>
       ) : null}
-      {this.props.employeeInput ? (
+      {props.employeeInput ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('employeeInput')}
+          onClick={() => handleOnClick('employeeInput')}
         >
           <GroupIcon color="primary" />{' '}
           <span className="menu-item">Employees</span>
         </div>
       ) : null}
-      {this.props.feedback ? (
+      {value.feedback ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('feedback')}
+          onClick={() => handleOnClick('feedback')}
         >
           <ChatIcon color="primary" />{' '}
           <span className="menu-item">Feedback</span>
         </div>
       ) : null}
-      {this.props.updates ? (
+      {props.updates ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('updates')}
+          onClick={() => handleOnClick('updates')}
         >
           <AnnouncementIcon color="primary" />
           <span className="menu-item">Updates</span>
         </div>
       ) : null}
-      {this.props.assignments ? (
+      {props.assignments ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('assignments')}
+          onClick={() => handleOnClick('assignments')}
         >
           <AssignmentTurnedInIcon color="primary" />
           <span className="menu-item">Assignments</span>
         </div>
       ) : null}
-      {this.props.invites ? (
+      {value.invites ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('invites')}
+          onClick={() => handleOnClick('invites')}
         >
           <InsertInvitationIcon color="primary" />
           <span className="menu-item">Invites</span>
         </div>
       ) : null}
-      {this.props.rewards ? (
+      {value.rewards ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('rewards')}
+          onClick={() => handleOnClick('rewards')}
         >
           <StarsIcon color="primary" />
           <span className="menu-item">Rewards</span>
         </div>
       ) : null}
-      {/* {this.props.polls ? (
+      {/* {props.polls ? (
           <div
             className="sidebar-button"
-            onClick={() => this.handleOnClick('polls')}
+            onClick={() => handleOnClick('polls')}
           >
             <PollIcon color="primary" />
             <span className="menu-item">Polls</span>
           </div>
         ) : null} */}
-      {this.props.usageStatistics ? (
+      {props.usageStatistics ? (
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('usageStatistics')}
+          onClick={() => handleOnClick('usageStatistics')}
         >
           <InfoIcon color="primary" />
           <span className="menu-item">UsageStatistics</span>
         </div>
       ) : null}
 
-      <Dev></Dev>
-
       <div>
         <div
           className="sidebar-button"
-          onClick={() => this.handleOnClick('about')}
+          onClick={() => handleOnClick('about')}
         >
           <HelpOutlineIcon color="primary" />
           <span className="menu-item">About</span>

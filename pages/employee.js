@@ -16,7 +16,7 @@ import axios from 'axios';
 import '../styles/Employee.css';
 
 //contextAPI
-import { UserProvider } from '../contextApi/UserContext';
+import { EmployeeProvider } from '../contextApi/EmployeeContext';
 
 export default class Employee extends React.Component {
   constructor() {
@@ -158,20 +158,21 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <UserProvider value={{ points: this.state.points, userType: this.state.userType }}>
+      <EmployeeProvider value={{ points: this.state.points,
+        userType: this.state.userType,
+        news: true,
+        feedback: true,
+        polls: true,
+        invites: true,
+        rewards: true,
+        handleComponentView: this.handleComponentView
+      }}>
         <div className="layout">
           <Navbar />
-          <Sidebar
-            news={true}
-            feedback={true}
-            polls={true}
-            invites={true}
-            rewards={true}
-            handleComponentView={this.handleComponentView}
-          />
+          <Sidebar />
           <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
         </div>
-      </UserProvider>
+      </EmployeeProvider>
     );
   }
 }
