@@ -12,9 +12,9 @@ const Dev = () => (
     <Link href="/admin">
       <button>Admin</button>
     </Link>
-    {/* <Link href="/">
+    <Link href="/">
       <button>Login</button>
-    </Link> */}
+    </Link>
   </div>
 );
 

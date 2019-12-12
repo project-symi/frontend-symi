@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { Typography, Button } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import { Typography, Button } from "@material-ui/core";
 
 //sweet alert
-import swal from 'sweetalert';
-import '../../assets/sweetalert.min.js';
+import swal from "sweetalert";
+import "../../assets/sweetalert.min.js";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,50 +14,31 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: '100%',
-    margin: '15px',
-    borderRadius: '12px'
+    margin: "auto",
+    maxWidth: "100%",
+    margin: "15px",
+    borderRadius: "12px"
   },
   image: {
     width: 128,
     height: 128
   },
   points: {
-    fontFamily: 'Roboto Condensed'
+    fontFamily: "Roboto Condensed"
   },
   title: {
-    color: '#58afc2',
-    fontFamily: 'Roboto Condensed'
+    color: "#58afc2",
+    fontFamily: "Roboto Condensed"
   }
 }));
 
 const Rewards = props => {
   const classes = useStyles();
 
-  const handleShowDetails = (id, category) => {
-    //user wants to get details about feedback or poll
-    //ask employee.js to make an API call and get either feedback or poll data
-    const details = props.handleRewardDetails(id, category);
-
+  const handleShowDetails = reward => {
     swal({
-      title:
-        (function() {
-          switch (category) {
-          case 'positive feedback':
-            return 'Feedback';
-            break;
-          case 'poll':
-            return 'Poll';
-            break;
-          case 'submitted feedback':
-            return 'Feedback';
-            break;
-          default:
-            return null;
-          }
-        })() + ' Details',
-      text: details,
+      title: reward.categoryName,
+      text: `"${reward.feedbackNote}"`,
       button: true
     });
   };
@@ -73,42 +54,22 @@ const Rewards = props => {
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      {reward.dateAdded}
+                      {reward.date}
 
                       <Typography
                         gutterBottom
                         variant="h6"
                         className={classes.title}
                       >
-                        {(function() {
-                          switch (reward.category) {
-                          case 'positive feedback':
-                            return 'Praised by a coworker';
-                            break;
-                          case 'poll':
-                            return 'Poll participation';
-                            break;
-                          case 'submitted feedback':
-                            return 'Feedback submitted';
-                            break;
-                          default:
-                            return null;
-                          }
-                        })()}
+                        {reward.categoryName}
                       </Typography>
                       <Button
                         size="small"
-                        onClick={() =>
-                          handleShowDetails(
-                            reward.correspondentId,
-                            reward.category
-                          )
-                        }
+                        onClick={() => handleShowDetails(reward)}
                         color="primary"
-                        variant="contained"
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: "pointer" }}
                       >
-                        Show details
+                        details
                       </Button>
                     </Grid>
                   </Grid>

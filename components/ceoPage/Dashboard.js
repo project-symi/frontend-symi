@@ -10,7 +10,7 @@ import SentimentbyNews from "./Charts/SentimentbyNews";
 import SentimentbyDept from "./Charts/SentimentbyDept";
 
 //components
-import CreateInvitation from "./CreateInvitation";
+import CreateInvite from "./CreateInvite";
 
 //images
 import Loader from "../../assets/loader_img.gif";
@@ -54,7 +54,7 @@ export default class Dashboard extends React.Component {
     return (
       <div>
         {this.state.currentlyShown === "createInvitation" ? (
-          <CreateInvitation
+          <CreateInvite
             invitee={this.state.invitee}
             handleCancelInvitation={this.handleCancelInvitation}
             handleSendInvitation={this.handleSendInvitation}
@@ -92,10 +92,12 @@ export default class Dashboard extends React.Component {
                         );
                       })
                   ) : (
-                    <img
-                      src={Loader}
-                      style={{ height: "100px", width: "100px" }}
-                    ></img>
+                    <div className="data">
+                      <img
+                        src={Loader}
+                        style={{ height: "100px", width: "100px" }}
+                      ></img>
+                    </div>
                   )}
                 </div>
               </div>
