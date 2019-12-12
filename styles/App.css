@@ -249,6 +249,14 @@ html {
   font-size: small;
 }
 
+.swal-button {
+  background-color: #3f50b5;
+}
+
+.swal-button button:hover {
+  background-color: #3f50b5;
+}
+
 @media screen and (max-width: 480px) {
   .menu-item {
     visibility: hidden;

@@ -12,32 +12,84 @@ import SentimentbyDept from "./Charts/SentimentbyDept";
 //components
 import CreateInvite from "./CreateInvite";
 
+// material ui
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+
 //images
 import Loader from "../../assets/loader_img.gif";
+import human from "../../assets/human.png";
+
+import swal from "@sweetalert/with-react";
 
 export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      topDepartments: [
-        { name: "Engineering", points: 5500 },
-        { name: "Operations", points: 7000 },
-        { name: "Admin", points: 200 },
-        { name: "Marketing", points: 2300 },
-        { name: "Sales", points: 5000 },
-        { name: "QA", points: 5000 },
-        { name: "Part-Time", points: 5000 }
-      ],
       currentlyShown: "defaultView",
-      invitee: null
+      invitee: null,
+      positiveFeedbacks: [
+        {
+          id: 1,
+          note: [
+            "he is awesome",
+            "he's very helpful & a hard worker",
+            "he gives me TimTams sometimes"
+          ]
+        },
+        {
+          id: 1,
+          note: [
+            "she's such a supportive tech lead",
+            "I love working with her",
+            "she likes cats and I like"
+          ]
+        }
+      ]
     };
   }
 
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/w6wsrc52/";
 
+  showEmployeeDetails = employee => {
+    swal({
+      content: (
+        <div className="employee-detail">
+          <img className="employee-img" width="200px" src={human}></img>
+          <div className="employee-details">
+            <div className="employee-name">
+              {employee.Name}, {employee.Gender[0].toUpperCase()}
+            </div>
+            {employee.Department}
+          </div>
+          <div className="employee-feedback">{}</div>
+        </div>
+      ),
+      buttons: {
+        confirm: {
+          text: "INVITE",
+          value: "invite",
+          className: "swal-button"
+        },
+        cancel: {
+          text: "CANCEL",
+          value: "cancel",
+          className: ""
+        }
+      }
+    }).then(value => {
+      if (value === "invite") {
+        this.handleSwitchViewToInvite(employee);
+      }
+    });
+  };
+
+  ////////////////////////////// INVITATION
   //switch view to Create Invitation and pass the invitee name
   handleSwitchViewToInvite = invitee => {
-    this.setState({ currentlyShown: "createInvitation", invitee });
+    this.setState({
+      currentlyShown: "createInvitation",
+      invitee
+    });
   };
 
   //in case CEO click cancel invitation button switch to default view
@@ -75,8 +127,12 @@ export default class Dashboard extends React.Component {
                         return (
                           <div key={i} className="top">
                             <div className="top-num">{i + 1}</div>
-                            <div>{employee.name}</div>
-                            <div>{employee.points} ⭐️</div>
+                            <div
+                              onClick={() => this.showEmployeeDetails(employee)}
+                            >
+                              {employee.Name}
+                            </div>
+                            <div>{employee.Point} ⭐️</div>
                             <div>
                               <Button
                                 size="small"
@@ -92,12 +148,10 @@ export default class Dashboard extends React.Component {
                         );
                       })
                   ) : (
-                    <div className="data">
-                      <img
-                        src={Loader}
-                        style={{ height: "100px", width: "100px" }}
-                      ></img>
-                    </div>
+                    <img
+                      src={Loader}
+                      style={{ height: "100px", width: "100px" }}
+                    ></img>
                   )}
                 </div>
               </div>
@@ -113,7 +167,7 @@ export default class Dashboard extends React.Component {
                 <p className="data-title">TOP RATED TEAMS</p>
                 <div className="data">
                   {[]
-                    .concat(this.state.topDepartments)
+                    .concat(this.props.topDepartments)
                     .sort((a, b) => {
                       return b.points - a.points;
                     })

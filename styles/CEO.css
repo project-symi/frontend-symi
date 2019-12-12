@@ -79,6 +79,27 @@
   display: none;
 }
 
+.employee-detail {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.employee-img {
+  width: 200px;
+}
+
+.employee-details {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.employee-name {
+  font-weight: bold;
+  font-size: 23pt;
+}
+
 @media screen and (max-width: 480px) {
   .data {
     width: 260px;

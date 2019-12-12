@@ -74,7 +74,7 @@ class CreateInvitation extends React.Component {
       title: "Confirm Invite",
       text:
         "Are you sure you want to send an invite to " +
-        this.props.invitee.name +
+        this.props.invitee.Name +
         "?",
       icon: "warning",
       buttons: {
@@ -95,7 +95,7 @@ class CreateInvitation extends React.Component {
             .then(value => {
               console.log("generating an invitation");
               this.props.handleSendInvitation({
-                employeeId: this.props.invitee.employeeId,
+                employeeId: this.props.invitee.Id,
                 comments: this.state.comments,
                 invitationDate: this.state.invitationDate,
                 status: "pending or confirmed or rescheduled",
@@ -122,7 +122,7 @@ class CreateInvitation extends React.Component {
               <TextField
                 id="standard-read-only-input"
                 label="Invite"
-                defaultValue={this.props.invitee.name}
+                defaultValue={this.props.invitee.Name}
                 InputProps={{
                   readOnly: true
                 }}

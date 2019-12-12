@@ -70,4 +70,42 @@ const rewards = [
 
 const totalPoints = 500;
 
-module.exports = { totalPoints, rewards };
+const topEmployees = [
+  {
+    Name: "Igor Dawg",
+    Id: 1,
+    Point: 500,
+    Department: "Development",
+    Gender: "male"
+  },
+  {
+    Name: "Mini Meow",
+    Id: 2,
+    Point: 400,
+    Department: "Leadership",
+    Gender: "female"
+  },
+  {
+    Name: "Yukio Lion",
+    Id: 3,
+    Point: 100,
+    Department: "Engineering",
+    Gender: "male"
+  },
+  {
+    Name: "Steffie Frog",
+    Id: 4,
+    Point: 150,
+    Department: "Operations",
+    Gender: "female"
+  },
+  {
+    Name: "Potato Fan",
+    Id: 5,
+    Point: 300,
+    Department: "Marketing",
+    Gender: "male"
+  }
+];
+
+module.exports = { totalPoints, rewards, topEmployees };
