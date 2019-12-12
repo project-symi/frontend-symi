@@ -1,38 +1,38 @@
 /* eslint-disable react/prop-types */
 
 //components
-import { TextField, Paper, Button } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { TextField, Paper, Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 //sweet alert
-import swal from 'sweetalert';
-import '../../assets/sweetalert.min.js';
+import swal from "sweetalert";
+import "../../assets/sweetalert.min.js";
 
 const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
-    maxWidth: '100%',
-    marginTop: '20px',
-    borderRadius: '20px'
+    maxWidth: "100%",
+    marginTop: "20px",
+    borderRadius: "20px"
   },
   textField: {
-    margin: '10px'
+    margin: "10px"
   },
   dataField: {
-    marginTop: '26px'
+    marginTop: "26px"
   },
   sendButton: {
-    backgroundColor: '#3f50b5',
-    margin: '10px',
-    '&:hover': {
-      backgroundColor: '#3748b0'
+    backgroundColor: "#3f50b5",
+    margin: "10px",
+    "&:hover": {
+      backgroundColor: "#3748b0"
     }
   },
   button: {
-    margin: '10px'
+    margin: "10px"
   },
   fields: {
-    margin: 'auto'
+    margin: "auto"
   }
 });
 
@@ -40,8 +40,8 @@ class CreateInvitation extends React.Component {
   constructor() {
     super();
     this.state = {
-      comments: '',
-      invitationDate: '',
+      comments: "",
+      invitationDate: "",
       commentsError: false,
       invitationDateError: false
     };
@@ -49,9 +49,9 @@ class CreateInvitation extends React.Component {
 
   handleInputChange = e => {
     //change state and don't forget to get rid of error message
-    if (e.target.name === 'comments')
+    if (e.target.name === "comments")
       return this.setState({ comments: e.target.value, commentsError: false });
-    if (e.target.name === 'invitationDate')
+    if (e.target.name === "invitationDate")
       return this.setState({
         invitationDate: e.target.value,
         invitationDateError: false
@@ -71,41 +71,41 @@ class CreateInvitation extends React.Component {
       return this.setState({ invitationDateError: true });
     //ask for the confirmation before generating and sending an invitation
     swal({
-      title: 'Confirm Invite',
+      title: "Confirm Invite",
       text:
-        'Are you sure you want to send an invite to ' +
-        this.props.invitee.name +
-        '?',
-      icon: 'warning',
+        "Are you sure you want to send an invite to " +
+        this.props.invitee.Name +
+        "?",
+      icon: "warning",
       buttons: {
         confirm: {
-          text: 'CONFIRM',
-          value: 'confirm'
+          text: "CONFIRM",
+          value: "confirm"
         },
-        cancel: 'CANCEL'
+        cancel: "CANCEL"
       }
     }).then(value => {
       switch (value) {
-      case 'confirm':
-        return swal({
-          title: 'Invite sent!',
-          icon: 'success',
-          button: true
-        })
-          .then(value => {
-            console.log('generating an invitation');
-            this.props.handleSendInvitation({
-              employeeId: this.props.invitee.employeeId,
-              comments: this.state.comments,
-              invitationDate: this.state.invitationDate,
-              status: 'pending or confirmed or rescheduled',
-              reply: 'reply from the employee who was invited',
-              seen: 'seen or unseen by the CEO'
-            });
+        case "confirm":
+          return swal({
+            title: "Invite sent!",
+            icon: "success",
+            button: true
           })
-          .then(value => this.setState({ comments: '', invitationDate: '' }));
-      default:
-        break;
+            .then(value => {
+              console.log("generating an invitation");
+              this.props.handleSendInvitation({
+                employeeId: this.props.invitee.Id,
+                comments: this.state.comments,
+                invitationDate: this.state.invitationDate,
+                status: "pending or confirmed or rescheduled",
+                reply: "reply from the employee who was invited",
+                seen: "seen or unseen by the CEO"
+              });
+            })
+            .then(value => this.setState({ comments: "", invitationDate: "" }));
+        default:
+          break;
       }
     });
   };
@@ -122,7 +122,7 @@ class CreateInvitation extends React.Component {
               <TextField
                 id="standard-read-only-input"
                 label="Invite"
-                defaultValue={this.props.invitee.name}
+                defaultValue={this.props.invitee.Name}
                 InputProps={{
                   readOnly: true
                 }}
@@ -138,7 +138,7 @@ class CreateInvitation extends React.Component {
                 onChange={this.handleInputChange}
                 error={this.state.commentsError ? true : false}
                 helperText={
-                  this.state.commentsError ? 'This field is required' : null
+                  this.state.commentsError ? "This field is required" : null
                 }
               />
               <TextField
@@ -151,7 +151,7 @@ class CreateInvitation extends React.Component {
                 error={this.state.invitationDateError ? true : false}
                 helperText={
                   this.state.invitationDateError
-                    ? 'This field is required'
+                    ? "This field is required"
                     : null
                 }
               />

@@ -1,104 +1,86 @@
 /* eslint-disable react/prop-types */
 //components
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
-import Feedback from '../components/employeePage/Feedback';
-import Rewards from '../components/employeePage/Rewards';
-import Polls from '../components/Polls';
-import News from '../components/News';
-import Invites from '../components/Invites';
-import About from '../components/About';
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
+import Feedback from "../components/employeePage/Feedback";
+import Rewards from "../components/employeePage/Rewards";
+import Polls from "../components/Polls";
+import News from "../components/News";
+import Invites from "../components/Invites";
+import About from "../components/About";
 
 //utils
-import axios from 'axios';
+import axios from "axios";
 
 //styles
-import '../styles/Employee.css';
+import "../styles/Employee.css";
+
+//dummy data
+import { totalPoints, rewards } from "../assets/dummyData";
 
 export default class Employee extends React.Component {
   constructor() {
     super();
     this.state = {
       isDefaultView: true,
-      currentlyShown: 'feedback',
-      fuzzyNames: '',
+      currentlyShown: "feedback",
+      fuzzyNames: "",
       feedbacks: null,
-      rewards: [
-        {
-          points: 50,
-          category: 'positive feedback',
-          dateAdded: '01/12/2019',
-          correspondentId: '1111'
-        },
-        {
-          points: 5,
-          category: 'poll',
-          dateAdded: '02/12/2019',
-          correspondentId: '6'
-        },
-        {
-          points: 10,
-          category: 'submitted feedback',
-          dateAdded: '04/12/2019',
-          correspondentId: '2222'
-        }
-      ],
-      employeeId: 'X009999',
-      userType: 'Employee',
-      points: 450
+      rewards: null,
+      employeeId: "X009999",
+      userType: "Employee",
+      totalPoints: null
     };
   }
 
   componentDidMount() {
-    //make an API call to get all the feedbacks made by this user
+    //API call to get all the feedbacks made by this user
     this.handleGetFeedbacks();
-    //make another API call to get all points
+
+    //API call to get total points
+    this.handleUpdatePoints();
+
+    //API call to get reward/points history
+    this.handleGetRewards();
+
+    console.log(this.props.token);
   }
 
-  //API call to get all feedbacks for the user
-  handleGetFeedbacks = async () => {
-    const response = await axios.get(
-      `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.employeeId}`,
-      { headers: { token: this.props.token } }
-    );
-    const feedbacks = response.data.sort((a, b) => {
-      a = new Date(a.dateAdded);
-      b = new Date(b.dateAdded);
-      return a > b ? -1 : a < b ? 1 : 0;
-    });
-    this.setState({ feedbacks });
+  ///////////////////////////////// POINTS
+  // TOTAL POINTS
+  handleUpdatePoints = async () => {
+    // const res = await axios.get(
+    //   `https://symi-be.herokuapp.com/auth/users/${this.state.employeeId}/total_points`,
+    //   {
+    //     headers: { token: this.props.token }
+    //   }
+    // );
+    // console.log(res);
+    // const totalPoints = res.data
+    console.log({ totalPoints });
+
+    this.setState({ totalPoints });
   };
 
-  //callback for Feedback to submit the feedback
-  submitFeedback = async feedbackObj => {
-    //add current employeeId to the feedback object (for the feedback history)
-    feedbackObj.employeeId = this.state.employeeId;
-    //make an API call to add the feedback to the db
-    await axios.post(
-      'https://symi-be.herokuapp.com/auth/feedbacks',
-      feedbackObj,
-      { headers: { token: this.props.token } }
-    );
-    //check whether feedback category is employee, if yes make another API call to add points
-    if (feedbackObj.category === 'Employee') {
-      //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
-      // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
-      console.log(feedbackObj.subcategory, ' received 10 points');
-    }
-    let addedFeedback = [...this.state.feedbacks];
-    addedFeedback.unshift(feedbackObj);
-    this.setState({ feedbacks: addedFeedback });
-    this.deleteFuzzyNames();
+  ///////////////////////////////// REWARDS
+  // REWARDS HISTORY
+  handleGetRewards = async () => {
+    // const res = await axios.get(
+    //   `https://symi-be.herokuapp.com/auth/users/${this.state.employeeId}/point`,
+    //   {
+    //     headers: { token: this.props.token }
+    //   }
+    // );
+    // console.log(res);
+    // const rewards = res.data
+
+    console.log({ rewards });
+
+    this.setState({ rewards });
   };
 
-  handleComponentView = view => {
-    this.setState({
-      currentlyShown: view,
-      isDefaultView: false
-    });
-  };
-
-  //callback for Feedback submit to get employee names
+  ///////////////////////////////// FEEDBACK
+  // FUZZY SEARCH
   handleFuzzyNameSearch = async string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
     const response = await axios.get(
@@ -109,59 +91,99 @@ export default class Employee extends React.Component {
   };
 
   deleteFuzzyNames = () => {
-    this.setState({ fuzzyNames: '' });
+    this.setState({ fuzzyNames: "" });
   };
 
-  handleRewardDetails = (id, category) => {
-    switch (category) {
-    case 'received positive feedback':
-      const feedbackDetails = feedbacks.find(feedback => feedback.id === id);
-      return feedbackDetails.note;
-    case 'poll':
-      return 'dummy poll';
-    case 'submitted feedback':
-      return 'dummy submitted feedback';
-    default:
-      return null;
+  // SUBMIT FEEDBACK
+  submitFeedback = async feedbackObj => {
+    //add current employeeId to the feedback object (for the feedback history)
+    feedbackObj.employeeId = this.state.employeeId;
+
+    //make an API call to add the feedback to the db
+    await axios.post(
+      "https://symi-be.herokuapp.com/auth/feedbacks",
+      feedbackObj,
+      { headers: { token: this.props.token } }
+    );
+
+    //check whether feedback category is employee, if yes make another API call to add points
+    if (feedbackObj.category === "Employee") {
+      //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
+      // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
+      console.log(feedbackObj.subcategory, " received 10 points");
     }
+    let addedFeedback = [...this.state.feedbacks];
+    addedFeedback.unshift(feedbackObj);
+    this.setState({ feedbacks: addedFeedback });
+    this.deleteFuzzyNames();
+
+    // update points after submitting feedback
+    this.handleUpdatePoints();
   };
 
+  // FEEDBACK HISTORY
+  handleGetFeedbacks = async () => {
+    const response = await axios.get(
+      `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.employeeId}`,
+      { headers: { token: this.props.token } }
+    );
+
+    const feedbacks = response.data.sort((a, b) => {
+      a = new Date(a.dateAdded);
+      b = new Date(b.dateAdded);
+      return a > b ? -1 : a < b ? 1 : 0;
+    });
+    this.setState({ feedbacks });
+  };
+
+  ///////////////////////////////// VIEW
+  handleComponentView = view => {
+    this.setState({
+      currentlyShown: view,
+      isDefaultView: false
+    });
+  };
+
+  ///////////////////////////////// SIDEBAR
   renderSwitchView = param => {
     switch (param) {
-    case 'feedback':
-      return (
-        <Feedback
-          feedbacks={this.state.feedbacks}
-          handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-          submitFeedback={this.submitFeedback}
-          fuzzyNames={this.state.fuzzyNames}
-          deleteFuzzyNames={this.deleteFuzzyNames}
-        />
-      );
-    case 'news':
-      return <News />;
-    case 'polls':
-      return <Polls />;
-    case 'rewards':
-      return (
-        <Rewards
-          rewards={this.state.rewards}
-          handleRewardDetails={this.handleRewardDetails}
-        />
-      );
-    case 'invites':
-      return <Invites />;
-    case 'about':
-      return <About />;
-    default:
-      null;
+      case "feedback":
+        return (
+          <Feedback
+            feedbacks={this.state.feedbacks}
+            handleFuzzyNameSearch={this.handleFuzzyNameSearch}
+            submitFeedback={this.submitFeedback}
+            fuzzyNames={this.state.fuzzyNames}
+            deleteFuzzyNames={this.deleteFuzzyNames}
+          />
+        );
+      case "news":
+        return <News />;
+      case "polls":
+        return <Polls />;
+      case "rewards":
+        return (
+          <Rewards
+            rewards={this.state.rewards}
+            handleRewardDetails={this.handleRewardDetails}
+          />
+        );
+      case "invites":
+        return <Invites />;
+      case "about":
+        return <About />;
+      default:
+        null;
     }
   };
 
   render() {
     return (
       <div className="layout">
-        <Navbar points={this.state.points} userType={this.state.userType} />
+        <Navbar
+          points={this.state.totalPoints}
+          userType={this.state.userType}
+        />
         <Sidebar
           news={true}
           feedback={true}
