@@ -58,11 +58,6 @@ class CreateInvitation extends React.Component {
     if (e.target.name === 'invitationDate') return this.setState({ invitationDate: e.target.value, invitationDateError: false });
   }
 
-  //cancel button clicked, switch view back to the dashboard
-  handleCancelInvitation = () => {
-    this.props.handleCancelInvitation();
-  };
-
   //send button clicked, generate invitation and pass it to the dashboard
   handleSendInvitation = () => {
     //check whether comments and date was inputted
@@ -138,7 +133,7 @@ class CreateInvitation extends React.Component {
             </div>
           </form>
           <Button variant="contained" color="secondary" className={classes.sendButton} onClick={this.handleSendInvitation}>Send</Button>
-          <Button variant="contained" color="secondary" onClick={this.handleCancelInvitation} >Cancel</Button>
+          <Button variant="contained" color="secondary" onClick={this.props.handleCancelInvitation} >Cancel</Button>
         </Paper>
       </div>
     );

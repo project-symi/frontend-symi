@@ -186,12 +186,6 @@ export default class Ceo extends React.Component {
       return <News / >;
     case 'dashboard':
       return <Dashboard
-        topEmployees = {
-          this.state.topEmployees
-        }
-        overallSentiment = {
-          this.state.feedbacksByFeelingRatio
-        }
         feedbacksbyFeelings = {
           [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
         }
@@ -220,6 +214,8 @@ export default class Ceo extends React.Component {
         polls: true,
         dashboard: true,
         invites: true,
+        topEmployees: this.state.topEmployees,
+        overallSentiment: this.state.feedbacksByFeelingRatio,
         handleCeoComponentView: this.handleComponentView,
         handleSendInvitation: this.handleSendInvitation,
       }}>

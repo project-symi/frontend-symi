@@ -1,5 +1,6 @@
 //styles
 import '../styles/Index.css';
+import '../styles/App.css';
 
 //utils
 import axios from 'axios';

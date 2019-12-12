@@ -41,11 +41,6 @@ export default class Dashboard extends React.Component {
 
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
-  componentDidMount() {
-    const props = this.context;
-    console.log(props);
-  }
-
   //switch view to Create Invitation and pass the invitee name
   handleSwitchViewToInvite = (invitee) => {
     this.setState({ currentlyShown: 'createInvitation', invitee });
@@ -55,11 +50,6 @@ export default class Dashboard extends React.Component {
   handleCancelInvitation = () => {
     this.setState({ currentlyShown: 'defaultView' });
   }
-  //callback from CreateInvitation component
-  //ask Parent component to make an API call to DB to create an invitation
-  // handleSendInvitation = (invitationObj) => {
-  //   props.handleSendInvitation(invitationObj);
-  // }
 
 
   render() {
@@ -72,7 +62,7 @@ export default class Dashboard extends React.Component {
               <div>
                 <p className="data-title">TOP RATED EMPLOYEES</p>
                 <div className="data">
-                  {this.props.topEmployees ? this.props.topEmployees
+                  {this.context.topEmployees ? this.context.topEmployees
                     .sort((a, b) => {
                       return b.points - a.points;
                     })

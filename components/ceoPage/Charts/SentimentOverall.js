@@ -13,7 +13,12 @@ import {
 //images
 import Loader from '../../../assets/loader_img.gif';
 
+//contextAPI
+import CeoContext from '../../../contextApi/CeoContext';
+
 export default class SentimentOverall extends React.Component {
+  static contextType = CeoContext;
+
   constructor() {
     super();
     this.state = {
@@ -57,16 +62,16 @@ export default class SentimentOverall extends React.Component {
     return (
       <div className="data">
         <ResponsiveContainer>
-          {this.props.overallSentiment ?
+          {this.context.overallSentiment ?
             <PieChart>
               <Pie
                 dataKey="value"
-                data={this.props.overallSentiment}
+                data={this.context.overallSentiment}
                 fill="#8884d8"
                 labelLine={false}
                 label={this.renderPercentageLabel}
               >
-                {this.props.overallSentiment.map((entry, index) => (
+                {this.context.overallSentiment.map((entry, index) => (
                   <Cell
                     key={index}
                     fill={this.state.colors[index % this.state.colors.length]}
