@@ -7,6 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 //sweet alert
 import swal from "sweetalert";
 import "../../assets/sweetalert.min.js";
+import { formatDiagnosticsWithColorAndContext } from "typescript";
 
 const styles = theme => ({
   paper: {
@@ -41,21 +42,46 @@ class CreateInvitation extends React.Component {
     super();
     this.state = {
       comments: "",
-      invitationDate: "",
+      invitationDate: "12:00",
+      invitationTime: "",
       commentsError: false,
-      invitationDateError: false
+      invitationDateError: false,
+      invitationTimeError: false
     };
   }
+
+  componentDidMount = () => {
+    this.getDate();
+    console.log(this.state);
+  };
+
+  getDate = () => {
+    const today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+
+    let dateString = `${mm}/${dd}/${yyyy}`;
+
+    this.setState({ invitationDate: dateString });
+  };
 
   handleInputChange = e => {
     //change state and don't forget to get rid of error message
     if (e.target.name === "comments")
       return this.setState({ comments: e.target.value, commentsError: false });
-    if (e.target.name === "invitationDate")
+    if (e.target.name === "invitationDate") {
       return this.setState({
         invitationDate: e.target.value,
         invitationDateError: false
       });
+    }
+    if (e.target.name === "invitationTime") {
+      return this.setState({
+        invitationTime: e.target.value,
+        invitationDateError: false
+      });
+    }
   };
 
   //cancel button clicked, switch view back to the dashboard
@@ -93,7 +119,6 @@ class CreateInvitation extends React.Component {
             button: true
           })
             .then(value => {
-              console.log("generating an invitation");
               this.props.handleSendInvitation({
                 employeeId: this.props.invitee.Id,
                 comments: this.state.comments,
@@ -130,7 +155,7 @@ class CreateInvitation extends React.Component {
               />
               <TextField
                 required
-                id="standard-required"
+                id="standard"
                 label="Note"
                 value={this.state.comments}
                 className={classes.textField}
@@ -144,6 +169,7 @@ class CreateInvitation extends React.Component {
               <TextField
                 id="date"
                 type="date"
+                label="Date"
                 className={classes.dataField}
                 value={this.state.invitationDate}
                 name="invitationDate"
@@ -151,7 +177,22 @@ class CreateInvitation extends React.Component {
                 error={this.state.invitationDateError ? true : false}
                 helperText={
                   this.state.invitationDateError
-                    ? "This field is required"
+                    ? "Please specify a date."
+                    : null
+                }
+              />
+              <TextField
+                id="time"
+                type="time"
+                label="Time"
+                className={classes.dataField}
+                value={this.state.invitationDate}
+                name="invitationTime"
+                onChange={this.handleInputChange}
+                error={this.state.invitationTimeError ? true : false}
+                helperText={
+                  this.state.invitationTimeError
+                    ? "Please specify a time"
                     : null
                 }
               />
