@@ -6,9 +6,7 @@ import axios from 'axios';
 //components
 import { TextField, Button } from '@material-ui/core';
 import Ceo from './ceo';
-import Employee from './employee';
 import Router from 'next/router';
-import { EmployeeProvider } from '../contextApi/EmployeeContext';
 
 export default class Login extends React.Component {
   constructor() {
