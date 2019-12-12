@@ -17,6 +17,7 @@ import '../styles/Employee.css';
 
 //contextAPI
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
+import EmployeeContext from '../contextApi/EmployeeContext';
 
 export default class Employee extends React.Component {
   constructor() {
@@ -53,10 +54,14 @@ export default class Employee extends React.Component {
     };
   }
 
+  static contextType = EmployeeContext;
+
   componentDidMount() {
     //make an API call to get all the feedbacks made by this user
     this.handleGetFeedbacks();
     //make another API call to get all points
+    const token = this.context;
+    console.log(token);
   }
 
   //API call to get all feedbacks for the user
