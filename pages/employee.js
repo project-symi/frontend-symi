@@ -11,17 +11,24 @@ import About from '../components/About';
 
 //utils
 import axios from 'axios';
+import nextCookies from 'next-cookies';
 
 //styles
 import '../styles/Employee.css';
 
 //contextAPI
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
-import EmployeeContext from '../contextApi/EmployeeContext';
 
 export default class Employee extends React.Component {
-  constructor() {
-    super();
+
+  static async getInitialProps(ctx) {
+    const token = nextCookies(ctx);
+    console.log(token);
+    return token;
+  }
+
+  constructor(props) {
+    super(props);
     this.state = {
       isDefaultView: true,
       currentlyShown: 'news',
@@ -54,14 +61,11 @@ export default class Employee extends React.Component {
     };
   }
 
-  static contextType = EmployeeContext;
 
   componentDidMount() {
     //make an API call to get all the feedbacks made by this user
     this.handleGetFeedbacks();
     //make another API call to get all points
-    const token = this.context;
-    console.log(token);
   }
 
   //API call to get all feedbacks for the user

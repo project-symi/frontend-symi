@@ -2,6 +2,7 @@ import '../styles/Index.css';
 
 //utils
 import axios from 'axios';
+import cookie from 'js-cookie';
 
 //components
 import { TextField, Button } from '@material-ui/core';
@@ -26,7 +27,6 @@ export default class Login extends React.Component {
   handleLogin = async (e) => {
     e.preventDefault();
     const response = await axios.post('https://symi-be.herokuapp.com/login', { userId: this.state.userId, password: this.state.password });
-    console.log(response.data);
     this.setState({ token: response.data.token, permission: response.data.permission });
   }
 
@@ -34,7 +34,9 @@ export default class Login extends React.Component {
     if (this.state.permission === 'CEO') {
       return <Ceo token={this.state.token} />;
     } else if (this.state.permission === 'employee') {
-      return Router.push('/employee');
+      cookie.set('token', this.state.token, { expires: 1 });
+      Router.push('/employee');
+      return null;
     } else {
       return <div id="login-wrap">
         <div id="login-container">
