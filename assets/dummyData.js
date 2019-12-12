@@ -52,7 +52,7 @@ const rewards = [
     points: 50,
     categoryName: "Received Positive Feedback",
     date: "01/12/2019",
-    feedbackNote: "Awesome Igor"
+    feedbackNote: "he is awesome and such"
   },
   {
     points: 5,
@@ -64,7 +64,7 @@ const rewards = [
     points: 10,
     categoryName: "Submitted Feedback",
     date: "04/12/2019",
-    feedbackNote: "2222"
+    feedbackNote: "I wish we had a gym benefit."
   }
 ];
 

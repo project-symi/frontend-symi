@@ -60,6 +60,7 @@ export default class Ceo extends React.Component {
     //   { headers: { token: this.props.token } }
     // );
     // const topEmployees = res.data
+
     console.log({ topEmployees });
     this.setState({
       topEmployees
@@ -134,7 +135,7 @@ export default class Ceo extends React.Component {
         notes = this.state.sadFeedbacks.map(feedback => feedback.note);
         break;
     }
-    console.log(notes);
+    console.log({ notes });
     const requestBody = {
       input_data: notes,
       input_type: "text",
@@ -153,12 +154,9 @@ export default class Ceo extends React.Component {
     );
     console.log(response.data.result);
     swal({
-      title:
-        feeling === "good"
-          ? "Positive Feedback Highlights"
-          : "Negative Feedback Highlights",
+      title: feeling === "good" ? "Positive Feedback" : "Negative Feedback",
       text: response.data.result.join(", "),
-      icon: "success",
+      icon: feeling === "good" ? "success" : "warning",
       button: true
     });
     // .then((val) => {
