@@ -15,6 +15,10 @@ import '../styles/CEO.css';
 
 //utils
 import axios from 'axios';
+import nextCookies from 'next-cookies';
+
+//contextAPI
+import { CeoProvider } from '../contextApi/CeoContext';
 
 //sweet alert
 import swal from 'sweetalert';
@@ -49,8 +53,14 @@ const topEmployees = [{
 ];
 
 export default class Ceo extends React.Component {
-  constructor() {
-    super();
+  static async getInitialProps(ctx) {
+    //get the user token for API calls to db
+    const token = nextCookies(ctx);
+    return token;
+  }
+
+  constructor(props) {
+    super(props);
     this.state = {
       currentlyShown: 'dashboard',
       topEmployees: null,
@@ -73,7 +83,6 @@ export default class Ceo extends React.Component {
 
   getFeedbacks = async () => {
     //all fbs
-    console.log(this.props.token);
     const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.props.token } });
     //change data to format applicable by overall centiment chart
     const feedbacksByFeelingRatio = response.data.reduce(
