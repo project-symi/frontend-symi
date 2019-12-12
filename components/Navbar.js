@@ -4,12 +4,12 @@ import logo from '../assets/symi-small.png';
 // MUI components
 import PersonIcon from '@material-ui/icons/Person';
 
-//contextAPI
-import { UserConsumer } from '../contextApi/UserContext';
+//context API
+import { EmployeeConsumer } from '../contextApi/EmployeeContext';
 
 const Navbar = () => {
   return (
-    <UserConsumer>
+    <EmployeeConsumer>
       {
         props => {
           return (<div id="navbar">
@@ -29,7 +29,7 @@ const Navbar = () => {
           </div>);
         }
       }
-    </UserConsumer>
+    </EmployeeConsumer>
   );
 };
 
