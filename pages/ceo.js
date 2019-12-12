@@ -84,7 +84,7 @@ export default class Ceo extends React.Component {
   getFeedbacks = async () => {
     //all fbs
     const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.props.token } });
-    //change data to format applicable by overall centiment chart
+    //create data to pass to overall centiment chart
     const feedbacksByFeelingRatio = response.data.reduce(
       (acc, feedback) => {
         switch (feedback.feeling) {
@@ -106,7 +106,6 @@ export default class Ceo extends React.Component {
         { name: '😞', value: 0, feeling: 'sad' }
       ]
     );
-    console.log(feedbacksByFeelingRatio);
     //good fb
     const responseGood = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.props.token }}
@@ -130,7 +129,6 @@ export default class Ceo extends React.Component {
 
   handleGetKeywords = async feeling => {
     let notes;
-    console.log(this.state.goodFeedbacks);
     switch (feeling) {
     case 'good':
       notes = this.state.goodFeedbacks.map(feedback => feedback.note);
@@ -159,7 +157,6 @@ export default class Ceo extends React.Component {
         }
       }
     );
-    console.log(response.data.result);
     swal({
       title: feeling === 'good' ? 'Positive Feedback Highlights' : 'Negative Feedback Highlights',
       text: response.data.result.join(', '),
@@ -186,7 +183,7 @@ export default class Ceo extends React.Component {
   renderSwitchView = param => {
     switch (param) {
     case 'news':
-      return <News / > ;
+      return <News / >;
     case 'dashboard':
       return <Dashboard
         handleSendInvitation = {

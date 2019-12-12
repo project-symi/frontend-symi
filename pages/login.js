@@ -4,11 +4,10 @@ import '../styles/Index.css';
 //utils
 import axios from 'axios';
 import cookie from 'js-cookie';
-
-//components
-import { TextField, Button } from '@material-ui/core';
-import Ceo from './ceo';
 import Router from 'next/router';
+
+//MUI components
+import { TextField, Button } from '@material-ui/core';
 
 export default class Login extends React.Component {
   constructor() {
