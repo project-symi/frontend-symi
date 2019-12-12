@@ -42,8 +42,8 @@ class CreateInvitation extends React.Component {
     super();
     this.state = {
       comments: "",
-      invitationDate: "12:00",
-      invitationTime: "",
+      invitationDate: "",
+      invitationTime: "12:00:00",
       commentsError: false,
       invitationDateError: false,
       invitationTimeError: false
@@ -61,7 +61,9 @@ class CreateInvitation extends React.Component {
     let mm = today.getMonth() + 1;
     const yyyy = today.getFullYear();
 
-    let dateString = `${mm}/${dd}/${yyyy}`;
+    let dateString = `${yyyy}-${mm}-${dd}`;
+
+    console.log(dateString);
 
     this.setState({ invitationDate: dateString });
   };
