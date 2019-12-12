@@ -217,18 +217,21 @@ export default class Ceo extends React.Component {
 
   render() {
     return (
-      <div className="layout">
-        <Navbar userType={this.state.userType} />
-        <Sidebar
-          news={true}
-          assignments={true}
-          polls={true}
-          dashboard={true}
-          invites={true}
-          handleComponentView={this.handleComponentView}
-        />
-        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </div>
+      <CeoProvider value={{ userType: this.state.userType,
+        news: true,
+        assignments: true,
+        polls: true,
+        dashboard: true,
+        invites: true,
+        handleCeoComponentView: this.handleComponentView
+      }}>
+        <div className="layout">
+          <Navbar />
+          <Sidebar
+          />
+          <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
+        </div>
+      </CeoProvider>
     );
   }
 }

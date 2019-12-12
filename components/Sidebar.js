@@ -16,20 +16,26 @@ import InfoIcon from '@material-ui/icons/Info';
 
 //context API
 import EmployeeContext from '../contextApi/EmployeeContext';
+import CeoContext from '../contextApi/CeoContext';
 import { useContext } from 'react';
 
 
 const Sidebar = (props) => {
 
   const value = useContext(EmployeeContext);
+  const ceoValue = useContext(CeoContext);
 
   const handleOnClick = view => {
-    value.handleComponentView(view);
+    console.log({value, ceoValue});
+    //check which component (ceo or employee) renders the sidebar
+    //to invoke the right version of handleComponentView
+    if (Object.keys(value).length > 0) value.handleComponentView(view);
+    if (ceoValue) ceoValue.handleCeoComponentView(view);
   };
 
   return (
     <div id="sidebar">
-      {props.dashboard ? (
+      {ceoValue.dashboard ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('dashboard')}
@@ -38,7 +44,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Dashboard</span>
         </div>
       ) : null}
-      {value.news ? (
+      {value.news || ceoValue.news ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('news')}
@@ -74,7 +80,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Updates</span>
         </div>
       ) : null}
-      {props.assignments ? (
+      {ceoValue.assignments ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('assignments')}
@@ -83,7 +89,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Assignments</span>
         </div>
       ) : null}
-      {value.invites ? (
+      {value.invites || ceoValue.invites  ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('invites')}
