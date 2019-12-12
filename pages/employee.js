@@ -20,10 +20,9 @@ import '../styles/Employee.css';
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
 
 export default class Employee extends React.Component {
-
   static async getInitialProps(ctx) {
+    //get the user token for API calls to db
     const token = nextCookies(ctx);
-    console.log(token);
     return token;
   }
 
@@ -87,12 +86,6 @@ export default class Employee extends React.Component {
     feedbackObj.employeeId = this.state.employeeId;
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.props.token } });
-    //check whether feedback category is employee, if yes make another API call to add points
-    if (feedbackObj.category === 'Employee') {
-      //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
-      // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
-      console.log(feedbackObj.subcategory, ' received 10 points');
-    };
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
     this.setState({ feedbacks: addedFeedback });
