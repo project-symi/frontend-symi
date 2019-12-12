@@ -1,3 +1,4 @@
+//styles
 import '../styles/Index.css';
 
 //utils
