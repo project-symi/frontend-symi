@@ -8,6 +8,9 @@ import { withStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
+//context API
+import CeoContext from '../../contextApi/CeoContext';
+
 const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
@@ -37,8 +40,10 @@ const styles = theme => ({
 });
 
 class CreateInvitation extends React.Component {
-  constructor() {
-    super();
+  static contextType = CeoContext;
+
+  constructor(props) {
+    super(props);
     this.state = {
       comments: '',
       invitationDate: '',
@@ -85,7 +90,8 @@ class CreateInvitation extends React.Component {
           button: true
         }).then(value => {
           console.log('generating an invitation');
-          this.props.handleSendInvitation({
+          console.log(this.context);
+          this.context.handleSendInvitation({
             employeeId: this.props.invitee.employeeId,
             comments: this.state.comments,
             invitationDate: this.state.invitationDate,

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-//material-ui
+//MUI components
 import { Button } from '@material-ui/core';
 
 //charts
@@ -15,10 +15,15 @@ import CreateInvitation from './CreateInvitation';
 //images
 import Loader from '../../assets/loader_img.gif';
 
+//context API
+import CeoContext from '../../contextApi/CeoContext';
+
 
 export default class Dashboard extends React.Component {
-  constructor() {
-    super();
+  static contextType = CeoContext;
+
+  constructor(props) {
+    super(props);
     this.state = {
       topDepartments: [
         { name: 'Engineering', points: 5500 },
@@ -36,6 +41,11 @@ export default class Dashboard extends React.Component {
 
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
+  componentDidMount() {
+    const props = this.context;
+    console.log(props);
+  }
+
   //switch view to Create Invitation and pass the invitee name
   handleSwitchViewToInvite = (invitee) => {
     this.setState({ currentlyShown: 'createInvitation', invitee });
@@ -47,15 +57,15 @@ export default class Dashboard extends React.Component {
   }
   //callback from CreateInvitation component
   //ask Parent component to make an API call to DB to create an invitation
-  handleSendInvitation = (invitationObj) => {
-    this.props.handleSendInvitation(invitationObj);
-  }
+  // handleSendInvitation = (invitationObj) => {
+  //   props.handleSendInvitation(invitationObj);
+  // }
 
 
   render() {
     return (
       <div>
-        { this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} handleSendInvitation={this.handleSendInvitation} /> :
+        { this.state.currentlyShown === 'createInvitation' ? <CreateInvitation invitee={this.state.invitee} handleCancelInvitation={this.handleCancelInvitation} /> :
           <div>
             <p className="title">CEO Dashboard</p>
             <div id="data-container">

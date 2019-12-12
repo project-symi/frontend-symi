@@ -186,9 +186,6 @@ export default class Ceo extends React.Component {
       return <News / >;
     case 'dashboard':
       return <Dashboard
-        handleSendInvitation = {
-          this.handleSendInvitation
-        }
         topEmployees = {
           this.state.topEmployees
         }
@@ -223,7 +220,8 @@ export default class Ceo extends React.Component {
         polls: true,
         dashboard: true,
         invites: true,
-        handleCeoComponentView: this.handleComponentView
+        handleCeoComponentView: this.handleComponentView,
+        handleSendInvitation: this.handleSendInvitation,
       }}>
         <div className="layout">
           <Navbar />
