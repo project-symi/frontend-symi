@@ -25,19 +25,19 @@ const Navbar = () => {
       <div id="logo">
         <img width="150px" src={logo} />
       </div>
+          
       <div id="user">
-        <PersonIcon color="primary"></PersonIcon>
+     
+        <Link href="/"><PersonIcon color="primary"/>
+        </Link>
         <div>
           {Object.keys(employeeProps).length > 0
             ? employeeProps.userType
             : ceoProps.userType}
         </div>
       </div>
-      <Link href="/">
-        <Button fontSize="small" color="primary" id="login">
-            Logout
-        </Button>
-      </Link>
+
+
     </div>
   );
 };

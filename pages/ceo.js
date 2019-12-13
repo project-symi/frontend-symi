@@ -53,16 +53,19 @@ export default class Ceo extends React.Component {
   }
 
   componentDidMount() {
+    //make an API call to db to get top employees data for dashboard
+    //make an API call to get all feedbacks
     const token = localStorage.getItem('token');
-    //make an API call to get all feedbacks	    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
 
     this.setState({ token, userId }, () => {
       //API call to get all feedbacks
-      this.getFeedbacks();	    this.getFeedbacks();
-
+      this.getFeedbacks();
 
       //API call to db to get top employees data for dashboard
-      this.getTopEmployees();	    this.getTopEmployees();
+      this.getTopEmployees();
+
+      this.getPositiveFeedbacks();
     });
   }
 
@@ -81,10 +84,11 @@ export default class Ceo extends React.Component {
     });
   };
 
-getPositiveFeedbacks = async (employeeId) => {
-  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.props.token } });
-
+getPositiveFeedbacks = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.state.token } });
   const topEmployeeFeedbacks = res.data;
+
+  console.log({topEmployeeFeedbacks});
 
   this.setState({topEmployeeFeedbacks});
 } 
@@ -196,7 +200,7 @@ getPositiveFeedbacks = async (employeeId) => {
     case 'news':
       return <News />;
     case 'dashboard':
-      return <Dashboard topEmployeeFeedbacks={this.state.topEmployeeFeedbacks}
+      return <Dashboard
         feedbacksbyFeelings = {
           [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
         }
@@ -226,6 +230,7 @@ getPositiveFeedbacks = async (employeeId) => {
         polls: true,
         dashboard: true,
         invites: true,
+        topEmployeeFeedbacks: this.state.topEmployeeFeedbacks,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,
         topDepartments: this.state.topDepartments,

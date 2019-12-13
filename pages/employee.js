@@ -20,6 +20,7 @@ import { totalPoints, rewards } from '../assets/dummyData';
 
 //contextAPI
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
+import swal from 'sweetalert';
 
 
 export default class Employee extends React.Component {
@@ -88,6 +89,16 @@ export default class Employee extends React.Component {
     this.setState({ totalPoints });
   };
 
+  newPointsPopup = () => {
+    swal({
+      title: 'Thanks for the feedback',
+      text: 'You got +25⭐️! Hooray!',
+      icon: 'success',
+      button: true
+    });
+  }
+
+
   ///////////////////////////////// REWARDS
   // REWARDS HISTORY
   handleGetRewards = async () => {
@@ -129,6 +140,8 @@ export default class Employee extends React.Component {
     addedFeedback.unshift(feedbackObj);
     this.setState({ feedbacks: addedFeedback });
     this.deleteFuzzyNames();
+
+    this.newPointsPopup();
 
     // update points after submitting feedback
     this.handleUpdatePoints();

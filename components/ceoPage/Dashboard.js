@@ -18,21 +18,35 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 //images
 import Loader from '../../assets/loader_img.gif';
 import human from '../../assets/human.png';
-import swal from '@sweetalert/with-react';
+import steffie from '../../assets/headshots/steffie.png';
+import igor from '../../assets/headshots/igor.png';
+import yukio from '../../assets/headshots/yukio.png';
+import mini from '../../assets/headshots/mini.png';
 
+import swal from '@sweetalert/with-react';
 
 //context API
 import CeoContext from '../../contextApi/CeoContext';
 
-
 export default class Dashboard extends React.Component {
   static contextType = CeoContext;
+  // access all context "props"
 
   constructor() {
     super();
     this.state = {
-      currentlyShown: "defaultView",
-      invitee: null
+      currentlyShown: 'defaultView',
+      invitee: null,
+      userPhotos: [
+        {photoURL: steffie,
+          employeeId: 'B000500'},
+        {photoURL: igor,
+          employeeId: 'B000300'},
+        {photoURL: mini,
+          employeeId: 'A000001'},
+        {photoURL: yukio,
+          employeeId: 'X009999'}
+      ]
     };
   }
 
@@ -41,46 +55,48 @@ export default class Dashboard extends React.Component {
   ////////////////////////////// TOP RATED EMPLOYEES
   /////////// EMPLOYEE DETAILS
  showEmployeeDetails = async (employee) => {
-   const employeeFeedback = await this.props.topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
+   const employeeFeedback = await this.context.topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
 
-    swal({
-      content: (
-        <div>
-        <div className="employee-popup">
-          {employee.gender === "male" ?  <img className="employee-img" width="200px" src={human}></img> : <img className="employee-img" width="200px" src={human}></img> }
+   let employeePhoto = this.state.userPhotos.filter((photoObj)=>{return employee.id === photoObj.employeeId;});
+   console.log({employeePhoto});
+   swal({
+     content: (
+       <div>
+         <div className="employee-popup">
+           {employeePhoto.length !== 0 ?  <img className="employee-img" width="200px" src={employeePhoto[0].photoURL}></img> : <img className="employee-img" width="200px" src={human}></img> }
          
-          <div className="employee-details">
-            <div className="employee-name">
-              {employee.name}, {employee.gender[0].toUpperCase()}
-            </div>
-            {employee.department}
-          </div>
-        </div>
-      <div className="employee-feedback">{employeeFeedback.map((feedback, i) => {
-            return (<div key={i}>{`"${feedback.note}"`}</div>);
-          })}
-      </div>
-      </div>
-        
-      ),
-      buttons: {
-        confirm: {
-          text: 'INVITE',
-          value: 'invite',
-          className: 'swal-button'
-        },
-        cancel: {
-          text: 'CANCEL',
-          value: 'cancel',
-          className: ''
-        }
-      }
-    }).then(value => {
-      if (value === 'invite') {
-        this.handleSwitchViewToInvite(employee);
-      }
-    });
-  };
+           <div className="employee-details">
+             <div className="employee-name">
+               {employee.name}, {employee.gender[0].toUpperCase()}
+             </div>
+             {employee.department}
+           </div>
+         </div>
+         <p className="title">What Employees Say About {employee.name.split(' ')[0]}</p>
+         <div className="employee-feedback">{employeeFeedback.map((feedback, i) => {
+           return (<div key={i}>{`"${feedback.note}"`}</div>);
+         })}
+         </div>
+       </div>
+     ),
+     buttons: {
+       confirm: {
+         text: 'INVITE',
+         value: 'invite',
+         className: 'swal-button'
+       },
+       cancel: {
+         text: 'CANCEL',
+         value: 'cancel',
+         className: ''
+       }
+     }
+   }).then(value => {
+     if (value === 'invite') {
+       this.handleSwitchViewToInvite(employee);
+     }
+   });
+ };
 
   ////////// INVITATION
   //switch view to Create Invitation and pass the invitee name
@@ -111,7 +127,7 @@ export default class Dashboard extends React.Component {
               <div>
                 <p className="data-title">TOP RATED EMPLOYEES</p>
                 <div className="data">
-                  {this.context.topEmployees ? (
+                  {this.context.topEmployees && this.context.topEmployeeFeedbacks ? (
                     this.context.topEmployees
                       .sort((a, b) => {
                         return b.points - a.points;

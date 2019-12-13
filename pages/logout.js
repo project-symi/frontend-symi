@@ -10,17 +10,8 @@ import { Button } from '@material-ui/core';
 
 const Logout = () => {
   //remove all essential info from localStorage
-<<<<<<< HEAD
-
-  // if (!localStorage) {
-  //   localStorage.removeItem('userId');
-  //   localStorage.removeItem('token');
-  // }
-
-=======
   // localStorage.removeItem('userId');
   // localStorage.removeItem('token');
->>>>>>> bbf6fb61d90d63c2ea3c7856ce3ddc807b5c005e
   return (
     <div id="login-wrap">
       <div id="login-container">
