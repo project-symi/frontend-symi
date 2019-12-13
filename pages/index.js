@@ -31,8 +31,8 @@ export default class Login extends React.Component {
   }
 
   render() {
-    localStorage.setItem('token', this.state.token);
-    localStorage.setItem('userId', this.state.userId);
+    // localStorage.setItem('token', this.state.token);
+    // localStorage.setItem('userId', this.state.userId);
     if (this.state.permission === 'CEO') {
       Router.push('/ceo');
       return null;
