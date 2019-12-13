@@ -10,6 +10,9 @@ import Invites from '../Invites';
 //sweet alert
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
+
+//context API
+import CeoContext from '../../contextApi/CeoContext';
 import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
 const styles = theme => ({
@@ -47,6 +50,8 @@ const styles = theme => ({
 });
 
 class CreateInvitation extends React.Component {
+  static contextType = CeoContext;
+
   constructor() {
     super();
     this.state = {
@@ -129,7 +134,8 @@ class CreateInvitation extends React.Component {
           button: true
         })
           .then(value => {
-            this.props.handleSendInvitation({
+            console.log('generating an invitation');
+            this.context.handleSendInvitation({
               employeeId: this.props.invitee.Id,
               comments: this.state.comments,
               invitationDate: this.state.invitationDate,
