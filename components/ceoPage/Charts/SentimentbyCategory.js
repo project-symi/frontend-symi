@@ -5,39 +5,39 @@ import {
   Legend,
   Tooltip,
   Cell
-} from 'recharts';
+} from "recharts";
 
 // sentiment by category
 const dataset = {
   good: [
-    { name: 'Work/Life Balance', value: 50 },
-    { name: 'News', value: 30 },
-    { name: 'Benefits', value: 30 },
-    { name: 'Holidays', value: 20 },
-    { name: 'Job Satisfaction', value: 20 },
-    { name: 'Company Policy', value: 20 },
-    { name: 'Employees', value: 20 },
-    { name: 'Other', value: 20 }
+    { name: "Work/Life Balance", value: 50 },
+    { name: "News", value: 30 },
+    { name: "Benefits", value: 30 },
+    { name: "Holidays", value: 20 },
+    { name: "Job Satisfaction", value: 20 },
+    { name: "Company Policy", value: 20 },
+    { name: "Employees", value: 20 },
+    { name: "Other", value: 20 }
   ],
   meh: [
-    { name: 'Work/Life Balance', value: 10 },
-    { name: 'News', value: 30 },
-    { name: 'Benefits', value: 30 },
-    { name: 'Holidays', value: 20 },
-    { name: 'Job Satisfaction', value: 20 },
-    { name: 'Company Policy', value: 20 },
-    { name: 'Employees', value: 20 },
-    { name: 'Other', value: 20 }
+    { name: "Work/Life Balance", value: 10 },
+    { name: "News", value: 30 },
+    { name: "Benefits", value: 30 },
+    { name: "Holidays", value: 20 },
+    { name: "Job Satisfaction", value: 20 },
+    { name: "Company Policy", value: 20 },
+    { name: "Employees", value: 20 },
+    { name: "Other", value: 20 }
   ],
   sad: [
-    { name: 'Work/Life Balance', value: 20 },
-    { name: 'News', value: 30 },
-    { name: 'Benefits', value: 30 },
-    { name: 'Holidays', value: 20 },
-    { name: 'Job Satisfaction', value: 20 },
-    { name: 'Company Policy', value: 20 },
-    { name: 'Employees', value: 20 },
-    { name: 'Other', value: 20 }
+    { name: "Work/Life Balance", value: 20 },
+    { name: "News", value: 30 },
+    { name: "Benefits", value: 30 },
+    { name: "Holidays", value: 20 },
+    { name: "Job Satisfaction", value: 20 },
+    { name: "Company Policy", value: 20 },
+    { name: "Employees", value: 20 },
+    { name: "Other", value: 20 }
   ]
 };
 
@@ -46,7 +46,7 @@ export default class SentimentbyCategory extends React.Component {
   constructor() {
     super();
     this.state = {
-      colors: ['#3ED7BD', '#58AFC2', '#8884d8'],
+      colors: ["#3ED7BD", "#58AFC2", "#8884d8"],
       data: dataset
     };
   }

@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { Typography, Button } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import { Typography, Button } from "@material-ui/core";
 
 //sweet alert
-import swal from 'sweetalert';
-import '../../assets/sweetalert.min.js';
+import swal from "sweetalert";
+import "../../assets/sweetalert.min.js";
 
 //contextAPI
-import { EmployeeConsumer } from '../../contextApi/EmployeeContext';
+import { EmployeeConsumer } from "../../contextApi/EmployeeContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,21 +17,21 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: '100%',
-    margin: '15px',
-    borderRadius: '12px'
+    margin: "auto",
+    maxWidth: "100%",
+    margin: "15px",
+    borderRadius: "12px"
   },
   image: {
     width: 128,
     height: 128
   },
   points: {
-    fontFamily: 'Roboto Condensed'
+    fontFamily: "Roboto Condensed"
   },
   title: {
-    color: '#58afc2',
-    fontFamily: 'Roboto Condensed'
+    color: "#58afc2",
+    fontFamily: "Roboto Condensed"
   }
 }));
 
@@ -74,7 +74,7 @@ const Rewards = () => {
                                 size="small"
                                 onClick={() => handleShowDetails(reward)}
                                 color="primary"
-                                style={{ cursor: 'pointer' }}
+                                style={{ cursor: "pointer" }}
                               >
                               details
                               </Button>

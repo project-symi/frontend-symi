@@ -1,14 +1,14 @@
-import InstagramIcon from '@material-ui/icons/Instagram';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import InstagramIcon from "@material-ui/icons/Instagram";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
-import '../styles/About.css';
+import "../styles/About.css";
 
-import steffie from '../assets/headshots/steffie.png';
-import igor from '../assets/headshots/igor.png';
-import yukio from '../assets/headshots/yukio.png';
-import mini from '../assets/headshots/mini.png';
+import steffie from "../assets/headshots/steffie.png";
+import igor from "../assets/headshots/igor.png";
+import yukio from "../assets/headshots/yukio.png";
+import mini from "../assets/headshots/mini.png";
 
 export default class Ceo extends React.Component {
   constructor() {

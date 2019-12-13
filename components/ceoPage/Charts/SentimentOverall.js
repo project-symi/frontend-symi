@@ -8,13 +8,13 @@ import {
   Legend,
   Tooltip,
   Cell
-} from 'recharts';
+} from "recharts";
 
 //images
-import Loader from '../../../assets/loader_img.gif';
+import Loader from "../../../assets/loader_img.gif";
 
 //contextAPI
-import CeoContext from '../../../contextApi/CeoContext';
+import CeoContext from "../../../contextApi/CeoContext";
 
 export default class SentimentOverall extends React.Component {
   static contextType = CeoContext;
@@ -22,7 +22,7 @@ export default class SentimentOverall extends React.Component {
   constructor() {
     super();
     this.state = {
-      colors: ['#3ED7BD', '#58AFC2', '#8884d8']
+      colors: ["#3ED7BD", "#58AFC2", "#8884d8"]
     };
   }
 
@@ -45,7 +45,7 @@ export default class SentimentOverall extends React.Component {
         x={x}
         y={y}
         fill="white"
-        textAnchor={x > cx ? 'start' : 'end'}
+        textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
         {`${(percent * 100).toFixed(0)}%`}
