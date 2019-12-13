@@ -37,8 +37,8 @@ export default class Login extends React.Component {
       Router.push('/ceo');
       return null;
     } else if (this.state.permission === 'employee') {
-      cookie.set('token', this.state.token, { expires: 1 });
-      cookie.set('userId', this.state.userId, { expires: 1 });
+      localStorage.setItem('token', this.state.token);
+      localStorage.setItem('userId', this.state.userId);
       Router.push('/employee');
       return null;
     } else {
