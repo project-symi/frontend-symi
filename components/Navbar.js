@@ -29,7 +29,7 @@ const Navbar = () => {
       <PersonIcon color="primary"></PersonIcon>
       <div>{Object.keys(employeeProps).length > 0 ? employeeProps.userType : ceoProps.userType}</div>
     </div>
-    <Link href="/logout">
+    <Link href="/">
       <Button fontSize="small" color="primary" id="login">
             Logout
       </Button>

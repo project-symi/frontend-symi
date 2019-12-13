@@ -21,16 +21,6 @@ import { totalPoints, rewards } from '../assets/dummyData';
 //contextAPI
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
 
-<<<<<<< HEAD
-
-export default class Employee extends React.Component {
-  static async getInitialProps(ctx) {
-    //get the user token for API calls to db
-    const props = nextCookies(ctx);
-    return props;
-  }
-=======
->>>>>>> 4229255d18bd0df1bff40cc0c298cf98bfb234dd
 
 export default class Employee extends React.Component {
   constructor(props) {
