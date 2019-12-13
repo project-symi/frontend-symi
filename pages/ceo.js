@@ -57,10 +57,10 @@ export default class Ceo extends React.Component {
 
     this.setState({ token, userId }, () => {
       //API call to get all feedbacks
-    this.getFeedbacks();
+      this.getFeedbacks();
 
-    //API call to db to get top employees data for dashboard
-    this.getTopEmployees();
+      //API call to db to get top employees data for dashboard
+      this.getTopEmployees();
     });
   }
 
