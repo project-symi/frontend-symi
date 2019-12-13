@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+
 //material ui
 import { TextField, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -10,13 +11,19 @@ import Invites from '../Invites';
 //sweet alert
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
-import { formatDiagnosticsWithColorAndContext } from 'typescript';
+
+
+//context API
+import CeoContext from '../../contextApi/CeoContext';
+import { formatDiagnosticsWithColorAndContext } from "typescript";
+
 
 const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
     maxWidth: '100%',
     marginTop: '20px',
+
     marginBottom: '20px',
     borderRadius: '20px',
     display: 'grid',
@@ -28,10 +35,12 @@ const styles = theme => ({
   icon: {
     fontSize: '100px',
     color: '#3f50b5'
+
   },
   sendButton: {
     backgroundColor: '#3f50b5',
     margin: '10px',
+
     marginLeft: '0px',
     width: '100px',
     '&:hover': {
@@ -47,6 +56,8 @@ const styles = theme => ({
 });
 
 class CreateInvitation extends React.Component {
+  static contextType = CeoContext;
+
   constructor() {
     super();
     this.state = {
@@ -129,7 +140,9 @@ class CreateInvitation extends React.Component {
           button: true
         })
           .then(value => {
-            this.props.handleSendInvitation({
+
+            console.log('generating an invitation');
+            this.context.handleSendInvitation({
               employeeId: this.props.invitee.Id,
               comments: this.state.comments,
               invitationDate: this.state.invitationDate,

@@ -18,10 +18,17 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 //images
 import Loader from "../../assets/loader_img.gif";
 import human from "../../assets/human.png";
-
 import swal from "@sweetalert/with-react";
 
+
+//context API
+import CeoContext from '../../contextApi/CeoContext';
+
+
+
 export default class Dashboard extends React.Component {
+  static contextType = CeoContext;
+
   constructor() {
     super();
     this.state = {
@@ -96,11 +103,6 @@ export default class Dashboard extends React.Component {
   handleCancelInvitation = () => {
     this.setState({ currentlyShown: "defaultView" });
   };
-  //callback from CreateInvitation component
-  //ask Parent component to make an API call to DB to create an invitation
-  handleSendInvitation = invitationObj => {
-    this.props.handleSendInvitation(invitationObj);
-  };
 
   render() {
     return (
@@ -109,7 +111,6 @@ export default class Dashboard extends React.Component {
           <CreateInvite
             invitee={this.state.invitee}
             handleCancelInvitation={this.handleCancelInvitation}
-            handleSendInvitation={this.handleSendInvitation}
           />
         ) : (
           <div>
@@ -118,8 +119,8 @@ export default class Dashboard extends React.Component {
               <div>
                 <p className="data-title">TOP RATED EMPLOYEES</p>
                 <div className="data">
-                  {this.props.topEmployees ? (
-                    this.props.topEmployees
+                  {this.context.topEmployees ? (
+                    this.context.topEmployees
                       .sort((a, b) => {
                         return b.points - a.points;
                       })
