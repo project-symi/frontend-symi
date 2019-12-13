@@ -1,37 +1,67 @@
 /* eslint-disable react/prop-types */
 //components
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
-import Feedback from "../components/employeePage/Feedback";
-import Rewards from "../components/employeePage/Rewards";
-import Polls from "../components/Polls";
-import News from "../components/News";
-import Invites from "../components/Invites";
-import About from "../components/About";
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
+import Feedback from '../components/employeePage/Feedback';
+import Rewards from '../components/employeePage/Rewards';
+import Polls from '../components/Polls';
+import News from '../components/News';
+import Invites from '../components/Invites';
+import About from '../components/About';
 
 //utils
-import axios from "axios";
+import axios from 'axios';
+import nextCookies from 'next-cookies';
 
 //styles
-import "../styles/Employee.css";
+import '../styles/Employee.css';
 
 //dummy data
-import { totalPoints, rewards } from "../assets/dummyData";
+import { totalPoints, rewards } from '../assets/dummyData';
+
+//contextAPI
+import { EmployeeProvider } from '../contextApi/EmployeeContext';
 
 export default class Employee extends React.Component {
-  constructor() {
-    super();
+  static async getInitialProps(ctx) {
+    //get the user token for API calls to db
+    const token = nextCookies(ctx);
+    return token;
+  }
+
+  constructor(props) {
+    super(props);
     this.state = {
       isDefaultView: true,
-      currentlyShown: "feedback",
-      fuzzyNames: "",
+      currentlyShown: 'feedback',
+      fuzzyNames: '',
       feedbacks: null,
-      rewards: null,
-      employeeId: "X009999",
-      userType: "Employee",
-      totalPoints: null
+      rewards: [
+        {
+          points: 50,
+          category: 'positive feedback',
+          dateAdded: '01/12/2019',
+          correspondentId: '1111'
+        },
+        {
+          points: 5,
+          category: 'poll',
+          dateAdded: '02/12/2019',
+          correspondentId: '6'
+        },
+        {
+          points: 10,
+          category: 'submitted feedback',
+          dateAdded: '04/12/2019',
+          correspondentId: '2222'
+        }
+      ],
+      employeeId: 'X009999',
+      userType: 'Employee',
+      points: 450
     };
   }
+
 
   componentDidMount() {
     //API call to get all the feedbacks made by this user
@@ -91,7 +121,7 @@ export default class Employee extends React.Component {
   };
 
   deleteFuzzyNames = () => {
-    this.setState({ fuzzyNames: "" });
+    this.setState({ fuzzyNames: '' });
   };
 
   // SUBMIT FEEDBACK
@@ -100,18 +130,7 @@ export default class Employee extends React.Component {
     feedbackObj.employeeId = this.state.employeeId;
 
     //make an API call to add the feedback to the db
-    await axios.post(
-      "https://symi-be.herokuapp.com/auth/feedbacks",
-      feedbackObj,
-      { headers: { token: this.props.token } }
-    );
-
-    //check whether feedback category is employee, if yes make another API call to add points
-    if (feedbackObj.category === "Employee") {
-      //API call to db points table, add 10 points toemployee (employeeId will the subcategory)
-      // /api/points/:employeeId (${feedback.subcategory} (since it's employee id))
-      console.log(feedbackObj.subcategory, " received 10 points");
-    }
+    await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.props.token } });
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
     this.setState({ feedbacks: addedFeedback });
@@ -147,53 +166,53 @@ export default class Employee extends React.Component {
   ///////////////////////////////// SIDEBAR
   renderSwitchView = param => {
     switch (param) {
-      case "feedback":
-        return (
-          <Feedback
-            feedbacks={this.state.feedbacks}
-            handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-            submitFeedback={this.submitFeedback}
-            fuzzyNames={this.state.fuzzyNames}
-            deleteFuzzyNames={this.deleteFuzzyNames}
-          />
-        );
-      case "news":
-        return <News />;
-      case "polls":
-        return <Polls />;
-      case "rewards":
-        return (
-          <Rewards
-            rewards={this.state.rewards}
-            handleRewardDetails={this.handleRewardDetails}
-          />
-        );
-      case "invites":
-        return <Invites />;
-      case "about":
-        return <About />;
-      default:
-        null;
+    case 'feedback':
+      return (
+        <Feedback
+          feedbacks={this.state.feedbacks}
+          handleFuzzyNameSearch={this.handleFuzzyNameSearch}
+          submitFeedback={this.submitFeedback}
+          fuzzyNames={this.state.fuzzyNames}
+          deleteFuzzyNames={this.deleteFuzzyNames}
+        />
+      );
+    case 'news':
+      return <News />;
+    case 'polls':
+      return <Polls />;
+    case 'rewards':
+      return (
+        <Rewards
+          rewards={this.state.rewards}
+          handleRewardDetails={this.handleRewardDetails}
+        />
+      );
+    case 'invites':
+      return <Invites />;
+    case 'about':
+      return <About />;
+    default:
+      null;
     }
   };
 
   render() {
     return (
-      <div className="layout">
-        <Navbar
-          points={this.state.totalPoints}
-          userType={this.state.userType}
-        />
-        <Sidebar
-          news={true}
-          feedback={true}
-          polls={true}
-          invites={true}
-          rewards={true}
-          handleComponentView={this.handleComponentView}
-        />
-        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </div>
+      <EmployeeProvider value={{ points: this.state.points,
+        userType: this.state.userType,
+        news: true,
+        feedback: true,
+        polls: true,
+        invites: true,
+        rewards: true,
+        handleComponentView: this.handleComponentView
+      }}>
+        <div className="layout">
+          <Navbar />
+          <Sidebar />
+          <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
+        </div>
+      </EmployeeProvider>
     );
   }
 }
