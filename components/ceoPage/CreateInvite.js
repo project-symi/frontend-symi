@@ -10,7 +10,7 @@ import '../../assets/sweetalert.min.js';
 
 //context API
 import CeoContext from '../../contextApi/CeoContext';
-import { formatDiagnosticsWithColorAndContext } from "typescript";
+import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
 const styles = theme => ({
   paper: {
@@ -46,9 +46,9 @@ class CreateInvitation extends React.Component {
   constructor() {
     super();
     this.state = {
-      comments: "",
-      invitationDate: "",
-      invitationTime: "12:00:00",
+      comments: '',
+      invitationDate: '',
+      invitationTime: '12:00:00',
       commentsError: false,
       invitationDateError: false,
       invitationTimeError: false
@@ -83,7 +83,7 @@ class CreateInvitation extends React.Component {
         invitationDateError: false
       });
     }
-    if (e.target.name === "invitationTime") {
+    if (e.target.name === 'invitationTime') {
       return this.setState({
         invitationTime: e.target.value,
         invitationDateError: false
@@ -185,7 +185,7 @@ class CreateInvitation extends React.Component {
                 error={this.state.invitationDateError ? true : false}
                 helperText={
                   this.state.invitationDateError
-                    ? "Please specify a date."
+                    ? 'Please specify a date.'
                     : null
                 }
               />
@@ -200,7 +200,7 @@ class CreateInvitation extends React.Component {
                 error={this.state.invitationTimeError ? true : false}
                 helperText={
                   this.state.invitationTimeError
-                    ? "Please specify a time"
+                    ? 'Please specify a time'
                     : null
                 }
               />
