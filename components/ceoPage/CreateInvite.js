@@ -1,42 +1,57 @@
 /* eslint-disable react/prop-types */
 
-//components
+
+//material ui
 import { TextField, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
+
+import Invites from '../Invites';
 
 //sweet alert
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
+
 //context API
 import CeoContext from '../../contextApi/CeoContext';
 import { formatDiagnosticsWithColorAndContext } from 'typescript';
+
 
 const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
     maxWidth: '100%',
     marginTop: '20px',
-    borderRadius: '20px'
-  },
-  textField: {
-    margin: '10px'
+
+    marginBottom: '20px',
+    borderRadius: '20px',
+    display: 'grid',
+    gridTemplateColumns: '100px 5fr'
   },
   dataField: {
-    marginTop: '26px'
+    marginRight: '10px'
+  },
+  icon: {
+    fontSize: '100px',
+    color: '#3f50b5'
+
   },
   sendButton: {
     backgroundColor: '#3f50b5',
     margin: '10px',
+
+    marginLeft: '0px',
+    width: '100px',
     '&:hover': {
       backgroundColor: '#3748b0'
     }
   },
-  button: {
-    margin: '10px'
-  },
-  fields: {
-    margin: 'auto'
+  cancelButton: {
+    backgroundColor: '#999999',
+    margin: '10px',
+    marginLeft: '0px',
+    width: '100px'
   }
 });
 
@@ -57,7 +72,6 @@ class CreateInvitation extends React.Component {
 
   componentDidMount = () => {
     this.getDate();
-    console.log(this.state);
   };
 
   getDate = () => {
@@ -126,6 +140,7 @@ class CreateInvitation extends React.Component {
           button: true
         })
           .then(value => {
+
             console.log('generating an invitation');
             this.context.handleSendInvitation({
               employeeId: this.props.invitee.Id,
@@ -145,83 +160,88 @@ class CreateInvitation extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(this.state);
 
     return (
       <div>
         <h1 className="title">Send Invite</h1>
         <Paper className={classes.paper}>
-          <form noValidate autoComplete="off">
-            <div className={classes.fields}>
-              <TextField
-                id="standard-read-only-input"
-                label="Invite"
-                defaultValue={this.props.invitee.Name}
-                InputProps={{
-                  readOnly: true
-                }}
-                className={classes.textField}
-              />
-              <TextField
-                required
-                id="standard"
-                label="Note"
-                value={this.state.comments}
-                className={classes.textField}
-                name="comments"
-                onChange={this.handleInputChange}
-                error={this.state.commentsError ? true : false}
-                helperText={
-                  this.state.commentsError ? 'This field is required' : null
-                }
-              />
-              <TextField
-                id="date"
-                type="date"
-                label="Date"
-                className={classes.dataField}
-                value={this.state.invitationDate}
-                name="invitationDate"
-                onChange={this.handleInputChange}
-                error={this.state.invitationDateError ? true : false}
-                helperText={
-                  this.state.invitationDateError
-                    ? 'Please specify a date.'
-                    : null
-                }
-              />
-              <TextField
-                id="time"
-                type="time"
-                label="Time"
-                className={classes.dataField}
-                value={this.state.invitationDate}
-                name="invitationTime"
-                onChange={this.handleInputChange}
-                error={this.state.invitationTimeError ? true : false}
-                helperText={
-                  this.state.invitationTimeError
-                    ? 'Please specify a time'
-                    : null
-                }
-              />
-            </div>
-          </form>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.sendButton}
-            onClick={this.handleSendInvitation}
-          >
-            Send
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={this.handleCancelInvitation}
-          >
-            Cancel
-          </Button>
+          <InsertInvitationIcon className={classes.icon} />
+          <div>
+            <form noValidate autoComplete="off">
+              <div className={classes.fields}>
+                <TextField
+                  id="standard-read-only-input"
+                  label="Invite"
+                  defaultValue={this.props.invitee.Name}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                  className={classes.dataField}
+                />
+                <TextField
+                  id="standard"
+                  label="Note"
+                  value={this.state.comments}
+                  className={classes.dataField}
+                  name="comments"
+                  onChange={this.handleInputChange}
+                  error={this.state.commentsError ? true : false}
+                  helperText={
+                    this.state.commentsError ? 'This field is required' : null
+                  }
+                />
+                <TextField
+                  id="date"
+                  type="date"
+                  label="Date"
+                  className={classes.dataField}
+                  value={this.state.invitationDate}
+                  name="invitationDate"
+                  onChange={this.handleInputChange}
+                  error={this.state.invitationDateError ? true : false}
+                  helperText={
+                    this.state.invitationDateError
+                      ? 'Please specify a date.'
+                      : null
+                  }
+                />
+                <TextField
+                  id="time"
+                  type="time"
+                  label="Time"
+                  className={classes.dataField}
+                  value={this.state.invitationTime}
+                  name="invitationTime"
+                  onChange={this.handleInputChange}
+                  error={this.state.invitationTimeError ? true : false}
+                  helperText={
+                    this.state.invitationTimeError
+                      ? 'Please specify a time'
+                      : null
+                  }
+                />
+              </div>
+            </form>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.cancelButton}
+              onClick={this.handleCancelInvitation}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.sendButton}
+              onClick={this.handleSendInvitation}
+            >
+              Send
+            </Button>
+          </div>
         </Paper>
+        <Invites></Invites>
       </div>
     );
   }
