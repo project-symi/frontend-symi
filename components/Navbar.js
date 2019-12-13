@@ -17,7 +17,6 @@ const Navbar = () => {
 
   const employeeProps = useContext(EmployeeContext);
   const ceoProps = useContext(CeoContext);
-  console.log(ceoProps.userType);
 
   return (<div id="navbar">
     {employeeProps.points ? (
