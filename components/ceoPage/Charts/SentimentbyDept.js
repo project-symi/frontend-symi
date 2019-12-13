@@ -88,7 +88,7 @@ export default class SentimentbyDept extends React.Component {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Legend />
+          {/* <Legend /> */}
           <Bar dataKey="😞" stackId="a" fill="#8884d8" />
           <Bar dataKey="😐" stackId="a" fill="#58AFC2" />
           <Bar dataKey="😊" stackId="a" fill="#3ED7BD" />

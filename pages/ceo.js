@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 //components
-import Sidebar from '../components/Sidebar';
-import Navbar from '../components/Navbar';
-import Dashboard from '../components/ceoPage/Dashboard';
-import Assignments from '../components/Assignments';
-import Polls from '../components/Polls';
-import News from '../components/News';
-import Invites from '../components/Invites';
-import About from '../components/About';
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import Dashboard from "../components/ceoPage/Dashboard";
+import Assignments from "../components/Assignments";
+import Polls from "../components/Polls";
+import News from "../components/News";
+import Invites from "../components/Invites";
+import About from "../components/About";
 
 //styles
-import '../styles/CEO.css';
+import "../styles/CEO.css";
 
 //utils
 import axios from 'axios';
@@ -21,36 +21,11 @@ import nextCookies from 'next-cookies';
 import { CeoProvider } from '../contextApi/CeoContext';
 
 //sweet alert
-import swal from 'sweetalert';
-import '../assets/sweetalert.min.js';
+import swal from "sweetalert";
+import "../assets/sweetalert.min.js";
 
-//top employees dummy data (for now)
-const topEmployees = [{
-  name: 'Igor Dawg',
-  points: 500,
-  employeeId: 3
-},
-{
-  name: 'Mini Meow',
-  points: 400,
-  employeeId: 1
-},
-{
-  name: 'Yukio Lion',
-  points: 100,
-  employeeId: 2
-},
-{
-  name: 'Steffie Frog',
-  points: 150,
-  employeeId: 4
-},
-{
-  name: 'Potato Fan',
-  points: 300,
-  employeeId: 5
-}
-];
+// dummy data
+import { topEmployees } from "../assets/dummyData";
 
 export default class Ceo extends React.Component {
   static async getInitialProps(ctx) {
@@ -62,13 +37,22 @@ export default class Ceo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentlyShown: 'dashboard',
+      currentlyShown: "dashboard",
       topEmployees: null,
+      topDepartments: [
+        { name: "Engineering", points: 5500 },
+        { name: "Operations", points: 7000 },
+        { name: "Admin", points: 200 },
+        { name: "Marketing", points: 2300 },
+        { name: "Sales", points: 5000 },
+        { name: "QA", points: 5000 },
+        { name: "Part-Time", points: 5000 }
+      ],
       goodFeedbacks: null,
       mehFeedbacks: null,
       sadFeedbacks: null,
       feedbacksByFeelingRatio: null,
-      userType: 'CEO'
+      userType: "CEO"
     };
   }
 
@@ -76,10 +60,22 @@ export default class Ceo extends React.Component {
     //make an API call to db to get top employees data for dashboard
     //make an API call to get all feedbacks
     this.getFeedbacks();
+
+    this.getTopEmployees();
+  }
+
+  getTopEmployees = async () => {
+    // const res = await axios.get(
+    //   "https://symi-be.herokuapp.com/auth/feedbacks",
+    //   { headers: { token: this.props.token } }
+    // );
+    // const topEmployees = res.data
+
+    console.log({ topEmployees });
     this.setState({
       topEmployees
     });
-  }
+  };
 
   getFeedbacks = async () => {
     //all fbs
@@ -88,35 +84,38 @@ export default class Ceo extends React.Component {
     const feedbacksByFeelingRatio = response.data.reduce(
       (acc, feedback) => {
         switch (feedback.feeling) {
-        case 'good':
-          acc[0].value++;
-          break;
-        case 'meh':
-          acc[1].value++;
-          break;
-        default:
-          acc[2].value++;
-          break;
+          case "good":
+            acc[0].value++;
+            break;
+          case "meh":
+            acc[1].value++;
+            break;
+          default:
+            acc[2].value++;
+            break;
         }
         return acc;
       },
       [
-        { name: '😊', value: 0, feeling: 'good' },
-        { name: '😐', value: 0, feeling: 'meh' },
-        { name: '😞', value: 0, feeling: 'sad' }
+        { name: "😊", value: 0, feeling: "good" },
+        { name: "😐", value: 0, feeling: "meh" },
+        { name: "😞", value: 0, feeling: "sad" }
       ]
     );
     //good fb
     const responseGood = await axios.get(
-      'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.props.token }}
+      "https://symi-be.herokuapp.com/auth/feedbacks?feeling=good",
+      { headers: { token: this.props.token } }
     );
     //meh fb
     const responseMeh = await axios.get(
-      'https://symi-be.herokuapp.com/auth/feedbacks?feeling=meh', { headers: { token: this.props.token }}
+      "https://symi-be.herokuapp.com/auth/feedbacks?feeling=meh",
+      { headers: { token: this.props.token } }
     );
     //sad fb
     const responseSad = await axios.get(
-      'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad', { headers: { token: this.props.token }}
+      "https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad",
+      { headers: { token: this.props.token } }
     );
     //create feedbacks ratio by feelings
     this.setState({
@@ -130,37 +129,37 @@ export default class Ceo extends React.Component {
   handleGetKeywords = async feeling => {
     let notes;
     switch (feeling) {
-    case 'good':
-      notes = this.state.goodFeedbacks.map(feedback => feedback.note);
-      break;
-    case 'meh':
-      notes = this.state.mehFeedbacks.map(feedback => feedback.note);
-      break;
-    default:
-      notes = this.state.sadFeedbacks.map(feedback => feedback.note);
-      break;
+      case "good":
+        notes = this.state.goodFeedbacks.map(feedback => feedback.note);
+        break;
+      case "meh":
+        notes = this.state.mehFeedbacks.map(feedback => feedback.note);
+        break;
+      default:
+        notes = this.state.sadFeedbacks.map(feedback => feedback.note);
+        break;
     }
-    console.log(notes);
+    console.log({ notes });
     const requestBody = {
       input_data: notes,
-      input_type: 'text',
+      input_type: "text",
       N: 10
     };
     const response = await axios.post(
-      'https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords',
+      "https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords",
       requestBody,
       {
         headers: {
-          'Content-Type': 'application/json',
-          'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
-          'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'
+          "Content-Type": "application/json",
+          "x-rapidapi-host": "unfound-keywords-extraction-v1.p.rapidapi.com",
+          "x-rapidapi-key": "0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634"
         }
       }
     );
     swal({
-      title: feeling === 'good' ? 'Positive Feedback Highlights' : 'Negative Feedback Highlights',
-      text: response.data.result.join(', '),
-      icon: 'success',
+      title: feeling === "good" ? "Positive Feedback" : "Negative Feedback",
+      text: response.data.result.join(", "),
+      icon: feeling === "good" ? "success" : "warning",
       button: true
     });
     // .then((val) => {
@@ -177,7 +176,7 @@ export default class Ceo extends React.Component {
 
   handleSendInvitation = invitationObj => {
     //make an API call to create an invitation
-    console.log(invitationObj, ' invitation was sent');
+    console.log(invitationObj, " invitation was sent");
   };
 
   renderSwitchView = param => {

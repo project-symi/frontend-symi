@@ -4,20 +4,25 @@
 import { Button } from '@material-ui/core';
 
 //charts
-import SentimentOverall from './Charts/SentimentOverall';
-import SentimentbyCategory from './Charts/SentimentbyCategory';
-import SentimentbyNews from './Charts/SentimentbyNews';
-import SentimentbyDept from './Charts/SentimentbyDept';
+import SentimentOverall from "./Charts/SentimentOverall";
+import SentimentbyCategory from "./Charts/SentimentbyCategory";
+import SentimentbyNews from "./Charts/SentimentbyNews";
+import SentimentbyDept from "./Charts/SentimentbyDept";
 
 //components
-import CreateInvitation from './CreateInvitation';
+import CreateInvite from "./CreateInvite";
+
+// material ui
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 //images
-import Loader from '../../assets/loader_img.gif';
+import Loader from "../../assets/loader_img.gif";
+import human from "../../assets/human.png";
 
 //context API
 import CeoContext from '../../contextApi/CeoContext';
 
+import swal from "@sweetalert/with-react";
 
 export default class Dashboard extends React.Component {
   static contextType = CeoContext;
@@ -25,26 +30,72 @@ export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      topDepartments: [
-        { name: 'Engineering', points: 5500 },
-        { name: 'Operations', points: 7000 },
-        { name: 'Admin', points: 200 },
-        { name: 'Marketing', points: 2300 },
-        { name: 'Sales', points: 5000 },
-        { name: 'QA', points: 5000 },
-        { name: 'Part-Time', points: 5000 }
-      ],
-      currentlyShown: 'defaultView',
-      invitee: null
+      currentlyShown: "defaultView",
+      invitee: null,
+      positiveFeedbacks: [
+        {
+          id: 1,
+          note: [
+            "he is awesome",
+            "he's very helpful & a hard worker",
+            "he gives me TimTams sometimes"
+          ]
+        },
+        {
+          id: 1,
+          note: [
+            "she's such a supportive tech lead",
+            "I love working with her",
+            "she likes cats and I like"
+          ]
+        }
+      ]
     };
   }
 
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
+  static jsfiddleUrl = "https://jsfiddle.net/alidingling/w6wsrc52/";
 
+  showEmployeeDetails = employee => {
+    swal({
+      content: (
+        <div className="employee-detail">
+          <img className="employee-img" width="200px" src={human}></img>
+          <div className="employee-details">
+            <div className="employee-name">
+              {employee.Name}, {employee.Gender[0].toUpperCase()}
+            </div>
+            {employee.Department}
+          </div>
+          <div className="employee-feedback">{}</div>
+        </div>
+      ),
+      buttons: {
+        confirm: {
+          text: "INVITE",
+          value: "invite",
+          className: "swal-button"
+        },
+        cancel: {
+          text: "CANCEL",
+          value: "cancel",
+          className: ""
+        }
+      }
+    }).then(value => {
+      if (value === "invite") {
+        this.handleSwitchViewToInvite(employee);
+      }
+    });
+  };
+
+  ////////////////////////////// INVITATION
   //switch view to Create Invitation and pass the invitee name
-  handleSwitchViewToInvite = (invitee) => {
-    this.setState({ currentlyShown: 'createInvitation', invitee });
-  }
+  handleSwitchViewToInvite = invitee => {
+    this.setState({
+      currentlyShown: "createInvitation",
+      invitee
+    });
+  };
 
   //in case CEO click cancel invitation button switch to default view
   handleCancelInvitation = () => {
@@ -77,20 +128,29 @@ export default class Dashboard extends React.Component {
                            invite
                             </Button>
                           </div>
-                        </div>
-                      );
-                    }) : <img src={Loader} style={{ height: '100px', width: '100px' }} ></img> }
+                        );
+                      })
+                  ) : (
+                    <img
+                      src={Loader}
+                      style={{ height: "100px", width: "100px" }}
+                    ></img>
+                  )}
                 </div>
               </div>
               <div>
                 <p className="data-title">OVERALL SENTIMENT</p>
-                <SentimentOverall overallSentiment={this.props.overallSentiment} feedbacksByFeelings={this.props.feedbacksByFeelings} handleGetKeywords={this.props.handleGetKeywords} />
+                <SentimentOverall
+                  overallSentiment={this.props.overallSentiment}
+                  feedbacksByFeelings={this.props.feedbacksByFeelings}
+                  handleGetKeywords={this.props.handleGetKeywords}
+                />
               </div>
               <div>
                 <p className="data-title">TOP RATED TEAMS</p>
                 <div className="data">
                   {[]
-                    .concat(this.state.topDepartments)
+                    .concat(this.props.topDepartments)
                     .sort((a, b) => {
                       return b.points - a.points;
                     })
@@ -102,7 +162,7 @@ export default class Dashboard extends React.Component {
                           <div>{department.points} ⭐️</div>
                           <div>
                             <Button size="small" color="primary">
-                           assign
+                              assign
                             </Button>
                           </div>
                         </div>
@@ -124,7 +184,7 @@ export default class Dashboard extends React.Component {
               </div>
             </div>
           </div>
-        }
+        )}
       </div>
     );
   }
