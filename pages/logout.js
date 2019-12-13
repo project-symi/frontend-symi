@@ -1,12 +1,12 @@
 //next.js
-import Link from 'next/link';
+import Link from "next/link";
 
 //styles
-import '../styles/App.css';
-import '../styles/Index.css';
+import "../styles/App.css";
+import "../styles/Index.css";
 
 //MUI components
-import { Button } from '@material-ui/core';
+import { Button } from "@material-ui/core";
 
 const Logout = () => (
   <div id="login-wrap">
@@ -17,7 +17,7 @@ const Logout = () => (
       ></img>
       <div>
         <h3>Logged out successfully</h3>
-        <Link href='login'><Button fontSize="small" color="primary" id="login">
+        <Link href='/'><Button fontSize="small" color="primary" id="login">
     Want to login back?
         </Button></Link>
       </div>

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
-import PointsKey from './PointsKey';
+import PointsKey from "./PointsKey";
 
 //components
-import { Autocomplete } from '@material-ui/lab';
+import { Autocomplete } from "@material-ui/lab";
 import {
   Slider,
   Select,
@@ -11,31 +11,31 @@ import {
   Button,
   FormControl,
   FormHelperText
-} from '@material-ui/core';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+} from "@material-ui/core";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 
 //util functions
-import { feedbackValidation, debounce } from '../../utils/utils';
-import moment from 'moment';
+import { feedbackValidation, debounce } from "../../utils/utils";
+import moment from "moment";
 
 //images
-import Loader from '../../assets/loader_img.gif';
+import Loader from "../../assets/loader_img.gif";
 
 //contextAPI
-import EmployeeContext from '../../contextApi/EmployeeContext';
+import EmployeeContext from "../../contextApi/EmployeeContext";
 
 //feelings data
 const feelings = [
   {
-    value: '100',
-    label: ' 😊'
+    value: "100",
+    label: " 😊"
   },
   {
     value: 50,
-    label: '😐'
+    label: "😐"
   },
-  { value: 0, label: '😞' }
+  { value: 0, label: "😞" }
 ];
 
 
@@ -45,17 +45,17 @@ export default class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      feeling: 'good',
-      about: '',
-      input: '',
-      note: '',
+      feeling: "good",
+      about: "",
+      input: "",
+      note: "",
       status: false,
       feedbackValidation: {
         result: false,
         errors: {
-          note: { isShown: false, message: '' },
-          about: { isShown: false, message: '' },
-          input: { isShown: false, message: '' }
+          note: { isShown: false, message: "" },
+          about: { isShown: false, message: "" },
+          input: { isShown: false, message: "" }
         }
       },
       isPopupOpen: false
@@ -95,22 +95,22 @@ export default class Feedback extends React.Component {
         status: this.state.status,
         category: this.state.about,
         note: this.state.note,
-        recipientId: this.state.about === 'Employee' ? this.state.input : '',
-        newsId: this.state.about === 'News' ? this.state.input : 0
+        recipientId: this.state.about === "Employee" ? this.state.input : "",
+        newsId: this.state.about === "News" ? this.state.input : 0
       };
       this.context.submitFeedback(feedback);
-      this.setState({ about: '', note: '', input: '' });
+      this.setState({ about: "", note: "", input: "" });
     }
   };
 
   handleFeelingInput = (event, value) => {
-    let feeling = '';
+    let feeling = "";
     if (value === 0) {
-      feeling = 'sad';
+      feeling = "sad";
     } else if (value === 50) {
-      feeling = 'meh';
+      feeling = "meh";
     } else if (value === 100) {
-      feeling = 'good';
+      feeling = "good";
     }
     this.setState({ feeling });
   };
@@ -121,9 +121,9 @@ export default class Feedback extends React.Component {
     if (this.state.isPopupOpen) {
       this.setState({ input: value.employeeId, isPopupOpen: false });
     } else {
-      console.log('hello', this.state.input);
+      console.log("hello", this.state.input);
       //clear the input and re-render employee name input field
-      this.setState({ input: '' });
+      this.setState({ input: "" });
       this.context.deleteFuzzyNames();
     }
   };
@@ -181,10 +181,10 @@ export default class Feedback extends React.Component {
                     </FormHelperText>
                   ) : null}
 
-                  {(this.state.about === 'Employee' &&
-                    this.context.fuzzyNames === '') ||
-                  (this.state.about === 'News' &&
-                    this.context.fuzzyNames === '') ? (
+                  {(this.state.about === "Employee" &&
+                    this.context.fuzzyNames === "") ||
+                  (this.state.about === "News" &&
+                    this.context.fuzzyNames === "") ? (
                       <TextField
                         error={this.state.feedbackValidation.errors.input.isShown}
                         helperText={
@@ -194,9 +194,9 @@ export default class Feedback extends React.Component {
                         margin="normal"
                         name="input"
                         placeholder={
-                          this.state.about === 'Employee'
-                            ? 'Please specify employee name'
-                            : 'Please enter news topic'
+                          this.state.about === "Employee"
+                            ? "Please specify employee name"
+                            : "Please enter news topic"
                         }
                         onChange={this.handleEmployeeNameInput}
                       ></TextField>
@@ -276,23 +276,23 @@ export default class Feedback extends React.Component {
             return (
               <div key={item.id} className="feedback-history">
                 <span className="feedback">
-                  <span> {moment(item.dateAdded).format('ddd, hA')}</span>I feel{' '}
-                  {' ' + item.feeling.toLowerCase() + ' '}
+                  <span> {moment(item.dateAdded).format("ddd, hA")}</span>I feel{" "}
+                  {" " + item.feeling.toLowerCase() + " "}
                   about
-                  {' ' +
-                    (item.category === 'Employee' ? item.name : item.category) +
-                    ' '}
+                  {" " +
+                    (item.category === "Employee" ? item.name : item.category) +
+                    " "}
                   because {item.note}.
-                </span>{' '}
+                </span>{" "}
                 <div className="status">
                   <div>
                     {!item.status ? (
-                      <HighlightOffIcon style={{ color: 'red' }} />
+                      <HighlightOffIcon style={{ color: "red" }} />
                     ) : (
-                      <CheckCircleOutlineIcon style={{ color: 'green' }} />
+                      <CheckCircleOutlineIcon style={{ color: "green" }} />
                     )}
                   </div>
-                  <div> {item.status ? 'Seen' : 'Unseen'}</div>
+                  <div> {item.status ? "Seen" : "Unseen"}</div>
                 </div>
               </div>
             );

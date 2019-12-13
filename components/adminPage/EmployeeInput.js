@@ -1,34 +1,34 @@
 /* eslint-disable react/prop-types */
 //utils
-import { formValidation, extractCsvData } from '../../utils/utils';
-import Papa from 'papaparse';
+import { formValidation, extractCsvData } from "../../utils/utils";
+import Papa from "papaparse";
 
 //components
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from "@material-ui/core";
 
 //sweet alert
-import swal from 'sweetalert';
-import '../../assets/sweetalert.min.js';
+import swal from "sweetalert";
+import "../../assets/sweetalert.min.js";
 
 class EmployeeInput extends React.Component {
   constructor() {
     super();
     this.state = {
-      employeeId: '',
-      email: '',
-      department: '',
-      name: '',
-      dateOfBirth: '',
-      type: '',
-      gender: '',
+      employeeId: "",
+      email: "",
+      department: "",
+      name: "",
+      dateOfBirth: "",
+      type: "",
+      gender: "",
       formValidation: {
-        employeeId: { isShown: false, message: '' },
-        email: { isShown: false, message: '' },
-        department: { isShown: false, message: '' },
-        name: { isShown: false, message: '' },
-        dateOfBirth: { isShown: false, message: '' },
-        type: { isShown: false, message: '' },
-        gender: { isShown: false, message: '' }
+        employeeId: { isShown: false, message: "" },
+        email: { isShown: false, message: "" },
+        department: { isShown: false, message: "" },
+        name: { isShown: false, message: "" },
+        dateOfBirth: { isShown: false, message: "" },
+        type: { isShown: false, message: "" },
+        gender: { isShown: false, message: "" }
       },
       csvData: null
     };
@@ -56,27 +56,27 @@ class EmployeeInput extends React.Component {
       return;
     } else {
       swal({
-        title: 'Employee Registration Confirm',
-        text: 'Are you sure you want to add another user?',
-        icon: 'warning',
+        title: "Employee Registration Confirm",
+        text: "Are you sure you want to add another user?",
+        icon: "warning",
         buttons: {
           confirm: {
-            text: 'CONFIRM',
-            value: 'confirm'
+            text: "CONFIRM",
+            value: "confirm"
           },
-          cancel: 'CANCEL'
+          cancel: "CANCEL"
         }
       })
         .then(value => {
           switch (value) {
-          case 'confirm':
+          case "confirm":
             return swal({
-              title: 'Done',
-              text: 'Employee successfully added!',
-              icon: 'success',
+              title: "Done",
+              text: "Employee successfully added!",
+              icon: "success",
               button: true
             }).then(val => {
-              console.log('adding an employee');
+              console.log("adding an employee");
               this.props.addNewEmployee({
                 employeeId: this.state.employeeId,
                 email: this.state.email,
@@ -93,13 +93,13 @@ class EmployeeInput extends React.Component {
         })
         .then(val =>
           this.setState({
-            employeeId: '',
-            email: '',
-            department: '',
-            name: '',
-            dateOfBirth: '',
-            type: '',
-            gender: ''
+            employeeId: "",
+            email: "",
+            department: "",
+            name: "",
+            dateOfBirth: "",
+            type: "",
+            gender: ""
           })
         );
     }
@@ -107,14 +107,14 @@ class EmployeeInput extends React.Component {
 
   handleCsvInput = e => {
     //in case file type is not CSV
-    if (e.target.files[0].type !== 'text/csv') {
+    if (e.target.files[0].type !== "text/csv") {
       swal({
-        title: 'Upload Error',
-        text: 'Please upload a CSV file',
-        icon: 'error',
+        title: "Upload Error",
+        text: "Please upload a CSV file",
+        icon: "error",
         button: true
       });
-      e.target.value = '';
+      e.target.value = "";
     } else {
       Papa.parse(e.target.files[0], {
         complete: results => {
@@ -128,7 +128,7 @@ class EmployeeInput extends React.Component {
   handleCsvUpload = () => {
     this.props.addNewEmployee(this.state.csvData);
     //clear input value
-    e.target.value = '';
+    e.target.value = "";
   };
 
   render() {
