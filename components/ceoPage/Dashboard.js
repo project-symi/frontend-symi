@@ -31,44 +31,37 @@ export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentlyShown: 'defaultView',
-      invitee: null,
-      positiveFeedbacks: [
-        {
-          id: 1,
-          note: [
-            'he is awesome',
-            'he\'s very helpful & a hard worker',
-            'he gives me TimTams sometimes'
-          ]
-        },
-        {
-          id: 1,
-          note: [
-            'she\'s such a supportive tech lead',
-            'I love working with her',
-            'she likes cats and I like'
-          ]
-        }
-      ]
+      currentlyShown: "defaultView",
+      invitee: null
     };
   }
 
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
-  showEmployeeDetails = employee => {
+  ////////////////////////////// TOP RATED EMPLOYEES
+  /////////// EMPLOYEE DETAILS
+ showEmployeeDetails = async (employee) => {
+   const employeeFeedback = await this.props.topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
+
     swal({
       content: (
-        <div className="employee-detail">
-          <img className="employee-img" width="200px" src={human}></img>
+        <div>
+        <div className="employee-popup">
+          {employee.gender === "male" ?  <img className="employee-img" width="200px" src={human}></img> : <img className="employee-img" width="200px" src={human}></img> }
+         
           <div className="employee-details">
             <div className="employee-name">
-              {employee.Name}, {employee.Gender[0].toUpperCase()}
+              {employee.name}, {employee.gender[0].toUpperCase()}
             </div>
-            {employee.Department}
+            {employee.department}
           </div>
-          <div className="employee-feedback">{}</div>
         </div>
+      <div className="employee-feedback">{employeeFeedback.map((feedback, i) => {
+            return (<div key={i}>{`"${feedback.note}"`}</div>);
+          })}
+      </div>
+      </div>
+        
       ),
       buttons: {
         confirm: {
@@ -89,7 +82,7 @@ export default class Dashboard extends React.Component {
     });
   };
 
-  ////////////////////////////// INVITATION
+  ////////// INVITATION
   //switch view to Create Invitation and pass the invitee name
   handleSwitchViewToInvite = invitee => {
     this.setState({
@@ -130,9 +123,9 @@ export default class Dashboard extends React.Component {
                             <div
                               onClick={() => this.showEmployeeDetails(employee)}
                             >
-                              {employee.Name}
+                              {employee.name}
                             </div>
-                            <div>{employee.Point} ⭐️</div>
+                            <div>{employee.point} ⭐️</div>
                             <div>
                               <Button
                                 size="small"

@@ -41,6 +41,7 @@ export default class Ceo extends React.Component {
         { name: 'QA', points: 5000 },
         { name: 'Part-Time', points: 5000 }
       ],
+      topEmployeeFeedbacks: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
       sadFeedbacks: null,
@@ -52,18 +53,20 @@ export default class Ceo extends React.Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
+    //make an API call to db to get top employees data for dashboard
+    //make an API call to get all feedbacks
+    // OVERALL SENTIMENT
+    this.getFeedbacks();
+    // TOP EMPLOYEES
+    this.getTopEmployees(); 
 
-    this.setState({ token, userId }, () => {
-      //API call to get all feedbacks
-      this.getFeedbacks();
+    this.getPositiveFeedbacks();
 
-      //API call to db to get top employees data for dashboard
-      this.getTopEmployees();
-    });
+    console.log(this.props.token);
+
   }
 
+  //////////////////////// TOP RATED EMPLOYEES
   getTopEmployees = async () => {
     // const res = await axios.get(
     //   "https://symi-be.herokuapp.com/auth/feedbacks",
@@ -72,11 +75,21 @@ export default class Ceo extends React.Component {
     // const topEmployees = res.data
 
     console.log({ topEmployees });
+
     this.setState({
       topEmployees
     });
   };
 
+getPositiveFeedbacks = async (employeeId) => {
+  const res = await axios.get("https://symi-be.herokuapp.com/auth/feedbacks?feeling=good", { headers: { token: this.props.token } })
+
+  const topEmployeeFeedbacks = res.data;
+
+  this.setState({topEmployeeFeedbacks});
+} 
+
+  //////////////////////// OVERALL SENTIMENT
   getFeedbacks = async () => {
     //all fbs
     const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
@@ -183,7 +196,15 @@ export default class Ceo extends React.Component {
     case 'news':
       return <News />;
     case 'dashboard':
-      return <Dashboard />;
+      return <Dashboard topEmployeeFeedbacks={this.state.topEmployeeFeedbacks}
+        feedbacksbyFeelings = {
+          [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
+        }
+        handleGetKeywords = {
+          this.handleGetKeywords
+        }
+        topDepartments = {this.state.topDepartments}
+      />;
     case 'assignments':
       return <Assignments /> ;
     case 'polls':
