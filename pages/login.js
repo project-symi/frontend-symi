@@ -38,6 +38,7 @@ export default class Login extends React.Component {
       return null;
     } else if (this.state.permission === 'employee') {
       cookie.set('token', this.state.token, { expires: 1 });
+      cookie.set('userId', this.state.userId, { expires: 1 });
       Router.push('/employee');
       return null;
     } else {
