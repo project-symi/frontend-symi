@@ -1,23 +1,23 @@
 /* eslint-disable react/prop-types */
 //components
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
-import Feedback from "../components/employeePage/Feedback";
-import Rewards from "../components/employeePage/Rewards";
-import Polls from "../components/Polls";
-import News from "../components/News";
-import Invites from "../components/Invites";
-import About from "../components/About";
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
+import Feedback from '../components/employeePage/Feedback';
+import Rewards from '../components/employeePage/Rewards';
+import Polls from '../components/Polls';
+import News from '../components/News';
+import Invites from '../components/Invites';
+import About from '../components/About';
 
 //utils
 import axios from 'axios';
 import nextCookies from 'next-cookies';
 
 //styles
-import "../styles/Employee.css";
+import '../styles/Employee.css';
 
 //dummy data
-import { totalPoints, rewards } from "../assets/dummyData";
+import { totalPoints, rewards } from '../assets/dummyData';
 
 //contextAPI
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
@@ -33,8 +33,8 @@ export default class Employee extends React.Component {
     super(props);
     this.state = {
       isDefaultView: true,
-      currentlyShown: "feedback",
-      fuzzyNames: "",
+      currentlyShown: 'feedback',
+      fuzzyNames: '',
       feedbacks: null,
       rewards: [
         {
@@ -121,7 +121,7 @@ export default class Employee extends React.Component {
   };
 
   deleteFuzzyNames = () => {
-    this.setState({ fuzzyNames: "" });
+    this.setState({ fuzzyNames: '' });
   };
 
   // SUBMIT FEEDBACK
@@ -166,33 +166,33 @@ export default class Employee extends React.Component {
   ///////////////////////////////// SIDEBAR
   renderSwitchView = param => {
     switch (param) {
-      case "feedback":
-        return (
-          <Feedback
-            feedbacks={this.state.feedbacks}
-            handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-            submitFeedback={this.submitFeedback}
-            fuzzyNames={this.state.fuzzyNames}
-            deleteFuzzyNames={this.deleteFuzzyNames}
-          />
-        );
-      case "news":
-        return <News />;
-      case "polls":
-        return <Polls />;
-      case "rewards":
-        return (
-          <Rewards
-            rewards={this.state.rewards}
-            handleRewardDetails={this.handleRewardDetails}
-          />
-        );
-      case "invites":
-        return <Invites />;
-      case "about":
-        return <About />;
-      default:
-        null;
+    case 'feedback':
+      return (
+        <Feedback
+          feedbacks={this.state.feedbacks}
+          handleFuzzyNameSearch={this.handleFuzzyNameSearch}
+          submitFeedback={this.submitFeedback}
+          fuzzyNames={this.state.fuzzyNames}
+          deleteFuzzyNames={this.deleteFuzzyNames}
+        />
+      );
+    case 'news':
+      return <News />;
+    case 'polls':
+      return <Polls />;
+    case 'rewards':
+      return (
+        <Rewards
+          rewards={this.state.rewards}
+          handleRewardDetails={this.handleRewardDetails}
+        />
+      );
+    case 'invites':
+      return <Invites />;
+    case 'about':
+      return <About />;
+    default:
+      null;
     }
   };
 
