@@ -15,7 +15,7 @@ import '../../assets/sweetalert.min.js';
 
 //context API
 import CeoContext from '../../contextApi/CeoContext';
-import { formatDiagnosticsWithColorAndContext } from "typescript";
+import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
 
 const styles = theme => ({

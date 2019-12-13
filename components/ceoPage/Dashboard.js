@@ -1,19 +1,19 @@
 /* eslint-disable react/prop-types */
 
 //material-ui
-import { Button } from "@material-ui/core";
+import { Button } from '@material-ui/core';
 
 //charts
-import SentimentOverall from "./Charts/SentimentOverall";
-import SentimentbyCategory from "./Charts/SentimentbyCategory";
-import SentimentbyNews from "./Charts/SentimentbyNews";
-import SentimentbyDept from "./Charts/SentimentbyDept";
+import SentimentOverall from './Charts/SentimentOverall';
+import SentimentbyCategory from './Charts/SentimentbyCategory';
+import SentimentbyNews from './Charts/SentimentbyNews';
+import SentimentbyDept from './Charts/SentimentbyDept';
 
 //components
-import CreateInvite from "./CreateInvite";
+import CreateInvite from './CreateInvite';
 
 // material ui
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 //images
 import Loader from "../../assets/loader_img.gif";
@@ -40,12 +40,22 @@ export default class Dashboard extends React.Component {
     };
   }
 
-  static jsfiddleUrl = "https://jsfiddle.net/alidingling/w6wsrc52/";
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
+  ////////////////////////////// TOP RATED EMPLOYEES
+  /////////// EMPLOYEE DETAILS
+showEmployeeDetails = employee => {
 
-  showEmployeeDetails = employee => {
+console.log("dashboard topEmployeeFeedbacks", this.props.topEmployeeFeedbacks);
+ const topEmployeeFeedbacks = this.props.topEmployeeFeedbacks;
+
+const employeeFeedback = topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
+
+console.log({employeeFeedback});
+
     swal({
       content: (
-        <div className="employee-detail">
+        <div>
+        <div className="employee-popup">
           {employee.gender === "male" ?  <img className="employee-img" width="200px" src={human}></img> : <img className="employee-img" width="200px" src={human}></img> }
          
           <div className="employee-details">
@@ -54,46 +64,51 @@ export default class Dashboard extends React.Component {
             </div>
             {employee.department}
           </div>
-          <div className="employee-feedback">{}</div>
         </div>
+      <div className="employee-feedback">{employeeFeedback.map((feedback, i) => {
+            return (<div key={i}>{`"${feedback.note}"`}</div>);
+          })}
+      </div>
+      </div>
+        
       ),
       buttons: {
         confirm: {
-          text: "INVITE",
-          value: "invite",
-          className: "swal-button"
+          text: 'INVITE',
+          value: 'invite',
+          className: 'swal-button'
         },
         cancel: {
-          text: "CANCEL",
-          value: "cancel",
-          className: ""
+          text: 'CANCEL',
+          value: 'cancel',
+          className: ''
         }
       }
     }).then(value => {
-      if (value === "invite") {
+      if (value === 'invite') {
         this.handleSwitchViewToInvite(employee);
       }
     });
   };
 
-  ////////////////////////////// INVITATION
+  ////////// INVITATION
   //switch view to Create Invitation and pass the invitee name
   handleSwitchViewToInvite = invitee => {
     this.setState({
-      currentlyShown: "createInvitation",
+      currentlyShown: 'createInvitation',
       invitee
     });
   };
 
   //in case CEO click cancel invitation button switch to default view
   handleCancelInvitation = () => {
-    this.setState({ currentlyShown: "defaultView" });
+    this.setState({ currentlyShown: 'defaultView' });
   };
 
   render() {
     return (
       <div>
-        {this.state.currentlyShown === "createInvitation" ? (
+        {this.state.currentlyShown === 'createInvitation' ? (
           <CreateInvite
             invitee={this.state.invitee}
             handleCancelInvitation={this.handleCancelInvitation}
@@ -137,7 +152,7 @@ export default class Dashboard extends React.Component {
                   ) : (
                     <img
                       src={Loader}
-                      style={{ height: "100px", width: "100px" }}
+                      style={{ height: '100px', width: '100px' }}
                     ></img>
                   )}
                 </div>

@@ -22,6 +22,9 @@ import moment from 'moment';
 //images
 import Loader from '../../assets/loader_img.gif';
 
+//contextAPI
+import EmployeeContext from '../../contextApi/EmployeeContext';
+
 //feelings data
 const feelings = [
   {
@@ -35,7 +38,10 @@ const feelings = [
   { value: 0, label: '😞' }
 ];
 
+
 export default class Feedback extends React.Component {
+  static contextType = EmployeeContext;
+
   constructor() {
     super();
     this.state = {
@@ -44,6 +50,7 @@ export default class Feedback extends React.Component {
       input: '',
       note: '',
       status: false,
+      name: '',
       feedbackValidation: {
         result: false,
         errors: {
@@ -58,7 +65,7 @@ export default class Feedback extends React.Component {
 
   //make an API call to DB to get employees
   update = debounce(async () => {
-    await this.props.handleFuzzyNameSearch(this.state.input);
+    await this.context.handleFuzzyNameSearch(this.state.input);
     this.setState({ isPopupOpen: true });
   }, 1500);
 
@@ -90,9 +97,10 @@ export default class Feedback extends React.Component {
         category: this.state.about,
         note: this.state.note,
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
+        name: this.state.about === 'Employee' ? 'an employee' : '',
         newsId: this.state.about === 'News' ? this.state.input : 0
       };
-      this.props.submitFeedback(feedback);
+      this.context.submitFeedback(feedback);
       this.setState({ about: '', note: '', input: '' });
     }
   };
@@ -118,7 +126,7 @@ export default class Feedback extends React.Component {
       console.log('hello', this.state.input);
       //clear the input and re-render employee name input field
       this.setState({ input: '' });
-      this.props.deleteFuzzyNames();
+      this.context.deleteFuzzyNames();
     }
   };
 
@@ -176,9 +184,9 @@ export default class Feedback extends React.Component {
                   ) : null}
 
                   {(this.state.about === 'Employee' &&
-                    this.props.fuzzyNames === '') ||
+                    this.context.fuzzyNames === '') ||
                   (this.state.about === 'News' &&
-                    this.props.fuzzyNames === '') ? (
+                    this.context.fuzzyNames === '') ? (
                       <TextField
                         error={this.state.feedbackValidation.errors.input.isShown}
                         helperText={
@@ -195,9 +203,9 @@ export default class Feedback extends React.Component {
                         onChange={this.handleEmployeeNameInput}
                       ></TextField>
                     ) : null}
-                  {this.props.fuzzyNames ? (
+                  {this.context.fuzzyNames ? (
                     <Autocomplete
-                      options={this.props.fuzzyNames}
+                      options={this.context.fuzzyNames}
                       getOptionLabel={option => {
                         return `${option.name} (${option.department})`;
                       }}
@@ -265,8 +273,8 @@ export default class Feedback extends React.Component {
           <span>Details ▾</span>
           <span className="status">Status ▾</span>
         </div>
-        {this.props.feedbacks ? (
-          this.props.feedbacks.map(item => {
+        {this.context.feedbacks ? (
+          this.context.feedbacks.map(item => {
             return (
               <div key={item.id} className="feedback-history">
                 <span className="feedback">

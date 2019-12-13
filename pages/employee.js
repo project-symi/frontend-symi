@@ -22,11 +22,12 @@ import { totalPoints, rewards } from '../assets/dummyData';
 //contextAPI
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
 
+
 export default class Employee extends React.Component {
   static async getInitialProps(ctx) {
     //get the user token for API calls to db
-    const token = nextCookies(ctx);
-    return token;
+    const props = nextCookies(ctx);
+    return props;
   }
 
   constructor(props) {
@@ -56,7 +57,6 @@ export default class Employee extends React.Component {
           correspondentId: '2222'
         }
       ],
-      employeeId: 'X009999',
       userType: 'Employee',
       points: 450
     };
@@ -64,6 +64,7 @@ export default class Employee extends React.Component {
 
 
   componentDidMount() {
+    console.log(this.props);
     //API call to get all the feedbacks made by this user
     this.handleGetFeedbacks();
 
@@ -73,14 +74,13 @@ export default class Employee extends React.Component {
     //API call to get reward/points history
     this.handleGetRewards();
 
-    console.log(this.props.token);
   }
 
   ///////////////////////////////// POINTS
   // TOTAL POINTS
   handleUpdatePoints = async () => {
     // const res = await axios.get(
-    //   `https://symi-be.herokuapp.com/auth/users/${this.state.employeeId}/total_points`,
+    //   `https://symi-be.herokuapp.com/auth/users/${this.props.userId}/total_points`,
     //   {
     //     headers: { token: this.props.token }
     //   }
@@ -96,7 +96,7 @@ export default class Employee extends React.Component {
   // REWARDS HISTORY
   handleGetRewards = async () => {
     // const res = await axios.get(
-    //   `https://symi-be.herokuapp.com/auth/users/${this.state.employeeId}/point`,
+    //   `https://symi-be.herokuapp.com/auth/users/${this.props.userId}/point`,
     //   {
     //     headers: { token: this.props.token }
     //   }
@@ -127,9 +127,10 @@ export default class Employee extends React.Component {
   // SUBMIT FEEDBACK
   submitFeedback = async feedbackObj => {
     //add current employeeId to the feedback object (for the feedback history)
-    feedbackObj.employeeId = this.state.employeeId;
+    feedbackObj.employeeId = this.props.userId;
 
     //make an API call to add the feedback to the db
+    console.log(this.props.token);
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.props.token } });
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
@@ -143,7 +144,7 @@ export default class Employee extends React.Component {
   // FEEDBACK HISTORY
   handleGetFeedbacks = async () => {
     const response = await axios.get(
-      `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.employeeId}`,
+      `https://symi-be.herokuapp.com/auth/feedbacks/${this.props.userId}`,
       { headers: { token: this.props.token } }
     );
 
@@ -168,13 +169,7 @@ export default class Employee extends React.Component {
     switch (param) {
     case 'feedback':
       return (
-        <Feedback
-          feedbacks={this.state.feedbacks}
-          handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-          submitFeedback={this.submitFeedback}
-          fuzzyNames={this.state.fuzzyNames}
-          deleteFuzzyNames={this.deleteFuzzyNames}
-        />
+        <Feedback />
       );
     case 'news':
       return <News />;
@@ -205,7 +200,12 @@ export default class Employee extends React.Component {
         polls: true,
         invites: true,
         rewards: true,
-        handleComponentView: this.handleComponentView
+        handleComponentView: this.handleComponentView,
+        feedbacks: this.state.feedbacks,
+        handleFuzzyNameSearch: this.handleFuzzyNameSearch,
+        submitFeedback: this.submitFeedback,
+        fuzzyNames: this.state.fuzzyNames,
+        deleteFuzzyNames: this.deleteFuzzyNames,
       }}>
         <div className="layout">
           <Navbar />
