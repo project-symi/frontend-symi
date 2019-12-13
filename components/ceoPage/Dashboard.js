@@ -16,17 +16,13 @@ import CreateInvite from './CreateInvite';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 //images
-import Loader from "../../assets/loader_img.gif";
-import human from "../../assets/human.png";
-
-
-// sweet alert
-import swal from "@sweetalert/with-react";
+import Loader from '../../assets/loader_img.gif';
+import human from '../../assets/human.png';
+import swal from '@sweetalert/with-react';
 
 
 //context API
 import CeoContext from '../../contextApi/CeoContext';
-
 
 
 export default class Dashboard extends React.Component {
@@ -154,17 +150,13 @@ export default class Dashboard extends React.Component {
               </div>
               <div>
                 <p className="data-title">OVERALL SENTIMENT</p>
-                <SentimentOverall
-                  overallSentiment={this.props.overallSentiment}
-                  feedbacksByFeelings={this.props.feedbacksByFeelings}
-                  handleGetKeywords={this.props.handleGetKeywords}
-                />
+                <SentimentOverall />
               </div>
               <div>
                 <p className="data-title">TOP RATED TEAMS</p>
                 <div className="data">
                   {[]
-                    .concat(this.props.topDepartments)
+                    .concat(this.context.topDepartments)
                     .sort((a, b) => {
                       return b.points - a.points;
                     })

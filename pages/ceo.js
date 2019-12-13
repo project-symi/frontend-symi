@@ -15,7 +15,6 @@ import '../styles/CEO.css';
 
 //utils
 import axios from 'axios';
-import nextCookies from 'next-cookies';
 
 //contextAPI
 import { CeoProvider } from '../contextApi/CeoContext';
@@ -28,12 +27,6 @@ import '../assets/sweetalert.min.js';
 import { topEmployees } from '../assets/dummyData';
 
 export default class Ceo extends React.Component {
-  static async getInitialProps(ctx) {
-    //get the user token for API calls to db
-    const token = nextCookies(ctx);
-    return token;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +46,9 @@ export default class Ceo extends React.Component {
       mehFeedbacks: null,
       sadFeedbacks: null,
       feedbacksByFeelingRatio: null,
-      userType: 'CEO'
+      userType: 'CEO',
+      userId: '',
+      token: ''
     };
   }
 
@@ -75,7 +70,7 @@ export default class Ceo extends React.Component {
   getTopEmployees = async () => {
     // const res = await axios.get(
     //   "https://symi-be.herokuapp.com/auth/feedbacks",
-    //   { headers: { token: this.props.token } }
+    //   { headers: { token: this.state.token } }
     // );
     // const topEmployees = res.data
 
@@ -97,7 +92,7 @@ getPositiveFeedbacks = async (employeeId) => {
   //////////////////////// OVERALL SENTIMENT
   getFeedbacks = async () => {
     //all fbs
-    const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.props.token } });
+    const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
     //create data to pass to overall centiment chart
     const feedbacksByFeelingRatio = response.data.reduce(
       (acc, feedback) => {
@@ -123,17 +118,17 @@ getPositiveFeedbacks = async (employeeId) => {
     //good fb
     const responseGood = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good',
-      { headers: { token: this.props.token } }
+      { headers: { token: this.state.token } }
     );
     //meh fb
     const responseMeh = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=meh',
-      { headers: { token: this.props.token } }
+      { headers: { token: this.state.token } }
     );
     //sad fb
     const responseSad = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad',
-      { headers: { token: this.props.token } }
+      { headers: { token: this.state.token } }
     );
     //create feedbacks ratio by feelings
     this.setState({
@@ -157,7 +152,6 @@ getPositiveFeedbacks = async (employeeId) => {
       notes = this.state.sadFeedbacks.map(feedback => feedback.note);
       break;
     }
-    console.log({ notes });
     const requestBody = {
       input_data: notes,
       input_type: 'text',
@@ -200,7 +194,7 @@ getPositiveFeedbacks = async (employeeId) => {
   renderSwitchView = param => {
     switch (param) {
     case 'news':
-      return <News / >;
+      return <News />;
     case 'dashboard':
       return <Dashboard topEmployeeFeedbacks={this.state.topEmployeeFeedbacks}
         feedbacksbyFeelings = {
@@ -212,13 +206,13 @@ getPositiveFeedbacks = async (employeeId) => {
         topDepartments = {this.state.topDepartments}
       />;
     case 'assignments':
-      return <Assignments / > ;
+      return <Assignments /> ;
     case 'polls':
-      return <Polls / > ;
+      return <Polls /> ;
     case 'invites':
-      return <Invites / > ;
+      return <Invites /> ;
     case 'about':
-      return <About / > ;
+      return <About /> ;
     default:
       null;
     }
@@ -234,8 +228,10 @@ getPositiveFeedbacks = async (employeeId) => {
         invites: true,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,
+        topDepartments: this.state.topDepartments,
         handleCeoComponentView: this.handleComponentView,
         handleSendInvitation: this.handleSendInvitation,
+        handleGetKeywords: this.handleGetKeywords
       }}>
         <div className="layout">
           <Navbar />
