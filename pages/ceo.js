@@ -139,7 +139,6 @@ export default class Ceo extends React.Component {
       notes = this.state.sadFeedbacks.map(feedback => feedback.note);
       break;
     }
-    console.log({ notes });
     const requestBody = {
       input_data: notes,
       input_type: 'text',
@@ -185,9 +184,6 @@ export default class Ceo extends React.Component {
       return <News / >;
     case 'dashboard':
       return <Dashboard
-        feedbacksbyFeelings = {
-          [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
-        }
         handleGetKeywords = {
           this.handleGetKeywords
         }
