@@ -94,17 +94,31 @@ const topEmployees = [
   },
   {
     name: 'Steffie Frog',
-    id: "B000500",
+    id: 'B000500',
     point: 150,
     department: 'Operations',
     gender: 'female'
   },
   {
     name: 'Potato Fan',
-    id: "X009998",
+    id: 'X009998',
     point: 300,
     department: 'Marketing',
     gender: 'male'
+  },
+  {
+    name: 'Nao Arimura',
+    id: 'X009990',
+    point: 200,
+    department: 'Marketing',
+    gender: 'female'
+  },
+  {
+    name: 'Eriko Babe',
+    id: 'X009990',
+    point: 200,
+    department: 'Marketing',
+    gender: 'female'
   }
 ];
 

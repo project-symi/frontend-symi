@@ -69,14 +69,16 @@ export default class Dashboard extends React.Component {
              <div className="employee-name">
                {employee.name}, {employee.gender[0].toUpperCase()}
              </div>
-             {employee.department}
+             <span className="employee-dept">{employee.department}</span>
            </div>
          </div>
+
          <p className="title">What Employees Say About {employee.name.split(' ')[0]}</p>
-         <div className="employee-feedback">{employeeFeedback.map((feedback, i) => {
+         <span className="employee-feedback">{employeeFeedback.map((feedback, i) => {
+           ;
            return (<div key={i}>{`"${feedback.note}"`}</div>);
          })}
-         </div>
+         </span>
        </div>
      ),
      buttons: {
@@ -130,7 +132,7 @@ export default class Dashboard extends React.Component {
                   {this.context.topEmployees && this.context.topEmployeeFeedbacks ? (
                     this.context.topEmployees
                       .sort((a, b) => {
-                        return b.points - a.points;
+                        return b.point - a.point;
                       })
                       .map((employee, i) => {
                         return (
