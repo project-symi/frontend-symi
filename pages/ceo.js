@@ -20,7 +20,7 @@ import axios from 'axios';
 import { CeoProvider } from '../contextApi/CeoContext';
 
 //sweet alert
-import swal from 'sweetalert';
+import swal from '@sweetalert/with-react';
 import '../assets/sweetalert.min.js';
 
 // dummy data
@@ -46,6 +46,7 @@ export default class Ceo extends React.Component {
       mehFeedbacks: null,
       sadFeedbacks: null,
       feedbacksByFeelingRatio: null,
+      news: null,
       userType: 'CEO',
       userId: '',
       token: ''
@@ -66,7 +67,20 @@ export default class Ceo extends React.Component {
       this.getTopEmployees();
 
       this.getPositiveFeedbacks();
+
+      this.getNews();
     });
+  }
+
+  //////////////////////// NEWS
+  getNews = async () => {
+    const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
+    
+    const news = res.data;
+
+    console.log({news});
+
+    this.setState({news});
   }
 
   //////////////////////// TOP RATED EMPLOYEES
@@ -174,9 +188,12 @@ getPositiveFeedbacks = async () => {
     );
     swal({
       title: feeling === 'good' ? 'Positive Feedback' : 'Negative Feedback',
-      text: response.data.result.join(', '),
-      icon: feeling === 'good' ? 'success' : 'warning',
-      button: true
+      button: true,
+      content: (
+        <div>
+          {response.data.result.join(', ')}
+        </div>
+      )
     });
     // .then((val) => {
     //   return axios.patch('https://symi-be.herokuapp.com/feedbacks/status');
@@ -201,13 +218,6 @@ getPositiveFeedbacks = async () => {
       return <News />;
     case 'dashboard':
       return <Dashboard
-        feedbacksbyFeelings = {
-          [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
-        }
-        handleGetKeywords = {
-          this.handleGetKeywords
-        }
-        topDepartments = {this.state.topDepartments}
       />;
     case 'assignments':
       return <Assignments /> ;
@@ -225,7 +235,7 @@ getPositiveFeedbacks = async () => {
   render() {
     return (
       <CeoProvider value={{ userType: this.state.userType,
-        news: true,
+        news: this.state.news,
         assignments: true,
         polls: true,
         dashboard: true,

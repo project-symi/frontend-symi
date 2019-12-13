@@ -73,7 +73,7 @@ export default class Dashboard extends React.Component {
            </div>
          </div>
 
-         <p className="title">What Employees Say About {employee.name.split(' ')[0]}</p>
+         <p className="title">What Others Say About {employee.name.split(' ')[0]}</p>
          <span className="employee-feedback">{employeeFeedback.map((feedback, i) => {
            ;
            return (<div key={i}>{`"${feedback.note}"`}</div>);
