@@ -22,20 +22,19 @@ import { useContext } from 'react';
 
 const Sidebar = (props) => {
 
-  const value = useContext(EmployeeContext);
-  const ceoValue = useContext(CeoContext);
+  const employeeProps = useContext(EmployeeContext);
+  const ceoProps = useContext(CeoContext);
 
   const handleOnClick = view => {
-    console.log({value, ceoValue});
     //check which component (ceo or employee) renders the sidebar
     //to invoke the right version of handleComponentView
-    if (Object.keys(value).length > 0) value.handleComponentView(view);
-    if (ceoValue) ceoValue.handleCeoComponentView(view);
+    if (Object.keys(employeeProps).length > 0) employeeProps.handleComponentView(view);
+    if (ceoProps) ceoProps.handleCeoComponentView(view);
   };
 
   return (
     <div id="sidebar">
-      {ceoValue.dashboard ? (
+      {ceoProps.dashboard ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('dashboard')}
@@ -44,7 +43,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Dashboard</span>
         </div>
       ) : null}
-      {value.news || ceoValue.news ? (
+      {employeeProps.news || ceoProps.news ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('news')}
@@ -62,7 +61,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Employees</span>
         </div>
       ) : null}
-      {value.feedback ? (
+      {employeeProps.feedback ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('feedback')}
@@ -80,7 +79,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Updates</span>
         </div>
       ) : null}
-      {ceoValue.assignments ? (
+      {ceoProps.assignments ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('assignments')}
@@ -89,7 +88,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Assignments</span>
         </div>
       ) : null}
-      {value.invites || ceoValue.invites  ? (
+      {employeeProps.invites || ceoProps.invites  ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('invites')}
@@ -98,7 +97,7 @@ const Sidebar = (props) => {
           <span className="menu-item">Invites</span>
         </div>
       ) : null}
-      {value.rewards ? (
+      {employeeProps.rewards ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('rewards')}
