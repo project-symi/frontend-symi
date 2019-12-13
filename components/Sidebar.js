@@ -12,6 +12,7 @@ import InfoIcon from "@material-ui/icons/Info";
 // DEV HELP
 import Dev from "../components/Dev";
 
+
 /* eslint-disable react/prop-types */
 //TODO change to functional component
 export default class Sidebar extends React.Component {
