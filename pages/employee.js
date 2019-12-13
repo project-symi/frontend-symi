@@ -26,9 +26,8 @@ import { EmployeeProvider } from '../contextApi/EmployeeContext';
 export default class Employee extends React.Component {
   static async getInitialProps(ctx) {
     //get the user token for API calls to db
-    const token = nextCookies(ctx);
-    const userId = nextCookies(ctx);
-    return token;
+    const props = nextCookies(ctx);
+    return props;
   }
 
   constructor(props) {
@@ -65,7 +64,7 @@ export default class Employee extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props.userId)
+    console.log(this.props);
     //API call to get all the feedbacks made by this user
     this.handleGetFeedbacks();
 
@@ -128,9 +127,10 @@ export default class Employee extends React.Component {
   // SUBMIT FEEDBACK
   submitFeedback = async feedbackObj => {
     //add current employeeId to the feedback object (for the feedback history)
-    feedbackObj.userId = this.props.userId;
+    feedbackObj.employeeId = this.props.userId;
 
     //make an API call to add the feedback to the db
+    console.log(this.props.token);
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.props.token } });
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
@@ -170,11 +170,11 @@ export default class Employee extends React.Component {
     case 'feedback':
       return (
         <Feedback
-          feedbacks={this.state.feedbacks}
-          handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-          submitFeedback={this.submitFeedback}
-          fuzzyNames={this.state.fuzzyNames}
-          deleteFuzzyNames={this.deleteFuzzyNames}
+          // feedbacks={this.state.feedbacks}
+          // handleFuzzyNameSearch={this.handleFuzzyNameSearch}
+          // submitFeedback={this.submitFeedback}
+          // fuzzyNames={this.state.fuzzyNames}
+          // deleteFuzzyNames={this.deleteFuzzyNames}
         />
       );
     case 'news':
@@ -206,7 +206,12 @@ export default class Employee extends React.Component {
         polls: true,
         invites: true,
         rewards: true,
-        handleComponentView: this.handleComponentView
+        handleComponentView: this.handleComponentView,
+        feedbacks: this.state.feedbacks,
+        handleFuzzyNameSearch: this.handleFuzzyNameSearch,
+        submitFeedback: this.submitFeedback,
+        fuzzyNames: this.state.fuzzyNames,
+        deleteFuzzyNames: this.deleteFuzzyNames,
       }}>
         <div className="layout">
           <Navbar />
