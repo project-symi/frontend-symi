@@ -55,15 +55,16 @@ export default class Ceo extends React.Component {
   componentDidMount() {
     //make an API call to db to get top employees data for dashboard
     //make an API call to get all feedbacks
-    // OVERALL SENTIMENT
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+
+    this.setState({ token, userId }, () => {
+      //API call to get all feedbacks
     this.getFeedbacks();
-    // TOP EMPLOYEES
-    this.getTopEmployees(); 
 
-    this.getPositiveFeedbacks();
-
-    console.log(this.props.token);
-
+    //API call to db to get top employees data for dashboard
+    this.getTopEmployees();
+    });
   }
 
   //////////////////////// TOP RATED EMPLOYEES
