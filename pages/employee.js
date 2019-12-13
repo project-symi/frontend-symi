@@ -169,13 +169,7 @@ export default class Employee extends React.Component {
     switch (param) {
     case 'feedback':
       return (
-        <Feedback
-          // feedbacks={this.state.feedbacks}
-          // handleFuzzyNameSearch={this.handleFuzzyNameSearch}
-          // submitFeedback={this.submitFeedback}
-          // fuzzyNames={this.state.fuzzyNames}
-          // deleteFuzzyNames={this.deleteFuzzyNames}
-        />
+        <Feedback />
       );
     case 'news':
       return <News />;
