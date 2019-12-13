@@ -79,13 +79,14 @@
   display: none;
 }
 
-.employee-detail {
+.employee-popup {
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
 
 .employee-img {
-  width: 200px;
+  width: 175px;
+  border-radius: 15px;
 }
 
 .employee-details {
@@ -98,6 +99,12 @@
 .employee-name {
   font-weight: bold;
   font-size: 23pt;
+}
+
+.employee-feedback {
+  display:grid;
+  margin-top: 20px;
+  font-size: 15pt;
 }
 
 @media screen and (max-width: 480px) {

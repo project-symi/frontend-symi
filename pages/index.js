@@ -1,22 +1,22 @@
 //styles
-import "../styles/Index.css";
-import "../styles/App.css";
+import '../styles/Index.css';
+import '../styles/App.css';
 
 //utils
-import axios from "axios";
-import Router from "next/router";
+import axios from 'axios';
+import Router from 'next/router';
 
 //MUI components
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button } from '@material-ui/core';
 
 export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      userId: "",
-      password: "",
-      token: "",
-      permission: ""
+      userId: '',
+      password: '',
+      token: '',
+      permission: ''
     };
   }
 
@@ -26,7 +26,7 @@ export default class Login extends React.Component {
 
   handleLogin = async e => {
     e.preventDefault();
-    const response = await axios.post("https://symi-be.herokuapp.com/login", {
+    const response = await axios.post('https://symi-be.herokuapp.com/login', {
       userId: this.state.userId,
       password: this.state.password
     });
@@ -37,14 +37,13 @@ export default class Login extends React.Component {
   };
 
   render() {
-    localStorage.setItem("token", this.state.token);
-    localStorage.setItem("userId", this.state.userId);
-
-    if (this.state.permission === "CEO") {
-      Router.push("/ceo");
+    localStorage.setItem('token', this.state.token);
+    localStorage.setItem('userId', this.state.userId);
+    if (this.state.permission === 'CEO') {
+      Router.push('/ceo');
       return null;
-    } else if (this.state.permission === "employee") {
-      Router.push("/employee");
+    } else if (this.state.permission === 'employee') {
+      Router.push('/employee');
       return null;
     } else {
       return (

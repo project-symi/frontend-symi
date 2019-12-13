@@ -50,6 +50,7 @@ export default class Feedback extends React.Component {
       input: '',
       note: '',
       status: false,
+      name: '',
       feedbackValidation: {
         result: false,
         errors: {
@@ -96,6 +97,7 @@ export default class Feedback extends React.Component {
         category: this.state.about,
         note: this.state.note,
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
+        name: this.state.about === 'Employee' ? 'an employee' : '',
         newsId: this.state.about === 'News' ? this.state.input : 0
       };
       this.context.submitFeedback(feedback);

@@ -166,7 +166,7 @@ class CreateInvitation extends React.Component {
                 <TextField
                   id="standard-read-only-input"
                   label="Invite"
-                  defaultValue={this.props.invitee.Name}
+                  defaultValue={this.props.invitee.name}
                   InputProps={{
                     readOnly: true
                   }}
