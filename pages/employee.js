@@ -64,7 +64,6 @@ export default class Employee extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props);
     //API call to get all the feedbacks made by this user
     this.handleGetFeedbacks();
 
@@ -87,7 +86,6 @@ export default class Employee extends React.Component {
     // );
     // console.log(res);
     // const totalPoints = res.data
-    console.log({ totalPoints });
 
     this.setState({ totalPoints });
   };
@@ -103,8 +101,6 @@ export default class Employee extends React.Component {
     // );
     // console.log(res);
     // const rewards = res.data
-
-    console.log({ rewards });
 
     this.setState({ rewards });
   };
@@ -130,7 +126,6 @@ export default class Employee extends React.Component {
     feedbackObj.employeeId = this.props.userId;
 
     //make an API call to add the feedback to the db
-    console.log(this.props.token);
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.props.token } });
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
@@ -177,10 +172,7 @@ export default class Employee extends React.Component {
       return <Polls />;
     case 'rewards':
       return (
-        <Rewards
-          rewards={this.state.rewards}
-          handleRewardDetails={this.handleRewardDetails}
-        />
+        <Rewards />
       );
     case 'invites':
       return <Invites />;
@@ -206,6 +198,8 @@ export default class Employee extends React.Component {
         submitFeedback: this.submitFeedback,
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
+        rewards: this.state.rewards,
+        handleRewardDetails: this.handleRewardDetails
       }}>
         <div className="layout">
           <Navbar />
