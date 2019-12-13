@@ -15,7 +15,6 @@ import '../styles/CEO.css';
 
 //utils
 import axios from 'axios';
-import nextCookies from 'next-cookies';
 
 //contextAPI
 import { CeoProvider } from '../contextApi/CeoContext';
@@ -28,12 +27,6 @@ import '../assets/sweetalert.min.js';
 import { topEmployees } from '../assets/dummyData';
 
 export default class Ceo extends React.Component {
-  static async getInitialProps(ctx) {
-    //get the ceo token for API calls to db
-    const token = nextCookies(ctx);
-    return token;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -52,22 +45,29 @@ export default class Ceo extends React.Component {
       mehFeedbacks: null,
       sadFeedbacks: null,
       feedbacksByFeelingRatio: null,
-      userType: 'CEO'
+      userType: 'CEO',
+      userId: '',
+      token: ''
     };
   }
 
   componentDidMount() {
-    //make an API call to db to get top employees data for dashboard
-    //make an API call to get all feedbacks
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+
+    this.setState({ token, userId }, () => {
+      //API call to get all feedbacks
     this.getFeedbacks();
 
+    //API call to db to get top employees data for dashboard
     this.getTopEmployees();
+    });
   }
 
   getTopEmployees = async () => {
     // const res = await axios.get(
     //   "https://symi-be.herokuapp.com/auth/feedbacks",
-    //   { headers: { token: this.props.token } }
+    //   { headers: { token: this.state.token } }
     // );
     // const topEmployees = res.data
 
@@ -79,7 +79,7 @@ export default class Ceo extends React.Component {
 
   getFeedbacks = async () => {
     //all fbs
-    const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.props.token } });
+    const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
     //create data to pass to overall centiment chart
     const feedbacksByFeelingRatio = response.data.reduce(
       (acc, feedback) => {
@@ -105,17 +105,17 @@ export default class Ceo extends React.Component {
     //good fb
     const responseGood = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good',
-      { headers: { token: this.props.token } }
+      { headers: { token: this.state.token } }
     );
     //meh fb
     const responseMeh = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=meh',
-      { headers: { token: this.props.token } }
+      { headers: { token: this.state.token } }
     );
     //sad fb
     const responseSad = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad',
-      { headers: { token: this.props.token } }
+      { headers: { token: this.state.token } }
     );
     //create feedbacks ratio by feelings
     this.setState({

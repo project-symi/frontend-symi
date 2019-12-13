@@ -11,7 +11,6 @@ import About from '../components/About';
 
 //utils
 import axios from 'axios';
-import nextCookies from 'next-cookies';
 
 //styles
 import '../styles/Employee.css';

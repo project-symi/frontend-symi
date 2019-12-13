@@ -32,13 +32,12 @@ export default class Login extends React.Component {
   }
 
   render() {
+    localStorage.setItem('token', this.state.token);
+    localStorage.setItem('userId', this.state.userId);
     if (this.state.permission === 'CEO') {
-      cookie.set('token', this.state.token, { expires: 1 });
       Router.push('/ceo');
       return null;
     } else if (this.state.permission === 'employee') {
-      localStorage.setItem('token', this.state.token);
-      localStorage.setItem('userId', this.state.userId);
       Router.push('/employee');
       return null;
     } else {
