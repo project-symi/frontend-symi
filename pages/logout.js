@@ -17,7 +17,7 @@ const Logout = () => (
       ></img>
       <div>
         <h3>Logged out successfully</h3>
-        <Link href='login'><Button fontSize="small" color="primary" id="login">
+        <Link href='/'><Button fontSize="small" color="primary" id="login">
     Want to login back?
         </Button></Link>
       </div>
