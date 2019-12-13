@@ -28,11 +28,11 @@ export default class Login extends React.Component {
     e.preventDefault();
     const response = await axios.post('https://symi-be.herokuapp.com/login', { userId: this.state.userId, password: this.state.password });
     this.setState({ token: response.data.token, permission: response.data.permission });
+    localStorage.setItem('token', this.state.token);
+    localStorage.setItem('userId', this.state.userId);
   }
 
   render() {
-    localStorage.setItem('token', this.state.token);
-    localStorage.setItem('userId', this.state.userId);
     if (this.state.permission === 'CEO') {
       Router.push('/ceo');
       return null;
