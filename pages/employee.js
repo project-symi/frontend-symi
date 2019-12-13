@@ -177,10 +177,7 @@ export default class Employee extends React.Component {
       return <Polls />;
     case 'rewards':
       return (
-        <Rewards
-          rewards={this.state.rewards}
-          handleRewardDetails={this.handleRewardDetails}
-        />
+        <Rewards />
       );
     case 'invites':
       return <Invites />;
@@ -206,6 +203,8 @@ export default class Employee extends React.Component {
         submitFeedback: this.submitFeedback,
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
+        rewards: this.state.rewards,
+        handleRewardDetails: this.handleRewardDetails
       }}>
         <div className="layout">
           <Navbar />
