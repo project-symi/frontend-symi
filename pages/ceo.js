@@ -62,6 +62,9 @@ export default class Ceo extends React.Component {
     this.getFeedbacks();
 
     this.getTopEmployees();
+
+    console.log(this.props.token)
+
   }
 
   getTopEmployees = async () => {
@@ -125,6 +128,8 @@ export default class Ceo extends React.Component {
       sadFeedbacks: responseSad.data
     });
   };
+
+
 
   handleGetKeywords = async feeling => {
     let notes;

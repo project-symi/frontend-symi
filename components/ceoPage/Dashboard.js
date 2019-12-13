@@ -18,6 +18,9 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 //images
 import Loader from "../../assets/loader_img.gif";
 import human from "../../assets/human.png";
+
+
+// sweet alert
 import swal from "@sweetalert/with-react";
 
 
@@ -33,25 +36,7 @@ export default class Dashboard extends React.Component {
     super();
     this.state = {
       currentlyShown: "defaultView",
-      invitee: null,
-      positiveFeedbacks: [
-        {
-          id: 1,
-          note: [
-            "he is awesome",
-            "he's very helpful & a hard worker",
-            "he gives me TimTams sometimes"
-          ]
-        },
-        {
-          id: 1,
-          note: [
-            "she's such a supportive tech lead",
-            "I love working with her",
-            "she likes cats and I like"
-          ]
-        }
-      ]
+      invitee: null
     };
   }
 
@@ -61,12 +46,13 @@ export default class Dashboard extends React.Component {
     swal({
       content: (
         <div className="employee-detail">
-          <img className="employee-img" width="200px" src={human}></img>
+          {employee.gender === "male" ?  <img className="employee-img" width="200px" src={human}></img> : <img className="employee-img" width="200px" src={human}></img> }
+         
           <div className="employee-details">
             <div className="employee-name">
-              {employee.Name}, {employee.Gender[0].toUpperCase()}
+              {employee.name}, {employee.gender[0].toUpperCase()}
             </div>
-            {employee.Department}
+            {employee.department}
           </div>
           <div className="employee-feedback">{}</div>
         </div>
@@ -131,9 +117,9 @@ export default class Dashboard extends React.Component {
                             <div
                               onClick={() => this.showEmployeeDetails(employee)}
                             >
-                              {employee.Name}
+                              {employee.name}
                             </div>
-                            <div>{employee.Point} ⭐️</div>
+                            <div>{employee.point} ⭐️</div>
                             <div>
                               <Button
                                 size="small"

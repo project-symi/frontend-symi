@@ -31,7 +31,7 @@ const Sidebar = (props) => {
     //check which component (ceo or employee) renders the sidebar
     //to invoke the right version of handleComponentView
     if (Object.keys(value).length > 0) value.handleComponentView(view);
-    if (ceoValue) ceoValue.handleCeoComponentView(view);
+    if (Object.keys(ceoValue).length > 0) ceoValue.handleCeoComponentView(view);
   };
 
   return (

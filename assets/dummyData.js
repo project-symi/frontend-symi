@@ -40,12 +40,12 @@ const feedbacksByFeeling = [
 ];
 
 //dummy data for fuzzy name input
-const employees = [
-  { name: 'Mini Meow', department: 'Marketing', employeeId: '1234' },
-  { name: 'Igor Dawg', department: 'HR', employeeId: '4321' },
-  { name: 'Yukio Lion', department: 'Engineering', employeeId: '2345' },
-  { name: 'Steffie Frog', department: 'Operations', employeeId: '6543' }
-];
+// const employees = [
+//   { name: 'Mini Meow', department: 'Marketing', employeeId: 'A000001' },
+//   { name: 'Igor Dawg', department: 'HR', employeeId: 'B000300' },
+//   { name: 'Yukio Lion', department: 'Engineering', employeeId: 'X009999' },
+//   { name: 'Steffie Frog', department: 'Operations', employeeId: 'B000500' }
+// ];
 
 const rewards = [
   {
@@ -72,39 +72,39 @@ const totalPoints = 500;
 
 const topEmployees = [
   {
-    Name: 'Igor Dawg',
-    Id: 1,
-    Point: 500,
-    Department: 'Development',
-    Gender: 'male'
+    name: 'Igor Dawg',
+    id: 'B000300',
+    point: 500,
+    department: 'Development',
+    gender: 'male'
   },
   {
-    Name: 'Mini Meow',
-    Id: 2,
-    Point: 400,
-    Department: 'Leadership',
-    Gender: 'female'
+    name: 'Mini Meow',
+    id: 'A000001',
+    point: 400,
+    department: 'Leadership',
+    gender: 'female'
   },
   {
-    Name: 'Yukio Lion',
-    Id: 3,
-    Point: 100,
-    Department: 'Engineering',
-    Gender: 'male'
+    name: 'Yukio Lion',
+    id: 'X009999',
+    point: 100,
+    department: 'Engineering',
+    gender: 'male'
   },
   {
-    Name: 'Steffie Frog',
-    Id: 4,
-    Point: 150,
-    Department: 'Operations',
-    Gender: 'female'
+    name: 'Steffie Frog',
+    id: "B000500",
+    point: 150,
+    department: 'Operations',
+    gender: 'female'
   },
   {
-    Name: 'Potato Fan',
-    Id: 5,
-    Point: 300,
-    Department: 'Marketing',
-    Gender: 'male'
+    name: 'Potato Fan',
+    id: "X009998",
+    point: 300,
+    department: 'Marketing',
+    gender: 'male'
   }
 ];
 
