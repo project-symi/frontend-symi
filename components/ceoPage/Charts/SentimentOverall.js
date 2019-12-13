@@ -53,11 +53,6 @@ export default class SentimentOverall extends React.Component {
     );
   };
 
-  handleCellClick = (value) => {
-    //ask parent component to make an API call to get keywords and switch view to keywords
-    this.props.handleGetKeywords(value.feeling);
-  }
-
   render() {
     return (
       <div className="data">
@@ -75,7 +70,7 @@ export default class SentimentOverall extends React.Component {
                   <Cell
                     key={index}
                     fill={this.state.colors[index % this.state.colors.length]}
-                    onClick={() => this.handleCellClick(entry)}
+                    onClick={() => this.context.handleGetKeywords(entry.feeling)}
                   />
                 ))}
               </Pie>

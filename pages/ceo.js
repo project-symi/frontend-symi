@@ -29,7 +29,7 @@ import { topEmployees } from '../assets/dummyData';
 
 export default class Ceo extends React.Component {
   static async getInitialProps(ctx) {
-    //get the user token for API calls to db
+    //get the ceo token for API calls to db
     const token = nextCookies(ctx);
     return token;
   }
@@ -139,7 +139,6 @@ export default class Ceo extends React.Component {
       notes = this.state.sadFeedbacks.map(feedback => feedback.note);
       break;
     }
-    console.log({ notes });
     const requestBody = {
       input_data: notes,
       input_type: 'text',
@@ -182,25 +181,17 @@ export default class Ceo extends React.Component {
   renderSwitchView = param => {
     switch (param) {
     case 'news':
-      return <News / >;
+      return <News />;
     case 'dashboard':
-      return <Dashboard
-        feedbacksbyFeelings = {
-          [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
-        }
-        handleGetKeywords = {
-          this.handleGetKeywords
-        }
-        topDepartments = {this.state.topDepartments}
-      />;
+      return <Dashboard />;
     case 'assignments':
-      return <Assignments / > ;
+      return <Assignments /> ;
     case 'polls':
-      return <Polls / > ;
+      return <Polls /> ;
     case 'invites':
-      return <Invites / > ;
+      return <Invites /> ;
     case 'about':
-      return <About / > ;
+      return <About /> ;
     default:
       null;
     }
@@ -216,8 +207,10 @@ export default class Ceo extends React.Component {
         invites: true,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,
+        topDepartments: this.state.topDepartments,
         handleCeoComponentView: this.handleComponentView,
         handleSendInvitation: this.handleSendInvitation,
+        handleGetKeywords: this.handleGetKeywords
       }}>
         <div className="layout">
           <Navbar />

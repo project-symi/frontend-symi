@@ -25,7 +25,6 @@ import swal from '@sweetalert/with-react';
 import CeoContext from '../../contextApi/CeoContext';
 
 
-
 export default class Dashboard extends React.Component {
   static contextType = CeoContext;
 
@@ -158,17 +157,13 @@ export default class Dashboard extends React.Component {
               </div>
               <div>
                 <p className="data-title">OVERALL SENTIMENT</p>
-                <SentimentOverall
-                  overallSentiment={this.props.overallSentiment}
-                  feedbacksByFeelings={this.props.feedbacksByFeelings}
-                  handleGetKeywords={this.props.handleGetKeywords}
-                />
+                <SentimentOverall />
               </div>
               <div>
                 <p className="data-title">TOP RATED TEAMS</p>
                 <div className="data">
                   {[]
-                    .concat(this.props.topDepartments)
+                    .concat(this.context.topDepartments)
                     .sort((a, b) => {
                       return b.points - a.points;
                     })
