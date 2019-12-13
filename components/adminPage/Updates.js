@@ -1,6 +1,6 @@
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button } from '@material-ui/core';
 
-import News from "../News";
+import News from '../News';
 
 const Updates = () => (
   <div>

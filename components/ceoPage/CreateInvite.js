@@ -2,56 +2,56 @@
 
 
 //material ui
-import { TextField, Paper, Button } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
+import { TextField, Paper, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 
-import Invites from "../Invites";
+import Invites from '../Invites';
 
 //sweet alert
-import swal from "sweetalert";
-import "../../assets/sweetalert.min.js";
+import swal from 'sweetalert';
+import '../../assets/sweetalert.min.js';
 
 
 //context API
-import CeoContext from "../../contextApi/CeoContext";
-import { formatDiagnosticsWithColorAndContext } from "typescript";
+import CeoContext from '../../contextApi/CeoContext';
+import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
 
 const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
-    maxWidth: "100%",
-    marginTop: "20px",
+    maxWidth: '100%',
+    marginTop: '20px',
 
-    marginBottom: "20px",
-    borderRadius: "20px",
-    display: "grid",
-    gridTemplateColumns: "100px 5fr"
+    marginBottom: '20px',
+    borderRadius: '20px',
+    display: 'grid',
+    gridTemplateColumns: '100px 5fr'
   },
   dataField: {
-    marginRight: "10px"
+    marginRight: '10px'
   },
   icon: {
-    fontSize: "100px",
-    color: "#3f50b5"
+    fontSize: '100px',
+    color: '#3f50b5'
 
   },
   sendButton: {
-    backgroundColor: "#3f50b5",
-    margin: "10px",
+    backgroundColor: '#3f50b5',
+    margin: '10px',
 
-    marginLeft: "0px",
-    width: "100px",
-    "&:hover": {
-      backgroundColor: "#3748b0"
+    marginLeft: '0px',
+    width: '100px',
+    '&:hover': {
+      backgroundColor: '#3748b0'
     }
   },
   cancelButton: {
-    backgroundColor: "#999999",
-    margin: "10px",
-    marginLeft: "0px",
-    width: "100px"
+    backgroundColor: '#999999',
+    margin: '10px',
+    marginLeft: '0px',
+    width: '100px'
   }
 });
 
@@ -61,9 +61,9 @@ class CreateInvitation extends React.Component {
   constructor() {
     super();
     this.state = {
-      comments: "",
-      invitationDate: "",
-      invitationTime: "12:00:00",
+      comments: '',
+      invitationDate: '',
+      invitationTime: '12:00:00',
       commentsError: false,
       invitationDateError: false,
       invitationTimeError: false
@@ -89,15 +89,15 @@ class CreateInvitation extends React.Component {
 
   handleInputChange = e => {
     //change state and don't forget to get rid of error message
-    if (e.target.name === "comments")
+    if (e.target.name === 'comments')
       return this.setState({ comments: e.target.value, commentsError: false });
-    if (e.target.name === "invitationDate") {
+    if (e.target.name === 'invitationDate') {
       return this.setState({
         invitationDate: e.target.value,
         invitationDateError: false
       });
     }
-    if (e.target.name === "invitationTime") {
+    if (e.target.name === 'invitationTime') {
       return this.setState({
         invitationTime: e.target.value,
         invitationDateError: false
@@ -118,40 +118,40 @@ class CreateInvitation extends React.Component {
       return this.setState({ invitationDateError: true });
     //ask for the confirmation before generating and sending an invitation
     swal({
-      title: "Confirm Invite",
+      title: 'Confirm Invite',
       text:
-        "Are you sure you want to send an invite to " +
+        'Are you sure you want to send an invite to ' +
         this.props.invitee.Name +
-        "?",
-      icon: "warning",
+        '?',
+      icon: 'warning',
       buttons: {
         confirm: {
-          text: "CONFIRM",
-          value: "confirm"
+          text: 'CONFIRM',
+          value: 'confirm'
         },
-        cancel: "CANCEL"
+        cancel: 'CANCEL'
       }
     }).then(value => {
       switch (value) {
-      case "confirm":
+      case 'confirm':
         return swal({
-          title: "Invite sent!",
-          icon: "success",
+          title: 'Invite sent!',
+          icon: 'success',
           button: true
         })
           .then(value => {
 
-            console.log("generating an invitation");
+            console.log('generating an invitation');
             this.context.handleSendInvitation({
               employeeId: this.props.invitee.Id,
               comments: this.state.comments,
               invitationDate: this.state.invitationDate,
-              status: "pending or confirmed or rescheduled",
-              reply: "reply from the employee who was invited",
-              seen: "seen or unseen by the CEO"
+              status: 'pending or confirmed or rescheduled',
+              reply: 'reply from the employee who was invited',
+              seen: 'seen or unseen by the CEO'
             });
           })
-          .then(value => this.setState({ comments: "", invitationDate: "" }));
+          .then(value => this.setState({ comments: '', invitationDate: '' }));
       default:
         break;
       }
@@ -188,7 +188,7 @@ class CreateInvitation extends React.Component {
                   onChange={this.handleInputChange}
                   error={this.state.commentsError ? true : false}
                   helperText={
-                    this.state.commentsError ? "This field is required" : null
+                    this.state.commentsError ? 'This field is required' : null
                   }
                 />
                 <TextField
@@ -202,7 +202,7 @@ class CreateInvitation extends React.Component {
                   error={this.state.invitationDateError ? true : false}
                   helperText={
                     this.state.invitationDateError
-                      ? "Please specify a date."
+                      ? 'Please specify a date.'
                       : null
                   }
                 />
@@ -217,7 +217,7 @@ class CreateInvitation extends React.Component {
                   error={this.state.invitationTimeError ? true : false}
                   helperText={
                     this.state.invitationTimeError
-                      ? "Please specify a time"
+                      ? 'Please specify a time'
                       : null
                   }
                 />

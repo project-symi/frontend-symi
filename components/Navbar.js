@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
-import logo from "../assets/symi-small.png";
+import logo from '../assets/symi-small.png';
 
 // MUI components
-import PersonIcon from "@material-ui/icons/Person";
-import { Button } from "@material-ui/core";
+import PersonIcon from '@material-ui/icons/Person';
+import { Button } from '@material-ui/core';
 
 //next.js
-import Link from "next/link";
+import Link from 'next/link';
 
 //context API
-import EmployeeContext from "../contextApi/EmployeeContext";
-import CeoContext from "../contextApi/CeoContext";
-import { useContext } from "react";
+import EmployeeContext from '../contextApi/EmployeeContext';
+import CeoContext from '../contextApi/CeoContext';
+import { useContext } from 'react';
 
 const Navbar = () => {
 
@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (<div id="navbar">
     {employeeProps.points ? (
-      <div id="points"> {employeeProps.points + " ⭐️"} </div>
+      <div id="points"> {employeeProps.points + ' ⭐️'} </div>
     ) : null}
     <div id="logo">
       <img width="150px" src={logo} />

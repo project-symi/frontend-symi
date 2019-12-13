@@ -3,22 +3,22 @@
 
 
 //MUI icons
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ChatIcon from "@material-ui/icons/Chat";
-import GroupIcon from "@material-ui/icons/Group";
-import StarsIcon from "@material-ui/icons/Stars";
-import AnnouncementIcon from "@material-ui/icons/Announcement";
-import PollIcon from "@material-ui/icons/Poll";
-import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import InfoIcon from "@material-ui/icons/Info";
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ChatIcon from '@material-ui/icons/Chat';
+import GroupIcon from '@material-ui/icons/Group';
+import StarsIcon from '@material-ui/icons/Stars';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import PollIcon from '@material-ui/icons/Poll';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import InfoIcon from '@material-ui/icons/Info';
 
 
 //context API
-import EmployeeContext from "../contextApi/EmployeeContext";
-import CeoContext from "../contextApi/CeoContext";
-import { useContext } from "react";
+import EmployeeContext from '../contextApi/EmployeeContext';
+import CeoContext from '../contextApi/CeoContext';
+import { useContext } from 'react';
 
 
 const Sidebar = (props) => {
@@ -38,7 +38,7 @@ const Sidebar = (props) => {
       {ceoProps.dashboard ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("dashboard")}
+          onClick={() => handleOnClick('dashboard')}
         >
           <DashboardIcon color="primary" />
           <span className="menu-item">Dashboard</span>
@@ -47,7 +47,7 @@ const Sidebar = (props) => {
       {employeeProps.news || ceoProps.news ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("news")}
+          onClick={() => handleOnClick('news')}
         >
           <AnnouncementIcon color="primary" />
           <span className="menu-item">News</span>
@@ -56,25 +56,25 @@ const Sidebar = (props) => {
       {props.employeeInput ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("employeeInput")}
+          onClick={() => handleOnClick('employeeInput')}
         >
-          <GroupIcon color="primary" />{" "}
+          <GroupIcon color="primary" />{' '}
           <span className="menu-item">Employees</span>
         </div>
       ) : null}
       {employeeProps.feedback ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("feedback")}
+          onClick={() => handleOnClick('feedback')}
         >
-          <ChatIcon color="primary" />{" "}
+          <ChatIcon color="primary" />{' '}
           <span className="menu-item">Feedback</span>
         </div>
       ) : null}
       {props.updates ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("updates")}
+          onClick={() => handleOnClick('updates')}
         >
           <AnnouncementIcon color="primary" />
           <span className="menu-item">Updates</span>
@@ -83,7 +83,7 @@ const Sidebar = (props) => {
       {ceoProps.assignments ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("assignments")}
+          onClick={() => handleOnClick('assignments')}
         >
           <AssignmentTurnedInIcon color="primary" />
           <span className="menu-item">Assignments</span>
@@ -92,7 +92,7 @@ const Sidebar = (props) => {
       {employeeProps.invites || ceoProps.invites  ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("invites")}
+          onClick={() => handleOnClick('invites')}
         >
           <InsertInvitationIcon color="primary" />
           <span className="menu-item">Invites</span>
@@ -101,7 +101,7 @@ const Sidebar = (props) => {
       {employeeProps.rewards ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("rewards")}
+          onClick={() => handleOnClick('rewards')}
         >
           <StarsIcon color="primary" />
           <span className="menu-item">Rewards</span>
@@ -119,7 +119,7 @@ const Sidebar = (props) => {
       {props.usageStatistics ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("usageStatistics")}
+          onClick={() => handleOnClick('usageStatistics')}
         >
           <InfoIcon color="primary" />
           <span className="menu-item">UsageStatistics</span>
@@ -129,7 +129,7 @@ const Sidebar = (props) => {
       <div>
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick("about")}
+          onClick={() => handleOnClick('about')}
         >
           <HelpOutlineIcon color="primary" />
           <span className="menu-item">About</span>

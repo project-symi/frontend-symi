@@ -1,23 +1,23 @@
 //styles
-import "../styles/Index.css";
-import "../styles/App.css";
+import '../styles/Index.css';
+import '../styles/App.css';
 
 //utils
-import axios from "axios";
-import cookie from "js-cookie";
-import Router from "next/router";
+import axios from 'axios';
+import cookie from 'js-cookie';
+import Router from 'next/router';
 
 //MUI components
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button } from '@material-ui/core';
 
 export default class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      userId: "",
-      password: "",
-      token: "",
-      permission: ""
+      userId: '',
+      password: '',
+      token: '',
+      permission: ''
     };
   }
 
@@ -27,19 +27,19 @@ export default class Login extends React.Component {
 
   handleLogin = async (e) => {
     e.preventDefault();
-    const response = await axios.post("https://symi-be.herokuapp.com/login", { userId: this.state.userId, password: this.state.password });
+    const response = await axios.post('https://symi-be.herokuapp.com/login', { userId: this.state.userId, password: this.state.password });
     this.setState({ token: response.data.token, permission: response.data.permission });
   }
 
   render() {
-    if (this.state.permission === "CEO") {
-      cookie.set("token", this.state.token, { expires: 1 });
-      Router.push("/ceo");
+    if (this.state.permission === 'CEO') {
+      cookie.set('token', this.state.token, { expires: 1 });
+      Router.push('/ceo');
       return null;
-    } else if (this.state.permission === "employee") {
-      cookie.set("token", this.state.token, { expires: 1 });
-      cookie.set("userId", this.state.userId, { expires: 1 });
-      Router.push("/employee");
+    } else if (this.state.permission === 'employee') {
+      cookie.set('token', this.state.token, { expires: 1 });
+      cookie.set('userId', this.state.userId, { expires: 1 });
+      Router.push('/employee');
       return null;
     } else {
       return <div id="login-wrap">

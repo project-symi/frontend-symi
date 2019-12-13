@@ -1,5 +1,5 @@
-import Link from "next/link";
-import "../styles/App.css";
+import Link from 'next/link';
+import '../styles/App.css';
 
 const Dev = () => (
   <div id="dev">
