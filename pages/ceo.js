@@ -53,19 +53,17 @@ export default class Ceo extends React.Component {
   }
 
   componentDidMount() {
-    //make an API call to db to get top employees data for dashboard
-    //make an API call to get all feedbacks
-    // OVERALL SENTIMENT
-    this.getFeedbacks();
-    // TOP EMPLOYEES
-    this.getTopEmployees(); 
+    const token = localStorage.getItem('token');
+    //make an API call to get all feedbacks	    const userId = localStorage.getItem('userId');
 
-    this.getPositiveFeedbacks();
+    this.setState({ token, userId }, () => {
+      //API call to get all feedbacks
+      this.getFeedbacks();	    this.getFeedbacks();
 
-    console.log(this.props.token);
 
-    
-
+      //API call to db to get top employees data for dashboard
+      this.getTopEmployees();	    this.getTopEmployees();
+    });
   }
 
   //////////////////////// TOP RATED EMPLOYEES
@@ -84,7 +82,7 @@ export default class Ceo extends React.Component {
   };
 
 getPositiveFeedbacks = async (employeeId) => {
-  const res = await axios.get("https://symi-be.herokuapp.com/auth/feedbacks?feeling=good", { headers: { token: this.props.token } })
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.props.token } });
 
   const topEmployeeFeedbacks = res.data;
 

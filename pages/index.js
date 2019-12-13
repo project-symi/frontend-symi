@@ -26,17 +26,11 @@ export default class Login extends React.Component {
 
   handleLogin = async e => {
     e.preventDefault();
-    const response = await axios.post('https://symi-be.herokuapp.com/login', {
-      userId: this.state.userId,
-      password: this.state.password
-    });
-    this.setState({
-      token: response.data.token,
-      permission: response.data.permission
-    });
+    const response = await axios.post('https://symi-be.herokuapp.com/login', { userId: this.state.userId, password: this.state.password });
+    this.setState({ token: response.data.token, permission: response.data.permission });
     localStorage.setItem('token', this.state.token);
     localStorage.setItem('userId', this.state.userId);
-  };
+  }
 
   render() {
     if (this.state.permission === 'CEO') {
