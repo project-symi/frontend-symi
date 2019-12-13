@@ -4,7 +4,6 @@ import '../styles/App.css';
 
 //utils
 import axios from 'axios';
-import cookie from 'js-cookie';
 import Router from 'next/router';
 
 //MUI components
