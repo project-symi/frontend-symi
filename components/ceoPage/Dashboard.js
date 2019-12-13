@@ -41,16 +41,11 @@ export default class Dashboard extends React.Component {
   }
 
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
+
   ////////////////////////////// TOP RATED EMPLOYEES
   /////////// EMPLOYEE DETAILS
-showEmployeeDetails = employee => {
-
-console.log("dashboard topEmployeeFeedbacks", this.props.topEmployeeFeedbacks);
- const topEmployeeFeedbacks = this.props.topEmployeeFeedbacks;
-
-const employeeFeedback = topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
-
-console.log({employeeFeedback});
+ showEmployeeDetails = async (employee) => {
+   const employeeFeedback = await this.props.topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
 
     swal({
       content: (
