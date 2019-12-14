@@ -39,6 +39,9 @@ export default class Login extends React.Component {
     } else if (this.state.permission === 'employee') {
       Router.push('/employee');
       return null;
+    } else if (this.state.permission === 'admin') {
+      Router.push('/admin');
+      return null;
     } else {
       return <div id="login-wrap">
         <div id="login-container">

@@ -31,7 +31,7 @@ export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentlyShown: "defaultView",
+      currentlyShown: 'defaultView',
       invitee: null
     };
   }
@@ -43,44 +43,44 @@ export default class Dashboard extends React.Component {
  showEmployeeDetails = async (employee) => {
    const employeeFeedback = await this.props.topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
 
-    swal({
-      content: (
-        <div>
-        <div className="employee-popup">
-          {employee.gender === "male" ?  <img className="employee-img" width="200px" src={human}></img> : <img className="employee-img" width="200px" src={human}></img> }
+   swal({
+     content: (
+       <div>
+         <div className="employee-popup">
+           {employee.gender === 'male' ?  <img className="employee-img" width="200px" src={human}></img> : <img className="employee-img" width="200px" src={human}></img> }
          
-          <div className="employee-details">
-            <div className="employee-name">
-              {employee.name}, {employee.gender[0].toUpperCase()}
-            </div>
-            {employee.department}
-          </div>
-        </div>
-      <div className="employee-feedback">{employeeFeedback.map((feedback, i) => {
-            return (<div key={i}>{`"${feedback.note}"`}</div>);
-          })}
-      </div>
-      </div>
+           <div className="employee-details">
+             <div className="employee-name">
+               {employee.name}, {employee.gender[0].toUpperCase()}
+             </div>
+             {employee.department}
+           </div>
+         </div>
+         <div className="employee-feedback">{employeeFeedback.map((feedback, i) => {
+           return (<div key={i}>{`"${feedback.note}"`}</div>);
+         })}
+         </div>
+       </div>
         
-      ),
-      buttons: {
-        confirm: {
-          text: 'INVITE',
-          value: 'invite',
-          className: 'swal-button'
-        },
-        cancel: {
-          text: 'CANCEL',
-          value: 'cancel',
-          className: ''
-        }
-      }
-    }).then(value => {
-      if (value === 'invite') {
-        this.handleSwitchViewToInvite(employee);
-      }
-    });
-  };
+     ),
+     buttons: {
+       confirm: {
+         text: 'INVITE',
+         value: 'invite',
+         className: 'swal-button'
+       },
+       cancel: {
+         text: 'CANCEL',
+         value: 'cancel',
+         className: ''
+       }
+     }
+   }).then(value => {
+     if (value === 'invite') {
+       this.handleSwitchViewToInvite(employee);
+     }
+   });
+ };
 
   ////////// INVITATION
   //switch view to Create Invitation and pass the invitee name

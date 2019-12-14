@@ -11,12 +11,14 @@ import Link from 'next/link';
 //context API
 import EmployeeContext from '../contextApi/EmployeeContext';
 import CeoContext from '../contextApi/CeoContext';
+import AdminContext from '../contextApi/AdminContext';
 import { useContext } from 'react';
 
 const Navbar = () => {
 
   const employeeProps = useContext(EmployeeContext);
   const ceoProps = useContext(CeoContext);
+  const adminProps = useContext(AdminContext);
 
   return (<div id="navbar">
     {employeeProps.points ? (
@@ -27,7 +29,9 @@ const Navbar = () => {
     </div>
     <div id="user">
       <PersonIcon color="primary"></PersonIcon>
-      <div>{Object.keys(employeeProps).length > 0 ? employeeProps.userType : ceoProps.userType}</div>
+      {Object.keys(employeeProps).length > 0 ? <div>{employeeProps.userType}</div> : null}
+      {Object.keys(ceoProps).length > 0 ? <div>{ceoProps.userType}</div> : null}
+      {Object.keys(adminProps).length > 0 ? <div>{adminProps.userType}</div> : null}
     </div>
     <Link href="/">
       <Button fontSize="small" color="primary" id="login">

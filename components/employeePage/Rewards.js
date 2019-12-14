@@ -8,7 +8,7 @@ import { Typography, Button } from '@material-ui/core';
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
-//contextAPI
+//context API
 import { EmployeeConsumer } from '../../contextApi/EmployeeContext';
 
 const useStyles = makeStyles(theme => ({

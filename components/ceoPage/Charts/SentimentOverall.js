@@ -13,7 +13,7 @@ import {
 //images
 import Loader from '../../../assets/loader_img.gif';
 
-//contextAPI
+//context API
 import CeoContext from '../../../contextApi/CeoContext';
 
 export default class SentimentOverall extends React.Component {
