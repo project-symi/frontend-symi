@@ -185,8 +185,8 @@ class EmployeeInput extends React.Component {
             }}
           >
             <option value=""></option>
-            <option value="ceo">Female</option>
-            <option value="employee">Male</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
           </TextField>
           <TextField
             size="small"

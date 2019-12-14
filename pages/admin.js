@@ -42,6 +42,8 @@ export default class Admin extends React.Component {
     } else {
       /////INDIVIDUAL UPLOAD////////
       console.log('individual employee upload');
+      console.log(addedEmployee);
+      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
       this.setState({ addedEmployee });
     }
   };
