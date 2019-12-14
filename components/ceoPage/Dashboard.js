@@ -55,10 +55,11 @@ export default class Dashboard extends React.Component {
   ////////////////////////////// TOP RATED EMPLOYEES
   /////////// EMPLOYEE DETAILS
  showEmployeeDetails = async (employee) => {
-   const employeeFeedback = await this.context.topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.id);
+   const employeeFeedback = await this.context.topEmployeeFeedbacks.filter((feedback)=>feedback.recipientId === employee.employeeId);
 
-   let employeePhoto = this.state.userPhotos.filter((photoObj)=>{return employee.id === photoObj.employeeId;});
-   console.log({employeePhoto});
+   // get employee photo from dummy data
+   let employeePhoto = this.state.userPhotos.filter((photoObj)=>{return employee.employeeId === photoObj.employeeId;});
+
    swal({
      content: (
        <div>
@@ -143,7 +144,7 @@ export default class Dashboard extends React.Component {
                             >
                               {employee.name}
                             </div>
-                            <div>{employee.point} ⭐️</div>
+                            <div>{employee.totalPoints} ⭐️</div>
                             <div>
                               <Button
                                 size="small"
