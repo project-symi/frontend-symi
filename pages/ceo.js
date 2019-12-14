@@ -16,7 +16,7 @@ import '../styles/CEO.css';
 //utils
 import axios from 'axios';
 
-//contextAPI
+//context API
 import { CeoProvider } from '../contextApi/CeoContext';
 
 //sweet alert

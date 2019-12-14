@@ -11,33 +11,32 @@ import Link from 'next/link';
 //context API
 import EmployeeContext from '../contextApi/EmployeeContext';
 import CeoContext from '../contextApi/CeoContext';
+import AdminContext from '../contextApi/AdminContext';
 import { useContext } from 'react';
 
 const Navbar = () => {
   const employeeProps = useContext(EmployeeContext);
   const ceoProps = useContext(CeoContext);
+  const adminProps = useContext(AdminContext);
 
   return (
     <div id="navbar">
       {employeeProps.points ? (
         <div id="points"> {employeeProps.points + ' ⭐️'} </div>
       ) : null}
+
       <div id="logo">
         <img width="150px" src={logo} />
       </div>
-          
+
       <div id="user">
-     
-        <Link href="/"><PersonIcon color="primary"/>
+        <Link href="/">
+          <PersonIcon color="primary"></PersonIcon>
         </Link>
-        <div>
-          {Object.keys(employeeProps).length > 0
-            ? employeeProps.userType
-            : ceoProps.userType}
-        </div>
+        {Object.keys(employeeProps).length > 0 ? <div>{employeeProps.userType}</div> : null}
+        {Object.keys(ceoProps).length > 0 ? <div>{ceoProps.userType}</div> : null}
+        {Object.keys(adminProps).length > 0 ? <div>{adminProps.userType}</div> : null}
       </div>
-
-
     </div>
   );
 };

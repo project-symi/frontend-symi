@@ -15,11 +15,13 @@ import InfoIcon from '@material-ui/icons/Info';
 //context API
 import EmployeeContext from '../contextApi/EmployeeContext';
 import CeoContext from '../contextApi/CeoContext';
+import AdminContext from '../contextApi/AdminContext';
 import { useContext } from 'react';
 
 const Sidebar = props => {
   const employeeProps = useContext(EmployeeContext);
   const ceoProps = useContext(CeoContext);
+  const adminProps = useContext(AdminContext);
 
   const handleOnClick = view => {
     //check which component (ceo or employee) renders the sidebar
@@ -27,6 +29,7 @@ const Sidebar = props => {
     if (Object.keys(employeeProps).length > 0)
       employeeProps.handleComponentView(view);
     if (Object.keys(ceoProps).length > 0) ceoProps.handleCeoComponentView(view);
+    if (Object.keys(adminProps).length > 0) adminProps.handleAdminComponentView(view);
   };
 
   return (
@@ -49,13 +52,11 @@ const Sidebar = props => {
           <span className="menu-item">Feedback</span>
         </div>
       ) : null}
-      {employeeProps.news || ceoProps.news ? (
-        <div className="sidebar-button" onClick={() => handleOnClick('news')}>
-          <AnnouncementIcon color="primary" />
-          <span className="menu-item">News</span>
-        </div>
-      ) : null}
-      {props.employeeInput ? (
+      <div className="sidebar-button" onClick={() => handleOnClick('news')}>
+        <AnnouncementIcon color="primary" />
+        <span className="menu-item">News</span>
+      </div>
+      {adminProps.employeeInput ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('employeeInput')}
@@ -64,16 +65,16 @@ const Sidebar = props => {
           <span className="menu-item">Employees</span>
         </div>
       ) : null}
-      {props.updates ? (
+      {employeeProps.feedback ? (
         <div
           className="sidebar-button"
-          onClick={() => handleOnClick('updates')}
+          onClick={() => handleOnClick('feedback')}
         >
-          <AnnouncementIcon color="primary" />
-          <span className="menu-item">Updates</span>
+          <ChatIcon color="primary" />{' '}
+          <span className="menu-item">Feedback</span>
         </div>
       ) : null}
-      {ceoProps.assignments ? (
+      {ceoProps.assignments || adminProps.assignments ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('assignments')}
@@ -109,7 +110,7 @@ const Sidebar = props => {
             <span className="menu-item">Polls</span>
           </div>
         ) : null} */}
-      {props.usageStatistics ? (
+      {/* {props.usageStatistics ? (
         <div
           className="sidebar-button"
           onClick={() => handleOnClick('usageStatistics')}
@@ -117,7 +118,7 @@ const Sidebar = props => {
           <InfoIcon color="primary" />
           <span className="menu-item">UsageStatistics</span>
         </div>
-      ) : null}
+      ) : null} */}
 
       <div>
         <div className="sidebar-button" onClick={() => handleOnClick('about')}>

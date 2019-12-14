@@ -101,7 +101,7 @@ const topEmployees = [
   },
   {
     name: 'Potato Fan',
-    id: 'B000301',
+    id: 'X009998',
     point: 300,
     department: 'Marketing',
     gender: 'male'

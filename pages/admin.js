@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 //components
 import EmployeeInput from '../components/adminPage/EmployeeInput';
-import Updates from '../components/adminPage/Updates';
+import News from '../components/News';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import Assignments from '../components/Assignments';
@@ -9,17 +9,54 @@ import Polls from '../components/Polls';
 import About from '../components/About';
 import '../styles/Admin.css';
 
+import axios from 'axios';
+
+//context API
+import { AdminProvider } from '../contextApi/AdminContext';
+
 export default class Admin extends React.Component {
   constructor() {
     super();
     this.state = {
+      news: null,
       addedEmployee: null,
       isDefaultView: true,
       currentlyShown: 'assignments',
-      userType: 'Admin'
+      userType: 'Admin',
+      userId: '',
+      token: ''
     };
   }
 
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+
+    this.setState({ token, userId }, () => {
+      this.getNews();
+    
+    });}
+
+  ///////////////////////////////// NEWS
+  getNews = async () => {
+    const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
+    const news = res.data;
+
+    console.log({news});
+
+    this.setState({news});
+  }
+
+  deleteNews = (newsId) => {
+    /// for news
+  }
+
+  uploadNews = () => {
+    /// for news
+  }
+
+
+  ///////////////////////////////// EMPLOYEE UPLOAD
   addNewEmployee = addedEmployee => {
     if (Array.isArray(addedEmployee)) {
       console.log('use endpoint for bulk upload');
@@ -29,6 +66,7 @@ export default class Admin extends React.Component {
     }
   };
 
+  ///////////////////////////////// SIDEBAR
   handleComponentView = view => {
     this.setState({ currentlyShown: view, isDefaultView: false });
   };
@@ -37,31 +75,34 @@ export default class Admin extends React.Component {
     switch (param) {
     case 'employeeInput':
       return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
-    case 'updates':
-      return <Updates />;
+    case 'news':
+      return <News />;
     case 'assignments':
       return <Assignments />;
     case 'polls':
       return <Polls />;
     case 'about':
       return <About />;
-      null;
     }
   };
 
   render() {
     return (
-      <div className="layout">
-        <Navbar userPermission={this.state.userType} />
-        <Sidebar
-          employeeInput={true}
-          updates={true}
-          assignments={true}
-          polls={true}
-          handleComponentView={this.handleComponentView}
-        />
-        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </div>
+      <AdminProvider value={{ userType: this.state.userType,
+        employeeInput: true,
+        news: this.state.news,
+        assignments: true,
+        polls: true,
+        news: this.state.news,
+        deleteNews: this.deleteNews,
+        uploadNews: this.uploadNews,
+        handleAdminComponentView: this.handleComponentView }} >
+        <div className="layout">
+          <Navbar />
+          <Sidebar />
+          <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
+        </div>
+      </AdminProvider>
     );
   }
 }

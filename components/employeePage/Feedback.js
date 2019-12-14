@@ -22,7 +22,7 @@ import moment from 'moment';
 //images
 import Loader from '../../assets/loader_img.gif';
 
-//contextAPI
+//context API
 import EmployeeContext from '../../contextApi/EmployeeContext';
 
 //feelings data
