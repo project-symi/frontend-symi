@@ -78,6 +78,7 @@ const feedbackValidation = ({ note, about, input }) => {
   return errors;
 };
 
+
 const extractCsvData = (arr) => {
   //TODO add additional check for columns
   const columns = arr[0].reduce((acc, val, i) => {
@@ -88,7 +89,7 @@ const extractCsvData = (arr) => {
   const employees = arr.reduce((acc, val, i) => {
     if (i > 0 && val.length > 1) {
       const obj = { employeeId: val[columns.employeeId], name: val[columns.name], department: val[columns.department],
-        email: val[columns.email], gender: val[columns.gender], dateOfBirth: val[columns.dateOfBirth], type: val[columns.type] };
+        email: val[columns.email], gender: val[columns.gender], dateOfBirth: val[columns.dateOfBirth], permission: val[columns.permission], Password: '', totalPoints: 0 };
       acc.push(obj);
     }
     return acc;

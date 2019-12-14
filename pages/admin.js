@@ -9,11 +9,12 @@ import Polls from '../components/Polls';
 import About from '../components/About';
 import '../styles/Admin.css';
 
-import axios from 'axios';
-
 //context API
 import { AdminProvider } from '../contextApi/AdminContext';
 import swal from '@sweetalert/with-react';
+
+//utils
+import axios from 'axios';
 
 export default class Admin extends React.Component {
   constructor() {
@@ -56,7 +57,7 @@ export default class Admin extends React.Component {
     swal({
       title: 'Are you sure you want to delete this?',
       icon: 'warning',
-      buttons: { 
+      buttons: {
         confirm: {
           text: 'DELETE',
           value: 'delete'
@@ -74,7 +75,7 @@ export default class Admin extends React.Component {
             {title: 'Deleted successfully',
               icon: 'success',
             });
-        } 
+        }
       });
   }
 
@@ -96,11 +97,14 @@ export default class Admin extends React.Component {
 
 
   ///////////////////////////////// EMPLOYEE UPLOAD
-  addNewEmployee = addedEmployee => {
+  addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      console.log('use endpoint for bulk upload');
+      console.log(addedEmployee);
+      //await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
     } else {
-      console.log('individual employee upload');
+      /////INDIVIDUAL UPLOAD////////
+      console.log(addedEmployee);
+      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
       this.setState({ addedEmployee });
     }
   };
@@ -110,10 +114,10 @@ export default class Admin extends React.Component {
     this.setState({ currentlyShown: view, isDefaultView: false });
   };
 
-  renderSwitchView = param => {
-    switch (param) {
+  renderSwitchView = view => {
+    switch (view) {
     case 'employeeInput':
-      return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
+      return <EmployeeInput />;
     case 'news':
       return <News />;
     case 'assignments':
@@ -132,7 +136,6 @@ export default class Admin extends React.Component {
         news: this.state.news,
         assignments: true,
         polls: true,
-        news: this.state.news,
         confirmDeleteNews: this.confirmDeleteNews,
         deleteNews: this.deleteNews,
         addNews: this.addNews,

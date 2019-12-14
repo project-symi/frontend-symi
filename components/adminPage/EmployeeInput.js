@@ -10,7 +10,12 @@ import { TextField, Button } from '@material-ui/core';
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
+//context API
+import AdminContext from '../../contextApi/AdminContext';
+
 class EmployeeInput extends React.Component {
+  static contextType = AdminContext;
+
   constructor() {
     super();
     this.state = {
@@ -77,13 +82,15 @@ class EmployeeInput extends React.Component {
               button: true
             }).then(val => {
               console.log('adding an employee');
-              this.props.addNewEmployee({
+              this.context.addNewEmployee({
                 employeeId: this.state.employeeId,
+                name: this.state.name,
+                Password: '',
                 email: this.state.email,
                 department: this.state.department,
-                name: this.state.name,
                 dateOfBirth: this.state.dateOfBirth,
-                type: this.state.type,
+                permission: this.state.type,
+                totalPoints: 0,
                 gender: this.state.gender
               });
             });
@@ -125,8 +132,8 @@ class EmployeeInput extends React.Component {
     }
   };
 
-  handleCsvUpload = () => {
-    this.props.addNewEmployee(this.state.csvData);
+  handleCsvUpload = (e) => {
+    this.context.addNewEmployee(this.state.csvData);
     //clear input value
     e.target.value = '';
   };
@@ -178,8 +185,8 @@ class EmployeeInput extends React.Component {
             }}
           >
             <option value=""></option>
-            <option value="ceo">Female</option>
-            <option value="employee">Male</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
           </TextField>
           <TextField
             size="small"

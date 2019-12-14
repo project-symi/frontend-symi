@@ -91,8 +91,9 @@ export default class Employee extends React.Component {
     this.setState({news});
   }
 
-  directNewsFeedback = () => {
+  directNewsFeedback = (feedback) => {
     /// for news
+    console.log(feedback);
   }
 
   ///////////////////////////////// POINTS
@@ -138,7 +139,7 @@ export default class Employee extends React.Component {
   };
 
   ///////////////////////////////// FEEDBACK
-  
+
   // FUZZY SEARCH
   handleFuzzyNameSearch = async string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
@@ -160,7 +161,7 @@ export default class Employee extends React.Component {
 
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
-    
+
     // show newly added feedback
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
