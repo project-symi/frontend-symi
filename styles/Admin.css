@@ -91,10 +91,6 @@
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
-.submit-feedback-button {
-  display: none;
-}
-
 .delete {
   cursor: pointer;
   display: inline-block;

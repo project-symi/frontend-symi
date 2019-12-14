@@ -75,10 +75,6 @@
   display: none;
 }
 
-.submit-feedback-button {
-  display: none;
-}
-
 .employee-popup {
   display: grid;
   grid-template-columns: 1fr 1fr;

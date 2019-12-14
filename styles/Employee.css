@@ -6,6 +6,7 @@
   margin-top: 5px;
   margin-top: 8px;
 }
+
 .feedback {
   display: grid;
   grid-auto-columns: 1fr 1fr;
@@ -93,7 +94,7 @@
 }
 
 .submit-feedback-button {
-  display: inline !important;
+  display: inline;
 }
 
 @media screen and (max-width: 480px) {
@@ -101,6 +102,7 @@
     display: grid;
     grid-template-columns: 1fr;
   }
+
   .data {
     width: 260px;
   }

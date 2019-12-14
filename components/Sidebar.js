@@ -40,6 +40,15 @@ const Sidebar = props => {
           <span className="menu-item">Dashboard</span>
         </div>
       ) : null}
+      {employeeProps.feedback ? (
+        <div
+          className="sidebar-button"
+          onClick={() => handleOnClick('feedback')}
+        >
+          <ChatIcon color="primary" />{' '}
+          <span className="menu-item">Feedback</span>
+        </div>
+      ) : null}
       {employeeProps.news || ceoProps.news ? (
         <div className="sidebar-button" onClick={() => handleOnClick('news')}>
           <AnnouncementIcon color="primary" />
@@ -53,15 +62,6 @@ const Sidebar = props => {
         >
           <GroupIcon color="primary" />{' '}
           <span className="menu-item">Employees</span>
-        </div>
-      ) : null}
-      {employeeProps.feedback ? (
-        <div
-          className="sidebar-button"
-          onClick={() => handleOnClick('feedback')}
-        >
-          <ChatIcon color="primary" />{' '}
-          <span className="menu-item">Feedback</span>
         </div>
       ) : null}
       {props.updates ? (
