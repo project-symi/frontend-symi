@@ -29,9 +29,9 @@ const Navbar = () => {
     </div>
     <div id="user">
       <PersonIcon color="primary"></PersonIcon>
-    {Object.keys(employeeProps).length > 0 ? <div>{employeeProps.userType}</div> : null}
-    {Object.keys(ceoProps).length > 0 ? <div>{ceoProps.userType}</div> : null}
-    {Object.keys(adminProps).length > 0 ? <div>{adminProps.userType}</div> : null}
+      {Object.keys(employeeProps).length > 0 ? <div>{employeeProps.userType}</div> : null}
+      {Object.keys(ceoProps).length > 0 ? <div>{ceoProps.userType}</div> : null}
+      {Object.keys(adminProps).length > 0 ? <div>{adminProps.userType}</div> : null}
     </div>
     <Link href="/">
       <Button fontSize="small" color="primary" id="login">

@@ -53,16 +53,15 @@ export default class Admin extends React.Component {
 
   render() {
     return (
-      <AdminProvider value={{ userType: this.state.userType }} >
+      <AdminProvider value={{ userType: this.state.userType,
+        employeeInput: true,
+        updates: true,
+        assignments: true,
+        polls: true,
+        handleAdminComponentView: this.handleComponentView }} >
         <div className="layout">
           <Navbar />
-          <Sidebar
-            employeeInput={true}
-            updates={true}
-            assignments={true}
-            polls={true}
-            handleComponentView={this.handleComponentView}
-          />
+          <Sidebar />
           <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
         </div>
       </AdminProvider>
