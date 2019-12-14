@@ -10,7 +10,12 @@ import { TextField, Button } from '@material-ui/core';
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
+//context API
+import AdminContext from '../../contextApi/AdminContext';
+
 class EmployeeInput extends React.Component {
+  static contextType = AdminContext;
+
   constructor() {
     super();
     this.state = {
@@ -77,7 +82,7 @@ class EmployeeInput extends React.Component {
               button: true
             }).then(val => {
               console.log('adding an employee');
-              this.props.addNewEmployee({
+              this.context.addNewEmployee({
                 employeeId: this.state.employeeId,
                 email: this.state.email,
                 department: this.state.department,

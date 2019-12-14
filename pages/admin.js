@@ -39,7 +39,7 @@ export default class Admin extends React.Component {
   renderSwitchView = param => {
     switch (param) {
     case 'employeeInput':
-      return <EmployeeInput addNewEmployee={this.addNewEmployee} />;
+      return <EmployeeInput />;
     case 'updates':
       return <Updates />;
     case 'assignments':
@@ -58,7 +58,8 @@ export default class Admin extends React.Component {
         updates: true,
         assignments: true,
         polls: true,
-        handleAdminComponentView: this.handleComponentView }} >
+        handleAdminComponentView: this.handleComponentView,
+        addNewEmployee: this.addNewEmployee }} >
         <div className="layout">
           <Navbar />
           <Sidebar />
