@@ -16,7 +16,7 @@ import axios from 'axios';
 import '../styles/Employee.css';
 
 //dummy data
-import { totalPoints, rewards } from '../assets/dummyData';
+import { rewards } from '../assets/dummyData';
 
 //context API
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
@@ -55,7 +55,7 @@ export default class Employee extends React.Component {
         }
       ],
       userType: 'Employee',
-      points: 450,
+      totalPoints: 0,
       userId: '',
       token: ''
     };
@@ -98,14 +98,14 @@ export default class Employee extends React.Component {
   ///////////////////////////////// POINTS
   // TOTAL POINTS
   handleUpdatePoints = async () => {
-    // const res = await axios.get(
-    //   `https://symi-be.herokuapp.com/auth/users/${this.state.userId}/total_points`,
-    //   {
-    //     headers: { token: this.state.token }
-    //   }
-    // );
-    // console.log(res);
-    // const totalPoints = res.data
+    const res = await axios.get(
+      `https://symi-be.herokuapp.com/auth/users/${this.state.userId}`,
+      {
+        headers: { token: this.state.token }
+      }
+    );
+
+    const totalPoints = res.data.totalPoints;
 
     this.setState({ totalPoints });
   };
@@ -226,7 +226,7 @@ export default class Employee extends React.Component {
     return (
       <EmployeeProvider value={{ 
         userType: this.state.userType,
-        points: this.state.points,
+        totalPoints: this.state.totalPoints,
         news: this.state.news,
         feedback: true,
         polls: true,

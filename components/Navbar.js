@@ -21,8 +21,8 @@ const Navbar = () => {
 
   return (
     <div id="navbar">
-      {employeeProps.points ? (
-        <div id="points"> {employeeProps.points + ' ⭐️'} </div>
+      {employeeProps.totalPoints ? (
+        <div id="points"> {employeeProps.totalPoints + ' ⭐️'} </div>
       ) : null}
 
       <div id="logo">
