@@ -70,7 +70,7 @@ html {
   justify-self: auto;
 }
 
-#points {
+.points {
   width: 100px;
   grid-area: points;
   margin: 10px;
@@ -83,6 +83,32 @@ html {
   box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
     0 10px 10px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06),
     0 10px 70px rgba(90, 97, 105, 0.1);
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-10px);
+  }
+
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.bounce {
+  animation-name: bounce;
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
 }
 
 #sidebar {

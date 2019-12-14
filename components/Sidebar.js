@@ -65,15 +65,6 @@ const Sidebar = props => {
           <span className="menu-item">Employees</span>
         </div>
       ) : null}
-      {employeeProps.feedback ? (
-        <div
-          className="sidebar-button"
-          onClick={() => handleOnClick('feedback')}
-        >
-          <ChatIcon color="primary" />{' '}
-          <span className="menu-item">Feedback</span>
-        </div>
-      ) : null}
       {ceoProps.assignments || adminProps.assignments ? (
         <div
           className="sidebar-button"

@@ -8,6 +8,8 @@ import { Typography, Button } from '@material-ui/core';
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
+import Loader from '../../assets/loader_img.gif';
+
 //context API
 import { EmployeeConsumer } from '../../contextApi/EmployeeContext';
 
@@ -31,7 +33,14 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     color: '#58afc2',
-    fontFamily: 'Roboto Condensed'
+    fontFamily: 'Roboto Condensed',
+    margin: '5px'
+  },
+  date: {
+    fontWeight: 'bold',
+    fontFamily: 'Roboto Condensed',
+    fontSize: '13pt',
+    marginLeft: '5px'
   }
 }));
 
@@ -53,48 +62,53 @@ const Rewards = () => {
           return (
             <div>
               <span className="title">Rewards</span>
-              {props.rewards.map((reward, i) => {
-                return (
-                  <div key={i} className={classes.root}>
-                    <Paper className={classes.paper}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm container>
-                          <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
-                              {reward.date}
+              { props.rewards ? (<div> 
+                {props.rewards.map((reward, i) => {
+                  return (
+                    <div key={i} className={classes.root}>
+                      <Paper className={classes.paper}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} sm container>
+                            <Grid item xs container direction="column" spacing={2}>
+                              <Grid item s>
+                                <Typography
+                                  className={classes.date}
+                                >
+                                  {reward.date.split(' ')[0]}
+                                </Typography>
 
-                              <Typography
-                                gutterBottom
-                                variant="h6"
-                                className={classes.title}
-                              >
-                                {reward.categoryName}
-                              </Typography>
-                              <Button
-                                size="small"
-                                onClick={() => handleShowDetails(reward)}
-                                color="primary"
-                                style={{ cursor: 'pointer' }}
-                              >
+                                <Typography
+                                  gutterBottom
+                                  variant="h6"
+                                  className={classes.title}
+                                >
+                                  {reward.categoryName}
+                                </Typography>
+                                <Button
+                                  size="small"
+                                  onClick={() => handleShowDetails(reward)}
+                                  color="primary"
+                                  style={{ cursor: 'pointer' }}
+                                >
                               details
-                              </Button>
+                                </Button>
+                              </Grid>
+                            </Grid>
+                            <Grid item>
+                              <Typography
+                                variant="h5"
+                                gutterBottom
+                                className={classes.points}
+                              >
+                            +{reward.points} ⭐
+                              </Typography>
                             </Grid>
                           </Grid>
-                          <Grid item>
-                            <Typography
-                              variant="h5"
-                              gutterBottom
-                              className={classes.points}
-                            >
-                            +{reward.points} ⭐
-                            </Typography>
-                          </Grid>
                         </Grid>
-                      </Grid>
-                    </Paper>
-                  </div>
-                );
-              })}
+                      </Paper>
+                    </div>
+                  );
+                })}</div>) : <img src={Loader}></img>} 
             </div>
           );
         }
