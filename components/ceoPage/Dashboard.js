@@ -144,7 +144,7 @@ export default class Dashboard extends React.Component {
                             >
                               {employee.name}
                             </div>
-                            <div>{employee.totalPoints} ⭐️</div>
+                            <div>{employee.points} ⭐️</div>
                             <div>
                               <Button
                                 size="small"

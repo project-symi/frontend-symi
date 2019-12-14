@@ -83,11 +83,13 @@ export default class Ceo extends React.Component {
 
   //////////////////////// TOP RATED EMPLOYEES
   getTopEmployees = async () => {
+
+
     const res = await axios.get(
-      'https://symi-be.herokuapp.com/auth/users',
+      'https://symi-be.herokuapp.com/auth/points',
       { headers: { token: this.state.token } }
     );
-    const topEmployees = res.data.sort((a,b)=>{return a.totalPoints - b.totalPoints;}).slice(0,7);
+    const topEmployees = res.data;
 
     console.log({ topEmployees });
 
