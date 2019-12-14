@@ -24,7 +24,7 @@ export default class Login extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleLogin = async (e) => {
+  handleLogin = async e => {
     e.preventDefault();
     const response = await axios.post('https://symi-be.herokuapp.com/login', { userId: this.state.userId, password: this.state.password });
     this.setState({ token: response.data.token, permission: response.data.permission });
@@ -43,40 +43,42 @@ export default class Login extends React.Component {
       Router.push('/admin');
       return null;
     } else {
-      return <div id="login-wrap">
-        <div id="login-container">
-          <img
-            id="login-logo"
-            src="https://i.ibb.co/Pm81mBV/symilogo.png"
-          ></img>
-          <TextField
-            name="userId"
-            id="outlined"
-            variant="filled"
-            label="employeeId"
-            margin="normal"
-            value={this.state.userId}
-            onChange={this.handleInputChange}
-          />
-          <TextField
-            name="password"
-            id="outlined"
-            label="password"
-            margin="normal"
-            variant="filled"
-            type="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-          <Button
-            onClick={this.handleLogin}
-            variant="contained"
-            color="primary"
-          >
-          Login
-          </Button>
+      return (
+        <div id="login-wrap">
+          <div id="login-container">
+            <img
+              id="login-logo"
+              src="https://i.ibb.co/Pm81mBV/symilogo.png"
+            ></img>
+            <TextField
+              name="userId"
+              id="outlined"
+              variant="filled"
+              label="employeeId"
+              margin="normal"
+              value={this.state.userId}
+              onChange={this.handleInputChange}
+            />
+            <TextField
+              name="password"
+              id="outlined"
+              label="password"
+              margin="normal"
+              variant="filled"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleInputChange}
+            />
+            <Button
+              onClick={this.handleLogin}
+              variant="contained"
+              color="primary"
+            >
+              Login
+            </Button>
+          </div>
         </div>
-      </div>;
+      );
     }
   }
 }

@@ -20,7 +20,7 @@ import axios from 'axios';
 import { CeoProvider } from '../contextApi/CeoContext';
 
 //sweet alert
-import swal from 'sweetalert';
+import swal from '@sweetalert/with-react';
 import '../assets/sweetalert.min.js';
 
 // dummy data
@@ -46,6 +46,7 @@ export default class Ceo extends React.Component {
       mehFeedbacks: null,
       sadFeedbacks: null,
       feedbacksByFeelingRatio: null,
+      news: null,
       userType: 'CEO',
       userId: '',
       token: ''
@@ -64,7 +65,22 @@ export default class Ceo extends React.Component {
 
       //API call to db to get top employees data for dashboard
       this.getTopEmployees();
+
+      this.getPositiveFeedbacks();
+
+      this.getNews();
     });
+  }
+
+  //////////////////////// NEWS
+  getNews = async () => {
+    const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
+    
+    const news = res.data;
+
+    console.log({news});
+
+    this.setState({news});
   }
 
   //////////////////////// TOP RATED EMPLOYEES
@@ -82,10 +98,11 @@ export default class Ceo extends React.Component {
     });
   };
 
-getPositiveFeedbacks = async (employeeId) => {
-  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.props.token } });
-
+getPositiveFeedbacks = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.state.token } });
   const topEmployeeFeedbacks = res.data;
+
+  console.log({topEmployeeFeedbacks});
 
   this.setState({topEmployeeFeedbacks});
 } 
@@ -171,9 +188,12 @@ getPositiveFeedbacks = async (employeeId) => {
     );
     swal({
       title: feeling === 'good' ? 'Positive Feedback' : 'Negative Feedback',
-      text: response.data.result.join(', '),
-      icon: feeling === 'good' ? 'success' : 'warning',
-      button: true
+      button: true,
+      content: (
+        <div>
+          {response.data.result.join(', ')}
+        </div>
+      )
     });
     // .then((val) => {
     //   return axios.patch('https://symi-be.herokuapp.com/feedbacks/status');
@@ -197,14 +217,7 @@ getPositiveFeedbacks = async (employeeId) => {
     case 'news':
       return <News />;
     case 'dashboard':
-      return <Dashboard topEmployeeFeedbacks={this.state.topEmployeeFeedbacks}
-        feedbacksbyFeelings = {
-          [this.state.responseGood, this.state.responseMeh, this.state.responseSad]
-        }
-        handleGetKeywords = {
-          this.handleGetKeywords
-        }
-        topDepartments = {this.state.topDepartments}
+      return <Dashboard
       />;
     case 'assignments':
       return <Assignments /> ;
@@ -222,11 +235,12 @@ getPositiveFeedbacks = async (employeeId) => {
   render() {
     return (
       <CeoProvider value={{ userType: this.state.userType,
-        news: true,
+        news: this.state.news,
         assignments: true,
         polls: true,
         dashboard: true,
         invites: true,
+        topEmployeeFeedbacks: this.state.topEmployeeFeedbacks,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,
         topDepartments: this.state.topDepartments,

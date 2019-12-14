@@ -15,14 +15,13 @@ const Logout = () => {
   return (
     <div id="login-wrap">
       <div id="login-container">
-        <img
-          id="login-logo"
-          src="https://i.ibb.co/Pm81mBV/symilogo.png"
-        ></img>
+        <img id="login-logo" src="https://i.ibb.co/Pm81mBV/symilogo.png"></img>
         <div>
           <h3>Logged out successfully</h3>
-          <Link href='/'>
-            <Button fontSize="small" color="primary" id="login">Want to login back?</Button>
+          <Link href="/">
+            <Button fontSize="small" color="primary" id="login">
+              Want to login back?
+            </Button>
           </Link>
         </div>
       </div>
