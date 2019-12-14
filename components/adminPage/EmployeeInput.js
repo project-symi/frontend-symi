@@ -84,11 +84,13 @@ class EmployeeInput extends React.Component {
               console.log('adding an employee');
               this.context.addNewEmployee({
                 employeeId: this.state.employeeId,
+                name: this.state.name,
+                Password: '',
                 email: this.state.email,
                 department: this.state.department,
-                name: this.state.name,
                 dateOfBirth: this.state.dateOfBirth,
-                type: this.state.type,
+                permission: this.state.type,
+                totalPoints: 0,
                 gender: this.state.gender
               });
             });
@@ -130,8 +132,8 @@ class EmployeeInput extends React.Component {
     }
   };
 
-  handleCsvUpload = () => {
-    this.props.addNewEmployee(this.state.csvData);
+  handleCsvUpload = (e) => {
+    this.context.addNewEmployee(this.state.csvData);
     //clear input value
     e.target.value = '';
   };

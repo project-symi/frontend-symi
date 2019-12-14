@@ -13,7 +13,7 @@ import '../styles/Admin.css';
 import { AdminProvider } from '../contextApi/AdminContext';
 
 //utils
-import axois from 'axios';
+import axios from 'axios';
 
 export default class Admin extends React.Component {
   constructor() {
@@ -34,10 +34,11 @@ export default class Admin extends React.Component {
   }
 
   ////////////API CALL TO ADD EMPLOYEE EITHER INVIDUALLY OR BULK UPLOAD/////////
-  addNewEmployee = addedEmployee => {
+  addNewEmployee = async addedEmployee => {
     ///////BULK UPLOAD////////
     if (Array.isArray(addedEmployee)) {
-
+      console.log(addedEmployee);
+      //await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
     } else {
       /////INDIVIDUAL UPLOAD////////
       console.log('individual employee upload');
@@ -72,7 +73,7 @@ export default class Admin extends React.Component {
         assignments: true,
         polls: true,
         handleAdminComponentView: this.handleComponentView,
-        addNewEmployee: this.addNewEmployee }} >
+        addNewEmployee: this.addNewEmployee }}>
         <div className="layout">
           <Navbar />
           <Sidebar />
