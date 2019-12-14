@@ -3,11 +3,9 @@
 html {
   height: 100%;
   background: rgb(114, 55, 211);
-  background: linear-gradient(
-    326deg,
-    rgba(114, 55, 211, 1) 0%,
-    rgba(60, 217, 188, 1) 100%
-  );
+  background: linear-gradient(326deg,
+      rgba(114, 55, 211, 1) 0%,
+      rgba(60, 217, 188, 1) 100%);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -248,13 +246,14 @@ html {
   text-align: center;
   font-size: small;
 }
-.swal-button {
+
+/* .swal-button {
   background-color: #3f50b5;
 }
 
 .swal-button button:hover {
   background-color: #3f50b5;
-}
+} */
 
 @media screen and (max-width: 480px) {
   .menu-item {
@@ -329,6 +328,6 @@ html {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 200px 1fr;
-    grid-template-areas: "newsimg" "newsdesc";
+    grid-template-areas: "newsimg""newsdesc";
   }
 }

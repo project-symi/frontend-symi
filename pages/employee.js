@@ -136,6 +136,7 @@ export default class Employee extends React.Component {
   };
 
   ///////////////////////////////// FEEDBACK
+  
   // FUZZY SEARCH
   handleFuzzyNameSearch = async string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
@@ -157,11 +158,15 @@ export default class Employee extends React.Component {
 
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
+    
+    // show newly added feedback
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
     this.setState({ feedbacks: addedFeedback });
+
     this.deleteFuzzyNames();
 
+    // new points notifcation
     this.newPointsPopup();
 
     // update points after submitting feedback
@@ -176,6 +181,7 @@ export default class Employee extends React.Component {
       { headers: { token: this.state.token } }
     );
 
+    // sorts by date
     const feedbacks = response.data.sort((a, b) => {
       a = new Date(a.dateAdded);
       b = new Date(b.dateAdded);

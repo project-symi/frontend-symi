@@ -13,6 +13,7 @@ import axios from 'axios';
 
 //context API
 import { AdminProvider } from '../contextApi/AdminContext';
+import swal from '@sweetalert/with-react';
 
 export default class Admin extends React.Component {
   constructor() {
@@ -33,9 +34,10 @@ export default class Admin extends React.Component {
     const userId = localStorage.getItem('userId');
 
     this.setState({ token, userId }, () => {
+      //API call to get news
       this.getNews();
-    
-    });}
+    });
+    ;}
 
   ///////////////////////////////// NEWS
   getNews = async () => {
@@ -45,14 +47,51 @@ export default class Admin extends React.Component {
     console.log({news});
 
     this.setState({news});
+
+    //pop up for news
   }
 
-  deleteNews = (newsId) => {
-    /// for news
+  confirmDeleteNews = newsId => {
+    // confirm delete pop up
+    swal({
+      title: 'Are you sure you want to delete this?',
+      icon: 'warning',
+      buttons: { 
+        confirm: {
+          text: 'DELETE',
+          value: 'delete'
+        },
+        cancel: {
+          text: 'CANCEL',
+          value: 'cancel'
+        }},
+      dangerMode: true,
+    })
+      .then((val) => {
+        if (val === 'delete') {
+          this.deleteNews(newsId);
+          swal(
+            {title: 'Deleted successfully',
+              icon: 'success',
+            });
+        } 
+      });
   }
 
-  uploadNews = () => {
-    /// for news
+  deleteNews = async (newsId) => {
+    // call delete api
+    await axios.delete(`https://symi-be.herokuapp.com/auth/news/${newsId}`, {headers: {token: this.state.token}});
+
+    // set new state to show updated news
+    this.setState({news: this.state.news.slice(1)});
+  }
+
+  addNews = async newsObj => {
+    console.log({newsObj});
+
+    const res = await axios.post('https://symi-be.herokuapp.com/auth/news', newsObj, { headers : { token: this.state.token}});
+
+    console.log(res);
   }
 
 
@@ -94,8 +133,9 @@ export default class Admin extends React.Component {
         assignments: true,
         polls: true,
         news: this.state.news,
+        confirmDeleteNews: this.confirmDeleteNews,
         deleteNews: this.deleteNews,
-        uploadNews: this.uploadNews,
+        addNews: this.addNews,
         handleAdminComponentView: this.handleComponentView }} >
         <div className="layout">
           <Navbar />
