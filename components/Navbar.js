@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <div id="navbar">
       {employeeProps.totalPoints ? (
-        <div id="points"> {employeeProps.totalPoints + ' ⭐️'} </div>
+        <div className="points bounce"> {employeeProps.totalPoints + ' ⭐️'} </div>
       ) : null}
 
       <div id="logo">
