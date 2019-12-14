@@ -9,6 +9,9 @@ import Polls from '../components/Polls';
 import About from '../components/About';
 import '../styles/Admin.css';
 
+//context API
+import { AdminProvider } from '../contextApi/AdminContext';
+
 export default class Admin extends React.Component {
   constructor() {
     super();
@@ -45,23 +48,24 @@ export default class Admin extends React.Component {
       return <Polls />;
     case 'about':
       return <About />;
-      null;
     }
   };
 
   render() {
     return (
-      <div className="layout">
-        <Navbar userPermission={this.state.userType} />
-        <Sidebar
-          employeeInput={true}
-          updates={true}
-          assignments={true}
-          polls={true}
-          handleComponentView={this.handleComponentView}
-        />
-        <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
-      </div>
+      <AdminProvider value={{ userType: this.state.userType }} >
+        <div className="layout">
+          <Navbar />
+          <Sidebar
+            employeeInput={true}
+            updates={true}
+            assignments={true}
+            polls={true}
+            handleComponentView={this.handleComponentView}
+          />
+          <div id="page">{this.renderSwitchView(this.state.currentlyShown)}</div>
+        </div>
+      </AdminProvider>
     );
   }
 }

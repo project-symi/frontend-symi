@@ -18,7 +18,7 @@ import '../styles/Employee.css';
 //dummy data
 import { totalPoints, rewards } from '../assets/dummyData';
 
-//contextAPI
+//context API
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
 
 
