@@ -64,7 +64,6 @@ export default class Dashboard extends React.Component {
        <div>
          <div className="employee-popup">
            {employeePhoto.length !== 0 ?  <img className="employee-img" width="200px" src={employeePhoto[0].photoURL}></img> : <img className="employee-img" width="200px" src={human}></img> }
-         
            <div className="employee-details">
              <div className="employee-name">
                {employee.name}, {employee.gender[0].toUpperCase()}
@@ -140,6 +139,7 @@ export default class Dashboard extends React.Component {
                             <div className="top-num">{i + 1}</div>
                             <div
                               onClick={() => this.showEmployeeDetails(employee)}
+                              style={{ cursor: 'pointer' }}
                             >
                               {employee.name}
                             </div>

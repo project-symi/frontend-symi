@@ -9,8 +9,6 @@ import Polls from '../components/Polls';
 import About from '../components/About';
 import '../styles/Admin.css';
 
-import axios from 'axios';
-
 //context API
 import { AdminProvider } from '../contextApi/AdminContext';
 import swal from '@sweetalert/with-react';
@@ -99,7 +97,7 @@ export default class Admin extends React.Component {
 
 
   ///////////////////////////////// EMPLOYEE UPLOAD
-  addNewEmployee = addedEmployee => {
+  addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
       console.log(addedEmployee);
       //await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
