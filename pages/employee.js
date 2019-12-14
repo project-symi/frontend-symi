@@ -158,11 +158,15 @@ export default class Employee extends React.Component {
 
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
+    
+    // show newly added feedback
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
     this.setState({ feedbacks: addedFeedback });
+
     this.deleteFuzzyNames();
 
+    // new points notifcation
     this.newPointsPopup();
 
     // update points after submitting feedback

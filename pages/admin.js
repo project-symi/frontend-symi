@@ -20,7 +20,6 @@ export default class Admin extends React.Component {
     super();
     this.state = {
       news: null,
-      newNews: {title: null, description: null, photo: null},
       addedEmployee: null,
       isDefaultView: true,
       currentlyShown: 'assignments',
@@ -88,15 +87,11 @@ export default class Admin extends React.Component {
   }
 
   addNews = async newsObj => {
-    axios.post('', newsObj, {headers : {token: this.state.token}});
-    let updatedNews = [newsObj, ... this.state.news];
-    this.setState({news: updatedNews});
-    const newNews = {
-      'title': this.state.newNews.title,
-      'description': this.state.newNews.desc,
-      'photo': this.state.newNews.photoUrl
-    };
+    console.log({newsObj});
 
+    const res = await axios.post('https://symi-be.herokuapp.com/auth/news', newsObj, { headers : { token: this.state.token}});
+
+    console.log(res);
   }
 
 

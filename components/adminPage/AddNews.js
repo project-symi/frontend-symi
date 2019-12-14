@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 //utils
 import { formValidation } from '../../utils/utils';
-import Papa from 'papaparse';
 
 //components
 import { TextField, Button } from '@material-ui/core';
@@ -51,37 +50,32 @@ export default class AddNews extends React.Component {
       buttons: {
         confirm: {
           text: 'CONFIRM',
-          value: 'confirm'
+          value: true
         },
         cancel: 'EDIT'
       }
     })
       .then(value => {
-        switch (value) {
-        case 'confirm':
-          return swal({
+        if (value) {
+          swal({
             title: 'News item published!',
             icon: 'success',
             button: true
-          }).then(val => {
-            console.log('adding news');
+          }).then(() => {
             this.props.addNews({
               title: this.state.title,
               description: this.state.description,
               photo: this.state.photo,
             });
-          });
-        default:
-          break;
+          }).then(val =>
+            this.setState({
+              title: '',
+              description: '',
+              photo: '',
+            })
+          );;
         }
-      })
-      .then(val =>
-        this.setState({
-          title: '',
-          description: '',
-          photo: '',
-        })
-      );
+      });
     // }
   };
 
