@@ -123,14 +123,16 @@ export default class Employee extends React.Component {
   ///////////////////////////////// REWARDS
   // REWARDS HISTORY
   handleGetRewards = async () => {
-    // const res = await axios.get(
-    //   `https://symi-be.herokuapp.com/auth/users/${this.state.userId}/point`,
-    //   {
-    //     headers: { token: this.state.token }
-    //   }
-    // );
-    // console.log(res);
-    // const rewards = res.data
+    const res = await axios.get(
+      `https://symi-be.herokuapp.com/auth/rewards/${this.state.userId}`,
+      {
+        headers: { token: this.state.token }
+      }
+    );
+
+    const rewards = res.data;
+
+    console.log({rewards});
 
     this.setState({ rewards });
   };
