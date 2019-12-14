@@ -34,12 +34,14 @@
 
 .button {
   grid-area: button;
-  height: 50px;
+  height: 40px;
 }
 
 .add-news-container {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 3fr 1.25fr;
+  grid-template-rows: 1fr 0.5fr;
+  grid-template-areas: ". . ."". . button";
   grid-column-gap: 10px;
   grid-row-gap: 5px;
   align-items: center;
@@ -116,5 +118,7 @@
 
   .add-news-container {
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "."".""."".";
   }
 }

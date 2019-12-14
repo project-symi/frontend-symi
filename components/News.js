@@ -28,7 +28,6 @@ const News = props => {
         <p className="title">Add News</p>
         <form
           autoComplete="off"
-          className="employees-container"
           className="add-news-container"
         >
           <TextField size="small" name="title" label="Title" variant="outlined" />
@@ -38,7 +37,13 @@ const News = props => {
             label="Description"
             variant="outlined"
           />
-          <Button color="primary" variant="contained">
+          <TextField
+            size="small"
+            name="photo"
+            label="Photo URL"
+            variant="outlined"
+          />
+          <Button color="primary" variant="contained" className="button">
         UPLOAD
           </Button>
         </form>
