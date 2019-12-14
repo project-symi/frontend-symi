@@ -18,7 +18,7 @@
 
 .employee-upload-container {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 4fr 1.25fr;
   grid-template-rows: 1fr;
   grid-column-gap: 10px;
   align-items: center;
@@ -34,12 +34,14 @@
 
 .button {
   grid-area: button;
-  height: 50px;
+  height: 40px;
 }
 
 .add-news-container {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 3fr 1.25fr;
+  grid-template-rows: 1fr 0.5fr;
+  grid-template-areas: ". . ."". . button";
   grid-column-gap: 10px;
   grid-row-gap: 5px;
   align-items: center;
@@ -91,10 +93,6 @@
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
-.submit-feedback-button {
-  display: none;
-}
-
 .delete {
   cursor: pointer;
   display: inline-block;
@@ -120,5 +118,7 @@
 
   .add-news-container {
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "."".""."".";
   }
 }

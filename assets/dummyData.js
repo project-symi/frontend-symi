@@ -105,6 +105,20 @@ const topEmployees = [
     point: 300,
     department: 'Marketing',
     gender: 'male'
+  },
+  {
+    name: 'Nao Arimura',
+    id: 'X009990',
+    point: 200,
+    department: 'Marketing',
+    gender: 'female'
+  },
+  {
+    name: 'Eriko Babe',
+    id: 'X009990',
+    point: 200,
+    department: 'Marketing',
+    gender: 'female'
   }
 ];
 

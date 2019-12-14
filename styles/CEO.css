@@ -71,22 +71,17 @@
   color: #3f50b5;
 }
 
-.delete {
-  display: none;
-}
-
-.submit-feedback-button {
-  display: none;
-}
 
 .employee-popup {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px;
 }
 
 .employee-img {
-  width: 175px;
-  border-radius: 15px;
+  width: 100%;
+  min-width: 150px;
+  border-radius: 25px;
 }
 
 .employee-details {
@@ -94,15 +89,28 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
+  margin: 10px;
 }
 
 .employee-name {
   font-weight: bold;
-  font-size: 23pt;
+  font-size: xx-large;
+  width: 1fr;
+}
+
+.employee-dept {
+  font-weight: bold;
+  font-size: large;
+  background-color: #3ED7BD;
+  color: white;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+  align-self: center;
 }
 
 .employee-feedback {
-  display:grid;
+  display: grid;
   margin-top: 20px;
   font-size: 15pt;
 }

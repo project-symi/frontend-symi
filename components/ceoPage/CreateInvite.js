@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 
-
 //material ui
 import { TextField, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,18 +11,15 @@ import Invites from '../Invites';
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
 
-
 //context API
 import CeoContext from '../../contextApi/CeoContext';
 import { formatDiagnosticsWithColorAndContext } from 'typescript';
-
 
 const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
     maxWidth: '100%',
     marginTop: '20px',
-
     marginBottom: '20px',
     borderRadius: '20px',
     display: 'grid',
@@ -35,12 +31,10 @@ const styles = theme => ({
   icon: {
     fontSize: '100px',
     color: '#3f50b5'
-
   },
   sendButton: {
     backgroundColor: '#3f50b5',
     margin: '10px',
-
     marginLeft: '0px',
     width: '100px',
     '&:hover': {
@@ -140,7 +134,6 @@ class CreateInvitation extends React.Component {
           button: true
         })
           .then(value => {
-
             console.log('generating an invitation');
             this.context.handleSendInvitation({
               employeeId: this.props.invitee.Id,

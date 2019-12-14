@@ -20,9 +20,12 @@ import { totalPoints, rewards } from '../assets/dummyData';
 
 //context API
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
+import swal from 'sweetalert';
 
 
 export default class Employee extends React.Component {
+
+
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +33,7 @@ export default class Employee extends React.Component {
       currentlyShown: 'feedback',
       fuzzyNames: '',
       feedbacks: null,
+      news: null,
       rewards: [
         {
           points: 50,
@@ -70,7 +74,25 @@ export default class Employee extends React.Component {
 
       //API call to get reward/points history
       this.handleGetRewards();
+
+      //API call to get news
+      this.getNews();
     });
+  }
+
+
+  ///////////////////////////////// NEWS
+  getNews = async () => {
+    const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
+    const news = res.data;
+
+    console.log({news});
+
+    this.setState({news});
+  }
+
+  directNewsFeedback = () => {
+    /// for news
   }
 
   ///////////////////////////////// POINTS
@@ -88,6 +110,16 @@ export default class Employee extends React.Component {
     this.setState({ totalPoints });
   };
 
+  newPointsPopup = () => {
+    swal({
+      title: 'Thanks for the feedback',
+      text: 'You got +25⭐️! Hooray!',
+      icon: 'success',
+      button: true
+    });
+  }
+
+
   ///////////////////////////////// REWARDS
   // REWARDS HISTORY
   handleGetRewards = async () => {
@@ -104,6 +136,7 @@ export default class Employee extends React.Component {
   };
 
   ///////////////////////////////// FEEDBACK
+  
   // FUZZY SEARCH
   handleFuzzyNameSearch = async string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
@@ -125,10 +158,16 @@ export default class Employee extends React.Component {
 
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
+    
+    // show newly added feedback
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
     this.setState({ feedbacks: addedFeedback });
+
     this.deleteFuzzyNames();
+
+    // new points notifcation
+    this.newPointsPopup();
 
     // update points after submitting feedback
     this.handleUpdatePoints();
@@ -142,6 +181,7 @@ export default class Employee extends React.Component {
       { headers: { token: this.state.token } }
     );
 
+    // sorts by date
     const feedbacks = response.data.sort((a, b) => {
       a = new Date(a.dateAdded);
       b = new Date(b.dateAdded);
@@ -184,13 +224,15 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <EmployeeProvider value={{ points: this.state.points,
+      <EmployeeProvider value={{ 
         userType: this.state.userType,
-        news: true,
+        points: this.state.points,
+        news: this.state.news,
         feedback: true,
         polls: true,
         invites: true,
         rewards: true,
+        directNewsFeedback: this.directNewsFeedback,
         handleComponentView: this.handleComponentView,
         feedbacks: this.state.feedbacks,
         handleFuzzyNameSearch: this.handleFuzzyNameSearch,
