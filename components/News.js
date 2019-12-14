@@ -51,7 +51,7 @@ const News = props => {
             <div key={i} className="news-container">
               <img className="news-img" src={item.photo}></img>
               {props.deleteNews ? ( <div className="delete">
-                <DeleteForeverIcon
+                <DeleteForeverIcon onClick={() => {props.confirmDeleteNews(item.newsId);}}
                   style={{ color: 'red' }}
                 ></DeleteForeverIcon>
               </div> ) : null}
@@ -61,7 +61,7 @@ const News = props => {
                 <h4>{item.description}</h4>
                 {props.directNewsFeedback ? (
                   <div className="submit-feedback-button">
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={() => {props.uploadNews(item.newsId);}}>
                       SUBMIT FEEDBACK
                     </Button>
                   </div>
