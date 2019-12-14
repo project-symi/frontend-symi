@@ -12,6 +12,9 @@ import '../styles/Admin.css';
 //context API
 import { AdminProvider } from '../contextApi/AdminContext';
 
+//utils
+import axois from 'axios';
+
 export default class Admin extends React.Component {
   constructor() {
     super();
@@ -19,14 +22,24 @@ export default class Admin extends React.Component {
       addedEmployee: null,
       isDefaultView: true,
       currentlyShown: 'assignments',
-      userType: 'Admin'
+      userType: 'Admin',
+      token: ''
     };
   }
 
+  ///////////GET TOKEN FROM LOCAL STOREAGE FOR API CALLS///////////
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    this.setState({ token });
+  }
+
+  ////////////API CALL TO ADD EMPLOYEE EITHER INVIDUALLY OR BULK UPLOAD/////////
   addNewEmployee = addedEmployee => {
+    ///////BULK UPLOAD////////
     if (Array.isArray(addedEmployee)) {
-      console.log('use endpoint for bulk upload');
+
     } else {
+      /////INDIVIDUAL UPLOAD////////
       console.log('individual employee upload');
       this.setState({ addedEmployee });
     }
@@ -36,8 +49,8 @@ export default class Admin extends React.Component {
     this.setState({ currentlyShown: view, isDefaultView: false });
   };
 
-  renderSwitchView = param => {
-    switch (param) {
+  renderSwitchView = view => {
+    switch (view) {
     case 'employeeInput':
       return <EmployeeInput />;
     case 'updates':
