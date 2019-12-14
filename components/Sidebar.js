@@ -52,10 +52,13 @@ const Sidebar = props => {
           <span className="menu-item">Feedback</span>
         </div>
       ) : null}
-      <div className="sidebar-button" onClick={() => handleOnClick('news')}>
-        <AnnouncementIcon color="primary" />
-        <span className="menu-item">News</span>
-      </div>
+      {employeeProps.news || ceoProps.news || adminProps.news ? (
+        <div className="sidebar-button" onClick={() => handleOnClick('news')}>
+          <AnnouncementIcon color="primary" />
+          <span className="menu-item">News</span>
+        </div>
+      ) : null}
+      
       {adminProps.employeeInput ? (
         <div
           className="sidebar-button"

@@ -136,6 +136,7 @@ export default class Employee extends React.Component {
   };
 
   ///////////////////////////////// FEEDBACK
+  
   // FUZZY SEARCH
   handleFuzzyNameSearch = async string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
@@ -176,6 +177,7 @@ export default class Employee extends React.Component {
       { headers: { token: this.state.token } }
     );
 
+    // sorts by date
     const feedbacks = response.data.sort((a, b) => {
       a = new Date(a.dateAdded);
       b = new Date(b.dateAdded);

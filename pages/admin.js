@@ -19,6 +19,7 @@ export default class Admin extends React.Component {
     super();
     this.state = {
       news: null,
+      newNews: {title: null, description: null, photo: null},
       addedEmployee: null,
       isDefaultView: true,
       currentlyShown: 'assignments',
@@ -33,9 +34,10 @@ export default class Admin extends React.Component {
     const userId = localStorage.getItem('userId');
 
     this.setState({ token, userId }, () => {
+      //API call to get news
       this.getNews();
-    
-    });}
+    });
+    ;}
 
   ///////////////////////////////// NEWS
   getNews = async () => {
@@ -45,14 +47,24 @@ export default class Admin extends React.Component {
     console.log({news});
 
     this.setState({news});
+
+    //pop up for news
   }
 
   deleteNews = (newsId) => {
     /// for news
   }
 
-  uploadNews = () => {
-    /// for news
+  uploadNews = async newsObj => {
+    axios.post('', newsObj, {headers : {token: this.state.token}});
+    let updatedNews = [newsObj, ... this.state.news];
+    this.setState({news: updatedNews});
+    const newNews = {
+      'title': this.state.newNews.title,
+      'description': this.state.newNews.desc,
+      'photo': this.state.newNews.photoUrl
+    };
+
   }
 
 

@@ -88,6 +88,7 @@ export default class Feedback extends React.Component {
       note: this.state.note,
       input: this.state.input
     });
+
     if (validation.result) {
       this.setState({ feedbackValidation: validation });
     } else {
@@ -100,6 +101,7 @@ export default class Feedback extends React.Component {
         name: this.state.about === 'Employee' ? 'an employee' : '',
         newsId: this.state.about === 'News' ? this.state.input : 0
       };
+      
       this.context.submitFeedback(feedback);
       this.setState({ about: '', note: '', input: '' });
     }
