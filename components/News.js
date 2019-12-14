@@ -1,11 +1,16 @@
 import { Button,TextField } from '@material-ui/core';
 
+import AddNews from '../components/adminPage/AddNews';
+
 import { useContext } from 'react';
 import CeoContext from '../contextApi/CeoContext';
 import EmployeeContext from '../contextApi/EmployeeContext';
 import AdminContext from '../contextApi/AdminContext';
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
+//images
+import Loader from '../assets/loader_img.gif';
 
 const News = props => {
   const employeeProps = useContext(EmployeeContext);
@@ -24,33 +29,10 @@ const News = props => {
 
   return (
     <div>
-      {props.uploadNews ? (<div>
-        <p className="title">Add News</p>
-        <form
-          autoComplete="off"
-          className="add-news-container"
-        >
-          <TextField size="small" name="title" label="Title" variant="outlined" />
-          <TextField
-            size="small"
-            name="description"
-            label="Description"
-            variant="outlined"
-          />
-          <TextField
-            size="small"
-            name="photo"
-            label="Photo URL"
-            variant="outlined"
-          />
-          <Button color="primary" variant="contained" className="button">
-        UPLOAD
-          </Button>
-        </form>
-      </div>) : null }
+      {props.addNews ? (<AddNews addNews={props.addNews}/>) : null }
      
       <p className="title">News</p>
-      <div>
+      {props.news ? ( <div> 
         {props.news.sort((a,b) => {a = new Date(a.postedOn); b = new Date(b.postedOn); return a>b ? -1 : a<b ? 1 : 0;}).map((item, i) => {
           return (
             <div key={i} className="news-container">
@@ -75,7 +57,8 @@ const News = props => {
             </div>
           );
         })}
-      </div>
+      </div>) : <img src={Loader}></img>}
+     
     </div>
   );
 };

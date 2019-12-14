@@ -45,6 +45,8 @@ export default class Admin extends React.Component {
     const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
     const news = res.data;
 
+    console.log({news});
+
     this.setState({news});
 
     //pop up for news
@@ -85,7 +87,7 @@ export default class Admin extends React.Component {
     this.setState({news: this.state.news.slice(1)});
   }
 
-  uploadNews = async newsObj => {
+  addNews = async newsObj => {
     axios.post('', newsObj, {headers : {token: this.state.token}});
     let updatedNews = [newsObj, ... this.state.news];
     this.setState({news: updatedNews});
@@ -138,7 +140,7 @@ export default class Admin extends React.Component {
         news: this.state.news,
         confirmDeleteNews: this.confirmDeleteNews,
         deleteNews: this.deleteNews,
-        uploadNews: this.uploadNews,
+        addNews: this.addNews,
         handleAdminComponentView: this.handleComponentView }} >
         <div className="layout">
           <Navbar />
