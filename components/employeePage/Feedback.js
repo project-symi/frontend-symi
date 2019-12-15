@@ -21,6 +21,7 @@ import moment from 'moment';
 
 //images
 import Loader from '../../assets/loader_img.gif';
+import reward from '../../assets/reward.png';
 
 //context API
 import EmployeeContext from '../../contextApi/EmployeeContext';
@@ -253,18 +254,21 @@ export default class Feedback extends React.Component {
           {/* 
         ///// POINTS KEY */}
           <div>
-            <p className="title">Quarterly Reward</p>
+            <p className="title">Get Points</p>
             <div className="feedback-submit">
               <PointsKey />
             </div>
 
-            <p className="title">Quarterly Prize</p>
+            <p className="title">Cash Out</p>
             <div className="feedback-submit">
               {/* <img
                 className="prize"
                 src="https://media.giphy.com/media/26u49YjOazMMAwTGU/giphy-downsized-large.gif"
               ></img> */}
-              <div>⭐500 = $50 Amazon Gift Card</div>
+              <div>
+                <img src={reward} width="100px"></img>
+                <div className="points">500⭐</div> 
+              $50 Amazon Gift Card</div>
             </div>
           </div>
         </div>
@@ -280,7 +284,7 @@ export default class Feedback extends React.Component {
             return (
               <div key={item.id} className="feedback-history">
                 <span className="feedback">
-                  <span> {moment(item.dateAdded).format('ddd, hA')}</span>I feel{' '}
+                  <span className="date"> {moment(item.dateAdded).format('MM/DD/YYYY')}</span>I feel{' '}
                   {' ' + item.feeling.toLowerCase() + ' '}
                   about
                   {' ' +

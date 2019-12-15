@@ -107,6 +107,9 @@
   margin: 10px;
   padding: 5px;
   align-self: center;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
 .employee-feedback {

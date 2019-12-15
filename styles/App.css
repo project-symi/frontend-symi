@@ -73,10 +73,10 @@ html {
 .points {
   width: 100px;
   grid-area: points;
-  margin: 10px;
-  background: #3f51b5;
+  margin: 5px;
+  background: #637ACB;
   padding: 3px;
-  border-radius: 5px;
+  border-radius: 30px;
   color: white;
   text-align: center;
   font-size: 18pt;

@@ -50,6 +50,26 @@ export default class Dashboard extends React.Component {
     };
   }
 
+  getAge(birthday) {
+    const ageDiff = new Date() - (new Date(birthday)).getTime();
+    const ageDate = new Date(ageDiff);
+
+    const today = new Date();
+    const birthDate = new Date(birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    console.log({today});
+    console.log({birthDate});
+    
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    console.log({age});
+
+    return age;
+  }
+
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
   ////////////////////////////// TOP RATED EMPLOYEES
@@ -65,12 +85,13 @@ export default class Dashboard extends React.Component {
        <div>
          <div className="employee-popup">
            {employeePhoto.length !== 0 ?  <img className="employee-img" width="200px" src={employeePhoto[0].photoURL}></img> : <img className="employee-img" width="200px" src={human}></img> }
-         
+           {console.log({employee})}
            <div className="employee-details">
              <div className="employee-name">
                {employee.name}, {employee.gender[0].toUpperCase()}
              </div>
              <span className="employee-dept">{employee.department}</span>
+             <span>{this.getAge(employee.dateOfBirth) + ' years old'}</span>
            </div>
          </div>
 

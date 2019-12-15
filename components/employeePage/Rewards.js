@@ -10,6 +10,8 @@ import '../../assets/sweetalert.min.js';
 
 import Loader from '../../assets/loader_img.gif';
 
+import moment from 'moment';
+
 //context API
 import { EmployeeConsumer } from '../../contextApi/EmployeeContext';
 
@@ -71,11 +73,7 @@ const Rewards = () => {
                           <Grid item xs={12} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                               <Grid item s>
-                                <Typography
-                                  className={classes.date}
-                                >
-                                  {reward.date.split(' ')[0]}
-                                </Typography>
+                                <span className="date">{moment(reward.date).format('MM/DD/YYYY')}</span>
 
                                 <Typography
                                   gutterBottom
@@ -95,13 +93,7 @@ const Rewards = () => {
                               </Grid>
                             </Grid>
                             <Grid item>
-                              <Typography
-                                variant="h5"
-                                gutterBottom
-                                className={classes.points}
-                              >
-                            +{reward.points} ⭐
-                              </Typography>
+                              <div className="points">  +{reward.points} ⭐</div>
                             </Grid>
                           </Grid>
                         </Grid>
