@@ -64,7 +64,11 @@ export default class Feedback extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ about: this.context.news })
+    if (this.context.newsFeedback) {
+      console.log(this.context.newsFeedback);
+      this.setState({ about: 'News', input: this.context.newsFeedback.title });
+      this.context.handleResetNewsFeedback();
+    }
   }
 
   //make an API call to DB to get employees
@@ -128,7 +132,6 @@ export default class Feedback extends React.Component {
     if (this.state.isPopupOpen) {
       this.setState({ input: value.employeeId, isPopupOpen: false });
     } else {
-      console.log('hello', this.state.input);
       //clear the input and re-render employee name input field
       this.setState({ input: '' });
       this.context.deleteFuzzyNames();
@@ -205,6 +208,7 @@ export default class Feedback extends React.Component {
                             ? 'Please specify employee name'
                             : 'Please enter news topic'
                         }
+                        value={this.state.input}
                         onChange={this.handleEmployeeNameInput}
                       ></TextField>
                     ) : null}
