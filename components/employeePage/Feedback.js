@@ -101,7 +101,6 @@ export default class Feedback extends React.Component {
         name: this.state.about === 'Employee' ? 'an employee' : '',
         newsId: this.state.about === 'News' ? this.state.input : 0
       };
-      
       this.context.submitFeedback(newFeedback);
       this.setState({ about: '', note: '', input: '' });
     }

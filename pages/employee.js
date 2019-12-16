@@ -94,6 +94,11 @@ export default class Employee extends React.Component {
   directNewsFeedback = (feedback) => {
     /// for news
     console.log(feedback);
+    this.handleComponentView('feedback');
+  }
+
+  handleNewsFeedback = () => {
+    
   }
 
   ///////////////////////////////// POINTS
