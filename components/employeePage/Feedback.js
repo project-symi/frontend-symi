@@ -28,7 +28,7 @@ import EmployeeContext from '../../contextApi/EmployeeContext';
 //feelings data
 const feelings = [
   {
-    value: '100',
+    value: 100,
     label: ' 😊'
   },
   {
@@ -61,6 +61,10 @@ export default class Feedback extends React.Component {
       },
       isPopupOpen: false
     };
+  }
+
+  componentDidMount() {
+    this.setState({ about: this.context.news })
   }
 
   //make an API call to DB to get employees

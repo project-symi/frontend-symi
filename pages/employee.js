@@ -97,9 +97,6 @@ export default class Employee extends React.Component {
     this.handleComponentView('feedback');
   }
 
-  handleNewsFeedback = () => {
-    
-  }
 
   ///////////////////////////////// POINTS
   // TOTAL POINTS
@@ -232,7 +229,7 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <EmployeeProvider value={{ 
+      <EmployeeProvider value={{
         userType: this.state.userType,
         totalPoints: this.state.totalPoints,
         news: this.state.news,
@@ -240,6 +237,7 @@ export default class Employee extends React.Component {
         polls: true,
         invites: true,
         rewards: true,
+        newsFeedback: this.state.newsFeedback,
         directNewsFeedback: this.directNewsFeedback,
         handleComponentView: this.handleComponentView,
         feedbacks: this.state.feedbacks,
