@@ -155,27 +155,26 @@ getPositiveFeedbacks = async () => {
     case 'good':
       notes = this.state.goodFeedbacks.reduce((acc, feedback) => {
         acc.notes.push(feedback.note);
-        acc.id.push(feedback.id);
+        acc.id.push(feedback.feedbackId);
         return acc;
       }, { notes: [], id: [] });
       break;
     case 'meh':
       notes = this.state.mehFeedbacks.reduce((acc, feedback) => {
-        console.log(feedback);
         acc.notes.push(feedback.note);
-        acc.id.push(feedback.id);
+        acc.id.push(feedback.feedbackId);
         return acc;
       }, { notes: [], id: [] });      break;
     default:
       notes = this.state.sadFeedbacks.reduce((acc, feedback) => {
         acc.notes.push(feedback.note);
-        acc.id.push(feedback.id);
+        acc.id.push(feedback.feedbackId);
         return acc;
       }, { notes: [], id: [] });
       break;
     }
 
-    console.log(notes);
+    console.log({notes});
 
     const requestBody = {
       input_data: notes.notes,
@@ -205,8 +204,7 @@ getPositiveFeedbacks = async () => {
           {response.data.result.join(', ')}
         </div>
       )
-    });
-    // .then((val) => { axios.patch('https://symi-be.herokuapp.com/feedbacks/status', )});
+    }).then((val) => axios.patch('https://symi-be.herokuapp.com/auth/feedbacks/status', notes.id, { headers: { token: this.state.token } }));
   };
 
   //decide which component to render
