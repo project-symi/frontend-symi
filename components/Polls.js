@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default class Polls extends React.Component {
   constructor() {
     super();

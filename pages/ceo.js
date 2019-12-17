@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
+
+import React from 'react';
+
 //components
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
