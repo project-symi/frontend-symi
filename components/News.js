@@ -30,9 +30,6 @@ const News = () => {
     props = employeeProps;
   }
 
-  console.log(employeeProps);
-  console.log(props);
-
 
   return (
     <div>
@@ -54,7 +51,7 @@ const News = () => {
                 <h4>{item.description}</h4>
                 {props.directNewsFeedback ? (
                   <div className="submit-feedback-button">
-                    <Button variant="contained" color="primary" onClick={() => props.directNewsFeedback(item.newsId)}>
+                    <Button variant="contained" color="primary" onClick={() => props.directNewsFeedback(item)}>
                       SUBMIT FEEDBACK
                     </Button>
                   </div>
