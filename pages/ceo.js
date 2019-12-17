@@ -161,20 +161,38 @@ getPositiveFeedbacks = async () => {
     let notes;
     switch (feeling) {
     case 'good':
-      notes = this.state.goodFeedbacks.map(feedback => feedback.note);
+      notes = this.state.goodFeedbacks.reduce((acc, feedback) => {
+        acc.notes.push(feedback.note);
+        acc.id.push(feedback.id);
+        return acc;
+      }, { notes: [], id: [] });
       break;
     case 'meh':
-      notes = this.state.mehFeedbacks.map(feedback => feedback.note);
-      break;
+      notes = this.state.mehFeedbacks.reduce((acc, feedback) => {
+        console.log(feedback);
+        acc.notes.push(feedback.note);
+        acc.id.push(feedback.id);
+        return acc;
+      }, { notes: [], id: [] });      break;
     default:
-      notes = this.state.sadFeedbacks.map(feedback => feedback.note);
+      notes = this.state.sadFeedbacks.reduce((acc, feedback) => {
+        acc.notes.push(feedback.note);
+        acc.id.push(feedback.id);
+        return acc;
+      }, { notes: [], id: [] });
       break;
     }
+
+    console.log(notes);
+
     const requestBody = {
-      input_data: notes,
+      input_data: notes.notes,
       input_type: 'text',
       N: 10
     };
+
+
+    ////////GET FEEDBACK KEYWORDS
     const response = await axios.post(
       'https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords',
       requestBody,
@@ -186,6 +204,7 @@ getPositiveFeedbacks = async () => {
         }
       }
     );
+    /////////////SHOW THE KEYWORDS IN POPUP
     swal({
       title: feeling === 'good' ? 'Positive Feedback' : 'Negative Feedback',
       button: true,
@@ -195,9 +214,7 @@ getPositiveFeedbacks = async () => {
         </div>
       )
     });
-    // .then((val) => {
-    //   return axios.patch('https://symi-be.herokuapp.com/feedbacks/status');
-    // });
+    // .then((val) => { axios.patch('https://symi-be.herokuapp.com/feedbacks/status', )});
   };
 
   //decide which component to render
