@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import React from 'react';
+
 //components
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';

@@ -273,13 +273,31 @@ html {
   font-size: small;
 }
 
-/* .swal-button {
+.swal-button {
+  background-color: #3f50b5;
+  border: 0px;
+  outline: none;
+}
+
+.swal-content {
+  border-radius: 25px;
+}
+
+.swal-modal {
+  border-radius: 35px;
+}
+
+button:hover {
   background-color: #3f50b5;
 }
 
 .swal-button button:hover {
   background-color: #3f50b5;
-} */
+}
+
+.swal-button:hover {
+  background-color: #3f50b5;
+}
 
 @media screen and (max-width: 480px) {
   .menu-item {

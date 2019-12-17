@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import React from 'react';
+
 import { Button,TextField } from '@material-ui/core';
 
 import AddNews from '../components/adminPage/AddNews';

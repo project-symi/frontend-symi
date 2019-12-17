@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
+
+import React from 'react';
+
 //components
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
@@ -186,9 +189,9 @@ getPositiveFeedbacks = async () => {
     const result = ['test', 'testy', 'tester', 'testerston', 'this', 'is', 'some', 'random', 'feedback', 'because', 'I', 'overused', 'API'];
 
     swal({
-      title: feeling === 'good' ? 'Positive Feedback' : 'Negative Feedback',
       button: true,
-      content: ( 
+      content: ( <div>
+        <div className="popup-title">EMPLOYEES FEEL {feeling.toUpperCase()} ABOUT</div>
         <div id="keyword-container">
           {result.map(function(item, i){
             console.log(item);
@@ -196,6 +199,7 @@ getPositiveFeedbacks = async () => {
           })
           }
         </div>
+      </div>
       )
     });
     // .then((val) => {

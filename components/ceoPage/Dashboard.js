@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import React from 'react';
 
 //material-ui
 import { Button } from '@material-ui/core';
@@ -90,14 +91,15 @@ export default class Dashboard extends React.Component {
            {employeePhoto.length !== 0 ?  <img className="employee-img" width="200px" src={employeePhoto[0].photoURL}></img> : <img className="employee-img" width="200px" src={human}></img> }
            <div className="employee-details">
              <div className="employee-name">
-               {employee.name}, {employee.gender[0].toUpperCase()}
+               {employee.name} 
              </div>
+
              <span className="employee-dept">{employee.department}</span>
-             <span>{this.getAge(employee.dateOfBirth) + ' years old'}</span>
+             <span className="employee-age">   { employee.gender === 'male' ? '♂' : '♀'}          {this.getAge(employee.dateOfBirth) + ' years old'}</span>
            </div>
          </div>
 
-         <p className="title">What Others Say About {employee.name.split(' ')[0]}</p>
+         <p className="title">WHAT OTHERS SAY ABOUT {employee.name.split(' ')[0].toUpperCase()}</p>
          <span className="employee-feedback">{employeeFeedback.map((feedback, i) => {
            ;
            return (<div key={i}>{`"${feedback.note}"`}</div>);
