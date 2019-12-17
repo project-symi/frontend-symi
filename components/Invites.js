@@ -3,9 +3,9 @@ import React from 'react';
 
 import { Button } from "@material-ui/core";
 
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 export default class Invites extends React.Component {
   constructor() {
@@ -13,16 +13,16 @@ export default class Invites extends React.Component {
     this.state = {
       invites: [
         {
-          date: "12/3/2009",
-          title: "Lunch at Afuri",
-          invitee: "Yukio",
-          status: "accepted"
+          date: '12/3/2009',
+          title: 'Lunch at Afuri',
+          invitee: 'Yukio',
+          status: 'accepted'
         },
         {
-          date: "12/3/2009",
-          title: "Walking meeting to Lawson",
-          invitee: "Igor",
-          status: "pending"
+          date: '12/3/2009',
+          title: 'Walking meeting to Lawson',
+          invitee: 'Igor',
+          status: 'pending'
         }
       ]
     };
@@ -47,10 +47,10 @@ export default class Invites extends React.Component {
 
               <div> {item.title}</div>
               <div className="status">
-                {item.status === "accepted" ? (
-                  <CheckCircleOutlineIcon style={{ color: "green" }} />
+                {item.status === 'accepted' ? (
+                  <CheckCircleOutlineIcon style={{ color: 'green' }} />
                 ) : (
-                  <HelpOutlineIcon style={{ color: "purple" }} />
+                  <HelpOutlineIcon style={{ color: 'purple' }} />
                 )}
 
                 <div>{item.status}</div>

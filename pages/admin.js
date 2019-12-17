@@ -11,11 +11,11 @@ import Polls from '../components/Polls';
 import About from '../components/About';
 import '../styles/Admin.css';
 
-//context API
+//////////////CONTEXT API
 import { AdminProvider } from '../contextApi/AdminContext';
 import swal from '@sweetalert/with-react';
 
-//utils
+////////////UTILS
 import axios from 'axios';
 
 export default class Admin extends React.Component {
@@ -81,6 +81,8 @@ export default class Admin extends React.Component {
       });
   }
 
+
+  ///////DELETE NEWS ITEM
   deleteNews = async (newsId) => {
     // call delete api
     await axios.delete(`https://symi-be.herokuapp.com/auth/news/${newsId}`, {headers: {token: this.state.token}});
@@ -89,12 +91,9 @@ export default class Admin extends React.Component {
     this.setState({news: this.state.news.slice(1)});
   }
 
+  ////////ADD NEWS ITEM
   addNews = async newsObj => {
-    console.log({newsObj});
-
-    const res = await axios.post('https://symi-be.herokuapp.com/auth/news', newsObj, { headers : { token: this.state.token}});
-
-    console.log(res);
+    await axios.post('https://symi-be.herokuapp.com/auth/news', newsObj, { headers : { token: this.state.token}});
   }
 
 
