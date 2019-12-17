@@ -109,32 +109,6 @@ getPositiveFeedbacks = async () => {
 
   //////////////////////// OVERALL SENTIMENT
   getFeedbacks = async () => {
-    //all fbs
-    const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
-    //create data to pass to overall centiment chart
-
-    const feedbacksByFeelingRatio = response.data.reduce(
-      (acc, feedback) => {
-        switch (feedback.feeling) {
-        case 'good':
-          acc[0].value++;
-          break;
-        case 'meh':
-          acc[1].value++;
-          break;
-        default:
-          acc[2].value++;
-          break;
-        }
-        return acc;
-      },
-      [
-        { name: '😊', value: 0, feeling: 'good' },
-        { name: '😐', value: 0, feeling: 'meh' },
-        { name: '😞', value: 0, feeling: 'sad' }
-      ]
-    );
-    
     //good fb
     const responseGood = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good',
@@ -153,8 +127,19 @@ getPositiveFeedbacks = async () => {
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad',
       { headers: { token: this.state.token } }
     );
-    console.log({responseSad});
     //create feedbacks ratio by feelings
+    const feedbacksByFeelingRatio = [
+      { name: '😊', value: 0, feeling: 'good' },
+      { name: '😐', value: 0, feeling: 'meh' },
+      { name: '😞', value: 0, feeling: 'sad' }
+    ];
+
+    feedbacksByFeelingRatio[0].value = responseGood.data.length;
+    feedbacksByFeelingRatio[1].value = responseMeh.data.length;
+    feedbacksByFeelingRatio[2].value = responseSad.data.length;
+
+    console.log(feedbacksByFeelingRatio);
+
     this.setState({
       feedbacksByFeelingRatio,
       goodFeedbacks: responseGood.data,
@@ -181,23 +166,35 @@ getPositiveFeedbacks = async () => {
       input_type: 'text',
       N: 10
     };
-    const response = await axios.post(
-      'https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords',
-      requestBody,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
-          'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'
-        }
-      }
-    );
+
+    // const response = await axios.post(
+    //   'https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords',
+    //   requestBody,
+    //   {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
+    //       'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'
+    //     }
+    //   }
+    // );
+
+    // console.log(response.data);
+
+    //  response.data.result
+
+    const result = ['test', 'testy', 'tester', 'testerston', 'this', 'is', 'some', 'random', 'feedback', 'because', 'I', 'overused', 'API'];
+
     swal({
       title: feeling === 'good' ? 'Positive Feedback' : 'Negative Feedback',
       button: true,
-      content: (
-        <div>
-          {response.data.result.join(', ')}
+      content: ( 
+        <div id="keyword-container">
+          {result.map(function(item, i){
+            console.log(item);
+            return <div className="keyword">{item}</div>;
+          })
+          }
         </div>
       )
     });

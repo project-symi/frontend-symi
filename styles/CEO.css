@@ -133,6 +133,23 @@
   font-size: 15pt;
 }
 
+#keyword-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+}
+
+.keyword {
+  background: rgb(64, 63, 209);
+  background: linear-gradient(90deg, rgba(64, 63, 209, 1) 0%, rgba(62, 215, 189, 1) 100%);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16pt;
+  color: #FFF;
+  margin: 5px;
+}
+
 @media screen and (max-width: 480px) {
   .data {
     width: 260px;
