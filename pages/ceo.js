@@ -155,45 +155,55 @@ getPositiveFeedbacks = async () => {
     let notes;
     switch (feeling) {
     case 'good':
-      notes = this.state.goodFeedbacks.map(feedback => feedback.note);
+      notes = this.state.goodFeedbacks.reduce((acc, feedback) => {
+        acc.notes.push(feedback.note);
+        acc.id.push(feedback.feedbackId);
+        return acc;
+      }, { notes: [], id: [] });
       break;
     case 'meh':
-      notes = this.state.mehFeedbacks.map(feedback => feedback.note);
-      break;
+      notes = this.state.mehFeedbacks.reduce((acc, feedback) => {
+        acc.notes.push(feedback.note);
+        acc.id.push(feedback.feedbackId);
+        return acc;
+      }, { notes: [], id: [] });      break;
     default:
-      notes = this.state.sadFeedbacks.map(feedback => feedback.note);
+      notes = this.state.sadFeedbacks.reduce((acc, feedback) => {
+        acc.notes.push(feedback.note);
+        acc.id.push(feedback.feedbackId);
+        return acc;
+      }, { notes: [], id: [] });
       break;
     }
+
+    console.log({notes});
+
     const requestBody = {
-      input_data: notes,
+      input_data: notes.notes,
       input_type: 'text',
       N: 10
     };
 
-    // const response = await axios.post(
-    //   'https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords',
-    //   requestBody,
-    //   {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
-    //       'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'
-    //     }
-    //   }
-    // );
 
-    // console.log(response.data);
-
-    //  response.data.result
-
-    const result = ['test', 'testy', 'tester', 'testerston', 'this', 'is', 'some', 'random', 'feedback', 'because', 'I', 'overused', 'API'];
-
+    ////////GET FEEDBACK KEYWORDS
+    const response = await axios.post(
+      'https://unfound-keywords-extraction-v1.p.rapidapi.com/extraction/keywords',
+      requestBody,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
+          'x-rapidapi-key': 'bcffb61f87msh1010dd8a811c346p15d31fjsndd304d82eef3'
+        }
+      }
+    );
+    /////////////SHOW THE KEYWORDS IN POPUP
     swal({
       button: true,
       content: ( <div>
         <div className="popup-title">EMPLOYEES FEEL {feeling.toUpperCase()} ABOUT</div>
         <div id="keyword-container">
-          {result.map(function(item, i){
+          {response.data.result.map(function(item, i){
             console.log(item);
             return <div className="keyword">{item}</div>;
           })
@@ -201,10 +211,7 @@ getPositiveFeedbacks = async () => {
         </div>
       </div>
       )
-    });
-    // .then((val) => {
-    //   return axios.patch('https://symi-be.herokuapp.com/feedbacks/status');
-    // });
+    }).then((val) => axios.patch('https://symi-be.herokuapp.com/auth/feedbacks/status', notes.id, { headers: { token: this.state.token } }));
   };
 
   //decide which component to render
