@@ -13,7 +13,10 @@ import SentimentbyDept from './Charts/SentimentbyDept';
 import CreateInvite from './CreateInvite';
 
 // material ui
+import IconButton from '@material-ui/core/IconButton';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import MailIcon from '@material-ui/icons/Mail';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 
 //images
 import Loader from '../../assets/loader_img.gif';
@@ -160,22 +163,17 @@ export default class Dashboard extends React.Component {
                         return (
                           <div key={i} className="top">
                             <div className="top-num">{i + 1}</div>
-                            <div
+                            <div className="top-name"
                               onClick={() => this.showEmployeeDetails(employee)}
                             >
                               {employee.name}
                             </div>
-                            <div>{employee.points} ⭐️</div>
+                            <div className="top-points">{employee.points} ⭐️</div>
                             <div>
-                              <Button
-                                size="small"
-                                color="primary"
-                                onClick={() =>
-                                  this.handleSwitchViewToInvite(employee)
-                                }
-                              >
-                                invite
-                              </Button>
+                              <IconButton size="small">
+                                <MailIcon color="primary" onClick={() =>
+                                  this.handleSwitchViewToInvite(employee)} fontSize="small"></MailIcon>
+                              </IconButton>
                             </div>
                           </div>
                         );
@@ -204,12 +202,12 @@ export default class Dashboard extends React.Component {
                       return (
                         <div key={i} className="top">
                           <div className="top-num">{i + 1}</div>
-                          <div>{department.name}</div>
-                          <div>{department.points} ⭐️</div>
+                          <div className="top-name">{department.name}</div>
+                          <div className="top-points">{department.points} ⭐️</div>
                           <div>
-                            <Button size="small" color="primary">
-                              assign
-                            </Button>
+                            <IconButton size="small" color="primary">
+                              <AssignmentTurnedInIcon fontSize="small" color="primary" />
+                            </IconButton>
                           </div>
                         </div>
                       );

@@ -146,7 +146,7 @@ export default class Feedback extends React.Component {
               {/* FEELING SLIDER */}
               <div className="about-line">
                 <div className="feedback-text">I FEEL</div>
-                <Slider
+                <Slider className="slider"
                   style={{ width: 220 }}
                   defaultValue={100}
                   aria-labelledby="discrete-slider-restrict"
