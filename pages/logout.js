@@ -1,3 +1,5 @@
+import React from 'react';
+
 //next.js
 import Link from 'next/link';
 

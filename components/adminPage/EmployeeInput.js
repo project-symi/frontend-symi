@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import React from 'react';
+
 //utils
 import { formValidation, extractCsvData } from '../../utils/utils';
 import Papa from 'papaparse';

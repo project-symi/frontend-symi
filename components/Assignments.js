@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import React from 'react';
 
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';

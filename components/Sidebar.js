@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 
+import React from 'react';
+
 //MUI icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ChatIcon from '@material-ui/icons/Chat';

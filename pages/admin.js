@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-////////////COMPONENTS
+import React from 'react';
+
+//components
 import EmployeeInput from '../components/adminPage/EmployeeInput';
 import News from '../components/News';
 import Sidebar from '../components/Sidebar';
