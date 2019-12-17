@@ -109,30 +109,6 @@ getPositiveFeedbacks = async () => {
 
   //////////////////////// OVERALL SENTIMENT
   getFeedbacks = async () => {
-    //all fbs
-    const response = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
-    //create data to pass to overall centiment chart
-    const feedbacksByFeelingRatio = response.data.reduce(
-      (acc, feedback) => {
-        switch (feedback.feeling) {
-        case 'good':
-          acc[0].value++;
-          break;
-        case 'meh':
-          acc[1].value++;
-          break;
-        default:
-          acc[2].value++;
-          break;
-        }
-        return acc;
-      },
-      [
-        { name: '😊', value: 0, feeling: 'good' },
-        { name: '😐', value: 0, feeling: 'meh' },
-        { name: '😞', value: 0, feeling: 'sad' }
-      ]
-    );
     //good fb
     const responseGood = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good',
@@ -148,7 +124,20 @@ getPositiveFeedbacks = async () => {
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad',
       { headers: { token: this.state.token } }
     );
+
     //create feedbacks ratio by feelings
+    const feedbacksByFeelingRatio = [
+      { name: '😊', value: 0, feeling: 'good' },
+      { name: '😐', value: 0, feeling: 'meh' },
+      { name: '😞', value: 0, feeling: 'sad' }
+    ];
+
+    feedbacksByFeelingRatio[0].value = responseGood.data.length;
+    feedbacksByFeelingRatio[1].value = responseMeh.data.length;
+    feedbacksByFeelingRatio[2].value = responseSad.data.length;
+
+    console.log(feedbacksByFeelingRatio);
+
     this.setState({
       feedbacksByFeelingRatio,
       goodFeedbacks: responseGood.data,
