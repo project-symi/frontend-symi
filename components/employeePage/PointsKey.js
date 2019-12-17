@@ -21,9 +21,9 @@ const useStyles = makeStyles({
   title: {
     fontFamily: 'Roboto Condensed',
     color: 'white',
-    background: '#3EC4BE',
+    background: '#637ACA',
     fontSize: '14pt',
-    size: '100%'
+    size: '100%',
   },
   text: { fontFamily: 'Roboto Condensed', fontSize: '12pt' },
   points: {

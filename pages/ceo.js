@@ -75,7 +75,7 @@ export default class Ceo extends React.Component {
   //////////////////////// NEWS
   getNews = async () => {
     const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
-    
+
     const news = res.data;
 
     this.setState({news});
@@ -105,7 +105,7 @@ getPositiveFeedbacks = async () => {
   console.log({topEmployeeFeedbacks});
 
   this.setState({topEmployeeFeedbacks});
-} 
+}
 
   //////////////////////// OVERALL SENTIMENT
   getFeedbacks = async () => {

@@ -54,6 +54,7 @@ export default class Employee extends React.Component {
           correspondentId: '2222'
         }
       ],
+      newsFeedback: null,
       userType: 'Employee',
       totalPoints: 0,
       userId: '',
@@ -86,14 +87,19 @@ export default class Employee extends React.Component {
     const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
     const news = res.data;
 
-    console.log({news});
-
     this.setState({news});
   }
 
-  directNewsFeedback = () => {
+  directNewsFeedback = (news) => {
     /// for news
+    console.log(news);
+    this.setState({ newsFeedback: news, currentlyShown: 'feedback', isDefaultView: false });
   }
+
+  handleResetNewsFeedback = () => {
+    this.setState({ newsFeedback: null });
+  }
+
 
   ///////////////////////////////// POINTS
   // TOTAL POINTS
@@ -138,7 +144,7 @@ export default class Employee extends React.Component {
   };
 
   ///////////////////////////////// FEEDBACK
-  
+
   // FUZZY SEARCH
   handleFuzzyNameSearch = async string => {
     //make an API call to get fuzzy names and assign the return value to fuzzyNames property
@@ -160,7 +166,7 @@ export default class Employee extends React.Component {
 
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
-    
+
     // show newly added feedback
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
@@ -226,7 +232,7 @@ export default class Employee extends React.Component {
 
   render() {
     return (
-      <EmployeeProvider value={{ 
+      <EmployeeProvider value={{
         userType: this.state.userType,
         totalPoints: this.state.totalPoints,
         news: this.state.news,
@@ -234,6 +240,8 @@ export default class Employee extends React.Component {
         polls: true,
         invites: true,
         rewards: true,
+        newsFeedback: this.state.newsFeedback,
+        handleResetNewsFeedback: this.handleResetNewsFeedback,
         directNewsFeedback: this.directNewsFeedback,
         handleComponentView: this.handleComponentView,
         feedbacks: this.state.feedbacks,

@@ -29,7 +29,7 @@ import EmployeeContext from '../../contextApi/EmployeeContext';
 //feelings data
 const feelings = [
   {
-    value: '100',
+    value: 100,
     label: ' 😊'
   },
   {
@@ -62,6 +62,14 @@ export default class Feedback extends React.Component {
       },
       isPopupOpen: false
     };
+  }
+
+  componentDidMount() {
+    if (this.context.newsFeedback) {
+      console.log(this.context.newsFeedback);
+      this.setState({ about: 'News', input: this.context.newsFeedback.title });
+      this.context.handleResetNewsFeedback();
+    }
   }
 
   //make an API call to DB to get employees
@@ -102,7 +110,6 @@ export default class Feedback extends React.Component {
         name: this.state.about === 'Employee' ? 'an employee' : '',
         newsId: this.state.about === 'News' ? this.state.input : 0
       };
-      
       this.context.submitFeedback(newFeedback);
       this.setState({ about: '', note: '', input: '' });
     }
@@ -126,7 +133,6 @@ export default class Feedback extends React.Component {
     if (this.state.isPopupOpen) {
       this.setState({ input: value.employeeId, isPopupOpen: false });
     } else {
-      console.log('hello', this.state.input);
       //clear the input and re-render employee name input field
       this.setState({ input: '' });
       this.context.deleteFuzzyNames();
@@ -203,6 +209,7 @@ export default class Feedback extends React.Component {
                             ? 'Please specify employee name'
                             : 'Please enter news topic'
                         }
+                        value={this.state.input}
                         onChange={this.handleEmployeeNameInput}
                       ></TextField>
                     ) : null}
@@ -266,9 +273,15 @@ export default class Feedback extends React.Component {
                 src="https://media.giphy.com/media/26u49YjOazMMAwTGU/giphy-downsized-large.gif"
               ></img> */}
               <div>
+
                 <img src={reward} width="100px"></img>
-                <div className="points">500⭐</div> 
-              $50 Amazon Gift Card</div>
+                <table id="reward">
+                  <tr>
+                    <th className="points">500⭐</th>
+                    <th className="points-desc">$50 AMAZON GIFT CARD</th>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>
