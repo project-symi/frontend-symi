@@ -183,12 +183,14 @@ export default class Employee extends React.Component {
     );
 
     // sorts by date
-    const feedbacks = response.data.sort((a, b) => {
-      a = new Date(a.dateAdded);
-      b = new Date(b.dateAdded);
-      return a > b ? -1 : a < b ? 1 : 0;
-    });
-    this.setState({ feedbacks });
+    if (response.data) {
+      const feedbacks = response.data.sort((a, b) => {
+        a = new Date(a.dateAdded);
+        b = new Date(b.dateAdded);
+        return a > b ? -1 : a < b ? 1 : 0;
+      });
+      this.setState({ feedbacks });
+    }
   };
 
   ///////////////////////////////// VIEW

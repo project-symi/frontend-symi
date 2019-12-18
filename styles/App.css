@@ -326,6 +326,13 @@ button:hover {
   background-color: #3f50b5;
 }
 
+#demo {
+  margin-top: 100px;
+  text-align: center;
+  font-weight: bold;
+  color: #3f50b5;
+}
+
 @media screen and (max-width: 480px) {
   .menu-item {
     visibility: hidden;

@@ -14,6 +14,8 @@ import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import InfoIcon from '@material-ui/icons/Info';
 
+import Demo from '../components/Demo';
+
 //context API
 import EmployeeContext from '../contextApi/EmployeeContext';
 import CeoContext from '../contextApi/CeoContext';
@@ -130,6 +132,9 @@ const Sidebar = props => {
           <span className="menu-item">About</span>
         </div>
       </div>
+
+
+      <Demo></Demo>
     </div>
   );
 };
