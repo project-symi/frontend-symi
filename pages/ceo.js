@@ -204,7 +204,7 @@ getPositiveFeedbacks = async () => {
         <div className="popup-title">EMPLOYEES FEEL {feeling.toUpperCase()} ABOUT</div>
         <div id="keyword-container">
           {response.data.result.map(function(item, i){
-            return <div className="keyword">{item}</div>;
+            return <div key={item.id}  className="keyword">{item}</div>;
           })
           }
         </div>
