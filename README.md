@@ -28,7 +28,7 @@ npm run start
     <td align="center"><a href="https://github.com/miniengineer"><img src="/assets/headshots/mini.png"" width="200px;"/><br /><sub><b>Mini</b></sub></a><br />Tech Lead
       <p>
 <a href="https://twitter.com/MiniSamadova" target="_blank">
-    <img alt="Twitter: SnowSnowManMan" src="https://img.shields.io/twitter/follow/SnowSnowManMan.svg?style=social" />
+    <img alt="Twitter: MiniSamadova" src="https://img.shields.io/twitter/follow/SnowSnowManMan.svg?style=social" />
 </a>
 </p></td><p>
       </a></P>
