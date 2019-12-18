@@ -267,7 +267,7 @@ export default class Feedback extends React.Component {
               <PointsKey />
             </div>
 
-            <p className="title">Cash Out</p>
+            <p className="title">Quarterly Prize</p>
             <div className="feedback-submit">
               {/* <img
                 className="prize"

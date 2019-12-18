@@ -17,9 +17,6 @@ import axios from 'axios';
 //styles
 import '../styles/Employee.css';
 
-//dummy data
-import { rewards } from '../assets/dummyData';
-
 //context API
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
 import swal from 'sweetalert';
@@ -36,26 +33,7 @@ export default class Employee extends React.Component {
       fuzzyNames: '',
       feedbacks: null,
       news: null,
-      rewards: [
-        {
-          points: 50,
-          category: 'positive feedback',
-          dateAdded: '01/12/2019',
-          correspondentId: '1111'
-        },
-        {
-          points: 5,
-          category: 'poll',
-          dateAdded: '02/12/2019',
-          correspondentId: '6'
-        },
-        {
-          points: 10,
-          category: 'submitted feedback',
-          dateAdded: '04/12/2019',
-          correspondentId: '2222'
-        }
-      ],
+      rewards: null,
       newsFeedback: null,
       userType: 'Employee',
       totalPoints: 0,
@@ -80,7 +58,20 @@ export default class Employee extends React.Component {
 
       //API call to get news
       this.getNews();
+
+      this.setActive(this.state.currentlyShown);
     });
+  }
+
+  setActive(view) {
+    if (document.getElementsByClassName('sidebar-button-active')[0]) {
+      const pastActive = document.getElementsByClassName('sidebar-button-active');
+      pastActive[0].className ='sidebar-button';
+      console.log({pastActive});
+    }
+
+    const active = document.getElementById(view);
+    active.className = 'sidebar-button-active';
   }
 
 
@@ -121,7 +112,7 @@ export default class Employee extends React.Component {
   newPointsPopup = () => {
     swal({
       title: '+25⭐️! Hooray!',
-      text: 'Thanks for the feedback',
+      text: 'Thanks for the feedback!',
       icon: 'success',
       button: true
     });
@@ -132,7 +123,7 @@ export default class Employee extends React.Component {
   // REWARDS HISTORY
   handleGetRewards = async () => {
     const res = await axios.get(
-      `https://symi-be.herokuapp.com/auth/rewards/${this.state.userId}`,
+      `https://symi-be.herokuapp.com/auth/points/${this.state.userId}`,
       {
         headers: { token: this.state.token }
       }
@@ -252,7 +243,8 @@ export default class Employee extends React.Component {
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
         rewards: this.state.rewards,
-        handleRewardDetails: this.handleRewardDetails
+        handleRewardDetails: this.handleRewardDetails,
+        setActive: this.setActive
       }}>
         <div className="layout">
           <Navbar />

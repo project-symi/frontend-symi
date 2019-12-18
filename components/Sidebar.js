@@ -28,16 +28,27 @@ const Sidebar = props => {
   const handleOnClick = view => {
     //check which component (ceo or employee) renders the sidebar
     //to invoke the right version of handleComponentView
-    if (Object.keys(employeeProps).length > 0)
+    if (Object.keys(employeeProps).length > 0) {
       employeeProps.handleComponentView(view);
-    if (Object.keys(ceoProps).length > 0) ceoProps.handleCeoComponentView(view);
-    if (Object.keys(adminProps).length > 0) adminProps.handleAdminComponentView(view);
+      employeeProps.setActive(view);
+    }
+
+    if (Object.keys(ceoProps).length > 0) 
+    {ceoProps.handleCeoComponentView(view);
+      ceoProps.setActive(view);
+    }
+
+    if (Object.keys(adminProps).length > 0) {
+      adminProps.handleAdminComponentView(view);
+      adminProps.setActive(view);
+    }
   };
+
 
   return (
     <div id="sidebar">
       {ceoProps.dashboard ? (
-        <div
+        <div id='dashboard'
           className="sidebar-button"
           onClick={() => handleOnClick('dashboard')}
         >
@@ -46,7 +57,7 @@ const Sidebar = props => {
         </div>
       ) : null}
       {employeeProps.feedback ? (
-        <div
+        <div id='feedback'
           className="sidebar-button"
           onClick={() => handleOnClick('feedback')}
         >
@@ -54,12 +65,12 @@ const Sidebar = props => {
           <span className="menu-item">Feedback</span>
         </div>
       ) : null}
-      <div className="sidebar-button" onClick={() => handleOnClick('news')}>
+      <div id="news" className="sidebar-button" onClick={() => handleOnClick('news')}>
         <AnnouncementIcon color="primary" />
         <span className="menu-item">News</span>
       </div>
       {adminProps.employeeInput ? (
-        <div
+        <div id="employeeInput"
           className="sidebar-button"
           onClick={() => handleOnClick('employeeInput')}
         >
@@ -68,7 +79,7 @@ const Sidebar = props => {
         </div>
       ) : null}
       {ceoProps.assignments || adminProps.assignments ? (
-        <div
+        <div id="assignments"
           className="sidebar-button"
           onClick={() => handleOnClick('assignments')}
         >
@@ -77,7 +88,7 @@ const Sidebar = props => {
         </div>
       ) : null}
       {employeeProps.invites || ceoProps.invites ? (
-        <div
+        <div id="invites"
           className="sidebar-button"
           onClick={() => handleOnClick('invites')}
         >
@@ -86,12 +97,12 @@ const Sidebar = props => {
         </div>
       ) : null}
       {employeeProps.rewards ? (
-        <div
+        <div id="rewards"
           className="sidebar-button"
           onClick={() => handleOnClick('rewards')}
         >
           <StarsIcon color="primary" />
-          <span className="menu-item">Rewards</span>
+          <span className="menu-item">Points</span>
         </div>
       ) : null}
       {/* {props.polls ? (
@@ -114,7 +125,7 @@ const Sidebar = props => {
       ) : null} */}
 
       <div>
-        <div className="sidebar-button" onClick={() => handleOnClick('about')}>
+        <div id="about" className="sidebar-button" onClick={() => handleOnClick('about')}>
           <HelpOutlineIcon color="primary" />
           <span className="menu-item">About</span>
         </div>

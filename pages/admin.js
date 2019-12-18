@@ -39,8 +39,21 @@ export default class Admin extends React.Component {
     this.setState({ token, userId }, () => {
       //API call to get news
       this.getNews();
+
+      this.setActive(this.state.currentlyShown);
     });
     ;}
+
+  setActive(view) {
+    if (document.getElementsByClassName('sidebar-button-active')[0]) {
+      const pastActive = document.getElementsByClassName('sidebar-button-active');
+      pastActive[0].className ='sidebar-button';
+      console.log({pastActive});
+    }
+
+    const active = document.getElementById(view);
+    active.className = 'sidebar-button-active';
+  }
 
   ///////////////////////////////// NEWS
   getNews = async () => {
@@ -140,6 +153,7 @@ export default class Admin extends React.Component {
         confirmDeleteNews: this.confirmDeleteNews,
         deleteNews: this.deleteNews,
         addNews: this.addNews,
+        setActive: this.setActive,
         handleAdminComponentView: this.handleComponentView }} >
         <div className="layout">
           <Navbar />

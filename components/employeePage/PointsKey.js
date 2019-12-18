@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   points: {
     width: '50px',
     fontFamily: 'Roboto Condensed',
-    fontSize: '16pt'
+    fontSize: '14pt'
   },
   prize: { margin: '10px 0px 0px 0px' }
 });
@@ -41,8 +41,7 @@ function createData(title, points) {
 
 const rows = [
   createData('SUBMIT FEEDBACK', '+25 ⭐'),
-  createData('RECEIVE  FEEDBACK', '+50 ⭐'),
-  createData('POLL', '+10 ⭐')
+  createData('RECEIVE  FEEDBACK', '+50 ⭐')
 ];
 
 export default function PointsKey() {
@@ -56,7 +55,7 @@ export default function PointsKey() {
             <TableRow>
               <TableCell className={classes.title} />
               <TableCell align="right" className={classes.title}>
-                REWARD
+                POINTS
               </TableCell>
             </TableRow>
           </TableHead>

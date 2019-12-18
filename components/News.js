@@ -11,6 +11,7 @@ import EmployeeContext from '../contextApi/EmployeeContext';
 import AdminContext from '../contextApi/AdminContext';
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 
 import moment from 'moment';
 
@@ -50,8 +51,8 @@ const News = () => {
                 ></DeleteForeverIcon>
               </div> ) : null}
               <div className="news-desc">
-                <span className="date">{moment(item.postedOn).format('MM/DD/YYYY')}</span>
-                <h2>{item.title}</h2>
+                <h2 className="title-item">{item.title.toUpperCase()}</h2>
+                <span className="date"> PUBLISHED <DoubleArrowIcon style={{fontSize: '12px'}}/> {moment(item.postedOn).format('MM/DD/YYYY')}</span>
                 <h4>{item.description}</h4>
                 {props.directNewsFeedback ? (
                   <div className="submit-feedback-button">

@@ -72,7 +72,20 @@ export default class Ceo extends React.Component {
       this.getPositiveFeedbacks();
 
       this.getNews();
+
+      this.setActive(this.state.currentlyShown);
     });
+  }
+
+  setActive(view) {
+    if (document.getElementsByClassName('sidebar-button-active')[0]) {
+      const pastActive = document.getElementsByClassName('sidebar-button-active');
+      pastActive[0].className ='sidebar-button';
+      console.log({pastActive});
+    }
+
+    const active = document.getElementById(view);
+    active.className = 'sidebar-button-active';
   }
 
   //////////////////////// NEWS
@@ -260,7 +273,8 @@ getPositiveFeedbacks = async () => {
         topDepartments: this.state.topDepartments,
         handleCeoComponentView: this.handleComponentView,
         handleSendInvitation: this.handleSendInvitation,
-        handleGetKeywords: this.handleGetKeywords
+        handleGetKeywords: this.handleGetKeywords,
+        setActive: this.setActive
       }}>
         <div className="layout">
           <Navbar />
