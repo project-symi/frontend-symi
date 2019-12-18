@@ -12,6 +12,8 @@ import AdminContext from '../contextApi/AdminContext';
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
+import moment from 'moment';
+
 //images
 import Loader from '../assets/loader_img.gif';
 
@@ -48,7 +50,7 @@ const News = () => {
                 ></DeleteForeverIcon>
               </div> ) : null}
               <div className="news-desc">
-                {item.postedOn.split(' ')[0]}
+                <span className="date">{moment(item.postedOn).format('MM/DD/YYYY')}</span>
                 <h2>{item.title}</h2>
                 <h4>{item.description}</h4>
                 {props.directNewsFeedback ? (

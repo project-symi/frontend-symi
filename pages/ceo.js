@@ -117,17 +117,19 @@ getPositiveFeedbacks = async () => {
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good',
       { headers: { token: this.state.token } }
     );
+
+    console.log({responseGood});
     //meh fb
     const responseMeh = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=meh',
       { headers: { token: this.state.token } }
     );
+    console.log({responseMeh});
     //sad fb
     const responseSad = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad',
       { headers: { token: this.state.token } }
     );
-
     //create feedbacks ratio by feelings
     const feedbacksByFeelingRatio = [
       { name: '😊', value: 0, feeling: 'good' },
@@ -191,18 +193,23 @@ getPositiveFeedbacks = async () => {
         headers: {
           'Content-Type': 'application/json',
           'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
-          'x-rapidapi-key': '0fcf27c58cmsh752c22710d8ecb1p13fbc9jsnc1a867c65634'
+          'x-rapidapi-key': 'bcffb61f87msh1010dd8a811c346p15d31fjsndd304d82eef3'
         }
       }
     );
     /////////////SHOW THE KEYWORDS IN POPUP
     swal({
-      title: feeling === 'good' ? 'Positive Feedback' : 'Negative Feedback',
       button: true,
-      content: (
-        <div>
-          {response.data.result.join(', ')}
+      content: ( <div>
+        <div className="popup-title">EMPLOYEES FEEL {feeling.toUpperCase()} ABOUT</div>
+        <div id="keyword-container">
+          {response.data.result.map(function(item, i){
+            console.log(item);
+            return <div className="keyword">{item}</div>;
+          })
+          }
         </div>
+      </div>
       )
     }).then((val) => axios.patch('https://symi-be.herokuapp.com/auth/feedbacks/status', notes.id, { headers: { token: this.state.token } }));
   };

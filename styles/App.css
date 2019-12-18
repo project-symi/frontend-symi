@@ -73,10 +73,10 @@ html {
 .points {
   width: 100px;
   grid-area: points;
-  margin: 10px;
-  background: #3f51b5;
+  margin: 5px;
+  background: #637ACB;
   padding: 3px;
-  border-radius: 5px;
+  border-radius: 30px;
   color: white;
   text-align: center;
   font-size: 18pt;
@@ -273,13 +273,31 @@ html {
   font-size: small;
 }
 
-/* .swal-button {
+.swal-button {
+  background-color: #3f50b5;
+  border: 0px;
+  outline: none;
+}
+
+.swal-content {
+  border-radius: 25px;
+}
+
+.swal-modal {
+  border-radius: 35px;
+}
+
+button:hover {
   background-color: #3f50b5;
 }
 
 .swal-button button:hover {
   background-color: #3f50b5;
-} */
+}
+
+.swal-button:hover {
+  background-color: #3f50b5;
+}
 
 @media screen and (max-width: 480px) {
   .menu-item {

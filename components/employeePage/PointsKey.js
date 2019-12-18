@@ -22,11 +22,11 @@ const useStyles = makeStyles({
   title: {
     fontFamily: 'Roboto Condensed',
     color: 'white',
-    background: '#3EC4BE',
+    background: '#637ACA',
     fontSize: '14pt',
-    size: '100%'
+    size: '100%',
   },
-  text: { fontFamily: 'Roboto Condensed', fontSize: '11pt' },
+  text: { fontFamily: 'Roboto Condensed', fontSize: '12pt' },
   points: {
     width: '50px',
     fontFamily: 'Roboto Condensed',
@@ -40,9 +40,9 @@ function createData(title, points) {
 }
 
 const rows = [
-  createData('Submit Feedback', '+25⭐'),
-  createData('Receive  Feedback', '+50⭐'),
-  createData('Poll', '+10⭐')
+  createData('SUBMIT FEEDBACK', '+25 ⭐'),
+  createData('RECEIVE  FEEDBACK', '+50 ⭐'),
+  createData('POLL', '+10 ⭐')
 ];
 
 export default function PointsKey() {

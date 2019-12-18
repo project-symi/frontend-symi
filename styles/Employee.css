@@ -87,8 +87,25 @@
   margin-right: 5px;
 }
 
-/* HIDE DEPENDING ON USER */
+#reward {
+  border: 1px #E0E0E0 solid;
+  border-radius: 25px;
+  font-size: 11pt;
+  font-weight: thin;
+}
 
+.points-desc {
+  padding: 10px;
+  padding-right: 15px;
+}
+
+.left {
+  border-radius: 15px 0px 0px 0px;
+}
+
+.right {
+  border-radius: 0px 15px 0px 0px;
+}
 
 .submit-feedback-button {
   display: inline;

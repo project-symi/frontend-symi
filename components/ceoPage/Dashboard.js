@@ -14,7 +14,10 @@ import SentimentbyDept from './Charts/SentimentbyDept';
 import CreateInvite from './CreateInvite';
 
 // material ui
+import IconButton from '@material-ui/core/IconButton';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import MailIcon from '@material-ui/icons/Mail';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 
 //images
 import Loader from '../../assets/loader_img.gif';
@@ -51,6 +54,26 @@ export default class Dashboard extends React.Component {
     };
   }
 
+  getAge(birthday) {
+    const ageDiff = new Date() - (new Date(birthday)).getTime();
+    const ageDate = new Date(ageDiff);
+
+    const today = new Date();
+    const birthDate = new Date(birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    console.log({today});
+    console.log({birthDate});
+    
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    console.log({age});
+
+    return age;
+  }
+
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/w6wsrc52/';
 
   ////////////////////////////// TOP RATED EMPLOYEES
@@ -68,13 +91,15 @@ export default class Dashboard extends React.Component {
            {employeePhoto.length !== 0 ?  <img className="employee-img" width="200px" src={employeePhoto[0].photoURL}></img> : <img className="employee-img" width="200px" src={human}></img> }
            <div className="employee-details">
              <div className="employee-name">
-               {employee.name}, {employee.gender[0].toUpperCase()}
+               {employee.name} 
              </div>
+
              <span className="employee-dept">{employee.department}</span>
+             <span className="employee-age">   { employee.gender === 'male' ? '♂' : '♀'}          {this.getAge(employee.dateOfBirth) + ' years old'}</span>
            </div>
          </div>
 
-         <p className="title">What Others Say About {employee.name.split(' ')[0]}</p>
+         <p className="title">WHAT OTHERS SAY ABOUT {employee.name.split(' ')[0].toUpperCase()}</p>
          <span className="employee-feedback">{employeeFeedback.map((feedback, i) => {
            ;
            return (<div key={i}>{`"${feedback.note}"`}</div>);
@@ -139,23 +164,18 @@ export default class Dashboard extends React.Component {
                         return (
                           <div key={i} className="top">
                             <div className="top-num">{i + 1}</div>
-                            <div
+                            <div className="top-name"
                               onClick={() => this.showEmployeeDetails(employee)}
                               style={{ cursor: 'pointer' }}
                             >
                               {employee.name}
                             </div>
-                            <div>{employee.points} ⭐️</div>
+                            <div className="top-points">{employee.points} ⭐️</div>
                             <div>
-                              <Button
-                                size="small"
-                                color="primary"
-                                onClick={() =>
-                                  this.handleSwitchViewToInvite(employee)
-                                }
-                              >
-                                invite
-                              </Button>
+                              <IconButton size="small">
+                                <MailIcon color="primary" onClick={() =>
+                                  this.handleSwitchViewToInvite(employee)} fontSize="small"></MailIcon>
+                              </IconButton>
                             </div>
                           </div>
                         );
@@ -184,12 +204,12 @@ export default class Dashboard extends React.Component {
                       return (
                         <div key={i} className="top">
                           <div className="top-num">{i + 1}</div>
-                          <div>{department.name}</div>
-                          <div>{department.points} ⭐️</div>
+                          <div className="top-name">{department.name}</div>
+                          <div className="top-points">{department.points} ⭐️</div>
                           <div>
-                            <Button size="small" color="primary">
-                              assign
-                            </Button>
+                            <IconButton size="small" color="primary">
+                              <AssignmentTurnedInIcon fontSize="small" color="primary" />
+                            </IconButton>
                           </div>
                         </div>
                       );

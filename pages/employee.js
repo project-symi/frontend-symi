@@ -120,8 +120,8 @@ export default class Employee extends React.Component {
 
   newPointsPopup = () => {
     swal({
-      title: 'Thanks for the feedback',
-      text: 'You got +25⭐️! Hooray!',
+      title: '+25⭐️! Hooray!',
+      text: 'Thanks for the feedback',
       icon: 'success',
       button: true
     });
