@@ -11,8 +11,7 @@ import News from '../components/News';
 import Invites from '../components/Invites';
 import About from '../components/About';
 
-// material ui
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+
 
 //utils
 import axios from 'axios';

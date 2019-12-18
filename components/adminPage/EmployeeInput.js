@@ -272,7 +272,7 @@ class EmployeeInput extends React.Component {
         <p className="title">Approved Users</p>
         <div className="approved-employees">
           {this.context.approvedUsers ? (this.context.approvedUsers.map((employee,i)=>{return (
-            <div className="employee-line"> 
+            <div key={i} className="employee-line"> 
               <div className="top-num">{i+1}</div> 
               <div>{employee.name}</div>
               <div>{employee.employeeId}</div>
