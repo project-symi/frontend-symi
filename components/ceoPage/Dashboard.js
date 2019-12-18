@@ -173,7 +173,7 @@ export default class Dashboard extends React.Component {
                             <div className="top-points">{employee.points} ⭐️</div>
                             <div>
                               <IconButton onClick={() =>
-                                  this.handleSwitchViewToInvite(employee)} size="small">
+                                this.handleSwitchViewToInvite(employee)} size="small">
                                 <MailIcon color="primary" fontSize="small"></MailIcon>
                               </IconButton>
                             </div>
