@@ -290,22 +290,23 @@ export default class Feedback extends React.Component {
         <p className="title">Feedback History</p>
 
         <div className="feedback-history-sub">
-          <span>Details ▾</span>
-          <span className="status">Status ▾</span>
+          <span>DETAILS ▾</span>
+          <span className="status">STATUS ▾</span>
         </div>
         {this.context.feedbacks ? (
           this.context.feedbacks.map(item => {
             return (
               <div key={item.id} className="feedback-history">
                 <span className="feedback">
-                  <span className="date"> {moment(item.dateAdded).format('MM/DD/YYYY')}</span>I feel{' '}
+                  I feel{' '}
                   {' ' + item.feeling.toLowerCase() + ' '}
                   about
                   {' ' +
                     (item.category === 'Employee' ? item.name : item.category) +
                     ' '}
                   because {item.note}.
-                </span>{' '}
+                  <span className="date"> SENT » {moment(item.dateAdded).format('MM/DD/YYYY')}</span>
+                </span>
                 <div className="status">
                   <div>
                     {!item.status ? (

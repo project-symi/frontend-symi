@@ -22,6 +22,7 @@ export default class Admin extends React.Component {
   constructor() {
     super();
     this.state = {
+      approvedUsers: null,
       news: null,
       addedEmployee: null,
       isDefaultView: true,
@@ -41,6 +42,8 @@ export default class Admin extends React.Component {
       this.getNews();
 
       this.setActive(this.state.currentlyShown);
+
+      this.getApprovedUsers();
     });
     ;}
 
@@ -54,6 +57,16 @@ export default class Admin extends React.Component {
     const active = document.getElementById(view);
     active.className = 'sidebar-button-active';
   }
+
+  ///////////////////////////////// EMPLOYEES
+getApprovedUsers = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: {token: this.state.token} });
+  const approvedUsers = res.data;
+
+  console.log({approvedUsers});
+  
+  this.setState({approvedUsers});
+}
 
   ///////////////////////////////// NEWS
   getNews = async () => {
@@ -154,6 +167,7 @@ export default class Admin extends React.Component {
         deleteNews: this.deleteNews,
         addNews: this.addNews,
         setActive: this.setActive,
+        approvedUsers: this.state.approvedUsers,
         handleAdminComponentView: this.handleComponentView }} >
         <div className="layout">
           <Navbar />

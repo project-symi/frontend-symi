@@ -8,6 +8,8 @@ import Papa from 'papaparse';
 //components
 import { TextField, Button } from '@material-ui/core';
 
+import Loader from '../../assets/loader_img.gif';
+
 //sweet alert
 import swal from 'sweetalert';
 import '../../assets/sweetalert.min.js';
@@ -16,7 +18,7 @@ import '../../assets/sweetalert.min.js';
 import AdminContext from '../../contextApi/AdminContext';
 
 class EmployeeInput extends React.Component {
-  static contextType = AdminContext;
+  static contextType = AdminContext;  
 
   constructor() {
     super();
@@ -266,6 +268,20 @@ class EmployeeInput extends React.Component {
           >
             Upload
           </Button>
+        </div>
+
+        <p className="title">Approved Users</p>
+        <div className="approved-employees">
+          {this.context.approvedUsers ? (this.context.approvedUsers.map((employee,i)=>{return (
+            <div className="employee-line"> 
+              <div className="top-num">{i+1}</div> 
+              <div>{employee.name}</div>
+              <div>{employee.employeeId}</div>
+              <div>{employee.department}</div>
+              <div>{employee.gender}</div>
+              <div>{employee.dateOfBirth}</div>
+              <div>{employee.email}</div>
+            </div>); })) : <img src={Loader}></img>}
         </div>
       </div>
     );
