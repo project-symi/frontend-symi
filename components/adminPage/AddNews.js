@@ -84,7 +84,7 @@ export default class AddNews extends React.Component {
   render() {
     return (
       <div>
-        <p className="title">Publish News</p>
+        <span className="title">Publish News</span>
         <form
           autoComplete="off"
           className="add-news-container"

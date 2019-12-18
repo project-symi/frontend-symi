@@ -78,7 +78,7 @@ const Sidebar = props => {
           <span className="menu-item">Employees</span>
         </div>
       ) : null}
-      {ceoProps.assignments || adminProps.assignments ? (
+      {/* {ceoProps.assignments || adminProps.assignments ? (
         <div id="assignments"
           className="sidebar-button"
           onClick={() => handleOnClick('assignments')}
@@ -86,7 +86,7 @@ const Sidebar = props => {
           <AssignmentTurnedInIcon color="primary" />
           <span className="menu-item">Assignments</span>
         </div>
-      ) : null}
+      ) : null} */}
       {employeeProps.invites || ceoProps.invites ? (
         <div id="invites"
           className="sidebar-button"

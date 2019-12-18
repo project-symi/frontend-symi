@@ -26,7 +26,7 @@ export default class Admin extends React.Component {
       news: null,
       addedEmployee: null,
       isDefaultView: true,
-      currentlyShown: 'assignments',
+      currentlyShown: 'employeeInput',
       userType: 'Admin',
       userId: '',
       token: ''
