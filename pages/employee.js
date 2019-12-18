@@ -67,7 +67,6 @@ export default class Employee extends React.Component {
     if (document.getElementsByClassName('sidebar-button-active')[0]) {
       const pastActive = document.getElementsByClassName('sidebar-button-active');
       pastActive[0].className ='sidebar-button';
-      console.log({pastActive});
     }
 
     const active = document.getElementById(view);
@@ -85,7 +84,6 @@ export default class Employee extends React.Component {
 
   directNewsFeedback = (news) => {
     /// for news
-    console.log(news);
     this.setState({ newsFeedback: news, currentlyShown: 'feedback', isDefaultView: false });
   }
 
@@ -131,8 +129,6 @@ export default class Employee extends React.Component {
 
     const rewards = res.data;
 
-    console.log({rewards});
-
     this.setState({ rewards });
   };
 
@@ -176,7 +172,6 @@ export default class Employee extends React.Component {
 
   // FEEDBACK HISTORY
   handleGetFeedbacks = async () => {
-    console.log(this.state.token, this.state.userId, 'get feedbacks');
     const response = await axios.get(
       `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.userId}`,
       { headers: { token: this.state.token } }

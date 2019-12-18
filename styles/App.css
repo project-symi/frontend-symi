@@ -30,7 +30,7 @@ html {
   border: 0px solid;
   border-radius: 15px;
   margin: 3% auto;
-  max-height: 650px;
+  height: 630px;
   width: 1020px;
   background-color: white;
   box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
@@ -327,7 +327,9 @@ button:hover {
 }
 
 #demo {
-  margin-top: 100px;
+  position: absolute;
+  margin-top: 60px;
+  margin-bottom: 10px;
   text-align: center;
   font-weight: bold;
   color: #3f50b5;

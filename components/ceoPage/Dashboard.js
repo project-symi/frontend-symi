@@ -62,14 +62,10 @@ export default class Dashboard extends React.Component {
     const birthDate = new Date(birthday);
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
-    console.log({today});
-    console.log({birthDate});
     
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
-
-    console.log({age});
 
     return age;
   }

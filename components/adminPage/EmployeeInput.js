@@ -85,7 +85,6 @@ class EmployeeInput extends React.Component {
               icon: 'success',
               button: true
             }).then(val => {
-              console.log('adding an employee');
               this.context.addNewEmployee({
                 employeeId: this.state.employeeId,
                 name: this.state.name,

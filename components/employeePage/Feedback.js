@@ -67,7 +67,6 @@ export default class Feedback extends React.Component {
 
   componentDidMount() {
     if (this.context.newsFeedback) {
-      console.log(this.context.newsFeedback);
       this.setState({ about: 'News', input: this.context.newsFeedback.title });
       this.context.handleResetNewsFeedback();
     }
@@ -321,7 +320,9 @@ export default class Feedback extends React.Component {
             );
           })
         ) : (
-          <img src={Loader}></img>
+          <div className="feedback-history">
+            <img src={Loader}></img>
+          </div>
         )}
       </div>
     );

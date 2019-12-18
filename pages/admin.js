@@ -51,7 +51,6 @@ export default class Admin extends React.Component {
     if (document.getElementsByClassName('sidebar-button-active')[0]) {
       const pastActive = document.getElementsByClassName('sidebar-button-active');
       pastActive[0].className ='sidebar-button';
-      console.log({pastActive});
     }
 
     const active = document.getElementById(view);
@@ -62,8 +61,6 @@ export default class Admin extends React.Component {
 getApprovedUsers = async () => {
   const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: {token: this.state.token} });
   const approvedUsers = res.data;
-
-  console.log({approvedUsers});
   
   this.setState({approvedUsers});
 }
@@ -124,11 +121,9 @@ getApprovedUsers = async () => {
   ///////////////////////////////// EMPLOYEE UPLOAD
   addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      console.log(addedEmployee);
-      //await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
     } else {
       /////INDIVIDUAL UPLOAD////////
-      console.log(addedEmployee);
       await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
       this.setState({ addedEmployee });
     }

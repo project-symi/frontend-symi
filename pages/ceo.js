@@ -81,7 +81,6 @@ export default class Ceo extends React.Component {
     if (document.getElementsByClassName('sidebar-button-active')[0]) {
       const pastActive = document.getElementsByClassName('sidebar-button-active');
       pastActive[0].className ='sidebar-button';
-      console.log({pastActive});
     }
 
     const active = document.getElementById(view);
@@ -107,8 +106,6 @@ export default class Ceo extends React.Component {
     );
     const topEmployees = res.data;
 
-    console.log({ topEmployees });
-
     this.setState({
       topEmployees
     });
@@ -117,8 +114,6 @@ export default class Ceo extends React.Component {
 getPositiveFeedbacks = async () => {
   const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.state.token } });
   const topEmployeeFeedbacks = res.data;
-
-  console.log({topEmployeeFeedbacks});
 
   this.setState({topEmployeeFeedbacks});
 }
@@ -130,14 +125,11 @@ getPositiveFeedbacks = async () => {
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=good',
       { headers: { token: this.state.token } }
     );
-
-    console.log({responseGood});
     //meh fb
     const responseMeh = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=meh',
       { headers: { token: this.state.token } }
     );
-    console.log({responseMeh});
     //sad fb
     const responseSad = await axios.get(
       'https://symi-be.herokuapp.com/auth/feedbacks?feeling=sad',
@@ -153,8 +145,6 @@ getPositiveFeedbacks = async () => {
     feedbacksByFeelingRatio[0].value = responseGood.data.length;
     feedbacksByFeelingRatio[1].value = responseMeh.data.length;
     feedbacksByFeelingRatio[2].value = responseSad.data.length;
-
-    console.log(feedbacksByFeelingRatio);
 
     this.setState({
       feedbacksByFeelingRatio,
@@ -188,8 +178,6 @@ getPositiveFeedbacks = async () => {
       }, { notes: [], id: [] });
       break;
     }
-
-    console.log({notes});
 
     const requestBody = {
       input_data: notes.notes,
@@ -235,7 +223,6 @@ getPositiveFeedbacks = async () => {
 
   handleSendInvitation = invitationObj => {
     //make an API call to create an invitation
-    console.log(invitationObj, ' invitation was sent');
   };
 
   renderSwitchView = param => {

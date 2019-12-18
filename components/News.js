@@ -23,8 +23,6 @@ const News = () => {
   const ceoProps = useContext(CeoContext);
   const adminProps = useContext(AdminContext);
 
-  console.log({adminProps});
-
   let props;
 
   if (Object.keys(adminProps).length > 0) {
