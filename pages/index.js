@@ -1,4 +1,5 @@
 import React from 'react';
+import About from '../components/About';
 
 //styles
 import '../styles/Index.css';
@@ -9,16 +10,28 @@ import axios from 'axios';
 import Router from 'next/router';
 
 //MUI components
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class Login extends React.Component {
+
+const styles = theme => ({
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    marginTop: theme.spacing(4),
+    maxWidth: '80%',
+  },
+});
+
+class Login extends React.Component {
   constructor() {
     super();
     this.state = {
       userId: '',
       password: '',
       token: '',
-      permission: ''
+      permission: '',
+      isAboutShown: false
     };
   }
 
@@ -34,17 +47,22 @@ export default class Login extends React.Component {
     localStorage.setItem('userId', this.state.userId);
   }
 
+  handleShowAboutPage = () => {
+    this.setState({ isAboutShown: !this.state.isAboutShown });
+  }
+
   render() {
-    if (this.state.permission === 'CEO') {
+    const { classes } = this.props;
+    if (this.state.permission === 'CEO' && !this.state.isAboutShown) {
       Router.push('/ceo');
       return null;
-    } else if (this.state.permission === 'employee') {
+    } else if (this.state.permission === 'employee' && !this.state.isAboutShown) {
       Router.push('/employee');
       return null;
-    } else if (this.state.permission === 'admin') {
+    } else if (this.state.permission === 'admin' && !this.state.isAboutShown) {
       Router.push('/admin');
       return null;
-    } else {
+    } else if (!this.state.isAboutShown) {
       return (
         <div id="login-wrap">
           <div id="login-container">
@@ -78,9 +96,33 @@ export default class Login extends React.Component {
             >
               Login
             </Button>
+            <Button
+              onClick={this.handleShowAboutPage}
+              variant="contained"
+              color="primary"
+            >
+              About SYMI
+            </Button>
           </div>
+        </div>
+      );
+    } else {
+      return (
+        <div id="login-wrap">
+          <Paper className={classes.paper} >
+          <About />
+          <Button
+            onClick={this.handleShowAboutPage}
+            variant="contained"
+            color="primary"
+          >
+              Go Back
+          </Button>
+          </Paper>
         </div>
       );
     }
   }
 }
+
+export default withStyles(styles)(Login);

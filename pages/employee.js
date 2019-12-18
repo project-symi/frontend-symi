@@ -252,7 +252,7 @@ export default class Employee extends React.Component {
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
         rewards: this.state.rewards,
-        handleRewardDetails: this.handleRewardDetails
+        handleRewardDetails: this.handleRewardDetails,
       }}>
         <div className="layout">
           <Navbar />
