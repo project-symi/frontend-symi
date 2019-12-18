@@ -11,6 +11,9 @@ import News from '../components/News';
 import Invites from '../components/Invites';
 import About from '../components/About';
 
+// material ui
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+
 //utils
 import axios from 'axios';
 
@@ -28,6 +31,8 @@ export default class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      prizeAmount: 500,
+      prize: 'a $50 Amazon Gift Card',
       isDefaultView: true,
       currentlyShown: 'feedback',
       fuzzyNames: '',
@@ -60,6 +65,9 @@ export default class Employee extends React.Component {
       this.getNews();
 
       this.setActive(this.state.currentlyShown);
+
+      // check if user reached prize amount
+      this.reachedPrizeAmount;
     });
   }
 
@@ -131,6 +139,18 @@ export default class Employee extends React.Component {
 
     this.setState({ rewards });
   };
+
+  // GOT PRIZE
+  reachedPrizeAmount = () => {
+    if (this.state.totalPoints >= this.state.prizeAmount) {
+      swal({
+        title: `Congrats! You're now eligible for ${this.state.prize}!`,
+        text: 'Your HR will contact you shortly!',
+        icon: 'success',
+        button: true
+      });
+    }
+  }
 
   ///////////////////////////////// FEEDBACK
 

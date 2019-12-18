@@ -266,7 +266,7 @@ export default class Feedback extends React.Component {
               <PointsKey />
             </div>
 
-            <p className="title">Quarterly Prize</p>
+            <p className="title">Quarterly Prize <HelpOutlineIcon style={{fontSize: '5px'}}></HelpOutlineIcon></p>
             <div className="feedback-submit">
               {/* <img
                 className="prize"
