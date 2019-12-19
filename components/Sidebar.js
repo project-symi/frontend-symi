@@ -35,7 +35,7 @@ const Sidebar = props => {
       employeeProps.setActive(view);
     }
 
-    if (Object.keys(ceoProps).length > 0) 
+    if (Object.keys(ceoProps).length > 0)
     {ceoProps.handleCeoComponentView(view);
       ceoProps.setActive(view);
     }
