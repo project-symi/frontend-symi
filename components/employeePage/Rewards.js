@@ -67,7 +67,9 @@ const Rewards = () => {
             <div>
               <span className="title">Points History</span>
               { props.rewards ? (<div> 
-                {props.rewards.map((reward, i) => {
+                {props.rewards.sort((a, b) => {
+                  return new Date(b.date) - new Date(a.date);
+                }).map((reward, i) => {
                   return (
                     <div key={i} className={classes.root}>
                       <Paper className={classes.paper}>
@@ -75,15 +77,12 @@ const Rewards = () => {
                           <Grid item xs={12} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                               <Grid item s>
-                                <span className="date">{moment(reward.date).format('MM/DD/YYYY')}</span>
-
-                                <Typography
-                                  gutterBottom
-                                  variant="h6"
-                                  className={classes.title}
+                                <h2
+                                  className="reward-item"
                                 >
                                   {reward.categoryName}
-                                </Typography>
+                                </h2>
+                                <span className="date">SENT » {moment(reward.date).format('MM/DD/YYYY | hh:mm')}</span>
                                 <Button
                                   size="small"
                                   onClick={() => handleShowDetails(reward)}
