@@ -65,7 +65,7 @@ const Rewards = () => {
         props => {
           return (
             <div>
-              <span className="title">Rewards</span>
+              <span className="title">Points History</span>
               { props.rewards ? (<div> 
                 {props.rewards.map((reward, i) => {
                   return (

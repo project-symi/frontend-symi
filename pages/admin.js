@@ -22,10 +22,11 @@ export default class Admin extends React.Component {
   constructor() {
     super();
     this.state = {
+      approvedUsers: null,
       news: null,
       addedEmployee: null,
       isDefaultView: true,
-      currentlyShown: 'assignments',
+      currentlyShown: 'employeeInput',
       userType: 'Admin',
       userId: '',
       token: ''
@@ -39,8 +40,30 @@ export default class Admin extends React.Component {
     this.setState({ token, userId }, () => {
       //API call to get news
       this.getNews();
+
+      this.setActive(this.state.currentlyShown);
+
+      this.getApprovedUsers();
     });
     ;}
+
+  setActive(view) {
+    if (document.getElementsByClassName('sidebar-button-active')[0]) {
+      const pastActive = document.getElementsByClassName('sidebar-button-active');
+      pastActive[0].className ='sidebar-button';
+    }
+
+    const active = document.getElementById(view);
+    active.className = 'sidebar-button-active';
+  }
+
+  ///////////////////////////////// EMPLOYEES
+getApprovedUsers = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: {token: this.state.token} });
+  const approvedUsers = res.data;
+  
+  this.setState({approvedUsers});
+}
 
   ///////////////////////////////// NEWS
   getNews = async () => {
@@ -98,11 +121,9 @@ export default class Admin extends React.Component {
   ///////////////////////////////// EMPLOYEE UPLOAD
   addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      console.log(addedEmployee);
-      //await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
     } else {
       /////INDIVIDUAL UPLOAD////////
-      console.log(addedEmployee);
       await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
       this.setState({ addedEmployee });
     }
@@ -138,6 +159,8 @@ export default class Admin extends React.Component {
         confirmDeleteNews: this.confirmDeleteNews,
         deleteNews: this.deleteNews,
         addNews: this.addNews,
+        setActive: this.setActive,
+        approvedUsers: this.state.approvedUsers,
         handleAdminComponentView: this.handleComponentView }} >
         <div className="layout">
           <Navbar />

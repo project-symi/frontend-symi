@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import About from '../components/About';
 
@@ -10,7 +11,7 @@ import axios from 'axios';
 import Router from 'next/router';
 
 //MUI components
-import { TextField, Button, Paper } from '@material-ui/core';
+import { TextField, Button, Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 
@@ -110,14 +111,10 @@ class Login extends React.Component {
       return (
         <div id="login-wrap">
           <Paper className={classes.paper} >
-          <About />
-          <Button
-            onClick={this.handleShowAboutPage}
-            variant="contained"
-            color="primary"
-          >
-              Go Back
-          </Button>
+            <About />
+            <Typography variant="body2" style={{ cursor: 'pointer' }} onClick={this.handleShowAboutPage} >
+                  Go Back
+            </Typography>
           </Paper>
         </div>
       );

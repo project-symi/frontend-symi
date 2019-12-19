@@ -34,11 +34,8 @@ const Navbar = () => {
 
       <div id="user">
         <Link href="/">
-          <PersonIcon color="primary"></PersonIcon>
+          <Button size="small" variant="contained" color="primary">LOGOUT</Button>
         </Link>
-        {Object.keys(employeeProps).length > 0 ? <div>{employeeProps.userType} <span style={{ cursor: 'pointer' }}>LOGOUT</span></div> : null}
-        {Object.keys(ceoProps).length > 0 ? <div>{ceoProps.userType} <span style={{ cursor: 'pointer' }}>LOGOUT</span></div> : null}
-        {Object.keys(adminProps).length > 0 ? <div>{adminProps.userType} <span style={{ cursor: 'pointer' }}>LOGOUT</span></div> : null}
       </div>
     </div>
   );
