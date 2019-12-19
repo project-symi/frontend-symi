@@ -40,7 +40,6 @@ const formValidation = ({ employeeId, email, department, name, dateOfBirth, type
     errors.result = true;
   }
   if (!type) {
-    console.log({type});
     errors.errors.type.isShown = true;
     errors.errors.type.message = 'A valid access type is required';
     errors.result = true;

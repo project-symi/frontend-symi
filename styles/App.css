@@ -30,7 +30,7 @@ html {
   border: 0px solid;
   border-radius: 15px;
   margin: 3% auto;
-  max-height: 650px;
+  height: 630px;
   width: 1020px;
   background-color: white;
   box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11),
@@ -137,7 +137,18 @@ html {
   display: grid;
   grid-template-columns: 30px 1fr;
   cursor: pointer;
+  font-weight: bold;
 }
+
+.sidebar-button-active {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  background: #f5f6f8;
+  color: #3f50b5;
+  font-weight: bold;
+}
+
 
 .sidebar-button:hover {
   background: #f5f6f8;
@@ -155,16 +166,16 @@ html {
 
 .title {
   margin-top: 20px;
+
   font-weight: bold;
   font-size: 18pt;
   color: #3f50b5;
   margin-bottom: 0px;
-  margin-top: 8px;
 }
 
 .news-container {
   display: grid;
-  grid-template-columns: 1fr 3fr 20px;
+  grid-template-columns: 200px 3fr 20px;
   grid-template-areas: "newsimg newsdesc";
   border: 0px solid;
   border-radius: 15px;
@@ -179,13 +190,29 @@ html {
 .news-img {
   grid-area: newsimg;
   width: 200px;
-  padding-right: 30px;
+  border-radius: 15px;
   align-self: center;
 }
 
 .news-desc {
   grid-area: newsdesc;
   padding: 5px;
+  padding-left: 30px;
+}
+
+.title-item {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 20pt;
+  color: #637aca;
+  text-shadow: 1.5px #3f50b5;
+  justify-content: center;
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+
+.date {
+  color: #9c9c9c;
 }
 
 .assignments-container {
@@ -297,6 +324,14 @@ button:hover {
 
 .swal-button:hover {
   background-color: #3f50b5;
+}
+
+#demo {
+  margin-top: 60px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #3f50b5;
 }
 
 @media screen and (max-width: 480px) {

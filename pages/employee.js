@@ -11,14 +11,13 @@ import News from '../components/News';
 import Invites from '../components/Invites';
 import About from '../components/About';
 
+
+
 //utils
 import axios from 'axios';
 
 //styles
 import '../styles/Employee.css';
-
-//dummy data
-import { rewards } from '../assets/dummyData';
 
 //context API
 import { EmployeeProvider } from '../contextApi/EmployeeContext';
@@ -31,31 +30,14 @@ export default class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      prizeAmount: 500,
+      prize: 'a $50 Amazon Gift Card',
       isDefaultView: true,
       currentlyShown: 'feedback',
       fuzzyNames: '',
       feedbacks: null,
       news: null,
-      rewards: [
-        {
-          points: 50,
-          category: 'positive feedback',
-          dateAdded: '01/12/2019',
-          correspondentId: '1111'
-        },
-        {
-          points: 5,
-          category: 'poll',
-          dateAdded: '02/12/2019',
-          correspondentId: '6'
-        },
-        {
-          points: 10,
-          category: 'submitted feedback',
-          dateAdded: '04/12/2019',
-          correspondentId: '2222'
-        }
-      ],
+      rewards: null,
       newsFeedback: null,
       userType: 'Employee',
       totalPoints: 0,
@@ -80,7 +62,22 @@ export default class Employee extends React.Component {
 
       //API call to get news
       this.getNews();
+
+      this.setActive(this.state.currentlyShown);
+
+      // check if user reached prize amount
+      this.reachedPrizeAmount;
     });
+  }
+
+  setActive(view) {
+    if (document.getElementsByClassName('sidebar-button-active')[0]) {
+      const pastActive = document.getElementsByClassName('sidebar-button-active');
+      pastActive[0].className ='sidebar-button';
+    }
+
+    const active = document.getElementById(view);
+    active.className = 'sidebar-button-active';
   }
 
 
@@ -94,7 +91,6 @@ export default class Employee extends React.Component {
 
   directNewsFeedback = (news) => {
     /// for news
-    console.log(news);
     this.setState({ newsFeedback: news, currentlyShown: 'feedback', isDefaultView: false });
   }
 
@@ -121,7 +117,7 @@ export default class Employee extends React.Component {
   newPointsPopup = () => {
     swal({
       title: '+25⭐️! Hooray!',
-      text: 'Thanks for the feedback',
+      text: 'Thanks for the feedback!',
       icon: 'success',
       button: true
     });
@@ -132,7 +128,7 @@ export default class Employee extends React.Component {
   // REWARDS HISTORY
   handleGetRewards = async () => {
     const res = await axios.get(
-      `https://symi-be.herokuapp.com/auth/rewards/${this.state.userId}`,
+      `https://symi-be.herokuapp.com/auth/points/${this.state.userId}`,
       {
         headers: { token: this.state.token }
       }
@@ -140,10 +136,20 @@ export default class Employee extends React.Component {
 
     const rewards = res.data;
 
-    console.log({rewards});
-
     this.setState({ rewards });
   };
+
+  // GOT PRIZE
+  reachedPrizeAmount = () => {
+    if (this.state.totalPoints >= this.state.prizeAmount) {
+      swal({
+        title: `Congrats! You're now eligible for ${this.state.prize}!`,
+        text: 'Your HR will contact you shortly!',
+        icon: 'success',
+        button: true
+      });
+    }
+  }
 
   ///////////////////////////////// FEEDBACK
 
@@ -185,19 +191,20 @@ export default class Employee extends React.Component {
 
   // FEEDBACK HISTORY
   handleGetFeedbacks = async () => {
-    console.log(this.state.token, this.state.userId, 'get feedbacks');
     const response = await axios.get(
       `https://symi-be.herokuapp.com/auth/feedbacks/${this.state.userId}`,
       { headers: { token: this.state.token } }
     );
 
     // sorts by date
-    const feedbacks = response.data.sort((a, b) => {
-      a = new Date(a.dateAdded);
-      b = new Date(b.dateAdded);
-      return a > b ? -1 : a < b ? 1 : 0;
-    });
-    this.setState({ feedbacks });
+    if (response.data) {
+      const feedbacks = response.data.sort((a, b) => {
+        a = new Date(a.dateAdded);
+        b = new Date(b.dateAdded);
+        return a > b ? -1 : a < b ? 1 : 0;
+      });
+      this.setState({ feedbacks });
+    }
   };
 
   ///////////////////////////////// VIEW
@@ -252,7 +259,8 @@ export default class Employee extends React.Component {
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
         rewards: this.state.rewards,
-        handleRewardDetails: this.handleRewardDetails
+        handleRewardDetails: this.handleRewardDetails,
+        setActive: this.setActive
       }}>
         <div className="layout">
           <Navbar />

@@ -28,7 +28,7 @@ export default class Assignments extends React.Component {
   render() {
     return (
       <div>
-        <p className="title">Assignments</p>
+        <span className="title">Assignments</span>
 
         <div className="assignments-sub">
           <span>Details ▾</span> <span className="assigned-to">Assigned ▾</span>{' '}

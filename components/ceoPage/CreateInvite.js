@@ -77,8 +77,6 @@ class CreateInvitation extends React.Component {
 
     let dateString = `${yyyy}-${mm}-${dd}`;
 
-    console.log(dateString);
-
     this.setState({ invitationDate: dateString });
   };
 
@@ -135,7 +133,6 @@ class CreateInvitation extends React.Component {
           button: true
         })
           .then(value => {
-            console.log('generating an invitation');
             this.context.handleSendInvitation({
               employeeId: this.props.invitee.Id,
               comments: this.state.comments,
@@ -154,7 +151,6 @@ class CreateInvitation extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state);
 
     return (
       <div>
