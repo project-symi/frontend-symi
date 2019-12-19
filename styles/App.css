@@ -387,6 +387,10 @@ button:hover {
   color: #3f50b5;
 }
 
+a {
+  color: #3f50b5;
+  text-decoration: none;
+}
 
 
 @media screen and (max-width: 480px) {
