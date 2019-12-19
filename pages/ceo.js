@@ -51,6 +51,7 @@ export default class Ceo extends React.Component {
       feedbacksByFeelingRatio: null,
       news: null,
       userType: 'CEO',
+      invitations: null,
       userId: '',
       token: ''
     };
@@ -221,8 +222,10 @@ getPositiveFeedbacks = async () => {
     });
   };
 
-  handleSendInvitation = invitationObj => {
+  handleSendInvitation = async (invitationObj) => {
     //make an API call to create an invitation
+    const response = await axios.post('https://symi-be.herokuapp.com/auth/invitations', invitationObj, { headers: { token: this.state.token } });
+    this.setState({ invitations: response.data });
   };
 
   renderSwitchView = param => {
@@ -230,8 +233,7 @@ getPositiveFeedbacks = async () => {
     case 'news':
       return <News />;
     case 'dashboard':
-      return <Dashboard
-      />;
+      return <Dashboard />;
     case 'assignments':
       return <Assignments /> ;
     case 'polls':
@@ -253,6 +255,7 @@ getPositiveFeedbacks = async () => {
         polls: true,
         dashboard: true,
         invites: true,
+        invitations: this.state.invitations,
         topEmployeeFeedbacks: this.state.topEmployeeFeedbacks,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,

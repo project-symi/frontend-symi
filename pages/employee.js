@@ -12,7 +12,6 @@ import Invites from '../components/Invites';
 import About from '../components/About';
 
 
-
 //utils
 import axios from 'axios';
 

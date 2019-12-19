@@ -98,11 +98,6 @@ class CreateInvitation extends React.Component {
     }
   };
 
-  //cancel button clicked, switch view back to the dashboard
-  handleCancelInvitation = () => {
-    this.props.handleCancelInvitation();
-  };
-
   //send button clicked, generate invitation and pass it to the dashboard
   handleSendInvitation = () => {
     //check whether comments and date was inputted
@@ -122,7 +117,7 @@ class CreateInvitation extends React.Component {
           text: 'CONFIRM',
           value: 'confirm'
         },
-        cancel: 'CANCEL'
+        cancel: 'GO BACK'
       }
     }).then(value => {
       switch (value) {
@@ -134,12 +129,9 @@ class CreateInvitation extends React.Component {
         })
           .then(value => {
             this.context.handleSendInvitation({
-              employeeId: this.props.invitee.Id,
+              employeeId: this.props.invitee.employeeId,
               comments: this.state.comments,
-              invitationDate: this.state.invitationDate,
-              status: 'pending or confirmed or rescheduled',
-              reply: 'reply from the employee who was invited',
-              seen: 'seen or unseen by the CEO'
+              invitationDate: this.state.invitationDate
             });
           })
           .then(value => this.setState({ comments: '', invitationDate: '' }));
@@ -217,7 +209,7 @@ class CreateInvitation extends React.Component {
               variant="contained"
               color="secondary"
               className={classes.cancelButton}
-              onClick={this.handleCancelInvitation}
+              onClick={this.props.handleCancelInvitation}
             >
               Cancel
             </Button>
@@ -231,7 +223,6 @@ class CreateInvitation extends React.Component {
             </Button>
           </div>
         </Paper>
-        <Invites></Invites>
       </div>
     );
   }
