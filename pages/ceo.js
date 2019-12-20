@@ -75,6 +75,7 @@ export default class Ceo extends React.Component {
       this.getNews();
 
       this.setActive(this.state.currentlyShown);
+
     });
   }
 
@@ -228,6 +229,11 @@ getPositiveFeedbacks = async () => {
     this.setState({ invitations: response.data });
   };
 
+  getAllInvitations = async () => {
+    const response = await axios.patch('https://symi-be.herokuapp.com/auth/invitations', {}, { headers: { token: this.state.token } });
+    this.setState({ invitations: response.data });
+  }
+
   renderSwitchView = param => {
     switch (param) {
     case 'news':
@@ -263,6 +269,7 @@ getPositiveFeedbacks = async () => {
         handleCeoComponentView: this.handleComponentView,
         handleSendInvitation: this.handleSendInvitation,
         handleGetKeywords: this.handleGetKeywords,
+        getAllInvitations: this.getAllInvitations,
         setActive: this.setActive
       }}>
         <div className="layout">

@@ -223,17 +223,13 @@ export default class Employee extends React.Component {
   renderSwitchView = param => {
     switch (param) {
     case 'feedback':
-      return (
-        <Feedback />
-      );
+      return <Feedback />;
     case 'news':
       return <News />;
     case 'polls':
       return <Polls />;
     case 'rewards':
-      return (
-        <Rewards />
-      );
+      return <Rewards />;
     case 'invites':
       return <Invites />;
     case 'about':
