@@ -104,17 +104,27 @@ getApprovedUsers = async () => {
 
 
   ///////DELETE NEWS ITEM
-  deleteNews = async (newsId) => {
+  deleteNews = async (id) => {
+    const newsToDelete = this.state.news.filter((newsItem)=>{
+      return newsItem.newsId == id;})[0];
+
     // call delete api
-    await axios.delete(`https://symi-be.herokuapp.com/auth/news/${newsId}`, {headers: {token: this.state.token}});
+    await axios.delete(`https://symi-be.herokuapp.com/auth/news/${id}`, {headers: {token: this.state.token}});
 
     // set new state to show updated news
-    this.setState({news: this.state.news.slice(1)});
+    const indexOfNewsToDelete = this.state.news.indexOf(newsToDelete);
+    const newsCopy = [...this.state.news];
+    newsCopy.splice(indexOfNewsToDelete,1);
+    this.setState({news: newsCopy});
   }
 
   ////////ADD NEWS ITEM
   addNews = async newsObj => {
+    console.log(newsObj);
     await axios.post('https://symi-be.herokuapp.com/auth/news', newsObj, { headers : { token: this.state.token}});
+
+    const newsCopy = [newsObj, ...this.state.news];
+    this.setState({news: newsCopy});
   }
 
 
