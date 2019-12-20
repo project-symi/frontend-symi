@@ -3,9 +3,9 @@
 
 Creating transparency between CEO and bottom line.
 
-### 🏠 [Homepage](https://github.com/project-symi/frontend-symi#readme)
+### 🏠 [Demo](https://symi.herokuapp.com/)
 
-### ✨ [Demo](<add demo url>)
+
 
 ## Commands
 
