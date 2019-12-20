@@ -97,25 +97,27 @@ class Login extends React.Component {
             >
               Login
             </Button>
-            <Button
-              onClick={this.handleShowAboutPage}
-              variant="contained"
-              color="primary"
-            >
-              About SYMI
-            </Button>
+            <span id="get-access">
+              Don&apos;t have an account? <a
+                onClick={this.handleShowAboutPage}
+                variant="contained"
+                color="primary"
+              >Get access.
+              </a>
+            </span>
           </div>
         </div>
       );
     } else {
       return (
-        <div id="login-wrap">
-          <Paper className={classes.paper} >
+        <div>
+
+          <div id="about-page">
+            <Button variant="contained" size="small" color="primary" style={{ color:'white', cursor: 'pointer' }} onClick={this.handleShowAboutPage} >
+                  « BACK
+            </Button>
             <About />
-            <Typography variant="body2" style={{ cursor: 'pointer' }} onClick={this.handleShowAboutPage} >
-                  Go Back
-            </Typography>
-          </Paper>
+          </div>
         </div>
       );
     }

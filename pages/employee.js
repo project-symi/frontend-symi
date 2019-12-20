@@ -30,8 +30,8 @@ export default class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prizeAmount: 500,
-      prize: 'a $50 Amazon Gift Card',
+      prizePoints: 500,
+      prize: '$50 Amazon Gift Card',
       isDefaultView: true,
       currentlyShown: 'feedback',
       fuzzyNames: '',
@@ -141,7 +141,7 @@ export default class Employee extends React.Component {
 
   // GOT PRIZE
   reachedPrizeAmount = () => {
-    if (this.state.totalPoints >= this.state.prizeAmount) {
+    if (this.state.totalPoints >= this.state.prizePoints) {
       swal({
         title: `Congrats! You're now eligible for ${this.state.prize}!`,
         text: 'Your HR will contact you shortly!',
@@ -178,7 +178,12 @@ export default class Employee extends React.Component {
     // show newly added feedback
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
+
+    console.log({feedbackObj});
+
     this.setState({ feedbacks: addedFeedback });
+
+    console.log(this.state.feedbacks);
 
     this.deleteFuzzyNames();
 
@@ -249,6 +254,8 @@ export default class Employee extends React.Component {
         polls: true,
         invites: true,
         rewards: true,
+        prizePoints: this.state.prizePoints,
+        prize: this.state.prize,
         newsFeedback: this.state.newsFeedback,
         handleResetNewsFeedback: this.handleResetNewsFeedback,
         directNewsFeedback: this.directNewsFeedback,
@@ -260,7 +267,7 @@ export default class Employee extends React.Component {
         deleteFuzzyNames: this.deleteFuzzyNames,
         rewards: this.state.rewards,
         handleRewardDetails: this.handleRewardDetails,
-        setActive: this.setActive
+        setActive: this.setActive,
       }}>
         <div className="layout">
           <Navbar />

@@ -211,6 +211,16 @@ html {
   margin-top: 8px;
 }
 
+.reward-item {
+  font-weight: bold;
+  font-size: 15pt;
+  color: #637aca;
+  text-shadow: 1.5px #3f50b5;
+  justify-content: center;
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+
 .date {
   color: #9c9c9c;
 }
@@ -316,14 +326,57 @@ html {
 
 button:hover {
   background-color: #3f50b5;
+  color: white;
 }
 
 .swal-button button:hover {
   background-color: #3f50b5;
+  color: white;
 }
 
 .swal-button:hover {
   background-color: #3f50b5;
+  color: white;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 20px 20px 12px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -120px;
+  opacity: 0;
+  font-size: 12pt;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  font-size: 12pt;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 
 #demo {
@@ -333,6 +386,12 @@ button:hover {
   font-weight: bold;
   color: #3f50b5;
 }
+
+a {
+  color: #3f50b5;
+  text-decoration: none;
+}
+
 
 @media screen and (max-width: 480px) {
   .menu-item {

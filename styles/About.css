@@ -5,6 +5,18 @@
   margin: 15px 0px;
 }
 
+#about-page {
+  padding: 20px 20px 20px 20px;
+  width: 900px;
+  border-radius: 25px;
+  background-color: #f5f6f8;
+  margin: auto;
+  margin-top: 50px;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
 #about-us {
   padding: 10px;
   border-radius: 15px;
@@ -15,6 +27,10 @@
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+}
+
+#get-access {
+  margin-top: 20px;
 }
 
 .profile {

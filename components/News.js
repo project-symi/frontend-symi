@@ -50,7 +50,7 @@ const News = () => {
               </div> ) : null}
               <div className="news-desc">
                 <h2 className="title-item">{item.title.toUpperCase()}</h2>
-                <span className="date"> PUBLISHED <DoubleArrowIcon style={{fontSize: '12px'}}/> {moment(item.postedOn).format('MM/DD/YYYY')}</span>
+                { item.postedOn ? (  <span className="date"> PUBLISHED <DoubleArrowIcon style={{fontSize: '12px'}}/> {moment(item.postedOn).format('MM/DD/YYYY')}</span>) : null }
                 <h4>{item.description}</h4>
                 {props.directNewsFeedback ? (
                   <div className="submit-feedback-button">
