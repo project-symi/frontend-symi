@@ -56,7 +56,6 @@ export default class Dashboard extends React.Component {
 
   getAge(birthday) {
     const ageDiff = new Date() - (new Date(birthday)).getTime();
-    const ageDate = new Date(ageDiff);
 
     const today = new Date();
     const birthDate = new Date(birthday);
@@ -189,7 +188,7 @@ export default class Dashboard extends React.Component {
                 <SentimentOverall />
               </div>
               <div>
-                <p className="data-title">TOP RATED TEAMS</p>
+                <p className="data-title">MOST ACTIVE TEAMS</p>
                 <div className="data">
                   {this.context.topDepartments ? (<div> {
                     this.context.topDepartments.sort((a, b) => {

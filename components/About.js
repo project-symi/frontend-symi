@@ -26,8 +26,7 @@ export default class Ceo extends React.Component {
           This was a group project created as a student at&nbsp;
           <a href="https://codechrysalis.io">Code Chrysalis</a>. SYMI (send
           your message interface) is a way for employees to voice their opinion
-          to C-Suite. View this open-source project on Github
-           &nbsp;<a href="https://github.com/project-symi">here</a>.
+          to C-Suite. View this open-source project on Github&nbsp;<a href="https://github.com/project-symi">here</a>.
         </div>
 
         <span className="title">Development Team</span>

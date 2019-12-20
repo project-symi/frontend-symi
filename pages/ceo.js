@@ -26,9 +26,6 @@ import { CeoProvider } from '../contextApi/CeoContext';
 import swal from '@sweetalert/with-react';
 import '../assets/sweetalert.min.js';
 
-// dummy data
-import { topEmployees } from '../assets/dummyData';
-
 export default class Ceo extends React.Component {
   constructor(props) {
     super(props);
@@ -37,6 +34,7 @@ export default class Ceo extends React.Component {
       topEmployees: null,
       topDepartments: null,
       categoryFeedbacks: null,
+      departmentFeedbacks: null,
       topEmployeeFeedbacks: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
@@ -61,9 +59,11 @@ export default class Ceo extends React.Component {
 
       //API call to db to get chart data
       this.getTopEmployees();
+      this.getTopDepartments();
       this.getPositiveFeedbacks();
       this.getFeedbacksByCategory();
-      this.getTopDepartments();
+      this.getFeedbacksByDepartment();
+
 
       this.getNews();
 
@@ -113,25 +113,6 @@ getPositiveFeedbacks = async () => {
 }
 
 
-
-getTopDepartments = async () => {
-  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
-  const result = res.data;
-
-  console.log({result});
-
-  const data = [
-    { name: 'Engineering', points: 5500 },
-    { name: 'Operations', points: 7000 },
-    { name: 'Admin', points: 200 },
-    { name: 'Marketing', points: 2300 },
-    { name: 'Sales', points: 5000 },
-    { name: 'QA', points: 5000 },
-    { name: 'Part-Time', points: 5000 }
-  ];
-
-  this.setState({topDepartments: data});
-}
 //////////////////////// CATEGORY SENTIMENT
 getFeedbacksByCategory = async () => {
   const dataset = [];
@@ -186,6 +167,143 @@ getFeedbacksByCategory = async () => {
   this.setState({categoryFeedbacks: dataset});
 }
 
+//////////////////////// MOST ACTIVE DEPARTMENTS
+
+getTopDepartments = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } }).data;
+
+  console.log({res});
+
+  const data = [
+    { name: 'Engineering', points: 5500 },
+    { name: 'Operations', points: 7000 },
+    { name: 'Admin', points: 200 },
+    { name: 'Marketing', points: 2300 },
+    { name: 'Sales', points: 5000 },
+    { name: 'QA', points: 5000 },
+    { name: 'Part-Time', points: 5000 }
+  ];
+
+  // res.data.forEach((feedback) => {
+  //   if (data.some((data) => {
+  //     return data.name == feedback.department;})) {
+
+  //     const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.department;})[0];
+  //     const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
+  //     dataset[dataToUpdateIndex];
+
+  //     data[dataToUpdateIndex].points += 25;
+  //   } else {
+  //     const dataToAdd = {
+  //       name: feedback.department,
+  //       points: 25
+  //     };
+  //     dataset.push(dataToAdd);
+  //   }
+  // });
+
+  this.setState({topDepartments: data});
+}
+
+//////////////////////// DEPARTMENT SENTIMENT
+getFeedbacksByDepartment = async () => {
+
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
+
+  // const dataset = [];
+  // res.data.forEach((feedback) => {
+  //   if (dataset.some((data) => {
+  //     return data.name == feedback.department;})) {
+
+  //     const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.department;})[0];
+  //     const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
+  //     dataset[dataToUpdateIndex];
+
+  //     switch(feedback.feeling) {
+  //     case 'good':
+  //       dataset[dataToUpdateIndex]['😊'] = dataset[dataToUpdateIndex]['😊']+ 1;
+  //       break;
+  //     case 'meh':
+  //       dataset[dataToUpdateIndex]['😐'] = dataset[dataToUpdateIndex]['😐'] + 1;
+  //       break;
+  //     case 'sad':
+  //       dataset[dataToUpdateIndex]['😞'] = dataset[dataToUpdateIndex]['😞'] + 1;
+  //       break;
+  //     default:
+  //     }
+
+  //   } else {
+  //     const dataToAdd = {
+  //       name: feedback.department,
+  //       '😞': 0,
+  //       '😐': 0, 
+  //       '😊': 0
+  //     };
+
+  //     switch(feedback.feeling) {
+  //     case 'good':
+  //       dataToAdd['😊'] = 1;
+  //       break;
+  //     case 'meh':
+  //       dataToAdd['😐'] = 1;
+  //       break;
+  //     case 'sad':
+  //       dataToAdd['😞'] = 1;
+  //       break;
+  //     default:
+  //     }
+
+  //     dataset.push(dataToAdd);
+  //   }
+  // });
+
+  const dataset = [
+    {
+      name: 'Marketing',
+      '😊': 400,
+      '😐': 240,
+      '😞': 100
+    },
+    {
+      name: 'HR',
+      '😊': 300,
+      '😐': 139,
+      '😞': 100
+    },
+    {
+      name: 'Eng',
+      '😊': 200,
+      '😐': 980,
+      '😞': 100
+    },
+    {
+      name: 'Operations',
+      '😊': 278,
+      '😐': 390,
+      '😞': 100
+    },
+    {
+      name: 'Accounting',
+      '😊': 189,
+      '😐': 480,
+      '😞': 100
+    },
+    {
+      name: 'Sales',
+      '😊': 239,
+      '😐': 380,
+      '😞': 100
+    },
+    {
+      name: 'Management',
+      '😊': 239,
+      '😐': 380,
+      '😞': 100
+    }
+  ];
+
+  this.setState({departmentFeedbacks: dataset});
+}
 
   //////////////////////// OVERALL SENTIMENT
   getFeedbacks = async () => {
@@ -328,6 +446,7 @@ getFeedbacksByCategory = async () => {
         invites: true,
         topEmployeeFeedbacks: this.state.topEmployeeFeedbacks,
         categoryFeedbacks: this.state.categoryFeedbacks,
+        departmentFeedbacks: this.state.departmentFeedbacks,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,
         topDepartments: this.state.topDepartments,
