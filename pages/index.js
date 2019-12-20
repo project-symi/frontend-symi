@@ -98,7 +98,7 @@ class Login extends React.Component {
               Login
             </Button>
             <span id="get-access">
-              Don't have an account? <a
+              Don&apos;t have an account? <a
                 onClick={this.handleShowAboutPage}
                 variant="contained"
                 color="primary"
