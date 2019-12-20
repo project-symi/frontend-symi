@@ -351,7 +351,7 @@ button:hover {
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 10px 20px;
+  padding: 10px 20px 20px 12px;
   position: absolute;
   z-index: 1;
   bottom: 125%;
