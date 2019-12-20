@@ -44,6 +44,7 @@ export default class Ceo extends React.Component {
         { name: 'QA', points: 5000 },
         { name: 'Part-Time', points: 5000 }
       ],
+      newsFeedbacks: null,
       topEmployeeFeedbacks: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
@@ -70,6 +71,8 @@ export default class Ceo extends React.Component {
       this.getTopEmployees();
 
       this.getPositiveFeedbacks();
+
+      this.getNewsFeedbacks();
 
       this.getNews();
 
@@ -117,6 +120,17 @@ getPositiveFeedbacks = async () => {
 
   this.setState({topEmployeeFeedbacks});
 }
+
+//////////////////////// NEWS SENTIMENT
+getNewsFeedbacks = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.state.token } });
+
+  const newsFeedbacks = res.data.filter(feedback => feedback.category == 'News');
+
+  console.log({newsFeedbacks});
+  this.setState({newsFeedbacks});
+}
+
 
   //////////////////////// OVERALL SENTIMENT
   getFeedbacks = async () => {
@@ -214,7 +228,11 @@ getPositiveFeedbacks = async () => {
     }).then((val) => axios.patch('https://symi-be.herokuapp.com/auth/feedbacks/status', notes.id, { headers: { token: this.state.token } }));
   };
 
-  //decide which component to render
+
+
+
+
+  //////////////////////// VIEW
   handleComponentView = view => {
     this.setState({
       currentlyShown: view
