@@ -269,7 +269,10 @@ export default class Feedback extends React.Component {
               <PointsKey />
             </div>
 
-            <p className="title">Quarterly Prize <HelpOutlineIcon className="help" style={{fontSize: '15px', color: 'black'}}></HelpOutlineIcon></p>
+            <div className="title">Quarterly Prize <div className="tooltip">
+              <HelpOutlineIcon style={{fontSize: '15px', color: 'black'}}></HelpOutlineIcon>
+              <span className="tooltiptext">Reach {this.context.prizePoints}⭐ to be eligible for the quarterly prize! Once eligible, HR will contact you.</span>
+            </div></div>
             <div className="feedback-submit">
               {/* <img
                 className="prize"
@@ -280,8 +283,8 @@ export default class Feedback extends React.Component {
                 <img src={reward} width="100px"></img>
                 <table id="reward">
                   <tr>
-                    <th className="points">500⭐</th>
-                    <th className="points-desc">$50 AMAZON GIFT CARD</th>
+                    <th className="points">{this.context.prizePoints}⭐</th>
+                    <th className="points-desc">{this.context.prize.toUpperCase()}</th>
                   </tr>
                 </table>
               </div>
