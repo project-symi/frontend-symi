@@ -44,7 +44,7 @@ export default class Ceo extends React.Component {
         { name: 'QA', points: 5000 },
         { name: 'Part-Time', points: 5000 }
       ],
-      newsFeedbacks: null,
+      categoryFeedbacks: null,
       topEmployeeFeedbacks: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
@@ -67,12 +67,10 @@ export default class Ceo extends React.Component {
       //API call to get all feedbacks
       this.getFeedbacks();
 
-      //API call to db to get top employees data for dashboard
+      //API call to db to get chart data
       this.getTopEmployees();
-
       this.getPositiveFeedbacks();
-
-      this.getNewsFeedbacks();
+      this.getFeedbacksByCategory();
 
       this.getNews();
 
@@ -122,13 +120,58 @@ getPositiveFeedbacks = async () => {
 }
 
 //////////////////////// NEWS SENTIMENT
-getNewsFeedbacks = async () => {
-  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks?feeling=good', { headers: { token: this.state.token } });
+getFeedbacksByCategory = async () => {
+  const dataset = [];
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
 
-  const newsFeedbacks = res.data.filter(feedback => feedback.category == 'News');
+  res.data.forEach((feedback) => {
+    if (dataset.some((data) => {
+      console.log('data.name', data.name);
+      return data.name == feedback.category;})) {
 
-  console.log({newsFeedbacks});
-  this.setState({newsFeedbacks});
+      const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.category;})[0];
+      const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
+      dataset[dataToUpdateIndex];
+
+      switch(feedback.feeling) {
+      case 'good':
+        dataset[dataToUpdateIndex]['😊'] = dataset[dataToUpdateIndex]['😊']+ 1;
+        break;
+      case 'meh':
+        dataset[dataToUpdateIndex]['😐'] = dataset[dataToUpdateIndex]['😐'] + 1;
+        break;
+      case 'sad':
+        dataset[dataToUpdateIndex]['😞'] = dataset[dataToUpdateIndex]['😞'] + 1;
+        break;
+      default:
+      }
+
+    } else {
+      const dataToAdd = {
+        name: feedback.category,
+        '😞': 0,
+        '😐': 0, 
+        '😊': 0
+      };
+
+      switch(feedback.feeling) {
+      case 'good':
+        dataToAdd['😊'] = 1;
+        break;
+      case 'meh':
+        dataToAdd['😐'] = 1;
+        break;
+      case 'sad':
+        dataToAdd['😞'] = 1;
+        break;
+      default:
+      }
+
+      dataset.push(dataToAdd);
+    }
+  });
+
+  this.setState({categoryFeedbacks: dataset});
 }
 
 
@@ -272,6 +315,7 @@ getNewsFeedbacks = async () => {
         dashboard: true,
         invites: true,
         topEmployeeFeedbacks: this.state.topEmployeeFeedbacks,
+        categoryFeedbacks: this.state.categoryFeedbacks,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,
         topDepartments: this.state.topDepartments,
