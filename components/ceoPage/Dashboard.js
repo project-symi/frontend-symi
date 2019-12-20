@@ -191,25 +191,24 @@ export default class Dashboard extends React.Component {
               <div>
                 <p className="data-title">TOP RATED TEAMS</p>
                 <div className="data">
-                  {[]
-                    .concat(this.context.topDepartments)
-                    .sort((a, b) => {
+                  {this.context.topDepartments ? (<div> {
+                    this.context.topDepartments.sort((a, b) => {
                       return b.points - a.points;
                     })
-                    .map((department, i) => {
-                      return (
-                        <div key={i} className="top">
-                          <div className="top-num">{i + 1}</div>
-                          <div className="top-name">{department.name}</div>
-                          <div className="top-points">{department.points} ⭐️</div>
-                          <div>
-                            <IconButton size="small" color="primary">
-                              <AssignmentTurnedInIcon fontSize="small" color="primary" />
-                            </IconButton>
+                      .map((department, i) => {
+                        return (
+                          <div key={i} className="top">
+                            <div className="top-num">{i + 1}</div>
+                            <div className="top-name">{department.name}</div>
+                            <div className="top-points">{department.points} ⭐️</div>
+                            <div>
+                              <IconButton size="small" color="primary">
+                                <AssignmentTurnedInIcon fontSize="small" color="primary" />
+                              </IconButton>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}</div>) : null}
                 </div>
               </div>
             </div>
@@ -220,7 +219,7 @@ export default class Dashboard extends React.Component {
               </div>
               <div id="data-container-big">
                 <div>
-                  <p className="data-title">SENTIMENT BY NEWS</p>
+                  <p className="data-title">SENTIMENT BY CATEGORY</p>
                   <SentimentbyNews />
                 </div>
               </div>

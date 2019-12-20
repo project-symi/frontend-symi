@@ -35,15 +35,7 @@ export default class Ceo extends React.Component {
     this.state = {
       currentlyShown: 'dashboard',
       topEmployees: null,
-      topDepartments: [
-        { name: 'Engineering', points: 5500 },
-        { name: 'Operations', points: 7000 },
-        { name: 'Admin', points: 200 },
-        { name: 'Marketing', points: 2300 },
-        { name: 'Sales', points: 5000 },
-        { name: 'QA', points: 5000 },
-        { name: 'Part-Time', points: 5000 }
-      ],
+      topDepartments: null,
       categoryFeedbacks: null,
       topEmployeeFeedbacks: null,
       goodFeedbacks: null,
@@ -71,6 +63,7 @@ export default class Ceo extends React.Component {
       this.getTopEmployees();
       this.getPositiveFeedbacks();
       this.getFeedbacksByCategory();
+      this.getTopDepartments();
 
       this.getNews();
 
@@ -119,14 +112,33 @@ getPositiveFeedbacks = async () => {
   this.setState({topEmployeeFeedbacks});
 }
 
-//////////////////////// NEWS SENTIMENT
+
+
+getTopDepartments = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
+  const result = res.data;
+
+  console.log({result});
+
+  const data = [
+    { name: 'Engineering', points: 5500 },
+    { name: 'Operations', points: 7000 },
+    { name: 'Admin', points: 200 },
+    { name: 'Marketing', points: 2300 },
+    { name: 'Sales', points: 5000 },
+    { name: 'QA', points: 5000 },
+    { name: 'Part-Time', points: 5000 }
+  ];
+
+  this.setState({topDepartments: data});
+}
+//////////////////////// CATEGORY SENTIMENT
 getFeedbacksByCategory = async () => {
   const dataset = [];
   const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
 
   res.data.forEach((feedback) => {
     if (dataset.some((data) => {
-      console.log('data.name', data.name);
       return data.name == feedback.category;})) {
 
       const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.category;})[0];

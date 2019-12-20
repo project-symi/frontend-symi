@@ -179,11 +179,7 @@ export default class Employee extends React.Component {
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
 
-    console.log({feedbackObj});
-
     this.setState({ feedbacks: addedFeedback });
-
-    console.log(this.state.feedbacks);
 
     this.deleteFuzzyNames();
 
