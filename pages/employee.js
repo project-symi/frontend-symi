@@ -40,6 +40,7 @@ export default class Employee extends React.Component {
       newsFeedback: null,
       userType: 'Employee',
       totalPoints: 0,
+      invitations: null,
       userId: '',
       token: ''
     };
@@ -63,6 +64,8 @@ export default class Employee extends React.Component {
       this.getNews();
 
       this.setActive(this.state.currentlyShown);
+
+      this.getInvitations();
 
       // check if user reached prize amount
       this.reachedPrizeAmount;
@@ -219,6 +222,14 @@ export default class Employee extends React.Component {
     });
   };
 
+  ////////////////////INVITES
+  getInvitations = async () => {
+    console.log('getting invitations');
+    const response = await axios.get(`https://symi-be.herokuapp.com/auth/invitations/${this.state.userId}`, { headers: { token: this.state.token }});
+    console.log(response);
+    this.setState({ invitations: response.data });
+  }
+
   ///////////////////////////////// SIDEBAR
   renderSwitchView = param => {
     switch (param) {
@@ -261,6 +272,7 @@ export default class Employee extends React.Component {
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
         rewards: this.state.rewards,
+        invitations: this.state.invitations,
         handleRewardDetails: this.handleRewardDetails,
         setActive: this.setActive,
       }}>

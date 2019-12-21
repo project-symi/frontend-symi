@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 ///////////////////Utils & Context API
 import CeoContext from '../contextApi/CeoContext';
+import EmployeeContext from '../contextApi/EmployeeContext';
 import { useContext } from 'react';
 import moment from 'moment';
 import Loader from '../assets/loader_img.gif';
@@ -36,17 +37,27 @@ const useStyles = makeStyles(theme => ({
 const Invites = () => {
   const classes = useStyles();
   const ceoProps = useContext(CeoContext);
-  ceoProps.getAllInvitations();
+  const employeeProps = useContext(EmployeeContext);
+
+  let props;
+  if (Object.keys(ceoProps).length > 0) {
+    props = ceoProps;
+    props.getAllInvitations();
+  }
+  if (Object.keys(employeeProps).length > 0) {
+    props = employeeProps;
+  }
 
   return (
     <div>
       {
-        ceoProps.invitations ?
+        props.invitations ?
           <div>
             <p className="title">Invites</p>
             <div className={classes.root}>
             </div>
-            {ceoProps.invitations.map((item, i) => {
+            {props.invitations.map((item, i) => {
+              console.log(item);
               return (
                 <Paper key={item.invitationId} className={classes.paper}>
                   <Grid container spacing={2}>
@@ -57,9 +68,16 @@ const Invites = () => {
                             {item.status === 'accepted' ? 'Accepted Invitation' : 'Pending Invitation'}
                           </Typography>
                           <Typography variant="body2" gutterBottom>
-                            Lunch meeting with {item.employeeName} on {moment(item.invitationDate).format('MMMM Do YYYY')} at {item.invitationTime}
+                            Lunch meeting with {item.employeeName ? item.employeeName : 'CEO'} on {moment(item.invitationDate).format('MMMM Do YYYY')} at {item.invitationTime}
                           </Typography>
                         </Grid>
+                        {
+                        item.employeeName ? null : <Grid item>
+                        <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                          {item.status === 'pending' ? 'Answer the invitation' : item.status}
+                        </Typography>
+                      </Grid>
+                      }
                       </Grid>
                       <Grid item>
                         <Typography variant="subtitle1">{item.status === 'accepted' ? (
