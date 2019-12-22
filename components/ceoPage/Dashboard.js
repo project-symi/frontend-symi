@@ -62,7 +62,7 @@ export default class Dashboard extends React.Component {
     const birthDate = new Date(birthday);
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
-    
+
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
@@ -87,7 +87,7 @@ export default class Dashboard extends React.Component {
            {employeePhoto.length !== 0 ?  <img className="employee-img" width="200px" src={employeePhoto[0].photoURL}></img> : <img className="employee-img" width="200px" src={human}></img> }
            <div className="employee-details">
              <div className="employee-name">
-               {employee.name} 
+               {employee.name}
              </div>
 
              <span className="employee-dept">{employee.department}</span>

@@ -13,14 +13,10 @@ import Link from 'next/link';
 
 //context API
 import EmployeeContext from '../contextApi/EmployeeContext';
-import CeoContext from '../contextApi/CeoContext';
-import AdminContext from '../contextApi/AdminContext';
 import { useContext } from 'react';
 
 const Navbar = () => {
   const employeeProps = useContext(EmployeeContext);
-  const ceoProps = useContext(CeoContext);
-  const adminProps = useContext(AdminContext);
 
   return (
     <div id="navbar">
