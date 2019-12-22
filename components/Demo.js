@@ -9,7 +9,6 @@ import Employee from '../assets/Employee.png';
 //context API
 import EmployeeContext from '../contextApi/EmployeeContext';
 import CeoContext from '../contextApi/CeoContext';
-import AdminContext from '../contextApi/AdminContext';
 import { useContext } from 'react';
 
 const Demo = props => {

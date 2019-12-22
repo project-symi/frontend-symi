@@ -26,24 +26,15 @@ import { CeoProvider } from '../contextApi/CeoContext';
 import swal from '@sweetalert/with-react';
 import '../assets/sweetalert.min.js';
 
-// dummy data
-import { topEmployees } from '../assets/dummyData';
-
 export default class Ceo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentlyShown: 'dashboard',
       topEmployees: null,
-      topDepartments: [
-        { name: 'Engineering', points: 5500 },
-        { name: 'Operations', points: 7000 },
-        { name: 'Admin', points: 200 },
-        { name: 'Marketing', points: 2300 },
-        { name: 'Sales', points: 5000 },
-        { name: 'QA', points: 5000 },
-        { name: 'Part-Time', points: 5000 }
-      ],
+      topDepartments: null,
+      categoryFeedbacks: null,
+      departmentFeedbacks: null,
       topEmployeeFeedbacks: null,
       goodFeedbacks: null,
       mehFeedbacks: null,
@@ -67,10 +58,13 @@ export default class Ceo extends React.Component {
       //API call to get all feedbacks
       this.getFeedbacks();
 
-      //API call to db to get top employees data for dashboard
+      //API call to db to get chart data
       this.getTopEmployees();
-
+      this.getTopDepartments();
       this.getPositiveFeedbacks();
+      this.getFeedbacksByCategory();
+      this.getFeedbacksByDepartment();
+
 
       this.getNews();
 
@@ -118,6 +112,146 @@ getPositiveFeedbacks = async () => {
   const topEmployeeFeedbacks = res.data;
 
   this.setState({topEmployeeFeedbacks});
+}
+
+
+//////////////////////// CATEGORY SENTIMENT
+getFeedbacksByCategory = async () => {
+  const dataset = [];
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
+
+  res.data.forEach((feedback) => {
+    if (dataset.some((data) => {
+      return data.name == feedback.category;})) {
+
+      const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.category;})[0];
+      const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
+      dataset[dataToUpdateIndex];
+
+      switch(feedback.feeling) {
+      case 'good':
+        dataset[dataToUpdateIndex]['😊'] = dataset[dataToUpdateIndex]['😊']+ 1;
+        break;
+      case 'meh':
+        dataset[dataToUpdateIndex]['😐'] = dataset[dataToUpdateIndex]['😐'] + 1;
+        break;
+      case 'sad':
+        dataset[dataToUpdateIndex]['😞'] = dataset[dataToUpdateIndex]['😞'] + 1;
+        break;
+      default:
+      }
+
+    } else {
+      const dataToAdd = {
+        name: feedback.category,
+        '😞': 0,
+        '😐': 0, 
+        '😊': 0
+      };
+
+      switch(feedback.feeling) {
+      case 'good':
+        dataToAdd['😊'] = 1;
+        break;
+      case 'meh':
+        dataToAdd['😐'] = 1;
+        break;
+      case 'sad':
+        dataToAdd['😞'] = 1;
+        break;
+      default:
+      }
+
+      dataset.push(dataToAdd);
+    }
+  });
+
+  this.setState({categoryFeedbacks: dataset});
+}
+
+//////////////////////// MOST ACTIVE DEPARTMENTS
+
+getTopDepartments = async () => {
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
+
+  console.log({res});
+
+  const data = [];
+
+  res.data.forEach((feedback) => {
+    if (data.some((data) => {
+      return data.name == feedback.department;})) {
+
+      const dataToUpdate = data.filter((data)=>{return data.name == feedback.department;})[0];
+      const dataToUpdateIndex = data.indexOf(dataToUpdate);
+      data[dataToUpdateIndex];
+
+      data[dataToUpdateIndex].points += 25;
+    } else {
+      const dataToAdd = {
+        name: feedback.department,
+        points: 25
+      };
+      data.push(dataToAdd);
+    }
+  });
+
+  this.setState({topDepartments: data});
+}
+
+//////////////////////// DEPARTMENT SENTIMENT
+getFeedbacksByDepartment = async () => {
+
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
+
+  const dataset = [];
+  res.data.forEach((feedback) => {
+    if (dataset.some((data) => {
+      return data.name == feedback.department;})) {
+
+      const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.department;})[0];
+      const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
+      dataset[dataToUpdateIndex];
+
+      switch(feedback.feeling) {
+      case 'good':
+        dataset[dataToUpdateIndex]['😊'] = dataset[dataToUpdateIndex]['😊']+ 1;
+        break;
+      case 'meh':
+        dataset[dataToUpdateIndex]['😐'] = dataset[dataToUpdateIndex]['😐'] + 1;
+        break;
+      case 'sad':
+        dataset[dataToUpdateIndex]['😞'] = dataset[dataToUpdateIndex]['😞'] + 1;
+        break;
+      default:
+      }
+
+    } else {
+      const dataToAdd = {
+        name: feedback.department,
+        '😞': 0,
+        '😐': 0, 
+        '😊': 0
+      };
+
+      switch(feedback.feeling) {
+      case 'good':
+        dataToAdd['😊'] = 1;
+        break;
+      case 'meh':
+        dataToAdd['😐'] = 1;
+        break;
+      case 'sad':
+        dataToAdd['😞'] = 1;
+        break;
+      default:
+      }
+
+      dataset.push(dataToAdd);
+    }
+  });
+
+  this.setState({departmentFeedbacks: dataset});
 }
 
   //////////////////////// OVERALL SENTIMENT
@@ -216,7 +350,11 @@ getPositiveFeedbacks = async () => {
     }).then((val) => axios.patch('https://symi-be.herokuapp.com/auth/feedbacks/status', notes.id, { headers: { token: this.state.token } }));
   };
 
-  //decide which component to render
+
+
+
+
+  //////////////////////// VIEW
   handleComponentView = view => {
     this.setState({
       currentlyShown: view
@@ -263,6 +401,8 @@ getPositiveFeedbacks = async () => {
         invites: true,
         invitations: this.state.invitations,
         topEmployeeFeedbacks: this.state.topEmployeeFeedbacks,
+        categoryFeedbacks: this.state.categoryFeedbacks,
+        departmentFeedbacks: this.state.departmentFeedbacks,
         topEmployees: this.state.topEmployees,
         overallSentiment: this.state.feedbacksByFeelingRatio,
         topDepartments: this.state.topDepartments,

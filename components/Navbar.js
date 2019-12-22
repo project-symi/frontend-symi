@@ -28,7 +28,7 @@ const Navbar = () => {
         <img width="150px" src={logo} />
       </div>
 
-      <div id="user">
+      <div id="logout">
         <Link href="/">
           <Button size="small" variant="contained" color="primary">LOGOUT</Button>
         </Link>

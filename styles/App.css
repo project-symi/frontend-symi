@@ -41,8 +41,8 @@ html {
 #navbar {
   grid-area: navbar;
   display: grid;
-  grid-template-columns: 2fr 8fr 1fr 0.5fr;
-  grid-template-areas: "points logo login user";
+  grid-template-columns: 2fr 8fr 80px;
+  grid-template-areas: "points logo logout";
   padding: 10px;
   margin: 0px;
   text-align: center;
@@ -59,13 +59,11 @@ html {
 
 #logo {
   grid-area: logo;
-  place-self: center stretch;
-  margin: 0px;
+  margin-right: 100px;
 }
 
-#login {
-  grid-area: login;
-  height: 50px;
+#logout {
+  grid-area: logout;
   align-self: center;
   justify-self: auto;
 }
@@ -394,6 +392,16 @@ a {
 
 
 @media screen and (max-width: 480px) {
+
+  #logo {
+    place-self: center stretch;
+    margin: 0px;
+  }
+
+  #demo {
+    display: none;
+  }
+
   .menu-item {
     visibility: hidden;
     clear: both;
