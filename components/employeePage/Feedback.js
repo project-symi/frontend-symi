@@ -79,7 +79,7 @@ export default class Feedback extends React.Component {
   update = debounce(async () => {
     await this.context.handleFuzzyNameSearch(this.state.input);
     this.setState({ isPopupOpen: true });
-  }, 1500);
+  }, 500);
 
   handleInputChange = event => {
     //for because & about input field

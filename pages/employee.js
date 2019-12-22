@@ -116,15 +116,6 @@ export default class Employee extends React.Component {
     this.setState({ totalPoints });
   };
 
-  newPointsPopup = () => {
-    swal({
-      title: '+25⭐️! Hooray!',
-      text: 'Thanks for the feedback!',
-      icon: 'success',
-      button: true
-    });
-  }
-
 
   ///////////////////////////////// REWARDS
   // REWARDS HISTORY
@@ -173,6 +164,14 @@ export default class Employee extends React.Component {
   submitFeedback = async feedbackObj => {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.userId;
+    swal({
+      title: '+25⭐️! Hooray!',
+      text: 'Thanks for the feedback!',
+      icon: 'success',
+      button: true
+    });
+
+    this.deleteFuzzyNames();
 
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
@@ -181,16 +180,7 @@ export default class Employee extends React.Component {
     let addedFeedback = [...this.state.feedbacks];
     addedFeedback.unshift(feedbackObj);
 
-    console.log({feedbackObj});
-
     this.setState({ feedbacks: addedFeedback });
-
-    console.log(this.state.feedbacks);
-
-    this.deleteFuzzyNames();
-
-    // new points notifcation
-    this.newPointsPopup();
 
     // update points after submitting feedback
     this.handleUpdatePoints();
