@@ -261,8 +261,7 @@ export default class Feedback extends React.Component {
             </form>
           </div>
 
-          {/* 
-        ///// POINTS KEY */}
+          {/* ///// POINTS KEY */}
           <div>
             <p className="title">Get Points</p>
             <div className="feedback-submit">

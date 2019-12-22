@@ -15,6 +15,11 @@ import { useContext } from 'react';
 import moment from 'moment';
 import Loader from '../assets/loader_img.gif';
 
+//sweet alert
+import swal from 'sweetalert';
+import '../assets/sweetalert.min.js';
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -48,6 +53,48 @@ const Invites = () => {
     props = employeeProps;
   }
 
+  const handleInvitation = (invitation) => {
+    swal({
+      title: 'Answer the Invitation',
+      text: 'Please either Accept or Decline',
+      content: {
+        element: 'input',
+        attributes: {
+          placeholder: 'Please add a reply',
+        }
+      },
+      icon: 'warning',
+      buttons: {
+        confirm: {
+          text: 'ACCEPT',
+          value: true
+        },
+        cancel: 'DECLINE'
+      }
+    }).then(value => {
+      console.log(swal.getState(), value);
+      if (value) {
+        swal({
+          title: 'Lunch invitation accepted!',
+          icon: 'success',
+          button: true
+        }).then(() => {
+          const answer = {
+            status: true,
+            reply: value
+          };
+          props.handleInvitation(invitation, answer);
+        });
+      } else {
+        const answer = {
+          status: false,
+          reply: swal.getState().actions.confirm.value
+        };
+        props.handleInvitation(invitation, answer);
+      }
+    });
+  };
+
   return (
     <div>
       {
@@ -56,8 +103,7 @@ const Invites = () => {
             <p className="title">Invites</p>
             <div className={classes.root}>
             </div>
-            {props.invitations.map((item, i) => {
-              console.log(item);
+            {props.invitations.map((item) => {
               return (
                 <Paper key={item.invitationId} className={classes.paper}>
                   <Grid container spacing={2}>
@@ -65,19 +111,22 @@ const Invites = () => {
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                           <Typography className={classes.title} gutterBottom variant="subtitle1">
-                            {item.status === 'accepted' ? 'Accepted Invitation' : 'Pending Invitation'}
+                            {item.status === 'accepted' ? 'Accepted Invitation' : null}
+                            {item.status === 'declined' ? 'Declined Invitation' : null}
+                            {item.status === 'pending' ? 'Pending Invitation' : null}
                           </Typography>
                           <Typography variant="body2" gutterBottom>
                             Lunch meeting with {item.employeeName ? item.employeeName : 'CEO'} on {moment(item.invitationDate).format('MMMM Do YYYY')} at {item.invitationTime}
                           </Typography>
                         </Grid>
                         {
-                        item.employeeName ? null : <Grid item>
-                        <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                          {item.status === 'pending' ? 'Answer the invitation' : item.status}
-                        </Typography>
-                      </Grid>
-                      }
+                          item.employeeName ? null : <Grid item>
+                            { item.status === 'pending' ?
+                              <Typography onClick={() => handleInvitation(item)} variant="body2" style={{ cursor: 'pointer' }}>
+                              Answer the Invitation
+                              </Typography> : <Typography variant="body2">{item.status}</Typography>}
+                          </Grid>
+                        }
                       </Grid>
                       <Grid item>
                         <Typography variant="subtitle1">{item.status === 'accepted' ? (

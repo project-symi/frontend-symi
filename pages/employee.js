@@ -224,10 +224,24 @@ export default class Employee extends React.Component {
 
   ////////////////////INVITES
   getInvitations = async () => {
-    console.log('getting invitations');
     const response = await axios.get(`https://symi-be.herokuapp.com/auth/invitations/${this.state.userId}`, { headers: { token: this.state.token }});
-    console.log(response);
     this.setState({ invitations: response.data });
+  }
+
+  ///////////////////HANDLE INVITES FROM CEO/LEADER
+  handleInvitation = async (invitation, answer) => {
+    const reply = {
+      status: answer.status ? 'Accepted' : 'Declined',
+      reply: answer.reply
+    };
+    await axios.patch(`https://symi-be.herokuapp.com/auth/invitations/${invitation.invitationId}`, reply, { headers: { token: this.state.token }} );
+    let renewedInvitation = this.state.invitations.find(invite => invite.invitationId === invitation.invitationId);
+    const index = this.state.invitations.indexOf(renewedInvitation);
+    renewedInvitation.status = reply.status;
+    renewedInvitation.reply = reply.reply;
+    const updatedInvitations = [...this.state.invitations];
+    updatedInvitations.splice(index, 1, renewedInvitation);
+    this.setState({ invitations: updatedInvitations });
   }
 
   ///////////////////////////////// SIDEBAR
@@ -274,6 +288,7 @@ export default class Employee extends React.Component {
         rewards: this.state.rewards,
         invitations: this.state.invitations,
         handleRewardDetails: this.handleRewardDetails,
+        handleInvitation: this.handleInvitation,
         setActive: this.setActive,
       }}>
         <div className="layout">
