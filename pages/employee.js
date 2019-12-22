@@ -12,7 +12,6 @@ import Invites from '../components/Invites';
 import About from '../components/About';
 
 
-
 //utils
 import axios from 'axios';
 
@@ -41,6 +40,7 @@ export default class Employee extends React.Component {
       newsFeedback: null,
       userType: 'Employee',
       totalPoints: 0,
+      invitations: null,
       userId: '',
       token: ''
     };
@@ -64,6 +64,8 @@ export default class Employee extends React.Component {
       this.getNews();
 
       this.setActive(this.state.currentlyShown);
+
+      this.getInvitations();
 
       // check if user reached prize amount
       this.reachedPrizeAmount;
@@ -114,15 +116,6 @@ export default class Employee extends React.Component {
     this.setState({ totalPoints });
   };
 
-  newPointsPopup = () => {
-    swal({
-      title: '+25⭐️! Hooray!',
-      text: 'Thanks for the feedback!',
-      icon: 'success',
-      button: true
-    });
-  }
-
 
   ///////////////////////////////// REWARDS
   // REWARDS HISTORY
@@ -171,6 +164,14 @@ export default class Employee extends React.Component {
   submitFeedback = async feedbackObj => {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.userId;
+    swal({
+      title: '+25⭐️! Hooray!',
+      text: 'Thanks for the feedback!',
+      icon: 'success',
+      button: true
+    });
+
+    this.deleteFuzzyNames();
 
     //make an API call to add the feedback to the db
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
@@ -180,11 +181,6 @@ export default class Employee extends React.Component {
     addedFeedback.unshift(feedbackObj);
 
     this.setState({ feedbacks: addedFeedback });
-
-    this.deleteFuzzyNames();
-
-    // new points notifcation
-    this.newPointsPopup();
 
     // update points after submitting feedback
     this.handleUpdatePoints();
@@ -216,21 +212,39 @@ export default class Employee extends React.Component {
     });
   };
 
+  ////////////////////INVITES
+  getInvitations = async () => {
+    const response = await axios.get(`https://symi-be.herokuapp.com/auth/invitations/${this.state.userId}`, { headers: { token: this.state.token }});
+    this.setState({ invitations: response.data });
+  }
+
+  ///////////////////HANDLE INVITES FROM CEO/LEADER
+  handleInvitation = async (invitation, answer) => {
+    const reply = {
+      status: answer.status ? 'Accepted' : 'Declined',
+      reply: answer.reply
+    };
+    await axios.patch(`https://symi-be.herokuapp.com/auth/invitations/${invitation.invitationId}`, reply, { headers: { token: this.state.token }} );
+    let renewedInvitation = this.state.invitations.find(invite => invite.invitationId === invitation.invitationId);
+    const index = this.state.invitations.indexOf(renewedInvitation);
+    renewedInvitation.status = reply.status;
+    renewedInvitation.reply = reply.reply;
+    const updatedInvitations = [...this.state.invitations];
+    updatedInvitations.splice(index, 1, renewedInvitation);
+    this.setState({ invitations: updatedInvitations });
+  }
+
   ///////////////////////////////// SIDEBAR
   renderSwitchView = param => {
     switch (param) {
     case 'feedback':
-      return (
-        <Feedback />
-      );
+      return <Feedback />;
     case 'news':
       return <News />;
     case 'polls':
       return <Polls />;
     case 'rewards':
-      return (
-        <Rewards />
-      );
+      return <Rewards />;
     case 'invites':
       return <Invites />;
     case 'about':
@@ -262,7 +276,9 @@ export default class Employee extends React.Component {
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
         rewards: this.state.rewards,
+        invitations: this.state.invitations,
         handleRewardDetails: this.handleRewardDetails,
+        handleInvitation: this.handleInvitation,
         setActive: this.setActive,
       }}>
         <div className="layout">

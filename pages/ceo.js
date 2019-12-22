@@ -42,6 +42,7 @@ export default class Ceo extends React.Component {
       feedbacksByFeelingRatio: null,
       news: null,
       userType: 'CEO',
+      invitations: null,
       userId: '',
       token: ''
     };
@@ -68,6 +69,7 @@ export default class Ceo extends React.Component {
       this.getNews();
 
       this.setActive(this.state.currentlyShown);
+
     });
   }
 
@@ -170,37 +172,29 @@ getFeedbacksByCategory = async () => {
 //////////////////////// MOST ACTIVE DEPARTMENTS
 
 getTopDepartments = async () => {
-  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } }).data;
+  const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
 
   console.log({res});
 
-  const data = [
-    { name: 'Engineering', points: 5500 },
-    { name: 'Operations', points: 7000 },
-    { name: 'Admin', points: 200 },
-    { name: 'Marketing', points: 2300 },
-    { name: 'Sales', points: 5000 },
-    { name: 'QA', points: 5000 },
-    { name: 'Part-Time', points: 5000 }
-  ];
+  const data = [];
 
-  // res.data.forEach((feedback) => {
-  //   if (data.some((data) => {
-  //     return data.name == feedback.department;})) {
+  res.data.forEach((feedback) => {
+    if (data.some((data) => {
+      return data.name == feedback.department;})) {
 
-  //     const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.department;})[0];
-  //     const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
-  //     dataset[dataToUpdateIndex];
+      const dataToUpdate = data.filter((data)=>{return data.name == feedback.department;})[0];
+      const dataToUpdateIndex = data.indexOf(dataToUpdate);
+      data[dataToUpdateIndex];
 
-  //     data[dataToUpdateIndex].points += 25;
-  //   } else {
-  //     const dataToAdd = {
-  //       name: feedback.department,
-  //       points: 25
-  //     };
-  //     dataset.push(dataToAdd);
-  //   }
-  // });
+      data[dataToUpdateIndex].points += 25;
+    } else {
+      const dataToAdd = {
+        name: feedback.department,
+        points: 25
+      };
+      data.push(dataToAdd);
+    }
+  });
 
   this.setState({topDepartments: data});
 }
@@ -210,97 +204,52 @@ getFeedbacksByDepartment = async () => {
 
   const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
 
-  // const dataset = [];
-  // res.data.forEach((feedback) => {
-  //   if (dataset.some((data) => {
-  //     return data.name == feedback.department;})) {
+  const dataset = [];
+  res.data.forEach((feedback) => {
+    if (dataset.some((data) => {
+      return data.name == feedback.department;})) {
 
-  //     const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.department;})[0];
-  //     const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
-  //     dataset[dataToUpdateIndex];
+      const dataToUpdate = dataset.filter((data)=>{return data.name == feedback.department;})[0];
+      const dataToUpdateIndex = dataset.indexOf(dataToUpdate);
+      dataset[dataToUpdateIndex];
 
-  //     switch(feedback.feeling) {
-  //     case 'good':
-  //       dataset[dataToUpdateIndex]['😊'] = dataset[dataToUpdateIndex]['😊']+ 1;
-  //       break;
-  //     case 'meh':
-  //       dataset[dataToUpdateIndex]['😐'] = dataset[dataToUpdateIndex]['😐'] + 1;
-  //       break;
-  //     case 'sad':
-  //       dataset[dataToUpdateIndex]['😞'] = dataset[dataToUpdateIndex]['😞'] + 1;
-  //       break;
-  //     default:
-  //     }
+      switch(feedback.feeling) {
+      case 'good':
+        dataset[dataToUpdateIndex]['😊'] = dataset[dataToUpdateIndex]['😊']+ 1;
+        break;
+      case 'meh':
+        dataset[dataToUpdateIndex]['😐'] = dataset[dataToUpdateIndex]['😐'] + 1;
+        break;
+      case 'sad':
+        dataset[dataToUpdateIndex]['😞'] = dataset[dataToUpdateIndex]['😞'] + 1;
+        break;
+      default:
+      }
 
-  //   } else {
-  //     const dataToAdd = {
-  //       name: feedback.department,
-  //       '😞': 0,
-  //       '😐': 0, 
-  //       '😊': 0
-  //     };
+    } else {
+      const dataToAdd = {
+        name: feedback.department,
+        '😞': 0,
+        '😐': 0, 
+        '😊': 0
+      };
 
-  //     switch(feedback.feeling) {
-  //     case 'good':
-  //       dataToAdd['😊'] = 1;
-  //       break;
-  //     case 'meh':
-  //       dataToAdd['😐'] = 1;
-  //       break;
-  //     case 'sad':
-  //       dataToAdd['😞'] = 1;
-  //       break;
-  //     default:
-  //     }
+      switch(feedback.feeling) {
+      case 'good':
+        dataToAdd['😊'] = 1;
+        break;
+      case 'meh':
+        dataToAdd['😐'] = 1;
+        break;
+      case 'sad':
+        dataToAdd['😞'] = 1;
+        break;
+      default:
+      }
 
-  //     dataset.push(dataToAdd);
-  //   }
-  // });
-
-  const dataset = [
-    {
-      name: 'Marketing',
-      '😊': 400,
-      '😐': 240,
-      '😞': 100
-    },
-    {
-      name: 'HR',
-      '😊': 300,
-      '😐': 139,
-      '😞': 100
-    },
-    {
-      name: 'Eng',
-      '😊': 200,
-      '😐': 980,
-      '😞': 100
-    },
-    {
-      name: 'Operations',
-      '😊': 278,
-      '😐': 390,
-      '😞': 100
-    },
-    {
-      name: 'Accounting',
-      '😊': 189,
-      '😐': 480,
-      '😞': 100
-    },
-    {
-      name: 'Sales',
-      '😊': 239,
-      '😐': 380,
-      '😞': 100
-    },
-    {
-      name: 'Management',
-      '😊': 239,
-      '😐': 380,
-      '😞': 100
+      dataset.push(dataToAdd);
     }
-  ];
+  });
 
   this.setState({departmentFeedbacks: dataset});
 }
@@ -412,17 +361,23 @@ getFeedbacksByDepartment = async () => {
     });
   };
 
-  handleSendInvitation = invitationObj => {
+  handleSendInvitation = async (invitationObj) => {
     //make an API call to create an invitation
+    const response = await axios.post('https://symi-be.herokuapp.com/auth/invitations', invitationObj, { headers: { token: this.state.token } });
+    this.setState({ invitations: response.data });
   };
+
+  getAllInvitations = async () => {
+    const response = await axios.patch('https://symi-be.herokuapp.com/auth/invitations', {}, { headers: { token: this.state.token } });
+    this.setState({ invitations: response.data });
+  }
 
   renderSwitchView = param => {
     switch (param) {
     case 'news':
       return <News />;
     case 'dashboard':
-      return <Dashboard
-      />;
+      return <Dashboard />;
     case 'assignments':
       return <Assignments /> ;
     case 'polls':
@@ -444,6 +399,7 @@ getFeedbacksByDepartment = async () => {
         polls: true,
         dashboard: true,
         invites: true,
+        invitations: this.state.invitations,
         topEmployeeFeedbacks: this.state.topEmployeeFeedbacks,
         categoryFeedbacks: this.state.categoryFeedbacks,
         departmentFeedbacks: this.state.departmentFeedbacks,
@@ -453,6 +409,7 @@ getFeedbacksByDepartment = async () => {
         handleCeoComponentView: this.handleComponentView,
         handleSendInvitation: this.handleSendInvitation,
         handleGetKeywords: this.handleGetKeywords,
+        getAllInvitations: this.getAllInvitations,
         setActive: this.setActive
       }}>
         <div className="layout">

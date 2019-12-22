@@ -78,7 +78,6 @@ export default class AddNews extends React.Component {
           );;
         }
       });
-    // }
   };
 
   render() {
