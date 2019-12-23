@@ -37,7 +37,7 @@ npm run build
 npm run start
 ```
 
-## ✨ Future Roadmap
+## ✨ Future Features
 - Custom Assignments
 - Employee Slack Notifications
 - Ivite Calendar Integration
