@@ -1,3 +1,8 @@
+h3 {
+  color: #3f50b5;
+  margin: 0px;
+}
+
 #team {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -5,11 +10,20 @@
   margin: 15px 0px;
 }
 
+#user-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-items: center;
+  margin: 15px 0px;
+}
+
 #about-page {
   padding: 20px 20px 20px 20px;
   width: 900px;
+  max-height: 600px;
   border-radius: 25px;
   background-color: #f5f6f8;
+  overflow-y: scroll;
   margin: auto;
   margin-top: 50px;
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
@@ -28,6 +42,24 @@
   -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
+
+table,
+td {
+  border: 1px solid black;
+  padding: 5px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+th {
+  background-color: #3f50b5;
+  border: 1px solid black;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  font-size: 12px;
+}
+
 
 #get-access {
   margin-top: 20px;

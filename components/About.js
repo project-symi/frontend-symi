@@ -19,15 +19,74 @@ export default class Ceo extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="page">
+
         <div className="title">About Symi</div>
 
         <div id="about-us">
-          This was a group project created as a student at&nbsp;
-          <a href="https://codechrysalis.io">Code Chrysalis</a>. SYMI (send
-          your message interface) is a way for employees to voice their opinion
-          to C-Suite. View this open-source project on Github&nbsp;<a href="https://github.com/project-symi">here</a>.
+          Symi is a gamified platform for promoting positive feedback and company morale. Employees get points for sending anonymous feedback directly to their CEO. CEO's can have a top-level overview of company sentiment in the form of data visualization personalized to company changes to employees.
         </div>
+
+        <div className="title">Test Symi</div>
+        <div id="user-section">
+          <div className="profile">
+
+            <h3>Employee Access</h3> 
+            <ul>
+              <li>submit anonymous feedback</li>
+              <li>view company news</li>
+              <li>accept/decline invites</li>
+            </ul>
+
+            <table>
+              <tr>
+                <th>USERNAME</th>
+                <td>X009998</td>
+
+              </tr>
+              <tr>
+                <th>PASSWORD</th>
+                <td>2019-12-05</td>
+              </tr>
+            </table>
+
+          </div>
+
+          <div className="profile">
+  
+            <h3>CEO Access</h3>
+            <ul>
+              <li>access dashboard</li>
+              <li>send invites to employees</li>
+              <li>view company news</li>
+            </ul>
+
+            <table>
+              <tr>
+                <th>USERNAME</th>
+                <td>A000000</td>
+
+              </tr>
+              <tr>
+                <th>PASSWORD</th>
+                <td>abc123</td>
+              </tr>
+            </table>
+          </div>
+
+          <div className="profile">
+  
+            <h3>Admin Access</h3>
+            <ul>
+              <li>add approved users individually</li>
+              <li>add approved users in bulk by CSV</li>
+              <li>add/delete company news</li>
+            </ul>
+
+            <span>For admin access, please <a href="mailto:steffie.harner@gmail.com">contact us</a>.</span>
+          </div>
+        </div>
+
 
         <span className="title">Development Team</span>
         <div id="team">
@@ -91,8 +150,17 @@ export default class Ceo extends React.Component {
                 <TwitterIcon color="primary" />
               </a>
             </span>
+                     
           </div>
         </div>
+
+        <div id="about-us">
+         This was a group project created as a student at&nbsp;
+          <a href="https://codechrysalis.io">Code Chrysalis</a> in less than 2 weeks. SYMI (send
+          your message interface) is a way for employees to voice their opinion
+          to C-Suite. View this open-source project on Github&nbsp;<a href="https://github.com/project-symi">here</a>.
+        </div>
+
       </div>
     );
   }
