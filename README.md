@@ -1,13 +1,15 @@
-<h1 align="center"> <img width="400px" src="assets/symilogo.png" /></h1>
+<h3 align="center"> <img width="400px" src="assets/symilogo.png" /><BR>Cultivating a culture of transparency.</h3>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 
 Symi is a gamified platform for promoting positive feedback and company morale. Employees get points for sending anonymous feedback directly to their CEO. CEO's can have a top-level overview of company sentiment in the form of data visualization personalized to company changes to employees.
 
 ### 🏠 [Demo](https://symi.herokuapp.com/)
 
-## Technologies
+## 👾 Technologies
+<h1 align="center"><img src="https://i.ibb.co/8bPPsmB/technologies.png" alt="technologies" border="0"></a></h1>
 
-## Commands
+
+## 🗣 Commands
 
 ```sh
 npm install
@@ -21,7 +23,7 @@ npm run build
 npm run start
 ```
 
-## Test Users
+## 🧪 Test Users
 You must be an approved user to access Symi. We have three different user types with access to different features. Use the following logins to test out Symi:
 
 <table width="500px">
@@ -74,7 +76,7 @@ You must be an approved user to access Symi. We have three different user types 
  </tr>
 </table>
 
-## Show your support
+## 💪🏼 Show your support
 
 Give a ⭐️ if you like our stuff!
 
