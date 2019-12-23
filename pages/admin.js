@@ -130,10 +130,10 @@ getApprovedUsers = async () => {
   ///////////////////////////////// EMPLOYEE UPLOAD
   addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.error(err));
     } else {
       /////INDIVIDUAL UPLOAD////////
-      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.error(err));
       this.setState({ addedEmployee });
     }
   };

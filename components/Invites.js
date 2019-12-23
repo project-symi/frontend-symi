@@ -72,7 +72,6 @@ const Invites = () => {
         cancel: 'DECLINE'
       }
     }).then(value => {
-      console.log(swal.getState(), value);
       if (value) {
         swal({
           title: 'Lunch invitation accepted!',
@@ -97,10 +96,11 @@ const Invites = () => {
 
   return (
     <div>
+      <p className="title">Invites</p>
       {
         props.invitations ?
           <div>
-            <p className="title">Invites</p>
+         
             <div className={classes.root}>
             </div>
             {props.invitations.map((item) => {
@@ -139,7 +139,11 @@ const Invites = () => {
                   </Grid>
                 </Paper>
               );
-            })}</div> : <img src={Loader}></img>
+            })}</div> : 
+          <div className="data-big">
+            <img src={Loader}></img>
+          </div>
+
       }
     </div>
   );

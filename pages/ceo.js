@@ -174,8 +174,6 @@ getFeedbacksByCategory = async () => {
 getTopDepartments = async () => {
   const res = await axios.get('https://symi-be.herokuapp.com/auth/feedbacks', { headers: { token: this.state.token } });
 
-  console.log({res});
-
   const data = [];
 
   res.data.forEach((feedback) => {

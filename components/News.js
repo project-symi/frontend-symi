@@ -63,7 +63,10 @@ const News = () => {
             </div>
           );
         })}
-      </div>) : <img src={Loader}></img>}
+      </div>) : 
+        <div className="data-big">
+          <img src={Loader}></img>
+        </div>}
 
     </div>
   );
