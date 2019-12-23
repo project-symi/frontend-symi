@@ -1,4 +1,4 @@
-<h1 align="center"> <img width="300px" src="assets/symilogo.png" /></h1>
+<h1 align="center"> <img width="400px" src="assets/symilogo.png" /></h1>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 
 Creating transparency between CEO and bottom line.
