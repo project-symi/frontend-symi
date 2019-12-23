@@ -22,7 +22,7 @@ npm run start
 ```
 
 ## 🧪 [Demo](https://symi.herokuapp.com/) & Test Users
-You must be an approved user to access Symi. We have three different user types with access to different features. Use the following logins to test out Symi:
+You must be an approved user to access Symi. We have three different user types with access to different features. Use the following logins and test out our features on www.symi.dev.
 
 <table width="500px">
  <tr>
