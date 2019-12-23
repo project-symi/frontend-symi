@@ -106,7 +106,6 @@ export default class Feedback extends React.Component {
     } else {
       const newFeedback = {
         feeling: this.state.feeling,
-        status: this.state.status,
         category: this.state.about,
         note: this.state.note,
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
