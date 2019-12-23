@@ -126,13 +126,17 @@ getApprovedUsers = async () => {
   ///////////////////////////////// EMPLOYEE UPLOAD
   addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } });
     } else {
       /////INDIVIDUAL UPLOAD////////
-      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.log(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } });
       this.setState({ addedEmployee });
     }
   };
+
+  editReward = async (reward) => {
+    await axios.patch('https://symi-be.herokuapp.com/auth/rewards', reward, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } });
+  }
 
   ///////////////////////////////// SIDEBAR
   handleComponentView = view => {
@@ -171,7 +175,8 @@ getApprovedUsers = async () => {
         addNews: this.addNews,
         setActive: this.setActive,
         approvedUsers: this.state.approvedUsers,
-        handleAdminComponentView: this.handleComponentView }} >
+        handleAdminComponentView: this.handleComponentView,
+        editReward: this.editReward }}>
         <div className="layout">
           <Navbar />
           <Sidebar />
