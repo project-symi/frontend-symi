@@ -3,6 +3,22 @@
 
 Symi is a gamified platform for promoting positive feedback and company morale. Employees get points for sending anonymous feedback directly to their CEO. CEO's can have a top-level overview of company sentiment in the form of data visualization personalized to company changes to employees.
 
+<table width="500px">
+ <tr>
+   <th align="center"><h3>Employee View</h3></th>
+   <th align="center"><h3>CEO View</h3></th>
+   <th align="center"><h3>Admin View</h3></th>
+</tr>
+<tr>
+   <td align="center"><a href="https://ibb.co/XC6GSFV"><img src="https://i.ibb.co/mcdP6hS/Employee.png" alt="Employee" border="0"></a></td>
+   <td align="center"> <a href="https://ibb.co/p1XDrJd"><img src="https://i.ibb.co/L0pwhn1/CEO.png" alt="CEO" border="0"></a></td>
+   <td align="center">
+     <a href="https://ibb.co/C8rdWqh"><img src="https://i.ibb.co/wgvHYTM/Admin.png" alt="Admin" border="0"></a>
+    </td>
+</tr>
+  </table>
+
+
 ## 👾 Technologies
 <h2 align="center"><img src="https://i.ibb.co/8bPPsmB/technologies.png" alt="technologies" border="0"></h2>
 
@@ -63,7 +79,7 @@ You must be an approved user to access Symi. We have three different user types 
 </tr>
 </table>
 
-## Contributors
+## 🖌 Creators
 
 <table>
  <tr>
