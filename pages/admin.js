@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import Assignments from '../components/Assignments';
 import Polls from '../components/Polls';
 import About from '../components/About';
+import RewardsEdit from '../components/adminPage/RewardsEdit';
 import '../styles/Admin.css';
 
 //////////////CONTEXT API
@@ -60,19 +61,13 @@ export default class Admin extends React.Component {
   ///////////////////////////////// EMPLOYEES
 getApprovedUsers = async () => {
   const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: {token: this.state.token} });
-  const approvedUsers = res.data;
-  
-  this.setState({approvedUsers});
+  this.setState({ approvedUsers: res.data });
 }
 
   ///////////////////////////////// NEWS
   getNews = async () => {
     const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
-    const news = res.data;
-
-    this.setState({news});
-
-    //pop up for news
+    this.setState({ news: res.data });
   }
 
   confirmDeleteNews = newsId => {
@@ -156,6 +151,10 @@ getApprovedUsers = async () => {
       return <Polls />;
     case 'about':
       return <About />;
+    case 'rewardsEdit':
+      return <RewardsEdit />;
+    default:
+      null;
     }
   };
 
@@ -166,6 +165,7 @@ getApprovedUsers = async () => {
         news: this.state.news,
         assignments: true,
         polls: true,
+        rewardsEdit: true,
         confirmDeleteNews: this.confirmDeleteNews,
         deleteNews: this.deleteNews,
         addNews: this.addNews,

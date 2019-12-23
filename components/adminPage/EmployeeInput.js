@@ -18,7 +18,7 @@ import '../../assets/sweetalert.min.js';
 import AdminContext from '../../contextApi/AdminContext';
 
 class EmployeeInput extends React.Component {
-  static contextType = AdminContext;  
+  static contextType = AdminContext;
 
   constructor() {
     super();
@@ -149,11 +149,11 @@ class EmployeeInput extends React.Component {
         <form autoComplete="off" className="employees-container">
           <TextField
             size="small"
-            // error={this.state.formValidation.employeeId.isShown}
+            error={this.state.formValidation.employeeId.isShown}
             name="employeeId"
             id="outlined"
             label="Employee ID"
-            //helperText={this.state.formValidation.employeeId.message}
+            helperText={this.state.formValidation.employeeId.message}
             margin="normal"
             variant="outlined"
             value={this.state.employeeId}

@@ -107,6 +107,16 @@ const Sidebar = () => {
           <span className="menu-item">Points</span>
         </div>
       ) : null}
+      {
+        adminProps.rewardsEdit ? (
+          <div id="rewardsEdit"
+            className="sidebar-button"
+            onClick={() => handleOnClick('rewardsEdit')}
+          >
+            <StarsIcon color="primary" />
+            <span className="menu-item">Rewards</span>
+          </div>
+        ) : null}
       {/* {props.polls ? (
           <div
             className="sidebar-button"
