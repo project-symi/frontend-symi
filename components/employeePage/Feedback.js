@@ -326,7 +326,7 @@ export default class Feedback extends React.Component {
           })
         ) : (
           <div className="feedback-history">
-            <img src={Loader}></img>
+            <img className="loader" src={Loader}></img>
           </div>
         )}
       </div>

@@ -43,15 +43,14 @@ h3 {
   box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
-table,
-td {
+.about-table {
   border: 1px solid black;
   padding: 5px;
   border-collapse: collapse;
   font-size: 12px;
 }
 
-th {
+.about-th {
   background-color: #3f50b5;
   border: 1px solid black;
   color: white;

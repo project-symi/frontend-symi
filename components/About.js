@@ -4,6 +4,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import PersonIcon from '@material-ui/icons/Person';
 
 import '../styles/About.css';
 
@@ -31,21 +32,21 @@ export default class Ceo extends React.Component {
         <div id="user-section">
           <div className="profile">
 
-            <h3>Employee Access</h3> 
+            <h3><PersonIcon color="primary"></PersonIcon> Employee Access</h3> 
             <ul>
               <li>submit anonymous feedback</li>
               <li>view company news</li>
               <li>accept/decline invites</li>
             </ul>
 
-            <table>
-              <tr>
-                <th>USERNAME</th>
+            <table className="about-table">
+              <tr className="about-table">
+                <th className="about-th">USERNAME</th>
                 <td>X009998</td>
 
               </tr>
-              <tr>
-                <th>PASSWORD</th>
+              <tr className="about-table">
+                <th className="about-th">PASSWORD</th>
                 <td>2019-12-05</td>
               </tr>
             </table>
@@ -54,21 +55,21 @@ export default class Ceo extends React.Component {
 
           <div className="profile">
   
-            <h3>CEO Access</h3>
+            <h3><PersonIcon color="primary"></PersonIcon> CEO Access</h3>
             <ul>
               <li>access dashboard</li>
               <li>send invites to employees</li>
               <li>view company news</li>
             </ul>
 
-            <table>
-              <tr>
-                <th>USERNAME</th>
+            <table className="about-table">
+              <tr className="about-table">
+                <th className="about-th">USERNAME</th>
                 <td>A000000</td>
 
               </tr>
-              <tr>
-                <th>PASSWORD</th>
+              <tr className="about-table">
+                <th className="about-th">PASSWORD</th>
                 <td>abc123</td>
               </tr>
             </table>
@@ -76,7 +77,7 @@ export default class Ceo extends React.Component {
 
           <div className="profile">
   
-            <h3>Admin Access</h3>
+            <h3><PersonIcon color="primary"></PersonIcon> Admin Access</h3>
             <ul>
               <li>add approved users individually</li>
               <li>add approved users in bulk by CSV</li>

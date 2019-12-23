@@ -3,7 +3,6 @@
 import React from 'react';
 
 // MUI components
-import PersonIcon from '@material-ui/icons/Person';
 import { Button } from '@material-ui/core';
 
 import logo from '../assets/symi-small.png';
