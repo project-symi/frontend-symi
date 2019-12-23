@@ -3,8 +3,6 @@
 
 Symi is a gamified platform for promoting positive feedback and company morale. Employees get points for sending anonymous feedback directly to their CEO. CEO's can have a top-level overview of company sentiment in the form of data visualization personalized to company changes to employees.
 
-## 🏠 [Demo](https://symi.herokuapp.com/)
-
 ## 👾 Technologies
 <h2 align="center"><img src="https://i.ibb.co/8bPPsmB/technologies.png" alt="technologies" border="0"></h2>
 
@@ -23,7 +21,7 @@ npm run build
 npm run start
 ```
 
-## 🧪 Test Users
+## 🧪 [Demo](https://symi.herokuapp.com/) & Test Users
 You must be an approved user to access Symi. We have three different user types with access to different features. Use the following logins to test out Symi:
 
 <table width="500px">
