@@ -27,7 +27,6 @@ export default class SentimentbyDept extends React.Component {
   }
 
   render() {
-    console.log(this.context.departmentFeedbacks);
     return (
       <div className="data-big">
         <BarChart

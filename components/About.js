@@ -83,7 +83,7 @@ export default class Ceo extends React.Component {
               <li>add/delete company news</li>
             </ul>
 
-            <span>For admin access, please <a href="mailto:steffie.harner@gmail.com">contact us</a>.</span>
+            <span>For admin access, <a href="mailto:steffie.harner@gmail.com">contact us</a>.</span>
           </div>
         </div>
 
