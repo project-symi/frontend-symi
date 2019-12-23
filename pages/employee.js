@@ -41,6 +41,7 @@ export default class Employee extends React.Component {
       userType: 'Employee',
       totalPoints: 0,
       invitations: null,
+      prizeForPoints: {},
       userId: '',
       token: ''
     };
@@ -50,7 +51,7 @@ export default class Employee extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
-    this.setState({ token, userId }, () => {
+    this.setState({ token, userId }, async () => {
       //API call to get all the feedbacks made by this user
       this.handleGetFeedbacks();
 
@@ -68,7 +69,10 @@ export default class Employee extends React.Component {
       this.getInvitations();
 
       // check if user reached prize amount
-      this.reachedPrizeAmount;
+      this.reachedPrizeAmount();
+
+      const response = await axios.get('https://symi-be.herokuapp.com/auth/news', { headers: { token: this.state.token } });
+      this.setState({ prizeForPoints: response.data[0] }, () => console.log(this.state.prizeForPoints));
     });
   }
 
@@ -266,6 +270,7 @@ export default class Employee extends React.Component {
         rewards: true,
         prizePoints: this.state.prizePoints,
         prize: this.state.prize,
+        prizeForPoints: this.state.prizeForPoints,
         newsFeedback: this.state.newsFeedback,
         handleResetNewsFeedback: this.handleResetNewsFeedback,
         directNewsFeedback: this.directNewsFeedback,

@@ -59,13 +59,14 @@ export default class Admin extends React.Component {
   }
 
   ///////////////////////////////// EMPLOYEES
-getApprovedUsers = async () => {
-  const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: {token: this.state.token} });
-  this.setState({ approvedUsers: res.data });
-}
+ getApprovedUsers = async () => {
+   const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: { token: this.state.token } });
+   this.setState({ approvedUsers: res.data });
+ }
 
   ///////////////////////////////// NEWS
   getNews = async () => {
+    console.log(this.state.token);
     const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
     this.setState({ news: res.data });
   }
@@ -126,16 +127,16 @@ getApprovedUsers = async () => {
   ///////////////////////////////// EMPLOYEE UPLOAD
   addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } });
+      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { token: this.state.token, 'Content-Type': 'application/json' } });
     } else {
       /////INDIVIDUAL UPLOAD////////
-      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } });
+      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { token: this.state.token, 'Content-Type': 'application/json' } });
       this.setState({ addedEmployee });
     }
   };
 
   editReward = async (reward) => {
-    await axios.patch('https://symi-be.herokuapp.com/auth/rewards', reward, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } });
+    await axios.patch('https://symi-be.herokuapp.com/auth/rewards', reward, { headers: { token: this.state.token, 'Content-Type': 'application/json' } });
   }
 
   ///////////////////////////////// SIDEBAR
