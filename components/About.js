@@ -25,7 +25,7 @@ export default class Ceo extends React.Component {
         <div className="title">About Symi</div>
 
         <div id="about-us">
-          Symi is a gamified platform for promoting positive feedback and company morale. Employees get points for sending anonymous feedback directly to their CEO. CEO's can have a top-level overview of company sentiment in the form of data visualization personalized to company changes to employees.
+          Symi is a gamified platform for promoting positive feedback and company morale. Employees get points for sending anonymous feedback directly to their CEO. CEO&apos;s can have a top-level overview of company sentiment in the form of data visualization personalized to company changes to employees.
         </div>
 
         <div className="title">Test Symi</div>
