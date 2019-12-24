@@ -131,7 +131,8 @@ class CreateInvitation extends React.Component {
             this.context.handleSendInvitation({
               employeeId: this.props.invitee.employeeId,
               comments: this.state.comments,
-              invitationDate: this.state.invitationDate
+              invitationDate: this.state.invitationDate,
+              invitationTime: this.state.invitationTime.substr(0, 5)
             });
           })
           .then(value => this.setState({ comments: '', invitationDate: '' }));
