@@ -47,26 +47,7 @@ const feedbacksByFeeling = [
 //   { name: 'Steffie Frog', department: 'Operations', employeeId: 'B000500' }
 // ];
 
-const rewards = [
-  {
-    points: 50,
-    categoryName: 'Received Positive Feedback',
-    date: '01/12/2019',
-    feedbackNote: 'he is awesome and such'
-  },
-  {
-    points: 5,
-    categoryName: 'Poll',
-    date: '02/12/2019',
-    feedbackNote: 'Awesome news'
-  },
-  {
-    points: 10,
-    categoryName: 'Submitted Feedback',
-    date: '04/12/2019',
-    feedbackNote: 'I wish we had a gym benefit.'
-  }
-];
+
 
 const totalPoints = 500;
 

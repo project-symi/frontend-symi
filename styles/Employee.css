@@ -143,4 +143,14 @@
   .date-added {
     display: none;
   }
+
+  .swal-title {
+    color: #3f50b5;
+  }
+
+  .swal-text {
+    font-size: 16pt;
+  }
+
+
 }

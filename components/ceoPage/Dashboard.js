@@ -94,7 +94,7 @@ export default class Dashboard extends React.Component {
            </div>
          </div>
 
-         <p className="title">WHAT OTHERS SAY ABOUT {employee.name.split(' ')[0].toUpperCase()}</p>
+         <p className="popup-title">WHAT OTHERS SAY ABOUT {employee.name.split(' ')[0].toUpperCase()}</p>
          <span className="employee-feedback">{employeeFeedback.map((feedback, i) => {
            ;
            return (<div key={i}>{`"${feedback.note}"`}</div>);

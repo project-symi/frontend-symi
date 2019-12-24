@@ -52,8 +52,21 @@ const Rewards = () => {
   const classes = useStyles();
 
   const handleShowDetails = reward => {
+    console.log(reward);
+
+    let title = '';
+
+    if (reward.categoryName === 'Submitted Feedback') {
+      title = ((reward.feedbackCategory == 'Employee') ? ('FEEDBACK ABOUT ' + reward.feedbackRecipientName.toUpperCase()) : 'FEEDBACK ABOUT ' + (reward.feedbackCategory.toUpperCase()) );
+    } else {
+      title = 'AN EMPLOYEE SAID...';
+    }
+
+
+    
+
     swal({
-      title: reward.categoryName,
+      title: title,
       text: `"${reward.feedbackNote}"`,
       button: true
     });
