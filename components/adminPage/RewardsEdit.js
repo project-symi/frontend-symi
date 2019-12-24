@@ -72,7 +72,7 @@ class RewardsEdit extends React.Component {
             variant="outlined"
             value={this.state.imgUrl}
             onChange={this.handleInputChange}/>
-            <Button
+          <Button
             className="button"
             onClick={this.handleFormSubmit}
             variant="contained"
