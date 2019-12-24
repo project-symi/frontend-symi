@@ -12,8 +12,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import CeoContext from '../contextApi/CeoContext';
 import EmployeeContext from '../contextApi/EmployeeContext';
 import { useContext } from 'react';
+
+// ui
 import moment from 'moment';
 import Loader from '../assets/loader_img.gif';
+import { Button } from '@material-ui/core';
 
 //sweet alert
 import swal from 'sweetalert';
@@ -29,13 +32,15 @@ const useStyles = makeStyles(theme => ({
     margin: 'auto',
     maxWidth: '100%',
     borderRadius: '20px',
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(2),
+    fontFamily: 'Roboto Condensed'
   },
   title: {
     fontWeight: 'bold',
     fontSize: '16pt',
     color: '#637aca',
     textShadow: '1.5px #3f50b5',
+    fontFamily: 'Roboto Condensed'
   }
 }));
 
@@ -96,11 +101,10 @@ const Invites = () => {
 
   return (
     <div>
-      <p className="title">Invites</p>
+      <p className="title">Upcoming Invites</p>
       {
         props.invitations ?
           <div>
-         
             <div className={classes.root}>
             </div>
             {props.invitations.map((item) => {
@@ -110,21 +114,24 @@ const Invites = () => {
                     <Grid item xs={12} sm container>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
+                          {console.log({item})}
+                          <span className="date">{moment(item.invitationDate).format('MMMM Do YYYY').toUpperCase()} AT {item.invitationTime.toUpperCase()}</span>
+
                           <Typography className={classes.title} gutterBottom variant="subtitle1">
-                            {item.status === 'accepted' ? 'Accepted Invitation' : null}
+                             Meeting with {item.employeeName ? item.employeeName : 'CEO'}
+                            {/* {item.status === 'accepted' ? 'Accepted Invitation' : null}
                             {item.status === 'declined' ? 'Declined Invitation' : null}
-                            {item.status === 'pending' ? 'Pending Invitation' : null}
+                            {item.status === 'pending' ? 'Pending Invitation' : null} */}
                           </Typography>
                           <Typography variant="body2" gutterBottom>
-                            Lunch meeting with {item.employeeName ? item.employeeName : 'CEO'} on {moment(item.invitationDate).format('MMMM Do YYYY')} at {item.invitationTime}
+                            {item.employeeName ? item.reply : item.comments} 
                           </Typography>
                         </Grid>
                         {
                           item.employeeName ? null : <Grid item>
                             { item.status === 'pending' ?
-                              <Typography onClick={() => handleInvitation(item)} variant="body2" style={{ cursor: 'pointer' }}>
-                              Answer the Invitation
-                              </Typography> : <Typography variant="body2">{item.status}</Typography>}
+                              <Button onClick={() => handleInvitation(item)} style={{ cursor: 'pointer' }} color="primary" variant="contained">Accept</Button>
+                              : null}
                           </Grid>
                         }
                       </Grid>
@@ -143,7 +150,6 @@ const Invites = () => {
           <div className="data-big">
             <img src={Loader}></img>
           </div>
-
       }
     </div>
   );

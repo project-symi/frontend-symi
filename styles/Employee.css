@@ -39,15 +39,13 @@
   margin: 10px;
 }
 
-/* .prize {
+.prize {
   overflow: hidden;
 }
 
 .prize img {
-  height: 100px;
   width: 300px;
-  margin: -75px 0 0 -100px;
-} */
+}
 
 #about-line {
   display: grid;
