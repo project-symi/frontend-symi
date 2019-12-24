@@ -34,7 +34,7 @@ export default class Employee extends React.Component {
       fuzzyNames: '',
       feedbacks: null,
       news: null,
-      rewards: null,
+      points: null,
       newsFeedback: null,
       userType: 'Employee',
       totalPoints: 0,
@@ -56,8 +56,8 @@ export default class Employee extends React.Component {
       //API call to get total points
       this.handleUpdatePoints();
 
-      //API call to get reward/points history
-      this.handleGetRewards();
+      //API call to get points history
+      this.handleGetPoints();
 
       //API call to get news
       this.getNews();
@@ -119,19 +119,17 @@ export default class Employee extends React.Component {
   };
 
 
-  ///////////////////////////////// REWARDS
-  // REWARDS HISTORY
-  handleGetRewards = async () => {
+  ///////////////////////////////// POINTS
+  // POINTS HISTORY
+  handleGetPoints = async () => {
     const res = await axios.get(
       `https://symi-be.herokuapp.com/auth/points/${this.state.userId}`,
       {
         headers: { token: this.state.token }
       }
     );
-
-    const rewards = res.data;
-
-    this.setState({ rewards });
+    console.log('I am called', res.data);
+    this.setState({ points: res.data });
   };
 
   // GOT PRIZE
@@ -186,6 +184,9 @@ export default class Employee extends React.Component {
 
     // update points after submitting feedback
     this.handleUpdatePoints();
+
+    ///update points history for rewards component
+    this.handleGetPoints();
   };
 
   // FEEDBACK HISTORY
@@ -276,9 +277,9 @@ export default class Employee extends React.Component {
         submitFeedback: this.submitFeedback,
         fuzzyNames: this.state.fuzzyNames,
         deleteFuzzyNames: this.deleteFuzzyNames,
-        rewards: this.state.rewards,
+        points: this.state.points,
         invitations: this.state.invitations,
-        handleRewardDetails: this.handleRewardDetails,
+        handleGetPoints: this.handleGetPoints,
         handleInvitation: this.handleInvitation,
         setActive: this.setActive,
       }}>
