@@ -12,7 +12,6 @@ class RewardsEdit extends React.Component {
   constructor() {
     super();
     this.state = {
-      testValue: 'hello',
       name: '',
       pointsNecessary: '',
       imgUrl: ''
@@ -32,6 +31,7 @@ class RewardsEdit extends React.Component {
       url: this.state.imgUrl
     };
     this.context.editReward(reward);
+    this.setState({ name: '', pointsNecessary: '', imgUrl: '' });
   }
 
   render() {
