@@ -94,7 +94,7 @@ You must be an approved user to access Symi. We have three different user types 
     <td align="center"><a href="https://github.com/miniengineer"><img src="/assets/headshots/mini.png"" width="200px;"/><br /><sub><b>Mini</b></sub></a><br />Tech Lead</td>
     <td align="center"><a href="https://github.com/FuyuByakko"><img src="/assets/headshots/igor.png" width="200px;"/><br /><sub><b>Igor</b></sub></a><br />Fullstack</td>
     <td align="center"><a href="https://github.com/steffieharner"><img src="/assets/headshots/steffie.png" width="200px;"/><br /><sub><b>Steffie Harner</b></sub></a><br />Design/Frontend</td> 
-    <td align="center"><a href="https://github.com/Yukio0315"><img src="/assets/headshots/yukio.png" width="200px;"/><br /><sub><b>Yukio Ueda</b></sub></a><br /> Backend</p></td>
+    <td align="center"><a href="https://github.com/Yukio0315"><img src="/assets/headshots/yukio.png" width="200px;"/><br /><sub><b>Yukio Ueda</b></sub></a><br /> Backend</td>
  </tr>
 </table>
 
