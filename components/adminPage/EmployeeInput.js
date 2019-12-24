@@ -88,12 +88,10 @@ class EmployeeInput extends React.Component {
               this.context.addNewEmployee({
                 employeeId: this.state.employeeId,
                 name: this.state.name,
-                Password: '',
                 email: this.state.email,
                 department: this.state.department,
                 dateOfBirth: this.state.dateOfBirth,
                 permission: this.state.type,
-                totalPoints: 0,
                 gender: this.state.gender
               });
             });
