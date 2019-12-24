@@ -29,8 +29,6 @@ export default class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prizePoints: 500,
-      prize: '$50 Amazon Gift Card',
       isDefaultView: true,
       currentlyShown: 'feedback',
       fuzzyNames: '',
@@ -268,8 +266,6 @@ export default class Employee extends React.Component {
         polls: true,
         invites: true,
         rewards: true,
-        prizePoints: this.state.prizePoints,
-        prize: this.state.prize,
         prizeForPoints: this.state.prizeForPoints,
         newsFeedback: this.state.newsFeedback,
         handleResetNewsFeedback: this.handleResetNewsFeedback,
