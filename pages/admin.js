@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import Assignments from '../components/Assignments';
 import Polls from '../components/Polls';
 import About from '../components/About';
+import RewardsEdit from '../components/adminPage/RewardsEdit';
 import '../styles/Admin.css';
 
 //////////////CONTEXT API
@@ -58,21 +59,16 @@ export default class Admin extends React.Component {
   }
 
   ///////////////////////////////// EMPLOYEES
-getApprovedUsers = async () => {
-  const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: {token: this.state.token} });
-  const approvedUsers = res.data;
-  
-  this.setState({approvedUsers});
-}
+ getApprovedUsers = async () => {
+   const res = await axios.get('https://symi-be.herokuapp.com/auth/users', { headers: { token: this.state.token } });
+   this.setState({ approvedUsers: res.data });
+ }
 
   ///////////////////////////////// NEWS
   getNews = async () => {
+    console.log(this.state.token);
     const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
-    const news = res.data;
-
-    this.setState({news});
-
-    //pop up for news
+    this.setState({ news: res.data });
   }
 
   confirmDeleteNews = newsId => {
@@ -130,13 +126,17 @@ getApprovedUsers = async () => {
   ///////////////////////////////// EMPLOYEE UPLOAD
   addNewEmployee = async addedEmployee => {
     if (Array.isArray(addedEmployee)) {
-      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.error(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users/csv', addedEmployee, { headers: { token: this.state.token, 'Content-Type': 'application/json' } });
     } else {
       /////INDIVIDUAL UPLOAD////////
-      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { 'token': this.state.token, 'Content-Type': 'application/json' } }).catch(err => console.error(err));
+      await axios.post('https://symi-be.herokuapp.com/auth/users', addedEmployee, { headers: { token: this.state.token, 'Content-Type': 'application/json' } });
       this.setState({ addedEmployee });
     }
   };
+
+  editReward = async (reward) => {
+    await axios.patch('https://symi-be.herokuapp.com/auth/rewards', reward, { headers: { token: this.state.token, 'Content-Type': 'application/json' } });
+  }
 
   ///////////////////////////////// SIDEBAR
   handleComponentView = view => {
@@ -155,6 +155,10 @@ getApprovedUsers = async () => {
       return <Polls />;
     case 'about':
       return <About />;
+    case 'rewardsEdit':
+      return <RewardsEdit />;
+    default:
+      null;
     }
   };
 
@@ -165,12 +169,14 @@ getApprovedUsers = async () => {
         news: this.state.news,
         assignments: true,
         polls: true,
+        rewardsEdit: true,
         confirmDeleteNews: this.confirmDeleteNews,
         deleteNews: this.deleteNews,
         addNews: this.addNews,
         setActive: this.setActive,
         approvedUsers: this.state.approvedUsers,
-        handleAdminComponentView: this.handleComponentView }} >
+        handleAdminComponentView: this.handleComponentView,
+        editReward: this.editReward }}>
         <div className="layout">
           <Navbar />
           <Sidebar />

@@ -18,7 +18,7 @@ import '../../assets/sweetalert.min.js';
 import AdminContext from '../../contextApi/AdminContext';
 
 class EmployeeInput extends React.Component {
-  static contextType = AdminContext;  
+  static contextType = AdminContext;
 
   constructor() {
     super();
@@ -88,12 +88,10 @@ class EmployeeInput extends React.Component {
               this.context.addNewEmployee({
                 employeeId: this.state.employeeId,
                 name: this.state.name,
-                Password: '',
                 email: this.state.email,
                 department: this.state.department,
                 dateOfBirth: this.state.dateOfBirth,
                 permission: this.state.type,
-                totalPoints: 0,
                 gender: this.state.gender
               });
             });
@@ -149,11 +147,11 @@ class EmployeeInput extends React.Component {
         <form autoComplete="off" className="employees-container">
           <TextField
             size="small"
-            // error={this.state.formValidation.employeeId.isShown}
+            error={this.state.formValidation.employeeId.isShown}
             name="employeeId"
             id="outlined"
             label="Employee ID"
-            //helperText={this.state.formValidation.employeeId.message}
+            helperText={this.state.formValidation.employeeId.message}
             margin="normal"
             variant="outlined"
             value={this.state.employeeId}
