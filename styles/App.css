@@ -41,8 +41,8 @@ html {
 #navbar {
   grid-area: navbar;
   display: grid;
-  grid-template-columns: 2fr 8fr 1fr 0.5fr;
-  grid-template-areas: "points logo login user";
+  grid-template-columns: 2fr 8fr 80px;
+  grid-template-areas: "points logo logout";
   padding: 10px;
   margin: 0px;
   text-align: center;
@@ -59,15 +59,34 @@ html {
 
 #logo {
   grid-area: logo;
-  place-self: center stretch;
-  margin: 0px;
+  margin-right: 100px;
 }
 
-#login {
-  grid-area: login;
-  height: 50px;
+#logout {
+  grid-area: logout;
   align-self: center;
   justify-self: auto;
+}
+
+.loader {
+  width: 50%;
+  align-self: center;
+}
+
+.data-big {
+  grid-area: big;
+  max-height: 900px;
+  width: 750px;
+  border: 0px solid;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  margin: 10px;
+  font-size: 10pt;
+  -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  -moz-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
+  box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
 }
 
 .points {
@@ -394,6 +413,16 @@ a {
 
 
 @media screen and (max-width: 480px) {
+
+  #logo {
+    place-self: center stretch;
+    margin: 0px;
+  }
+
+  #demo {
+    display: none;
+  }
+
   .menu-item {
     visibility: hidden;
     clear: both;
@@ -455,9 +484,9 @@ a {
     font-size: medium;
   }
 
-  #points {
+  .points {
     font-size: small;
-    margin: 10px;
+    margin: 0px 8px 0px 0px;
     min-width: 50px;
     max-width: 50px;
   }

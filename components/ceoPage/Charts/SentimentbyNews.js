@@ -9,19 +9,16 @@ import {
   Tooltip
 } from 'recharts';
 
-const dataset = [
-  { name: 'Premium Fridays', '😞': 400, '😐': 240, '😊': 240 },
-  { name: 'Bring Your Pup', '😞': 300, '😐': 139, '😊': 221 },
-  { name: 'Gym', '😞': 200, '😐': 980, '😊': 229 },
-  { name: 'KFC Christmas', '😞': 278, '😐': 390, '😊': 200 }
-];
+//context API
+import CeoContext from '../../../contextApi/CeoContext';
 
 export default class SentimentbyNews extends React.Component {
+  static contextType = CeoContext;
+
   constructor() {
     super();
     this.state = {
-      colors: ['#3ED7BD', '#58AFC2', '#8884d8'],
-      data: dataset
+      colors: ['#3ED7BD', '#58AFC2', '#8884d8']
     };
   }
 
@@ -31,7 +28,7 @@ export default class SentimentbyNews extends React.Component {
         <AreaChart
           width={750}
           height={300}
-          data={this.state.data}
+          data={this.context.categoryFeedbacks}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -60,6 +57,7 @@ export default class SentimentbyNews extends React.Component {
             fill="#3ED7BD"
           />
         </AreaChart>
+        
       </div>
     );
   }

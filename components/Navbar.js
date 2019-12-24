@@ -3,7 +3,6 @@
 import React from 'react';
 
 // MUI components
-import PersonIcon from '@material-ui/icons/Person';
 import { Button } from '@material-ui/core';
 
 import logo from '../assets/symi-small.png';
@@ -28,7 +27,7 @@ const Navbar = () => {
         <img width="150px" src={logo} />
       </div>
 
-      <div id="user">
+      <div id="logout">
         <Link href="/">
           <Button size="small" variant="contained" color="primary">LOGOUT</Button>
         </Link>

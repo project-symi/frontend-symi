@@ -116,7 +116,6 @@ export default class Admin extends React.Component {
 
   ////////ADD NEWS ITEM
   addNews = async newsObj => {
-    console.log(newsObj);
     await axios.post('https://symi-be.herokuapp.com/auth/news', newsObj, { headers : { token: this.state.token}});
 
     const newsCopy = [newsObj, ...this.state.news];
