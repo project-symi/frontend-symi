@@ -85,6 +85,10 @@
   margin-right: 5px;
 }
 
+p {
+  margin: 0px;
+}
+
 #reward {
   border: 1px #E0E0E0 solid;
   border-radius: 25px;

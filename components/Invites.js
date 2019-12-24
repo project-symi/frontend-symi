@@ -40,7 +40,8 @@ const useStyles = makeStyles(theme => ({
     fontSize: '16pt',
     color: '#637aca',
     textShadow: '1.5px #3f50b5',
-    fontFamily: 'Roboto Condensed'
+    fontFamily: 'Roboto Condensed',
+    marginTop: '5px',
   }
 }));
 
@@ -101,7 +102,7 @@ const Invites = () => {
 
   return (
     <div>
-      <p className="title">Upcoming Invites</p>
+      <p className="title">Invites</p>
       {
         props.invitations ?
           <div>
@@ -114,7 +115,6 @@ const Invites = () => {
                     <Grid item xs={12} sm container>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                          {console.log({item})}
                           <span className="date">{moment(item.invitationDate).format('MMMM Do YYYY').toUpperCase()} AT {item.invitationTime.toUpperCase()}</span>
 
                           <Typography className={classes.title} gutterBottom variant="subtitle1">
@@ -123,19 +123,19 @@ const Invites = () => {
                             {item.status === 'declined' ? 'Declined Invitation' : null}
                             {item.status === 'pending' ? 'Pending Invitation' : null} */}
                           </Typography>
-                          <Typography variant="body2" gutterBottom>
+                          <p>
                             {item.employeeName ? item.reply : item.comments} 
-                          </Typography>
+                          </p>
                         </Grid>
+                      </Grid>
+                      <Grid item>
                         {
-                          item.employeeName ? null : <Grid item>
+                          item.employeeName ? null : <p>
                             { item.status === 'pending' ?
                               <Button onClick={() => handleInvitation(item)} style={{ cursor: 'pointer' }} color="primary" variant="contained">Accept</Button>
                               : null}
-                          </Grid>
+                          </p>
                         }
-                      </Grid>
-                      <Grid item>
                         <Typography variant="subtitle1">{item.status === 'accepted' ? (
                           <CheckCircleOutlineIcon style={{ color: 'green' }} />
                         ) : (
