@@ -71,7 +71,7 @@ export default class Employee extends React.Component {
       // check if user reached prize amount
       this.reachedPrizeAmount();
 
-      const response = await axios.get('https://symi-be.herokuapp.com/auth/news', { headers: { token: this.state.token } });
+      const response = await axios.get('https://symi-be.herokuapp.com/auth/rewards', { headers: { token: this.state.token } });
       this.setState({ prizeForPoints: response.data[0] }, () => console.log(this.state.prizeForPoints));
     });
   }

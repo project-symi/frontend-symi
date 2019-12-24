@@ -269,7 +269,7 @@ export default class Feedback extends React.Component {
 
             <div className="title">Quarterly Prize <div className="tooltip">
               <HelpOutlineIcon style={{fontSize: '15px', color: 'black'}}></HelpOutlineIcon>
-              <span className="tooltiptext">Reach {this.context.prizePoints}⭐ to be eligible for the quarterly prize! Once eligible, HR will contact you.</span>
+              <span className="tooltiptext">Reach {this.context.prizeForPoints.points ? this.context.prizeForPoints.points : null}⭐ to be eligible for the quarterly prize! Once eligible, HR will contact you.</span>
             </div></div>
             <div className="feedback-submit">
               {/* <img
@@ -278,11 +278,11 @@ export default class Feedback extends React.Component {
               ></img> */}
               <div>
 
-                <img src={reward} width="100px"></img>
+                <img src={this.context.prizeForPoints.url ? this.context.prizeForPoints.url : null} width="100px"></img>
                 <table id="reward">
                   <tr>
-                    <th className="points">{this.context.prizePoints}⭐</th>
-                    <th className="points-desc">{this.context.prize.toUpperCase()}</th>
+                    <th className="points">{this.context.prizeForPoints.points ? this.context.prizeForPoints.points : null}⭐</th>
+                    <th className="points-desc">{this.context.prizeForPoints.name ? this.context.prizeForPoints.name.toUpperCase() : null}</th>
                   </tr>
                 </table>
               </div>
