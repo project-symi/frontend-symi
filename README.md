@@ -45,7 +45,7 @@ npm run start
 - Badges & Rewards
 
 
-## 🧪 [Demo](https://symi.herokuapp.com/) & Test Users
+## 🧪 [Demo](https://www.symi.dev/) & Test Users
 You must be an approved user to access Symi. We have three different user types with access to different features. Use the following logins and test out our features on www.symi.dev.
 
 <table width="500px">
@@ -58,7 +58,7 @@ You must be an approved user to access Symi. We have three different user types 
 <tr>
    <th>LOGIN</th>
    <td align="center"><b>USERNAME</b>: X009998<BR> <b>PW:</b> 2019-12-05</td>
-   <td align="center"><b>USERNAME:</b> A000000<BR> <b>PW:</b> abc123</td>
+   <td align="center"><b>USERNAME:</b> A000001<BR> <b>PW:</b> abc123</td>
      <td align="center">If you'd like admin access,<BR>please <a href="mailto:steffieharner@gmail.com">contact us.</td>
 </tr>
 <tr>
