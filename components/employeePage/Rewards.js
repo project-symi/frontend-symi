@@ -66,8 +66,8 @@ const Rewards = () => {
           return (
             <div>
               <span className="title">Points History</span>
-              { props.rewards ? (<div> 
-                {props.rewards.sort((a, b) => {
+              { props.points ? (<div>
+                {props.points.sort((a, b) => {
                   return new Date(b.date) - new Date(a.date);
                 }).map((reward, i) => {
                   return (
@@ -82,7 +82,7 @@ const Rewards = () => {
                                 >
                                   {reward.categoryName}
                                 </h2>
-                                <span className="date">SENT » {moment(reward.date).format('MM/DD/YYYY | hh:mm')}</span>
+                                <span className="date">SENT » {moment(reward.date.substr(0, 10)).format('MM/DD/YYYY')} </span>
                                 <Button
                                   size="small"
                                   onClick={() => handleShowDetails(reward)}

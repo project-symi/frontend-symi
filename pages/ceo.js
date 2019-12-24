@@ -228,7 +228,7 @@ getFeedbacksByDepartment = async () => {
       const dataToAdd = {
         name: feedback.department,
         '😞': 0,
-        '😐': 0, 
+        '😐': 0,
         '😊': 0
       };
 
