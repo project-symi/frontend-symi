@@ -68,6 +68,12 @@ html {
   justify-self: auto;
 }
 
+#error-msg {
+  margin-top: 15px;
+  font-weight: bold;
+  color: red;
+}
+
 .loader {
   width: 50%;
   align-self: center;

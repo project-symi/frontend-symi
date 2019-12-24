@@ -9,6 +9,7 @@ import '../styles/App.css';
 //utils
 import axios from 'axios';
 import Router from 'next/router';
+import { feedbackValidation } from '../utils/utils';
 
 //MUI components
 import { TextField, Button, Paper, Typography } from '@material-ui/core';
@@ -32,7 +33,8 @@ class Login extends React.Component {
       password: '',
       token: '',
       permission: '',
-      isAboutShown: false
+      isAboutShown: false,
+      loginError: false
     };
   }
 
@@ -41,11 +43,19 @@ class Login extends React.Component {
   };
 
   handleLogin = async e => {
+    this.setState({loginError: false});
     e.preventDefault();
-    const response = await axios.post('https://symi-be.herokuapp.com/login', { userId: this.state.userId, password: this.state.password });
-    this.setState({ token: response.data.token, permission: response.data.permission });
-    localStorage.setItem('token', this.state.token);
-    localStorage.setItem('userId', this.state.userId);
+
+    const response = await axios.post('https://symi-be.herokuapp.com/login', { userId: this.state.userId, password: this.state.password }).catch((err)=>{console.error(err);
+    });
+
+    if (response) {
+      this.setState({ token: response.data.token, permission: response.data.permission });
+      localStorage.setItem('token', this.state.token);
+      localStorage.setItem('userId', this.state.userId);}
+    else {
+      this.setState({loginError: true});
+    }
   }
 
   handleShowAboutPage = () => {
@@ -79,6 +89,7 @@ class Login extends React.Component {
               margin="normal"
               value={this.state.userId}
               onChange={this.handleInputChange}
+              error={this.state.loginError}
             />
             <TextField
               name="password"
@@ -88,7 +99,7 @@ class Login extends React.Component {
               variant="filled"
               type="password"
               value={this.state.password}
-              onChange={this.handleInputChange}
+              onChange={this.handleInputChange} error={this.state.loginError}
             />
             <Button
               onClick={this.handleLogin}
@@ -97,6 +108,9 @@ class Login extends React.Component {
             >
               Login
             </Button>
+
+            { this.state.loginError ? <span id="error-msg">Incorrect credentials. Please try again.</span> : null }
+
             <span id="get-access">
               Don&apos;t have an account? <a
                 onClick={this.handleShowAboutPage}
