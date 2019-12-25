@@ -128,7 +128,6 @@ export default class Employee extends React.Component {
         headers: { token: this.state.token }
       }
     );
-
     this.setState({ points: res.data });
   };
 
@@ -153,7 +152,8 @@ export default class Employee extends React.Component {
       `https://symi-be.herokuapp.com/auth/users?name=${string}`,
       { headers: { token: this.state.token } }
     );
-    this.setState({ fuzzyNames: response.data });
+    const fuzzyNames = response.data.filter(employee => employee.name !== 'Mini Samadova');
+    this.setState({ fuzzyNames });
   };
 
   deleteFuzzyNames = () => {
@@ -224,7 +224,7 @@ export default class Employee extends React.Component {
   ///////////////////HANDLE INVITES FROM CEO/LEADER
   handleInvitation = async (invitation, answer) => {
     const reply = {
-      status: answer.status ? 'Accepted' : 'Declined',
+      status: answer.status ? 'accepted' : 'declined',
       reply: answer.reply
     };
     await axios.patch(`https://symi-be.herokuapp.com/auth/invitations/${invitation.invitationId}`, reply, { headers: { token: this.state.token }} );

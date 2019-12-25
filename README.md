@@ -40,7 +40,7 @@ npm run start
 ## ✨ Future Features
 - Custom Assignments
 - Employee Slack Notifications
-- Ivite Calendar Integration
+- Invites Calendar Integration
 - Points Animations
 - Badges & Rewards
 
