@@ -100,7 +100,6 @@ const Invites = () => {
       {
         props.invitations ?
           <div>
-         
             <div className={classes.root}>
             </div>
             {props.invitations.map((item) => {
@@ -139,7 +138,7 @@ const Invites = () => {
                   </Grid>
                 </Paper>
               );
-            })}</div> : 
+            })}</div> :
           <div className="data-big">
             <img src={Loader}></img>
           </div>

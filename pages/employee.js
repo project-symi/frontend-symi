@@ -70,7 +70,7 @@ export default class Employee extends React.Component {
       this.reachedPrizeAmount();
 
       const response = await axios.get('https://symi-be.herokuapp.com/auth/rewards', { headers: { token: this.state.token } });
-      this.setState({ prizeForPoints: response.data[0] }, () => console.log(this.state.prizeForPoints));
+      this.setState({ prizeForPoints: response.data[0] });
     });
   }
 
@@ -128,7 +128,6 @@ export default class Employee extends React.Component {
         headers: { token: this.state.token }
       }
     );
-    console.log('I am called', res.data);
     this.setState({ points: res.data });
   };
 
