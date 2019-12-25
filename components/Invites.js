@@ -31,9 +31,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     margin: 'auto',
     maxWidth: '100%',
-    borderRadius: '20px',
-    marginTop: theme.spacing(2),
-    fontFamily: 'Roboto Condensed'
+    margin: '10px',
+    borderRadius: '12px'
   },
   title: {
     fontWeight: 'bold',
@@ -61,12 +60,12 @@ const Invites = () => {
 
   const handleInvitation = (invitation) => {
     swal({
-      title: 'Answer the Invitation',
-      text: 'Please either Accept or Decline',
+      title: 'Can you make the meeting?',
+      text: 'Please either accept or decline.',
       content: {
         element: 'input',
         attributes: {
-          placeholder: 'Please add a reply',
+          placeholder: 'Send a note back.',
         }
       },
       icon: 'warning',
@@ -108,7 +107,7 @@ const Invites = () => {
           <div>
             <div className={classes.root}>
             </div>
-            {props.invitations.map((item) => {
+            {props.invitations.map((item) => { if (item.status == 'pending') {
               return (
                 <Paper key={item.invitationId} className={classes.paper}>
                   <Grid container spacing={2}>
@@ -119,38 +118,83 @@ const Invites = () => {
 
                           <Typography className={classes.title} gutterBottom variant="subtitle1">
                              Meeting with {item.employeeName ? item.employeeName : 'CEO'}
-                            {/* {item.status === 'accepted' ? 'Accepted Invitation' : null}
-                            {item.status === 'declined' ? 'Declined Invitation' : null}
-                            {item.status === 'pending' ? 'Pending Invitation' : null} */}
                           </Typography>
                           <p>
-                            {item.employeeName ? item.reply : item.comments} 
+                            {item.comments} 
                           </p>
                         </Grid>
                       </Grid>
                       <Grid item>
                         {
-                          item.employeeName ? null : <p>
+                          item.employeeName ? <p>{item.status === 'accepted' ? (
+                            <div className="status">
+                              <CheckCircleOutlineIcon style={{ color: 'green' }} />
+                              <div>accepted</div>
+                            </div>
+                          ) : (
+                            <div className="status">
+                              <HelpOutlineIcon style={{ color: 'purple' }} />
+                              <div>pending</div>
+                            </div>
+                          )}</p> : <p>
                             { item.status === 'pending' ?
-                              <Button onClick={() => handleInvitation(item)} style={{ cursor: 'pointer' }} color="primary" variant="contained">Accept</Button>
+                              <Button onClick={() => handleInvitation(item)} style={{ cursor: 'pointer' }} color="primary" variant="contained">Answer</Button>
                               : null}
                           </p>
                         }
-                        <Typography variant="subtitle1">{item.status === 'accepted' ? (
-                          <CheckCircleOutlineIcon style={{ color: 'green' }} />
-                        ) : (
-                          <HelpOutlineIcon style={{ color: 'purple' }} />
-                        )}</Typography>
+                      
                       </Grid>
                     </Grid>
                   </Grid>
                 </Paper>
               );
+            }
             })}</div> : 
           <div className="data-big">
             <img src={Loader}></img>
           </div>
       }
+ 
+      {
+        props.invitations ?
+          <div>
+            <div className={classes.root}>
+            </div>
+            {props.invitations.map((item) => { if (item.status == 'accepted') {
+              return (
+                <Paper key={item.invitationId} className={classes.paper}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm container>
+                      <Grid item xs container direction="column" spacing={2}>
+                        <Grid item xs>
+                          <span className="date">{moment(item.invitationDate).format('MMMM Do YYYY').toUpperCase()} AT {item.invitationTime.toUpperCase()}</span>
+
+                          <Typography className={classes.title} gutterBottom variant="subtitle1">
+                             Meeting with {item.employeeName ? item.employeeName : 'CEO'}
+                          </Typography>
+                          <p>
+                            {item.comments} 
+                          </p>
+                        </Grid>
+                      </Grid>
+                      <Grid item>
+                        {item.status === 'accepted' ? (
+                          <div className="status">
+                            <CheckCircleOutlineIcon style={{ color: 'green' }} />
+                            <div>accepted</div>
+                          </div>
+                        ) : null }
+                      
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              );
+            }
+            })}</div> : 
+          null
+      }
+
     </div>
   );
 };

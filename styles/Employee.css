@@ -40,11 +40,13 @@
 }
 
 .prize {
-  overflow: hidden;
+  width: 200px;
+  margin-bottom: 12px;
 }
 
-.prize img {
-  width: 300px;
+.status {
+  text-align: center;
+  margin: 4px;
 }
 
 #about-line {

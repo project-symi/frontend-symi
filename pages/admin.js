@@ -66,7 +66,6 @@ export default class Admin extends React.Component {
 
   ///////////////////////////////// NEWS
   getNews = async () => {
-    console.log(this.state.token);
     const res = await axios.get('https://symi-be.herokuapp.com/auth/news',{ headers: { token: this.state.token } });
     this.setState({ news: res.data });
   }
