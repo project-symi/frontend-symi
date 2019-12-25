@@ -106,9 +106,7 @@ class CreateInvitation extends React.Component {
     swal({
       title: 'Confirm Invite',
       text:
-        'Are you sure you want to send an invite to ' +
-        this.props.invitee.Name +
-        '?',
+        'Are you sure you want to send this invite?',
       icon: 'warning',
       buttons: {
         confirm: {
@@ -133,7 +131,7 @@ class CreateInvitation extends React.Component {
               invitationTime: this.state.invitationTime.substr(0, 5)
             });
           })
-          .then(value => this.setState({ comments: '', invitationDate: '' }));
+          .then(value => this.setState({ comments: '' }));
       default:
         break;
       }

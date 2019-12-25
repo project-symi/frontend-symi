@@ -69,7 +69,7 @@ export default class SentimentOverall extends React.Component {
                 label={this.renderPercentageLabel}
               >
                 {this.context.overallSentiment.map((entry, index) => (
-                  <Cell
+                  <Cell style={{cursor:'pointer'}}
                     key={index}
                     fill={this.state.colors[index % this.state.colors.length]}
                     onClick={() => this.context.handleGetKeywords(entry.feeling)}
