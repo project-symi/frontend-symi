@@ -39,15 +39,15 @@
   margin: 10px;
 }
 
-/* .prize {
-  overflow: hidden;
+.prize {
+  width: 200px;
+  margin-bottom: 12px;
 }
 
-.prize img {
-  height: 100px;
-  width: 300px;
-  margin: -75px 0 0 -100px;
-} */
+.status {
+  text-align: center;
+  margin: 4px;
+}
 
 #about-line {
   display: grid;
@@ -85,6 +85,10 @@
   grid-row-gap: 10px;
   grid-area: string;
   margin-right: 5px;
+}
+
+p {
+  margin: 0px;
 }
 
 #reward {
@@ -145,4 +149,14 @@
   .date-added {
     display: none;
   }
+
+  .swal-title {
+    color: #3f50b5;
+  }
+
+  .swal-text {
+    font-size: 16pt;
+  }
+
+
 }

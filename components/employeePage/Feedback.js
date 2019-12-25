@@ -144,13 +144,9 @@ export default class Feedback extends React.Component {
     return (
       <div>
         <div id="feedback-container">
-          {/* //////////// SUBMIT FEEDBACK SECTION */}
           <div>
             <p className="title">Submit Feedback</p>
             <form className="feedback-submit">
-              {/* FEELING SLIDER */}
-
-              {/* FEELING SLIDER */}
               <div className="about-line">
                 <div className="feedback-text">I FEEL</div>
                 <Slider className="slider"
@@ -163,7 +159,6 @@ export default class Feedback extends React.Component {
                 />
               </div>
 
-              {/* CATEGORY SELECT */}
               <div className="about-line">
                 <div className="feedback-text">ABOUT</div>
 
@@ -235,7 +230,6 @@ export default class Feedback extends React.Component {
                 </FormControl>
               </div>
 
-              {/* NOTE */}
               <div className="about-line">
                 <span className="feedback-text">BECAUSE</span>
                 <TextField
@@ -259,7 +253,6 @@ export default class Feedback extends React.Component {
             </form>
           </div>
 
-          {/* ///// POINTS KEY */}
           <div>
             <p className="title">Get Points</p>
             <div className="feedback-submit">
@@ -269,15 +262,12 @@ export default class Feedback extends React.Component {
             <div className="title">Quarterly Prize <div className="tooltip">
               <HelpOutlineIcon style={{fontSize: '15px', color: 'black'}}></HelpOutlineIcon>
               <span className="tooltiptext">Reach {this.context.prizeForPoints.points ? this.context.prizeForPoints.points : null}⭐ to be eligible for the quarterly prize! Once eligible, HR will contact you.</span>
-            </div></div>
+            </div>
+            </div>
             <div className="feedback-submit">
-              {/* <img
-                className="prize"
-                src="https://media.giphy.com/media/26u49YjOazMMAwTGU/giphy-downsized-large.gif"
-              ></img> */}
               <div>
 
-                <img src={this.context.prizeForPoints.url ? this.context.prizeForPoints.url : null} width="100px"></img>
+                <img className="prize" src={this.context.prizeForPoints.url ? this.context.prizeForPoints.url : null} ></img>
                 <table id="reward">
                   <tr>
                     <th className="points">{this.context.prizeForPoints.points ? this.context.prizeForPoints.points : null}⭐</th>

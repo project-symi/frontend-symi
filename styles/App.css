@@ -339,14 +339,7 @@ html {
   background-color: #3f50b5;
   border: 0px;
   outline: none;
-}
-
-.swal-content {
-  border-radius: 25px;
-}
-
-.swal-modal {
-  border-radius: 35px;
+  color: white;
 }
 
 button:hover {
@@ -363,6 +356,15 @@ button:hover {
   background-color: #3f50b5;
   color: white;
 }
+
+.swal-content {
+  border-radius: 25px;
+}
+
+.swal-modal {
+  border-radius: 35px;
+}
+
 
 .tooltip {
   position: relative;
