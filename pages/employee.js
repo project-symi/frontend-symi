@@ -164,12 +164,14 @@ export default class Employee extends React.Component {
   submitFeedback = async feedbackObj => {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.userId;
-    swal({
-      title: '+25⭐️! Hooray!',
-      text: 'Thanks for the feedback!',
-      icon: 'success',
-      button: true
-    });
+    if (feedback.feeling === 'good') {
+      swal({
+        title: '+25⭐️! Hooray!',
+        text: 'Thanks for the feedback!',
+        icon: 'success',
+        button: true
+      });
+    }
 
     this.deleteFuzzyNames();
 
