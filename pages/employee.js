@@ -224,7 +224,7 @@ export default class Employee extends React.Component {
   ///////////////////HANDLE INVITES FROM CEO/LEADER
   handleInvitation = async (invitation, answer) => {
     const reply = {
-      status: answer.status ? 'Accepted' : 'Declined',
+      status: answer.status ? 'accepted' : 'declined',
       reply: answer.reply
     };
     await axios.patch(`https://symi-be.herokuapp.com/auth/invitations/${invitation.invitationId}`, reply, { headers: { token: this.state.token }} );
