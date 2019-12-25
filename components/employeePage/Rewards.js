@@ -23,9 +23,8 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    margin: 'auto',
+    margin: '10px',
     maxWidth: '100%',
-    margin: '15px',
     borderRadius: '12px'
   },
   image: {
@@ -52,8 +51,20 @@ const Rewards = () => {
   const classes = useStyles();
 
   const handleShowDetails = reward => {
+
+    let title = '';
+
+    if (reward.categoryName === 'Submitted Feedback') {
+      title = ((reward.feedbackCategory == 'Employee') ? ('FEEDBACK ABOUT ' + reward.feedbackRecipientName.toUpperCase()) : 'FEEDBACK ABOUT ' + (reward.feedbackCategory.toUpperCase()) );
+    } else {
+      title = 'AN EMPLOYEE SAID...';
+    }
+
+
+    
+
     swal({
-      title: reward.categoryName,
+      title: title,
       text: `"${reward.feedbackNote}"`,
       button: true
     });
@@ -73,31 +84,31 @@ const Rewards = () => {
                   return (
                     <div key={i} className={classes.root}>
                       <Paper className={classes.paper}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} sm container>
-                            <Grid item xs container direction="column" spacing={2}>
-                              <Grid item s>
-                                <h2
-                                  className="reward-item"
-                                >
-                                  {reward.categoryName}
-                                </h2>
-                                <span className="date">SENT » {moment(reward.date.substr(0, 10)).format('MM/DD/YYYY')} </span>
-                                <Button
-                                  size="small"
-                                  onClick={() => handleShowDetails(reward)}
-                                  color="primary"
-                                  style={{ cursor: 'pointer' }}
-                                >
+       
+                        <Grid item xs={12} sm container>
+                          <Grid item xs container direction="column" spacing={1}>
+                            <Grid item s>
+                              <h2
+                                className="reward-item"
+                              >
+                                {reward.categoryName}
+                              </h2>
+                              <span className="date">SENT » {moment(reward.date.substr(0, 10)).format('MM/DD/YYYY')} </span>
+                              <Button
+                                size="small"
+                                onClick={() => handleShowDetails(reward)}
+                                color="primary"
+                                style={{ cursor: 'pointer' }}
+                              >
                               details
-                                </Button>
-                              </Grid>
-                            </Grid>
-                            <Grid item>
-                              <div className="points">  +{reward.points} ⭐</div>
+                              </Button>
                             </Grid>
                           </Grid>
+                          <Grid item>
+                            <div className="points">  +{reward.points} ⭐</div>
+                          </Grid>
                         </Grid>
+          
                       </Paper>
                     </div>
                   );

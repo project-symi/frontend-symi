@@ -81,7 +81,6 @@ class CreateInvitation extends React.Component {
   };
 
   handleInputChange = e => {
-    //change state and don't forget to get rid of error message
     if (e.target.name === 'comments')
       return this.setState({ comments: e.target.value, commentsError: false });
     if (e.target.name === 'invitationDate') {
@@ -98,13 +97,12 @@ class CreateInvitation extends React.Component {
     }
   };
 
-  //send button clicked, generate invitation and pass it to the dashboard
+
   handleSendInvitation = () => {
-    //check whether comments and date was inputted
     if (!this.state.comments) this.setState({ commentsError: true });
     if (!this.state.invitationDate)
       return this.setState({ invitationDateError: true });
-    //ask for the confirmation before generating and sending an invitation
+
     swal({
       title: 'Confirm Invite',
       text:

@@ -33,18 +33,6 @@ export default class AddNews extends React.Component {
   handleFormSubmit = e => {
     e.preventDefault();
 
-    // // eslint-disable-next-line react/prop-types
-    // const validation = formValidation({
-    //   photo: this.state.photo,
-    //   title: this.state.title,
-    //   description: this.state.department
-    // });
-
-    // if (validation.result) {
-    //   this.setState({ formValidation: validation.errors });
-    //   return;
-    // } else {
-
     swal({
       title: 'Ready to publish news?',
       text: 'This will update globally.',
