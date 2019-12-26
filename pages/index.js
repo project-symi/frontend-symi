@@ -113,9 +113,11 @@ class Login extends React.Component {
 
             <span id="get-access">
               Don&apos;t have an account? <a
-                onClick={this.handleShowAboutPage}
+                // onClick={this.handleShowAboutPage}
                 variant="contained"
                 color="primary"
+                style={{ cursor: 'pointer' }}
+                href='https://github.com/project-symi/frontend-symi'
               >Get access.
               </a>
             </span>
