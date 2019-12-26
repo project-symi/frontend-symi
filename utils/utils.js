@@ -108,9 +108,21 @@ const debounce = (a,b,c) => {
   };
 };
 
+
+const filterKeywords = (keywordsArr) => {
+  const badWords = ['month', 'participate', 'minute', 'i', 'I', 'he', 'she', 'it', 'a lot', 'they', 'them', 'do', 'done', 'have', 'been', 'mentour', 'ui/ux'];
+  return keywordsArr.reduce((acc, keyword) => {
+    if (!badWords.includes(keyword)) {
+      acc.push(keyword);
+    }
+    return acc;
+  }, []);
+};
+
 module.exports = {
   formValidation,
   feedbackValidation,
   extractCsvData,
-  debounce
+  debounce,
+  filterKeywords
 };

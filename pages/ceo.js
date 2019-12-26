@@ -18,6 +18,7 @@ import '../styles/CEO.css';
 
 //utils
 import axios from 'axios';
+import { filterKeywords } from '../utils/utils';
 
 //context API
 import { CeoProvider } from '../contextApi/CeoContext';
@@ -332,16 +333,16 @@ getFeedbacksByDepartment = async () => {
         }
       }
     );
+
+    const filteredKeywords = filterKeywords(response.data.result);
+
     /////////////SHOW THE KEYWORDS IN POPUP
     swal({
       button: true,
       content: ( <div>
         <div className="popup-title">EMPLOYEES FEEL {feeling.toUpperCase()} ABOUT</div>
         <div id="keyword-container">
-          {response.data.result.map(function(item, i){
-            return <div key={item.id}  className="keyword">{item}</div>;
-          })
-          }
+          {filteredKeywords.map((item) => <div key={item.id} className="keyword">{item}</div>)}
         </div>
       </div>
       )
