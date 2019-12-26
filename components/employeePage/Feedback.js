@@ -113,7 +113,7 @@ export default class Feedback extends React.Component {
         category: this.state.about,
         note: this.state.note,
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
-        newsId: this.state.about === 'News' ? this.context.news.find(news => news.title === this.state.input).newsId : 0
+        newsId: this.state.about === 'News' ? this.context.news.find(news => news.title.includes(this.state.input)).newsId : 0
       };
       this.setState({ about: '', note: '', input: '' });
     }
@@ -210,20 +210,20 @@ export default class Feedback extends React.Component {
                         onChange={this.handleEmployeeNameInput}
                       ></TextField>
                     ) : null}
-                    {
-                       (this.state.about === 'News' &&
+                  {
+                    (this.state.about === 'News' &&
                        this.context.fuzzyNames === '') ? <TextField
-                       error={this.state.feedbackValidation.errors.input.isShown}
-                       helperText={
-                         this.state.feedbackValidation.errors.input.message
-                       }
-                       id="outlined"
-                       margin="normal"
-                       name="input"
-                       placeholder='Please enter news topic'
-                       value={this.state.input}
-                       onChange={this.handleNewsTopicInput}
-                     ></TextField> : null}
+                        error={this.state.feedbackValidation.errors.input.isShown}
+                        helperText={
+                          this.state.feedbackValidation.errors.input.message
+                        }
+                        id="outlined"
+                        margin="normal"
+                        name="input"
+                        placeholder='Please enter news topic'
+                        value={this.state.input}
+                        onChange={this.handleNewsTopicInput}
+                      ></TextField> : null}
                   {this.context.fuzzyNames ? (
                     <Autocomplete
                       options={this.context.fuzzyNames}
