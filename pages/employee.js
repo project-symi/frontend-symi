@@ -161,7 +161,7 @@ export default class Employee extends React.Component {
   };
 
   // SUBMIT FEEDBACK
-  submitFeedback = async feedbackObj => {
+  submitFeedback = async (feedbackObj) => {
     //add current employeeId to the feedback object (for the feedback history)
     feedbackObj.employeeId = this.state.userId;
     if (feedbackObj.feeling === 'good') {
@@ -179,10 +179,7 @@ export default class Employee extends React.Component {
     await axios.post('https://symi-be.herokuapp.com/auth/feedbacks', feedbackObj, { headers: { token: this.state.token } });
 
     // show newly added feedback
-    let addedFeedback = [...this.state.feedbacks];
-    addedFeedback.unshift(feedbackObj);
-
-    this.setState({ feedbacks: addedFeedback });
+    this.handleGetFeedbacks();
 
     // update points after submitting feedback
     this.handleUpdatePoints();
