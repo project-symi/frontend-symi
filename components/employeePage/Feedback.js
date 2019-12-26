@@ -93,7 +93,6 @@ export default class Feedback extends React.Component {
 
   handleNewsTopicInput = event => {
     this.setState({ input: event.target.value });
-    console.log(event.target.value);
   }
 
   handleSubmit = event => {
@@ -116,7 +115,6 @@ export default class Feedback extends React.Component {
         recipientId: this.state.about === 'Employee' ? this.state.input : '',
         newsId: this.state.about === 'News' ? this.context.news.find(news => news.title === this.state.input).newsId : 0
       };
-      console.log(newFeedback);
       this.setState({ about: '', note: '', input: '' });
     }
   };
