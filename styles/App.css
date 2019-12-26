@@ -505,4 +505,9 @@ a {
     grid-template-rows: 200px 1fr;
     grid-template-areas: "newsimg""newsdesc";
   }
+
+  #about-page {
+    width: 300px;
+    max-height: 600px;
+  }
 }

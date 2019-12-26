@@ -24,6 +24,7 @@ h3 {
   border-radius: 25px;
   background-color: #f5f6f8;
   overflow-y: scroll;
+  overflow-x: scroll;
   margin: auto;
   margin-top: 50px;
   -webkit-box-shadow: -14px 14px 7px -15px rgba(209, 209, 209, 0.92);
