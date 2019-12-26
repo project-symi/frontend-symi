@@ -328,7 +328,7 @@ getFeedbacksByDepartment = async () => {
         headers: {
           'Content-Type': 'application/json',
           'x-rapidapi-host': 'unfound-keywords-extraction-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'bcffb61f87msh1010dd8a811c346p15d31fjsndd304d82eef3'
+          'x-rapidapi-key': '94b0449799mshe73aefab9250cb3p1f2a92jsn2aeee4dca90e'
         }
       }
     );
