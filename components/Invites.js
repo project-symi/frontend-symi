@@ -120,7 +120,7 @@ const Invites = () => {
                              Meeting with {item.employeeName ? item.employeeName : 'CEO'}
                           </Typography>
                           <p>
-                            {item.comments} 
+                            {item.comments}
                           </p>
                         </Grid>
                       </Grid>

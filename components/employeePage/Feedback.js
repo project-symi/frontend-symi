@@ -287,6 +287,7 @@ export default class Feedback extends React.Component {
         </div>
         {this.context.feedbacks ? (
           this.context.feedbacks.map(item => {
+            console.log(item);
             return (
               <div key={item.id} className="feedback-history">
                 <span className="feedback">
@@ -294,7 +295,7 @@ export default class Feedback extends React.Component {
                   {' ' + item.feeling.toLowerCase() + ' '}
                   about
                   {' ' +
-                    (item.category === 'Employee' ? item.name : item.category) +
+                    (item.category === 'Employee' ? 'an employee' : item.category) +
                     ' '}
                   because {item.note}.
                   <span className="date"> SENT » {moment(item.dateAdded).format('MM/DD/YYYY')}</span>
