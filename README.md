@@ -13,7 +13,7 @@ Symi is a gamified platform for promoting positive feedback and company morale. 
    <td align="center"><a href="https://ibb.co/XC6GSFV"><img src="https://i.ibb.co/mcdP6hS/Employee.png" alt="Employee" border="0"></a></td>
    <td align="center"> <a href="https://ibb.co/p1XDrJd"><img src="https://i.ibb.co/L0pwhn1/CEO.png" alt="CEO" border="0"></a></td>
    <td align="center">
-     <a href="https://ibb.co/C8rdWqh"><img src="https://i.ibb.co/wgvHYTM/Admin.png" alt="Admin" border="0"></a>
+     <a href="https://ibb.co/C8rdWqh"><img src="https://i.ibb.co/k0C0dJS/Admin.png" alt="Admin" border="0"></a>
     </td>
 </tr>
   </table>
